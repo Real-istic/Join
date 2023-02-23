@@ -44,10 +44,10 @@ function summaryBottomHTML() {
             </div>
         </div>
     </div>
-    <div class="task-box" id="taskBoxToDo">
+    <div class="task-box-to-do" id="taskBoxToDo">
         <div class="task-picture-and-count">
             <img src="assets/img/taskstodo.svg" alt="">
-            <span class="task-number">5</span>
+            <span class="task-number" >5</span>
         </div>
         <span>
             Tasks To-do

@@ -239,6 +239,37 @@ nav {
   color: white !important;
 }
 
+.task-box-to-do{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 190px;
+  width: 190px;
+  background-color:#D2E3FF;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  margin: 17.5px;
+  color: #4589FF;
+  transition: 120ms ease-in-out;
+}
+
+.task-box-to-do:hover{
+  cursor: pointer;
+  border-radius: 0 30px 30px 30px;
+  scale: 1.1;
+  transition: 120ms ease-in-out;
+  background-color: #ffffff;
+  color: white !important;
+  transform-origin: left top;
+  color:#005DFF;
+}
+
+.task-box-to-do:hover span{
+  color: #005DFF!important;
+}
+
 .task-number{
   color: black;
   font-size: 48px !important;
