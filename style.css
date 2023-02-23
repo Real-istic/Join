@@ -303,6 +303,10 @@ span {
   border-radius: 10px;
 }
 
+.search-glass {
+  cursor: pointer;
+}
+
 .search-task-input-field {
   font-family: "Inter";
   border: none;

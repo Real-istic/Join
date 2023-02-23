@@ -19,12 +19,11 @@ function insertBoardHeaderHTML() {
             <form class="task-form" action="" onsubmit="searchTask()">
                 <input class="search-task-input-field" type="text" placeholder="Find Task" required>
                 <img src="assets/img/barrier.svg" alt="">
-                <img src="assets/img/searchglass.svg" alt="">
+                <img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
             </form>
             <button class="add-task-button" onclick="addTask()">Add task <img src="assets/img/plus.svg" alt=""></button>
         </div>`;
 }
-
 
 /**
  * inserts board task content
@@ -41,7 +40,6 @@ function insertBoardTasks() {
     </div>
     `;
 }
-
 
 /**
  * inserts to do tasks
@@ -111,3 +109,4 @@ function insertDoneTasksHTML(){
         </div>
     `;
 }
+
