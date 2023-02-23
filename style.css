@@ -179,10 +179,22 @@ nav {
   height: 190px;
   width: 640px;
   margin: 17.5px;
+  transition: 120ms ease-in-out;
 }
 
 .task-box-deadline:hover{
   cursor: pointer;
+  border-radius: 0 30px 30px 30px;
+  scale: 1.05;
+  transition: 120ms ease-in-out;
+  background-color: #ffffff;
+  color:#4589FF;
+  border-color: #4589FF;
+  transform-origin: left top;
+}
+
+.task-box-deadline:hover span{
+  color:#4589FF !important;
 }
 
 .task-box-deadline-left{
