@@ -8,6 +8,7 @@ function insertBoard() {
     contentDiv.innerHTML += insertBoardTasks();
 }
 
+
 /**
  * inserts board header
  * 
