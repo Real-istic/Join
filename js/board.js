@@ -1,3 +1,8 @@
+
+/**
+ * insert board content
+ * 
+ */
 function insertBoard() {
     contentDiv.innerHTML = insertBoardHeaderHTML();
     contentDiv.innerHTML += insertBoardTasks();
