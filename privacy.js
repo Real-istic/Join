@@ -1,53 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+function insertPrivacy() {
+    contentDiv.innerHTML = privacyHTML();
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join</title>
-    <link rel="shortcut icon" href="assets/img/favico.svg" type="image/x-icon">
-    <script src="./mini_backend.js"></script>
-    <script src="./script.js"></script>
-    <script src="backend.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="fonts.css">
-</head>
-
-<body onload="init()">
-
-    <header>
-        <img class="header-left" src="assets/img/headerjoinlogo.svg" alt="">
-        <div class="header-right">
-            <span>Kanban Project Management Tool</span>
-            <img src="assets/img/question.svg" alt="">
-            <img src="assets/img/headeruserimage.png" alt="">
-        </div>
-    </header>
-    <nav>
-        <div class="nav-top">
-            <div class="nav-element"><img src="assets/img/summaryicon.svg" alt=""><span>Summary</span></div>
-            <div class="nav-element"><img src="assets/img/boardicon.svg" alt=""><span>Board</span></div>
-            <div class="nav-element"><img src="assets/img/addtaskicon.svg" alt=""><span>Add Task</span></div>
-            <div class="nav-element"><img src="assets/img/contacticon.svg" alt=""><span>Contacts</span></div>
-        </div>
-        <div class="nav-bottom">
-            <div class="nav-element">
-                <img src="assets/img/infoicon.svg" alt="">
-                <span class="notice-link"><a href="legalNotice.html">Legal notice</a></span>
-            </div>
-            <div class="nav-element">
-                <img src="assets/img/privacyicon.svg" alt="">
-                <span class="privacy-link"><a href="privacy.html">privacy</a></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Content -->
-
-    <div class="margin-content">
-
-        <h1>Datenschutz­erklärung</h1>
+function privacyHTML() {
+    return /*html*/`
+     <h1 style="margin-top: 0;">Datenschutzerklärung</h1>
         <h2>1. Datenschutz auf einen Blick</h2>
         <h3>Allgemeine Hinweise</h3>
         <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen
@@ -78,7 +35,7 @@
             personenbezogenen Daten zu verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der
             zuständigen Aufsichtsbehörde zu.</p>
         <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit an uns wenden.</p>
-        <h2>2. Allgemeine Hinweise und Pflicht­informationen</h2>
+        <h2>2. Allgemeine Hinweise und Pflichtinformationen</h2>
         <h3>Datenschutz</h3>
         <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln
             Ihre personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie
@@ -147,12 +104,12 @@
             DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN, WERDEN IHRE PERSONENBEZOGENEN DATEN
             ANSCHLIESSEND NICHT MEHR ZUM ZWECKE DER DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO).
         </p>
-        <h3>Beschwerde­recht bei der zuständigen Aufsichts­behörde</h3>
+        <h3>Beschwerderecht bei der zuständigen Aufsichtsbehörde</h3>
         <p>Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei einer
             Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres
             Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht
             unbeschadet anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.</p>
-        <h3>Recht auf Daten­übertrag­barkeit</h3>
+        <h3>Recht auf Datenübertragbarkeit</h3>
         <p>Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines
             Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen,
             maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten
@@ -184,7 +141,7 @@
                 personenbezogenen Daten zu verlangen.</li>
         </ul>
         <p>Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen diese Daten
-            – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung,
+            - von ihrer Speicherung abgesehen - nur mit Ihrer Einwilligung oder zur Geltendmachung,
             Ausübung oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen
             natürlichen oder juristischen Person oder aus Gründen eines wichtigen öffentlichen
             Interesses der Europäischen Union oder eines Mitgliedstaats verarbeitet werden.</p>
@@ -192,7 +149,7 @@
         <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.</p>
         <p>Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der Websitebetreiber hat
             ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der Optimierung seiner Website
-            – hierzu müssen die Server-Log-Files erfasst werden.</p>
+            - hierzu müssen die Server-Log-Files erfasst werden.</p>
         <h3>Anfrage per E-Mail, Telefon oder Telefax</h3>
         <p>Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive aller daraus
             hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei
@@ -206,13 +163,9 @@
         <p>Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur
             Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die
             Datenspeicherung entfällt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihres Anliegens). Zwingende
-            gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben
+            gesetzliche Bestimmungen - insbesondere gesetzliche Aufbewahrungsfristen - bleiben
             unberührt.</p>
         <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
     </div>
-
-</body>
-
-<!-- <a href="https://www.flaticon.com/free-icons/safe" title="safe icons">Safe icons created by Kiranshastry - Flaticon</a> -->
-
-</html>
+    `
+}

@@ -9,9 +9,7 @@
     <link rel="shortcut icon" href="assets/img/favico.svg" type="image/x-icon">
     <script src="./mini_backend.js"></script>
     <script src="backend.js"></script>
-    <script src="global_variables.js"></script>
-    <script src="./script.js"></script>
-    <script src="legalnotice.js"></script>
+    
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
@@ -36,13 +34,13 @@
                 <div class="nav-element"><img src="assets/img/contacticon.svg" alt=""><span>Contacts</span></div>
             </div>
             <div class="nav-bottom">
-                <div class="nav-element">
+                <div class="nav-element" onclick="insertLegalNotice()">
                     <img src="assets/img/infoicon.svg" alt="">
-                    <span class="notice-link"><a href="legalNotice.html">Legal notice</a></span>
+                    <span class="notice-link">Legal notice</span>
                 </div>
-                <div class="nav-element">
+                <div class="nav-element" onclick="insertPrivacy()">
                     <img src="assets/img/privacyicon.svg" alt="">
-                    <span class="privacy-link"><a href="privacy.html">privacy</a></span>
+                    <span class="privacy-link">privacy</span>
                 </div>
             </div>
         </nav>
@@ -51,6 +49,13 @@
         <div class="content" id="content"></div>
     </div>
 </body>
+
+<!-- load scripts -->
+
+    <script src="global_variables.js"></script>
+    <script src="./script.js"></script>
+    <script src="legalnotice.js"></script>
+    <script src="privacy.js"></script>
 
 <!-- <a href="https://www.flaticon.com/free-icons/safe" title="safe icons">Safe icons created by Kiranshastry - Flaticon</a> -->
 

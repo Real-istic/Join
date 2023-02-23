@@ -5,7 +5,7 @@ function insertLegalNotice(){
 function legalNoticeHTML(){
     return /*html*/`
     <div>
-        <h1>Legal Notice</h1>
+        <h1 style="margin-top: 0;">Legal Notice</h1>
 
         <h2>Angaben gemäß § 5 TMG</h2>
         <p>Max Mustermann<br>
