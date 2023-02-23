@@ -16,8 +16,8 @@ function summaryHTML() {
 }
 
 function summaryTopHTML(){
-    if (users[0].name) {
-        return /*html*/ `Good morning,` + `<span>${users[0].name}</span>`;
+    if (userList[0].name) {
+        return /*html*/ `Good morning,` + `<span>${userList[0].name}</span>`;
     } else {
         return /*html*/ `Good morning,` + `<span>Guest</span>`;
     }
