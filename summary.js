@@ -22,3 +22,14 @@ function summaryTopHTML(){
         return /*html*/ `Good morning,` + `<span>Guest</span>`;
     }
 }
+
+function summaryBottomHTML(){
+    return /*html*/ `
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    `
+}
