@@ -123,3 +123,111 @@ nav {
   padding: 75px 5%;
   overflow-y: scroll;
 }
+
+
+/* Summary */
+
+.summary-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.summary-top{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: baseline;
+  text-align: center;
+  font-size: 48px;
+}
+
+.summary-top span{
+  font-size: 64px;
+  font-weight: 700;
+  color: #4589FF;
+}
+
+.summary-bottom{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.summary-bottom img{
+  width: 65px;
+  height: 65px;
+}
+
+.summary-bottom span{
+  font-size: 23px;
+}
+
+/* All Task Boxes */
+
+/* big task box (with date) */
+.task-box-deadline{
+  color: white;
+  display: flex;
+  background-color: #4589FF;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  height: 190px;
+  width: 640px;
+  margin: 17.5px;
+}
+
+.task-box-deadline:hover{
+  cursor: pointer;
+}
+
+.task-box-deadline-left{
+  display: flex;
+  padding-right: 35px;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.date-and-upcoming-deadline{
+  display: flex;
+  padding-left: 35px;
+  flex-direction: column;
+}
+
+.task-picture-and-count{
+  display: flex;
+}
+
+.task-picture-and-count img, span{
+  margin: 0 10px;
+}
+
+.task-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 190px;
+  width: 190px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+  margin: 17.5px;
+  color: #4589FF;
+}
+
+.task-box:hover{
+  cursor: pointer;
+}
+
+.task-number{
+  color: black;
+  font-size: 48px !important;
+  font-weight: 700;
+}

@@ -15,21 +15,79 @@ function summaryHTML() {
     `
 }
 
-function summaryTopHTML(){
+function summaryTopHTML() {
     if (userList[0].name) {
-        return /*html*/ `Good morning,` + `<span>${userList[0].name}</span>`;
+        return /*html*/ `Good morning,` + `<div><span>${userList[0].name}</span></div>`;
     } else {
         return /*html*/ `Good morning,` + `<span>Guest</span>`;
     }
 }
 
-function summaryBottomHTML(){
+function summaryBottomHTML() {
     return /*html*/ `
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+    <div class="task-box-deadline">
+        <div class="task-box-deadline-left" style="border-right: 3px solid white;">
+            <div class="task-picture-and-count">
+                <img src="assets/img/tasksurgent.svg" alt="">
+                <span class="task-number" style="color:white;">1</span>
+            </div>
+            <span>
+                Tasks Urgent
+            </span>
+        </div>
+        <div class="date-and-upcoming-deadline">
+            <div>
+                <span style="font-size:33px; font-weight:700;">October 16, 2022</span> 
+            </div>
+            <div>
+                <span>Upcoming Deadline</span> 
+            </div>
+        </div>
+    </div>
+    <div class="task-box" id="taskBoxToDo">
+        <div class="task-picture-and-count">
+            <img src="assets/img/taskstodo.svg" alt="">
+            <span class="task-number">5</span>
+        </div>
+        <span>
+            Tasks To-do
+        </span>
+    </div>
+    <div class="task-box" id="taskBoxTaskInBoard">
+        <div class="task-picture-and-count">
+            <img src="assets/img/tasksinboard.svg" alt="">
+            <span class="task-number">10</span>
+        </div>
+        <span>
+            Tasks in <br> Board
+        </span>
+    </div>
+    <div class="task-box" id="taskBoxTaskInProgress">
+        <div class="task-picture-and-count">
+            <img src="assets/img/tasksinprogress.svg" alt="">
+            <span class="task-number">100</span>
+        </div>
+        <span>
+            Tasks in Progress
+        </span>
+    </div>
+    <div class="task-box" id="TaskBoxAwaitingFeedback">
+        <div class="task-picture-and-count">
+            <img src="assets/img/tasksawaitingfeedback.svg" alt="">
+            <span class="task-number">2</span>
+        </div>
+        <span>
+            Awaiting Feedback
+        </span>
+    </div>
+    <div class="task-box" id="TaskBoxTaskDone">
+        <div class="task-picture-and-count">
+            <img src="assets/img/tasksdone.svg" alt="">
+            <span class="task-number">9</span>
+        </div>
+        <span>
+            Tasks <br> Done
+        </span>
+    </div>
     `
 }
