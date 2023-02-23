@@ -1,6 +1,6 @@
 
 /**
- * insert board content
+ * inserts board content
  * 
  */
 function insertBoard() {
@@ -8,6 +8,11 @@ function insertBoard() {
     contentDiv.innerHTML += insertBoardTasks();
 }
 
+/**
+ * inserts board header
+ * 
+ * @returns board header content
+ */
 function insertBoardHeaderHTML() {
     return /*html*/ `
             <div class="board-header">
@@ -20,6 +25,12 @@ function insertBoardHeaderHTML() {
         </div>`;
 }
 
+
+/**
+ * inserts board task content
+ * 
+ * @returns board task content
+ */
 function insertBoardTasks() {
     return /*html*/ `
     <div class="board-tasks">
@@ -31,6 +42,12 @@ function insertBoardTasks() {
     `;
 }
 
+
+/**
+ * inserts to do tasks
+ * 
+ * @returns to do content
+ */
 function insertTodoTasksHTML(){
     return/*html*/ `
     
@@ -44,6 +61,11 @@ function insertTodoTasksHTML(){
         `;
 }
 
+/**
+ * inserts in progress tasks
+ * 
+ * @returns in progress content
+ */
 function insertInProgressTasksHTML(){
     return /*html*/ `
         <div class="in-progress-tasks" id="inProgressTasks">
@@ -56,6 +78,11 @@ function insertInProgressTasksHTML(){
     `;
 }
 
+/**
+ * inserts await feedback tasks
+ * 
+ * @returns await feedback content
+ */
 function insertAwaitFeedbackTasksHTML(){
     return /* html */ `
         <div class="await-feedback-tasks" id="awaitFeedbackTasks">
@@ -68,6 +95,11 @@ function insertAwaitFeedbackTasksHTML(){
     `;
 }
 
+/**
+ * inserts done tasks
+ * 
+ * @returns done content
+ */
 function insertDoneTasksHTML(){
     return /*html*/ `
         <div class="done-tasks" id="doneTasks">

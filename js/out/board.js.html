@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: board.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: board.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * inserts board content
+ * 
+ */
+function insertBoard() {
+    contentDiv.innerHTML = insertBoardHeaderHTML();
+    contentDiv.innerHTML += insertBoardTasks();
+}
+
+/**
+ * inserts board header
+ * 
+ * @returns board header content
+ */
+function insertBoardHeaderHTML() {
+    return /*html*/ `
+            &lt;div class="board-header">
+            &lt;form class="task-form" action="" onsubmit="searchTask()">
+                &lt;input class="search-task-input-field" type="text" placeholder="Find Task" required>
+                &lt;img src="assets/img/barrier.svg" alt="">
+                &lt;img src="assets/img/searchglass.svg" alt="">
+            &lt;/form>
+            &lt;button class="add-task-button" onclick="addTask()">Add task &lt;img src="assets/img/plus.svg" alt="">&lt;/button>
+        &lt;/div>`;
+}
+
+
+/**
+ * inserts board task content
+ * 
+ * @returns board task content
+ */
+function insertBoardTasks() {
+    return /*html*/ `
+    &lt;div class="board-tasks">
+     ${insertTodoTasksHTML()}
+     ${insertInProgressTasksHTML()}
+     ${insertAwaitFeedbackTasksHTML()}
+     ${insertDoneTasksHTML()}
+    &lt;/div>
+    `;
+}
+
+
+/**
+ * inserts to do tasks
+ * 
+ * @returns to do content
+ */
+function insertTodoTasksHTML(){
+    return/*html*/ `
+    
+        &lt;div class="to-do-tasks" id="toDoTasks">
+            &lt;div class="to-do-header">
+                &lt;span>To do&lt;/span>
+                &lt;img src="assets/img/plus button.svg" alt="">
+            &lt;/div>
+            &lt;!-- tasks here -->
+        &lt;/div>
+        `;
+}
+
+/**
+ * inserts in progress tasks
+ * 
+ * @returns in progress content
+ */
+function insertInProgressTasksHTML(){
+    return /*html*/ `
+        &lt;div class="in-progress-tasks" id="inProgressTasks">
+            &lt;div class="in-progress-header">
+                &lt;span>In progress&lt;/span>
+                &lt;img src="assets/img/plus button.svg" alt="">
+            &lt;/div>
+            &lt;!-- tasks here -->
+        &lt;/div>
+    `;
+}
+
+/**
+ * inserts await feedback tasks
+ * 
+ * @returns await feedback content
+ */
+function insertAwaitFeedbackTasksHTML(){
+    return /* html */ `
+        &lt;div class="await-feedback-tasks" id="awaitFeedbackTasks">
+            &lt;div class="await-feedback-header">
+                &lt;span>Await feedback&lt;/span>
+                &lt;img src="assets/img/plus button.svg" alt="">
+            &lt;/div>
+            &lt;!-- tasks here -->
+        &lt;/div>
+    `;
+}
+
+/**
+ * inserts done tasks
+ * 
+ * @returns done content
+ */
+function insertDoneTasksHTML(){
+    return /*html*/ `
+        &lt;div class="done-tasks" id="doneTasks">
+            &lt;div class="done-header">
+                &lt;span>Done&lt;/span>
+                &lt;img src="assets/img/plus button.svg" alt="">
+            &lt;/div>
+            &lt;!-- tasks here -->
+        &lt;/div>
+    `;
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Feb 23 2023 19:53:48 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
