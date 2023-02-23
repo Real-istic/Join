@@ -1,7 +1,17 @@
+
+/**
+ * 
+ * call the summary content
+ */
 function insertSummary() {
     contentDiv.innerHTML = summaryHTML();
 }
 
+/**
+ * renders the summary content
+ * 
+ * @returns the html part
+ */
 function summaryHTML() {
     return /*html*/ `
     <div class="summary-div">
@@ -15,6 +25,11 @@ function summaryHTML() {
     `
 }
 
+/**
+ * renders the top part of the summary page
+ * 
+ * @returns the html part
+ */
 function summaryTopHTML() {
     if (userList[0].name) {
         return /*html*/ `Good morning,` + `<div><span>${userList[0].name}</span></div>`;
@@ -23,6 +38,11 @@ function summaryTopHTML() {
     }
 }
 
+/**
+ * renders the bottom part of the summary page
+ * 
+ * @returns the html part
+ */
 function summaryBottomHTML() {
     return /*html*/ `
     <div class="task-box-deadline">

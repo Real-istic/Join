@@ -11,7 +11,7 @@ html {
   scroll-behavior: smooth;
 }
 
-a{
+a {
   text-decoration: none;
   color: black;
   cursor: pointer;
@@ -52,13 +52,12 @@ header span {
 }
 /*nav and content outer div*/
 
-.nav-and-content{
+.nav-and-content {
   display: flex;
   position: fixed;
   width: 100vw;
   bottom: 0px;
   height: calc(100vh - 100px);
-  
 }
 /* navigation bar */
 
@@ -96,27 +95,21 @@ nav {
   flex-grow: 0;
   white-space: nowrap;
   font-size: 16px;
-}
-
-.nav-element:hover{
   cursor: pointer;
 }
 
-.nav-element img {
-    height: 22px;
-    width: 22px;
+.nav-element:hover {
+  background-color: #d2e3ff;
 }
 
+.nav-element img {
+  height: 22px;
+  width: 22px;
+}
 
-/* .margin-content{
-    margin-left: 300px;
-    margin-top: 160px;
+/* content-area */
 
-} */
-
-/* content */
-
-.content{
+.content {
   width: 100%;
   height: 100%;
   background-color: aquamarine;
@@ -124,10 +117,9 @@ nav {
   overflow-y: scroll;
 }
 
-
 /* Summary */
 
-.summary-div{
+.summary-div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,43 +128,44 @@ nav {
   height: 100%;
 }
 
-.summary-top{
+.summary-top {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: baseline;
   text-align: center;
   font-size: 48px;
+  font-weight: bold;
 }
 
-.summary-top span{
+.summary-top span {
   font-size: 64px;
   font-weight: 700;
-  color: #4589FF;
+  color: #4589ff;
 }
 
-.summary-bottom{
+.summary-bottom {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.summary-bottom img{
+.summary-bottom img {
   width: 65px;
   height: 65px;
 }
 
-.summary-bottom span{
+.summary-bottom span {
   font-size: 23px;
 }
 
 /* All Task Boxes */
 
 /* big task box (with date) */
-.task-box-deadline{
+.task-box-deadline {
   color: white;
   display: flex;
-  background-color: #4589FF;
+  background-color: #4589ff;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
@@ -182,22 +175,22 @@ nav {
   transition: 120ms ease-in-out;
 }
 
-.task-box-deadline:hover{
+.task-box-deadline:hover {
   cursor: pointer;
   border-radius: 0 30px 30px 30px;
   scale: 1.05;
   transition: 120ms ease-in-out;
   background-color: #ffffff;
-  color:#4589FF;
-  border-color: #4589FF;
+  color: #4589ff;
+  border-color: #4589ff;
   transform-origin: left top;
 }
 
-.task-box-deadline:hover span{
-  color:#4589FF !important;
+.task-box-deadline:hover span {
+  color: #4589ff !important;
 }
 
-.task-box-deadline-left{
+.task-box-deadline-left {
   display: flex;
   padding-right: 35px;
   flex-direction: column;
@@ -205,23 +198,24 @@ nav {
   align-items: center;
 }
 
-.date-and-upcoming-deadline{
+.date-and-upcoming-deadline {
   display: flex;
   padding-left: 35px;
   flex-direction: column;
 }
 
-.task-picture-and-count{
+.task-picture-and-count {
   display: flex;
 }
 
-.task-picture-and-count img, span{
+.task-picture-and-count img,
+span {
   margin: 0 10px;
 }
 
-/* Task Box */
+/* Regular Task Box */
 
-.task-box{
+.task-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -229,29 +223,29 @@ nav {
   justify-content: center;
   height: 190px;
   width: 190px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   border-radius: 30px;
   margin: 17.5px;
-  color: #4589FF;
+  color: #4589ff;
   transition: 120ms ease-in-out;
 }
 
-.task-box:hover{
+.task-box:hover {
   cursor: pointer;
   border-radius: 0 30px 30px 30px;
   scale: 1.1;
   transition: 120ms ease-in-out;
-  background-color: #005DFF;
+  background-color: #005dff;
   color: white !important;
   transform-origin: left top;
 }
 
-.task-box:hover span{
+.task-box:hover span {
   color: white !important;
 }
 
-.task-box-to-do{
+.task-box-to-do {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -259,15 +253,15 @@ nav {
   justify-content: center;
   height: 190px;
   width: 190px;
-  background-color:#D2E3FF;
+  background-color: #d2e3ff;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   border-radius: 30px;
   margin: 17.5px;
-  color: #4589FF;
+  color: #4589ff;
   transition: 120ms ease-in-out;
 }
 
-.task-box-to-do:hover{
+.task-box-to-do:hover {
   cursor: pointer;
   border-radius: 0 30px 30px 30px;
   scale: 1.1;
@@ -275,15 +269,105 @@ nav {
   background-color: #ffffff;
   color: white !important;
   transform-origin: left top;
-  color:#005DFF;
+  color: #005dff;
 }
 
-.task-box-to-do:hover span{
-  color: #005DFF!important;
+.task-box-to-do:hover span {
+  color: #005dff !important;
 }
 
-.task-number{
+.task-number {
   color: black;
   font-size: 48px !important;
   font-weight: 700;
-} 
+}
+
+/* board */
+
+.board-header {
+  display: flex;
+  width: 100%;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 13px 21px;
+  gap: 10px;
+  margin-right: 35px;
+  width: 251px;
+  height: 51px;
+  background: #ffffff;
+  border: 1px solid #a8a8a8;
+  border-radius: 10px;
+}
+
+.search-task-input-field {
+  font-family: "Inter";
+  border: none;
+  font-size: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+.search-task-input-field:focus {
+  outline: none;
+}
+
+.add-task-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 10px;
+  gap: 10px;
+  width: 138px;
+  height: 51px;
+  background: #4589ff;
+  border: 1px solid #4589ff;
+  border-radius: 10px;
+  color: white;
+  white-space: nowrap;
+  font-size: 23px;
+  line-height: 28px;
+  text-align: left;
+  font-family: "Open Sans";
+  cursor: pointer;
+  transition: all 100ms ease-in-out;
+}
+
+.add-task-button:hover {
+  background: #005dff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  transition: all 100ms ease-in-out;
+}
+
+.board-tasks {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+}
+
+.to-do-header,
+.in-progress-header,
+.await-feedback-header,
+.done-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+  gap: 35px;
+  width: 230px;
+  height: 30px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 120%;
+  color: #42526e;
+  white-space: nowrap;
+  margin-right: 46px;
+}
