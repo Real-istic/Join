@@ -41,10 +41,9 @@ function renderUserList() {
     let userListHTML = "";
     for (let i = 0; i < userList.length; i++) {
         userListHTML += /*html*/ `
-        <div class="contact">
+        <div class="contact-left-main">
             <div class="contact-name">${userList[i].name}</div>
-            <div class="contact-email">${userList[i].email}</div>
-            
+            <div class="contact-email">${userList[i].email}</div>   
         </div>
         `;
     }
