@@ -29,4 +29,3 @@ async function deleteUser() {
     await backend.deleteItem('users');
     initBackend();
 }
-

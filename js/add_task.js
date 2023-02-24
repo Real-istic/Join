@@ -6,7 +6,6 @@ function Task() {
     document.getElementById("help").classList.remove("help-none");
 }
 
-
 function insertTask() {
     return /*html*/ `
     <div class="task-main">
