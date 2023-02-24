@@ -43,17 +43,11 @@ function insertTask() {
     `;
 }
 
-//function checkForExpandedContactList(){
-//  if(contactListExpanded == false){
-//        
-//  }else{
-//    
-/// }
-// 
+
 
 
 //function searchContacts(){
-//  expandContactList()
+//  checkForExpandedContactList();
 //
 //  let input = document.getElementById('addContactToTaskInput');
 //  let filter = input.ariaValueMax.toLowerCase();
@@ -69,6 +63,13 @@ function insertTask() {
 //  }
 //}
 //
+//function checkForExpandedContactList(){
+//  if(contactListExpanded == false){
+//      expandContactList();
+//      contactListExpanded = true;      
+//  }
+// 
+//
 //function expandContactList(){
 //  contactListExpanded = true;    
 //  loadContactList();  
@@ -78,7 +79,7 @@ function insertTask() {
 //
 //function loadContactList(){
 //  for (i = 0; i < userList.length; i++){
-//      document.getElementById('addTaskContactList').innerHTML = createContactAddTaskHTML(i);
+//      document.getElementById('addTaskContactList').innerHTML += createContactAddTaskHTML(i);
 //  }
 //}
 //
