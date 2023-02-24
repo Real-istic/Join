@@ -8,43 +8,46 @@ function insertTask() {
     return /*html*/ `
     <div class="task-main">
         <form class="task-left">
-            <input class="add-task-input-title" placeholder="Enter a title" required type="text" name="" id="taskTitle">
-            <div class="add-task-contacts-assign" id="taskContacts">
-                <input required class="add-task-select-contacts" onkeyup="searchContacts()" id="addContactToTaskInput">
-                <img src="assets/img/dropdownicon.svg" onclick="expandContactList()">
-            </div>
-            <div id="addTaskContactList" class="add-task-contact-list">
-                <label class="add-task-contact-container">
-                    ${userList[0].name}
-                    <div class="add-task-checkbox-container">
-                        <input class="add-task-contact-checkbox" type="checkbox">
-                    </div>
-                </label>
-                <label class="add-task-contact-container">
-                    ${userList[0].name}
-                    <div class="add-task-checkbox-container">
-                        <input class="add-task-contact-checkbox" type="checkbox">
-                    </div>
-                </label>
-                <label class="add-task-contact-container">
-                    ${userList[0].name}
-                    <div class="add-task-checkbox-container">
-                        <input class="add-task-contact-checkbox" type="checkbox">
-                    </div>
-                </label>
-            </div>
-            
+            ${insertTaskTitleHTML()}
+            ${insertTaskContactlistHTML()}
+            <!--more to do -->
         </form>
         <div class="task-right">
-        <button class="btn-clear" onclick="clear()">Clear <img class="btn-x" src="assets/img/x.svg" alt=""></button>
+            <button class="btn-clear" onclick="clear()">Clear <img class="btn-x" src="assets/img/x.svg" alt=""></button>
             <button class="btn-addTask" onclick="addTask()">Create Task</button>
         </div>
     </div>
     `;
 }
 
+function insertTaskTitleHTML(){
+    return /*html*/ `
+        <input class="add-task-input-title" placeholder="Enter a title" required type="text" name="" id="taskTitle">
+    `;
+}
 
-
+function insertTaskContactlistHTML(){
+    return /*html*/ `
+        <div class="add-task-contacts-assign" id="taskContacts">
+                <input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
+                <img src="assets/img/dropdownicon.svg" onclick="expandContactList()">
+            </div>
+            <div id="addTaskContactList" class="add-task-contact-list">
+                <li class="add-task-contact-container">
+                    <input class="add-task-contact-checkbox" type="checkbox">
+                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
+                </li>
+                <li class="add-task-contact-container">
+                    <input class="add-task-contact-checkbox" type="checkbox">
+                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
+                </li>
+                <li class="add-task-contact-container">
+                    <input class="add-task-contact-checkbox" type="checkbox">
+                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
+                </li>
+            </div>
+    `;
+}
 
 //function searchContacts(){
 //  checkForExpandedContactList();
