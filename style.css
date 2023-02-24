@@ -188,6 +188,10 @@ nav {
   transform-origin: left top;
 }
 
+.task-box-deadline:hover .task-box-deadline-left {
+  border-right: 3px solid #4589ff;
+}
+
 .task-box-deadline:hover span {
   color: #4589ff !important;
 }
@@ -198,7 +202,10 @@ nav {
   flex-direction: column;
   text-align: center;
   align-items: center;
+  border-right: 3px solid white;
 }
+
+
 
 .date-and-upcoming-deadline {
   display: flex;
@@ -447,16 +454,14 @@ span {
 .btn-clear:hover {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  color: #005dff;
+  color: #4589ff;
   transition: all 100ms ease-in-out;
+  border-color: #4589ff;
 }
 
-.btn-x {
-  fill: #647188;
-}
+.btn-clear:hover path{
+  stroke: #4589ff;
 
-.btn-x:hover {
-  fill: #4589ff;
 }
 
 .add-task-input-title {

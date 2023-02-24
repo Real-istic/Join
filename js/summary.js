@@ -46,7 +46,7 @@ function summaryTopHTML() {
 function summaryBottomHTML() {
     return /*html*/ `
     <div class="task-box-deadline">
-        <div class="task-box-deadline-left" style="border-right: 3px solid white;">
+        <div class="task-box-deadline-left">
             <div class="task-picture-and-count">
                 <img src="assets/img/tasksurgent.svg" alt="">
                 <span class="task-number" style="color:white;">1</span>

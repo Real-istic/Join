@@ -13,7 +13,11 @@ function insertTask() {
             <!--more to do -->
         </form>
         <div class="task-right">
-            <button class="btn-clear" onclick="clear()">Clear <img class="btn-x" src="assets/img/x.svg" alt=""></button>
+            <button class="btn-clear" onclick="clear()">Clear
+                <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
             <button class="btn-addTask" onclick="addTask()">Create Task</button>
         </div>
     </div>
