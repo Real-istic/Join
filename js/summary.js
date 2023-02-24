@@ -5,6 +5,7 @@
  */
 function insertSummary() {
     contentDiv.innerHTML = summaryHTML();
+    document.getElementById("help").classList.remove("help-none");
 }
 
 /**

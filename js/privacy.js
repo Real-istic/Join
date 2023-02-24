@@ -1,5 +1,6 @@
 function insertPrivacy() {
     contentDiv.innerHTML = privacyHTML();
+    document.getElementById("help").classList.remove("help-none");
 }
 
 function privacyHTML() {

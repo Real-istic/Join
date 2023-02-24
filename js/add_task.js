@@ -1,8 +1,11 @@
+
 //let contactListExpanded = false;
 
 function Task() {
     contentDiv.innerHTML = insertTask();
+    document.getElementById("help").classList.remove("help-none");
 }
+
 
 function insertTask() {
     return /*html*/ `
@@ -22,6 +25,7 @@ function insertTask() {
         </div>
     </div>
     `;
+
 }
 
 function insertTaskTitleHTML(){
@@ -52,6 +56,8 @@ function insertTaskContactlistHTML(){
             </div>
     `;
 }
+
+
 
 //function searchContacts(){
 //  checkForExpandedContactList();

@@ -6,6 +6,7 @@
 function insertBoard() {
     contentDiv.innerHTML = insertBoardHeaderHTML();
     contentDiv.innerHTML += insertBoardTasks();
+    document.getElementById("help").classList.remove("help-none");
 }
 
 
