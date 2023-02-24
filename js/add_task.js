@@ -1,8 +1,11 @@
+
 //let contactListExpanded = false;
 
 function Task() {
     contentDiv.innerHTML = insertTask();
+    document.getElementById("help").classList.remove("help-none");
 }
+
 
 function insertTask() {
     return /*html*/ `
@@ -36,12 +39,15 @@ function insertTask() {
             
         </form>
         <div class="task-right">
-        <button class="btn-clear" onclick="clear()">Clear <img class="btn-x" src="assets/img/x.svg" alt=""></button>
-            <button class="btn-addTask" onclick="addTask()">Create Task</button>
+        <button class="btn-clear" onclick="clear()">Clear<img class="btn-x" src="assets/img/x.svg" alt=""></button>
+        <button class="btn-addTask" onclick="addTask()">Create Task<img class="btn-ok" src="assets/img/ok.svg" alt=""></button>
         </div>
     </div>
     `;
+
 }
+
+
 
 
 

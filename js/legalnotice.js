@@ -1,5 +1,6 @@
 function insertLegalNotice(){
     contentDiv.innerHTML = legalNoticeHTML();
+    document.getElementById("help").classList.remove("help-none");
 }
 
 function legalNoticeHTML(){

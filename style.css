@@ -11,10 +11,34 @@ html {
   scroll-behavior: smooth;
 }
 
+/*global*/
+
 a {
   text-decoration: none;
   color: black;
   cursor: pointer;
+}
+
+h1 {
+  color: #4589FF;
+  font-family: Open Sans;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: left;
+
+}
+
+h2 {
+  color: #005DFF;
+  font-family: Open Sans;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: left;
+
 }
 
 /* header */
@@ -49,6 +73,52 @@ header span {
   font-weight: 400;
   font-size: 19px;
   line-height: 120%;
+}
+
+/* question mark on the header*/
+
+.help{
+  cursor: pointer;
+}
+
+.help-none {
+  display: none;
+}
+
+.help-arrow {
+  position: absolute;
+  right: 200px;
+  top: 114px;
+  cursor: pointer;
+}
+
+
+.help-p {
+
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}
+
+.help-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.help-number {
+  font-family: Open Sans;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #005DFF;
+
 }
 
 /*nav and content outer div*/
@@ -419,14 +489,14 @@ span {
   font-size: 23px;
   color: white;
   border: none;
+  cursor: pointer;
 }
 
 .btn-addTask:hover {
   background: #005dff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  color: #005dff;
-
+  color: #ffffff;
   transition: all 100ms ease-in-out;
 }
 
@@ -444,6 +514,7 @@ span {
   border: 1px solid #647188;
   padding-left: 16.76px;
   gap: 10px;
+  cursor: pointer;
 }
 
 .btn-clear:hover {
@@ -452,15 +523,27 @@ span {
   border-radius: 10px;
   color: #005dff;
   transition: all 100ms ease-in-out;
+  fill: #4589FF;
+  border: 1px solid #005DFF;
 }
 
 .btn-x {
   fill: #647188;
+  margin-left: 14px;
+  
 }
 
 .btn-x:hover {
-  fill: #4589FF;
+  
+  cursor: pointer;
 }
+
+.btn-ok {
+  
+  margin-left: 14px;
+}
+
+
 
 .add-task-input-title {
   display: flex;
