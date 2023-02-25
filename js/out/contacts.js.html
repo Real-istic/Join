@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: contacts.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,69 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: contacts.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * 
+ * call the contacts content
+ */
+function insertContacts() {
+    contentDiv.innerHTML = contactsHTML();
+    document.getElementById("help").classList.remove("help-none");
+}
+
+/**
+ * renders the contacts content
+ * 
+ * @returns the html part
+ */
+function contactsHTML() {
+    return /*html*/ `
+    &lt;div class="contact-main">
+        &lt;div class="contact-left">
+            ${renderUserList()}
+        &lt;/div>
+        &lt;div class="contact-right">
+            &lt;div class="new-contact-button" onclick="">New Contact
+                
+            &lt;/div>
+        &lt;/div>
 
 
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
+    &lt;/div>
     
+    
+    `
+}
 
-
-
-
-
+/**
+ *
+ * render userList
+ * 
+*/
+function renderUserList() {
+    let userListHTML = "";
+    for (let i = 0; i &lt; userList.length; i++) {
+        userListHTML += /*html*/ `
+        &lt;div class="contact">
+            &lt;div class="contact-name">${userList[i].name}&lt;/div>
+            &lt;div class="contact-email">${userList[i].email}&lt;/div>
+            
+        &lt;/div>
+        `;
+    }
+    return userListHTML;
+}</code></pre>
+        </article>
+    </section>
 
 
 

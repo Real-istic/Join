@@ -20,7 +20,7 @@ a {
 }
 
 h1 {
-  color: #4589FF;
+  color: #4589ff;
   font-family: Open Sans;
   font-size: 61px;
   font-weight: 700;
@@ -30,7 +30,7 @@ h1 {
 }
 
 h2 {
-  color: #005DFF;
+  color: #005dff;
   font-family: Open Sans;
   font-size: 33px;
   font-weight: 700;
@@ -75,7 +75,7 @@ header span {
 
 /* question mark on the header*/
 
-.help{
+.help {
   cursor: pointer;
 }
 
@@ -90,9 +90,7 @@ header span {
   cursor: pointer;
 }
 
-
 .help-p {
-
   font-family: Open Sans;
   font-size: 16px;
   font-weight: 400;
@@ -115,8 +113,7 @@ header span {
   line-height: 40px;
   letter-spacing: 0em;
   text-align: left;
-  color: #005DFF;
-
+  color: #005dff;
 }
 
 /*nav and content outer div*/
@@ -273,8 +270,6 @@ nav {
   align-items: center;
   border-right: 3px solid white;
 }
-
-
 
 .date-and-upcoming-deadline {
   display: flex;
@@ -530,7 +525,7 @@ span {
   border-color: #4589ff;
 }
 
-.btn-clear:hover path{
+.btn-clear:hover path {
   stroke: #4589ff;
 }
 
@@ -578,6 +573,16 @@ span {
   border-bottom: 1px solid #d1d1d1;
 }
 
+.rotate-arrow-0 {
+  transform: rotate(0deg);
+  transition: 120ms ease-in-out;
+}
+
+.rotate-arrow-90 {
+  transform: rotate(90deg);
+  transition: 120ms ease-in-out;
+}
+
 .add-task-select-contacts {
   width: 100%;
   height: 23px;
@@ -586,14 +591,17 @@ span {
   font-weight: 400;
   font-size: 19px;
   line-height: 120%;
-  color: #000000;
   border: none;
 }
 
-.add-task-select-contacts img{
+.add-task-select-contacts::placeholder {
+  color: #d1d1d1;
+}
+
+/* .add-task-select-contacts img {
   transform: rotate(90deg);
   transition: 120ms ease-in-out;
-}
+} */
 
 .add-task-select-contacts:focus {
   outline: none;
@@ -657,16 +665,65 @@ span {
   width: 422px;
 }
 
-.expand-contact-list{
+.expand-contact-list {
   height: 145px;
   overflow-y: scroll;
   overflow-x: hidden;
   transition: 120ms ease-in-out;
 }
 
+.add-task-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px 0;
+  gap: 10px;
+  width: 100%;
+  height: 51px;
+  background: #ffffff;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.add-task-date span {
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 120%;
+  color: #42526e;
+}
+
+.add-task-date-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 21px;
+  width: 100%;
+  height: 51px;
+  background: #ffffff;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+.add-task-input-date {
+  width: 125px;
+  height: 25px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 120%;
+  border: none;
+}
+
+.add-task-input-date::placeholder {
+  color: #d1d1d1;
+}
+
+.add-task-input-date:focus {
+  outline: none;
+}
 /* Contacts */
 
-.contact-main{
+.contact-main {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -692,31 +749,25 @@ span {
   justify-content: flex-end;
   width: 50%;
   height: 100%;
-  
 }
 
 .new-contact-button {
   height: 61px;
-width: 197px;
-left: 20px;
-top: 94px;
-border-radius: 10px;
-padding: 18px 10px 18px 10px;
-background: #4589FF;
-color: white;
-font-family: Open Sans;
-font-size: 23px;
-font-weight: 400;
-line-height: 28px;
-letter-spacing: 0em;
-text-align: left;
-
-
-
+  width: 197px;
+  left: 20px;
+  top: 94px;
+  border-radius: 10px;
+  padding: 18px 10px 18px 10px;
+  background: #4589ff;
+  color: white;
+  font-family: Open Sans;
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
-.new-contact-button:hover{
-  background: #005DFF;
-
-
+.new-contact-button:hover {
+  background: #005dff;
 }

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: add_task.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: add_task.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+let taskClipboard = [
+    {
+        'title': 0,
+        'contacts': [],
+        'date': 0,
+        'categories': [],
+        'prioritie': 0,
+        'description': 0,
+        'subtasks': [],
+    }
+]
+
+let contactListExpanded = false;
+
+/**
+ * call the add task page
+ * 
+ */
+function Task() {
+    contentDiv.innerHTML = insertTask();
+    document.getElementById("help").classList.remove("help-none");
+}
+
+/**
+ * inserts the add task content
+ * 
+ * @returns the html part of the page
+ */
+function insertTask() {
+    return /*html*/ `
+    &lt;div class="task-main">
+        &lt;form class="task-left">
+            ${insertTaskTitleHTML()}
+            ${insertTaskContactlistHTML()}
+            ${insertDueDateHTML()}
+            &lt;!--more to do -->
+        &lt;/form>
+        &lt;div class="task-right">
+            &lt;button class="btn-clear" onclick="clear()">Clear
+                &lt;svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                    &lt;path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                &lt;/svg>
+            &lt;/button>
+            &lt;button class="btn-addTask" onclick="addTask()">Create Task&lt;/button>
+        &lt;/div>
+    &lt;/div>
+    `;
+
+}
+
+/**
+ * inserts the title of the add task page
+ * 
+ * @returns the html part of the title
+ */
+function insertTaskTitleHTML() {
+    return /*html*/ `
+        &lt;input class="add-task-input-title" placeholder="Enter a title" required type="text" name="" id="taskTitle">
+    `;
+}
+
+/**
+ * inserts the contact list of the add task page
+ * 
+ * @returns the html part of the contact list
+ */
+function insertTaskContactlistHTML() {
+    return /*html*/ `
+            &lt;div class="add-task-contacts-assign" id="taskContacts">
+                &lt;input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
+                &lt;img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
+            &lt;/div>
+            &lt;div id="addTaskContactList" class="add-task-contact-list">
+            &lt;/div>
+    `;
+}
+/**
+ * inserts the due date of the add task page
+ * 
+ * @returns the html part of the due date
+ */
+function insertDueDateHTML() {
+    return /*html*/ `
+        &lt;div class="add-task-date">
+            &lt;span>Due Date&lt;/span>
+            &lt;div class="add-task-date-form">
+                &lt;input class="add-task-input-date" id="addTaskInputDate" type="text" required minlength="10" maxlength="10" placeholder="dd/mm/yyyy" name="" id="">
+                &lt;img src="assets/img/calendariconl.svg" alt="">
+            &lt;/div>
+        &lt;/div>
+    `;
+}
+
+//ADD CONTACT TO TASK
+
+function searchContacts() {
+    checkForExpandedContactList();
+
+    let input = document.getElementById('addContactToTaskInput');
+    let filter = input.ariaValueMax.toLowerCase();
+
+    let contacts = document.getElementsByClassName('contact');
+
+    for (let i = 0; i &lt; contacts.length; i++) {
+        if (contacts[i].innerText.toLowerCase().includes(filter)) {
+            contacts[i].style.display = 'flex';
+        } else {
+            contacts[i].style.display = 'none';
+        }
+    }
+}
+
+function checkForExpandedContactList() {
+    let expandArrow = document.getElementById('addTaskExpandArrow');
+    if (contactListExpanded == false) {
+        expandArrow.classList.add('rotate-arrow-90');
+        expandArrow.classList.remove('rotate-arrow-0');
+    } else {
+        expandArrow.classList.add('rotate-arrow-0');
+        expandArrow.classList.remove('rotate-arrow-90');
+    }
+}
+
+function openAndCloseContactList() {
+    if (contactListExpanded == false) {
+        expandContactList();
+    } else {
+        hideContactList();
+    }
+}
+
+function expandContactList() {
+    contactListExpanded = true;
+    checkForExpandedContactList()
+    loadContactList();
+    document.getElementById('addTaskContactList').classList.add('expand-contact-list');
+}
+
+
+function loadContactList() {
+    for (i = 0; i &lt; userList.length; i++) {
+        document.getElementById('addTaskContactList').innerHTML += createContactAddTaskHTML(i);
+    }
+}
+
+function hideContactList() {
+    contactListExpanded = false
+    checkForExpandedContactList()
+    document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
+    document.getElementById('addTaskContactList').innerHTML = ``;
+}
+
+function createContactAddTaskHTML(i) {
+    return /*html*/ `
+    &lt;li class="add-task-contact-container" onclick="toggleContactTask(${i})">
+        &lt;input class="add-task-contact-checkbox" type="checkbox">
+        &lt;label for="confirm" class="add-task-checkbox-container">${userList[i].name}&lt;/label>
+    &lt;/li>
+ `
+}
+
+function toggleContactTask(i) {
+    let nameStillInTask = checkForContactInClipboard(i);
+
+    if (nameStillInTask == true) {
+        removeContactFromTask(i);
+    } else {
+        addContactToTask(i);
+    }
+}
+
+function checkForContactInClipboard(i) {
+    let nameStillInTask = false;
+    for (k = 0; k &lt; taskClipboard[0].contacts.length; k++) {
+        if (userList[i].name == taskClipboard[0].contacts[k]) {
+            nameStillInTask = true;
+        }
+    }
+    return nameStillInTask;
+}
+
+function removeContactFromTask(i) {
+    for (j = 0; j &lt; taskClipboard[0].contacts.length; j++) {
+        if (taskClipboard[0].contacts[j] == userList[i].name) {
+            taskClipboard[0].contacts.splice(j, 1);
+        }
+
+    }
+}
+
+function addContactToTask(i) {
+    let newContactForTask = userList[i].name;
+    taskClipboard[0].contacts.push(newContactForTask);
+}
+
+// function addContactToTask(i){
+// let newContactForTask;
+//     for(j = 0; j &lt; userList.length; j++){
+//         if (j == i){
+//             newContactForTask = userList[i].name;
+//         }
+//     }
+// taskClipborad[0].contacts.push(newContactForTask);
+// }
+
+//
+// ----- ACHTUNG CSS -------
+//.expand-contact-list{
+//  height: 400px;
+//  overflow-y: scroll;
+//  transition: 120ms ease-in-out;
+//}
+//--------------------------</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Task">Task</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#contactsHTML">contactsHTML</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Feb 25 2023 16:11:59 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
