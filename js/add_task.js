@@ -52,22 +52,6 @@ function insertTaskContactlistHTML(){
                 <img src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
             </div>
             <div id="addTaskContactList" class="add-task-contact-list">
-                <li class="add-task-contact-container">
-                    <input class="add-task-contact-checkbox" type="checkbox">
-                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
-                </li>
-                <li class="add-task-contact-container">
-                    <input class="add-task-contact-checkbox" type="checkbox">
-                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
-                </li>
-                <li class="add-task-contact-container">
-                    <input class="add-task-contact-checkbox" type="checkbox">
-                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
-                </li>
-                <li class="add-task-contact-container">
-                    <input class="add-task-contact-checkbox" type="checkbox">
-                    <label for="confirm" class="add-task-checkbox-container">${userList[0].name}</label>
-                </li>
             </div>
     `;
 }
@@ -93,8 +77,7 @@ function searchContacts(){
 
 function checkForExpandedContactList(){
  if(contactListExpanded == false){
-     expandContactList();
-     contactListExpanded = true;      
+     expandContactList();    
  }
 }
 
@@ -108,8 +91,8 @@ function openAndCloseContactList(){
 
 function expandContactList(){
  contactListExpanded = true;    
- //loadContactList();  
- document.getElementById('addTaskContactList').classList.add = 'expand-contact-list';
+ loadContactList();  
+ document.getElementById('addTaskContactList').classList.add('expand-contact-list');
 }
 
 
@@ -120,17 +103,17 @@ function loadContactList(){
 }
 
 function hideContactList(){
-    document.getElementById('addTaskContactList').classList.remove = 'expand-contact-list';
+    contactListExpanded = false
+    document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
+    document.getElementById('addTaskContactList').innerHTML = ``;
 }
 
-function createContaktAddTaskHTML(i){
+function createContactAddTaskHTML(i){
  return `
- <label class="add-task-contact-container" id="contact${i}" onclick="toggleContactTask(i)">
-     ${userList[i].name}
-     <div class="add-task-checkbox-container">
-         <input class="add-task-contact-checkbox" type="checkbox">
-     </div>
- </label>
+    <li class="add-task-contact-container">
+        <input class="add-task-contact-checkbox" type="checkbox">
+        <label for="confirm" class="add-task-checkbox-container">${userList[i].name}</label>
+    </li>
  `    
 }
 

@@ -596,6 +596,7 @@ span {
 
 .add-task-contact-list {
   display: flex;
+  height: 0;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -652,8 +653,9 @@ span {
 }
 
 .expand-contact-list{
-  height: 400px;
+  height: 145px;
   overflow-y: scroll;
+  overflow-x: hidden;
   transition: 120ms ease-in-out;
 }
 
