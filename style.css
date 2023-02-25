@@ -576,11 +576,15 @@ span {
 .rotate-arrow-0 {
   transform: rotate(0deg);
   transition: 120ms ease-in-out;
+  width: 25px;
+  height: 25px;
 }
 
 .rotate-arrow-90 {
   transform: rotate(90deg);
   transition: 120ms ease-in-out;
+  width: 25px;
+  height: 25px;
 }
 
 .add-task-select-contacts {
@@ -597,11 +601,6 @@ span {
 .add-task-select-contacts::placeholder {
   color: #d1d1d1;
 }
-
-/* .add-task-select-contacts img {
-  transform: rotate(90deg);
-  transition: 120ms ease-in-out;
-} */
 
 .add-task-select-contacts:focus {
   outline: none;
@@ -662,7 +661,7 @@ span {
 .add-task-checkbox-container {
   display: flex;
   justify-content: space-between;
-  width: 422px;
+  width: 416px;
 }
 
 .expand-contact-list {
@@ -704,7 +703,7 @@ span {
 }
 
 .add-task-input-date {
-  width: 125px;
+  width: 100%;
   height: 25px;
   font-family: "Open Sans";
   font-style: normal;
@@ -712,10 +711,22 @@ span {
   font-size: 19px;
   line-height: 120%;
   border: none;
+  color: #d1d1d1;
 }
 
-.add-task-input-date::placeholder {
-  color: #d1d1d1;
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  background: url(assets/img/calendariconl.svg);
+  width: 25px;
+  height: 25px;
+}
+
+input[type="date"].datepicker {
+  dateFormat: 'DD/MM/YYYY';
+}
+
+input[type="date"]:valid {
+  color: black;
 }
 
 .add-task-input-date:focus {

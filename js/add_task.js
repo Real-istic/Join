@@ -1,12 +1,12 @@
 
 let taskClipboard = [
     {
-        'title': 0,
+        'title': 'TestTitle',
         'contacts': [],
-        'date': 0,
+        'date': '10.01.2022',
         'categories': [],
-        'prioritie': 0,
-        'description': 0,
+        'priority': 'urgent',
+        'description': 'testtest',
         'subtasks': [],
     }
 ]
@@ -85,12 +85,22 @@ function insertDueDateHTML() {
         <div class="add-task-date">
             <span>Due Date</span>
             <div class="add-task-date-form">
-                <input class="add-task-input-date" id="addTaskInputDate" type="text" required minlength="10" maxlength="10" placeholder="dd/mm/yyyy" name="" id="">
-                <img src="assets/img/calendariconl.svg" alt="">
+                <input class="add-task-input-date" id="addTaskInputDate" type="date" required minlength="10" maxlength="10" placeholder="dd-mm-yyyy" name="" id="">
             </div>
         </div>
     `;
 }
+
+function insertCategoryHTML(){
+    
+}
+/**
+ * changes the color of the "due date" to black if a date is picked
+ * 
+ */
+document.querySelector('add-task-input-date').onchange = function(){
+    this.style.color="black";
+  }
 
 //ADD CONTACT TO TASK
 
