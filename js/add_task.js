@@ -98,9 +98,9 @@ function insertCategorySelectorHTML() {
     return /*html*/ `
         <div class="add-task-category">
             <span>Category</span>
-            <div class="add-task-category-form">
+            <div onclick="toggleCategoryList()" class="add-task-category-form">
                 <span>Select task category</span>
-                <img class="rotate-arrow-90" src="assets/img/dropdownicon.svg" alt="">
+                <img class="rotate-arrow-90" id="addTaskCategoryListArrow" src="assets/img/dropdownicon.svg" alt="">
             </div>
         </div>
     `;
@@ -108,12 +108,28 @@ function insertCategorySelectorHTML() {
 
 function insertCategoryListHTML(){
     return /*html*/ `
-            <div class="add-task-category-list" style="transform: scaleY(0)">
+            <div id="addTaskCategoryList" class="add-task-category-list height-0">
                 <input class="add-task-list-element" type="text" placeholder="New category" required minlength="1" maxlength="20">
                 <li class="add-task-list-element">Sales</li>
                 <li class="add-task-list-element">Backoffice</li>
             </div>
     `;
+}
+
+function toggleCategoryList(){
+    let expandArrow = document.getElementById('addTaskCategoryListArrow');
+    let categoryList = document.getElementById('addTaskCategoryList');
+    if (categoryList.classList.contains('height-1')) {
+        categoryList.classList.add('height-0')
+        categoryList.classList.remove('height-1')
+        expandArrow.classList.add('rotate-arrow-90');
+        expandArrow.classList.remove('rotate-arrow-0');
+    } else {
+        categoryList.classList.add('height-1')
+        categoryList.classList.remove('height-0')
+        expandArrow.classList.add('rotate-arrow-0');
+        expandArrow.classList.remove('rotate-arrow-90');
+    }
 }
 
 //ADD CONTACT TO TASK
