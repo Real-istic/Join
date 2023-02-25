@@ -1,5 +1,5 @@
 
-let taskClipborad = [
+let taskClipboard = [
     {
         'title' : 0,
         'contacts': [],
@@ -129,7 +129,7 @@ function toggleContactTask(i){
 
 function checkForContactInClipboard(i){
  let nameStillInTask = false;
-    for(k = 0; k < taskClipborad[0].contacts.length; k++){
+    for(k = 0; k < taskClipboard[0].contacts.length; k++){
         if(userList[i].name == taskClipboard[0].contacts[k]){
             nameStillInTask = true;
         }
@@ -148,7 +148,7 @@ function removeContactFromTask(i){
 
 function addContactToTask(i){
     let newContactForTask = userList[i].name;
-    taskClipborad[0].contacts.push(newContactForTask);   
+    taskClipboard[0].contacts.push(newContactForTask);   
     }
 
 // function addContactToTask(i){
