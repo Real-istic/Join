@@ -118,7 +118,7 @@ function createContactAddTaskHTML(i){
 }
 
 function toggleContactTask(i){
- let nameStillInTask = checkForContactInClipborad(i);
+ let nameStillInTask = checkForContactInClipboard(i);
 
  if(nameStillInTask == true){
      removeContactFromTask(i)  
