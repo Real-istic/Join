@@ -651,6 +651,12 @@ span {
   width: 422px;
 }
 
+.expand-contact-list{
+  height: 400px;
+  overflow-y: scroll;
+  transition: 120ms ease-in-out;
+}
+
 /* Contacts */
 
 .contact-main{
