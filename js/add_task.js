@@ -16,6 +16,7 @@ let contactListExpanded = false;
 /**
  * call the add task page
  * 
+ * 
  */
 function Task() {
     contentDiv.innerHTML = insertTask();
@@ -34,6 +35,8 @@ function insertTask() {
             ${insertTaskTitleHTML()}
             ${insertTaskContactlistHTML()}
             ${insertDueDateHTML()}
+            ${insertCategorySelectorHTML()}
+            ${insertCategoryListHTML()}
             <!--more to do -->
         </form>
         <div class="task-right">
@@ -91,16 +94,27 @@ function insertDueDateHTML() {
     `;
 }
 
-function insertCategoryHTML(){
-    
+function insertCategorySelectorHTML() {
+    return /*html*/ `
+        <div class="add-task-category">
+            <span>Category</span>
+            <div class="add-task-category-form">
+                <span>Select task category</span>
+                <img class="rotate-arrow-90" src="assets/img/dropdownicon.svg" alt="">
+            </div>
+        </div>
+    `;
 }
-/**
- * changes the color of the "due date" to black if a date is picked
- * 
- */
-document.querySelector('add-task-input-date').onchange = function(){
-    this.style.color="black";
-  }
+
+function insertCategoryListHTML(){
+    return /*html*/ `
+            <div class="add-task-category-list" style="transform: scaleY(0)">
+                <input class="add-task-list-element" type="text" placeholder="New category" required minlength="1" maxlength="20">
+                <li class="add-task-list-element">Sales</li>
+                <li class="add-task-list-element">Backoffice</li>
+            </div>
+    `;
+}
 
 //ADD CONTACT TO TASK
 
