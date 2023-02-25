@@ -39,6 +39,32 @@ h2 {
   text-align: left;
 }
 
+/* custom scrollbar */
+
+.scrollbar {
+  height: 300px;
+  width: 50%;
+  overflow: auto;
+  /* padding: 0 10px; */
+}
+
+.scrollbar1::-webkit-scrollbar {
+  width: 16px;
+}
+
+.scrollbar1::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
+}
+
+.scrollbar1::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #4589ff;
+}
+
 /* header */
 
 header {
@@ -616,8 +642,8 @@ span {
 }
 
 .add-task-contact-container {
-  width: 100%;
   display: flex;
+  height: 51px;
   justify-content: space-between;
   width: 100%;
   font-family: "Inter";
@@ -629,6 +655,7 @@ span {
   align-items: center;
   padding: 18px 21px;
   position: relative;
+  /* overflow-x: hidden; */
 }
 
 .add-task-contact-checkbox + .add-task-checkbox-container {
@@ -772,6 +799,7 @@ input[type="date"]:valid {
   font-size: 19px;
   line-height: 120%;
   color: #000000;
+  margin: 0 0;
 }
 
 .add-task-category-list {
@@ -782,6 +810,10 @@ input[type="date"]:valid {
 
 .add-task-category-list input {
   border: none;
+}
+
+.add-task-category-list input:focus {
+  outline: none;
 }
 
 .add-task-list-element {
@@ -810,10 +842,9 @@ input[type="date"]:valid {
 .height-1 {
   height: 153px;
   transition: 120ms ease-in-out;
-  overflow: scroll;  
+  overflow: scroll;
   overflow-x: hidden;
 }
-
 
 /* Contacts */
 

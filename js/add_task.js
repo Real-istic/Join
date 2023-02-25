@@ -74,7 +74,7 @@ function insertTaskContactlistHTML() {
                 <input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
                 <img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
             </div>
-            <div id="addTaskContactList" class="add-task-contact-list">
+            <div id="addTaskContactList" class="add-task-contact-list scrollbar scrollbar1">
             </div>
     `;
 }
@@ -108,10 +108,12 @@ function insertCategorySelectorHTML() {
 
 function insertCategoryListHTML(){
     return /*html*/ `
-            <div id="addTaskCategoryList" class="add-task-category-list height-0">
+            <div id="addTaskCategoryList" class="add-task-category-list height-0 scrollbar scrollbar1">
                 <input class="add-task-list-element" type="text" placeholder="New category" required minlength="1" maxlength="20">
                 <li class="add-task-list-element">Sales</li>
                 <li class="add-task-list-element">Backoffice</li>
+                <li class="add-task-list-element">Management</li>
+                <li class="add-task-list-element">Support</li>
             </div>
     `;
 }
