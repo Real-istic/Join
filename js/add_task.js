@@ -110,7 +110,7 @@ function hideContactList(){
 
 function createContactAddTaskHTML(i){
  return `
-    <li class="add-task-contact-container">
+    <li class="add-task-contact-container" onclick="toggleContactTask(i)">
         <input class="add-task-contact-checkbox" type="checkbox">
         <label for="confirm" class="add-task-checkbox-container">${userList[i].name}</label>
     </li>
@@ -121,43 +121,45 @@ function toggleContactTask(i){
  let nameStillInTask = checkForContactInClipboard(i);
 
  if(nameStillInTask == true){
-     removeContactFromTask(i)  
+     removeContactFromTask(i);  
  }else{
-     addContactToTask(i)  
+     addContactToTask(i);  
  }
 }
 
 function checkForContactInClipboard(i){
-
  let nameStillInTask = false;
-   
- for(j = 0; j < userList.length; j++){
-     for(k = 0; k < taskClipborad.contacts.length; k++){
-         if(userList[i].name == taskClipboard.contacts[k]){
-             nameStillInTask = true;
-         }
-     }  
- }
+    for(k = 0; k < taskClipborad[0].contacts.length; k++){
+        if(userList[i].name == taskClipboard[0].contacts[k]){
+            nameStillInTask = true;
+        }
+    }  
  return nameStillInTask;    
 }
 
 function removeContactFromTask(i){
- for(j = 0; j < taskClipboard.contacts.length; j++){
-     if(taskClipboard.contacts[j] == userList[i].name){
-         taskClipboard.contacts.splice(j,1);        
+ for(j = 0; j < taskClipboard[0].contacts.length; j++){
+     if(taskClipboard[0].contacts[j] == userList[i].name){
+         taskClipboard[0].contacts.splice(j,1);        
      }
        
  }  
 }
 
 function addContactToTask(i){
- for(j = 0; j < userList.length; j++){
-     if (j == i){
-         let newContactForTask = userList[i].name;
-     }  
- }  
- taskClipborad['contacts'].push(newContactForTask);   
-}
+    let newContactForTask = userList[i].name;
+    taskClipborad[0].contacts.push(newContactForTask);   
+    }
+
+// function addContactToTask(i){
+// let newContactForTask;   
+//     for(j = 0; j < userList.length; j++){
+//         if (j == i){
+//             newContactForTask = userList[i].name;
+//         }  
+//     }     
+// taskClipborad[0].contacts.push(newContactForTask);   
+// }
 
 //
 // ----- ACHTUNG CSS -------
