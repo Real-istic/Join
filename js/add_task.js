@@ -110,7 +110,7 @@ function hideContactList(){
 
 function createContactAddTaskHTML(i){
  return `
-    <li class="add-task-contact-container" onclick="toggleContactTask(i)">
+    <li class="add-task-contact-container" onclick="toggleContactTask(${i})">
         <input class="add-task-contact-checkbox" type="checkbox">
         <label for="confirm" class="add-task-checkbox-container">${userList[i].name}</label>
     </li>
