@@ -590,6 +590,11 @@ span {
   border: none;
 }
 
+.add-task-select-contacts img{
+  transform: rotate(90deg);
+  transition: 120ms ease-in-out;
+}
+
 .add-task-select-contacts:focus {
   outline: none;
 }
