@@ -38,6 +38,7 @@ function insertTask() {
             ${insertDueDateHTML()}
             ${insertCategorySelectorHTML()}
             ${insertCategoryListHTML()}
+            ${insertPriorityHTML()}
             <!--more to do -->
         </form>
         <div class="task-right">
@@ -95,6 +96,11 @@ function insertDueDateHTML() {
     `;
 }
 
+/**
+ * inserts the category selector
+ * 
+ * @returns the html part of the category selector
+ */
 function insertCategorySelectorHTML() {
     return /*html*/ `
         <div class="add-task-category">
@@ -107,7 +113,12 @@ function insertCategorySelectorHTML() {
     `;
 }
 
-function insertCategoryListHTML(){
+/**
+ * inserts the category list
+ * 
+ * @returns the html part of the category list
+ */
+function insertCategoryListHTML() {
     return /*html*/ `
             <div id="addTaskCategoryList" class="add-task-category-list height-0 scrollbar scrollbar1">
                 <input class="add-task-list-element" type="text" placeholder="New category" required minlength="1" maxlength="20">
@@ -119,9 +130,48 @@ function insertCategoryListHTML(){
     `;
 }
 
-function toggleCategoryList(){
+function insertPriorityHTML() {
+    return /*html*/ `
+        <div class="add-task-priority-container">
+            <label class="add-task-priority-label" id="addTaskPriorityLabelUrgent">
+                <input class="add-task-priority-input" id="AddTaskPriorityInputUrgent" type="radio" checked="checked" name="radio">
+                <span class="">Urgent</span>
+                <img src="assets/img/priorityurgent.svg" alt="">
+            </label>
+            <label class="add-task-priority-label" id="addTaskPriorityLabelMedium">
+                <input class="add-task-priority-input" id="AddTaskPriorityInputMedium" type="radio" name="radio">
+                <span class="">Medium</span>
+                <img src="assets/img/prioritymedium.svg" alt="">
+            </label>
+            <label class="add-task-priority-label" id="addTaskPriorityLabelLow">
+                <input class="add-task-priority-input" id="AddTaskPriorityInputLow" type="radio" name="radio">
+                <span class="">Low</span>
+                <img src="assets/img/prioritylow.svg" alt="">
+            </label>
+        </div>
+    `;
+}
+
+document.getElementById('AddTaskPriorityInputUrgent').addEventListener('change', function () {
+    // let medium = document.getElementById('AddTaskPriorityInputMedium');
+    // let low = document.getElementById('AddTaskPriorityInputLow');
+    let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
+    // let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
+    // let lowBow = document.getElementById('addTaskPriorityLabelLow');
+
+    if (this.checked) {
+        urgentBox.classList.add('add-task-priority-urgent')
+    }
+})
+
+/**
+ * toggles the categorylist while rotating the arrow by 90deg
+ * 
+ */
+function toggleCategoryList() {
     let expandArrow = document.getElementById('addTaskCategoryListArrow');
     let categoryList = document.getElementById('addTaskCategoryList');
+
     if (categoryList.classList.contains('height-1')) {
         categoryList.classList.add('height-0')
         categoryList.classList.remove('height-1')
@@ -188,15 +238,15 @@ function loadContactList() {
     }
 }
 
-function checkCheckboxes(){
+function checkCheckboxes() {
     let nameStillInTask
     for (i = 0; i < userList.length; i++) {
         nameStillInTask = checkForContactInClipboard(i);
-        
-        if(nameStillInTask == true){
-            document.getElementById('checkBox' + userList[i].name).checked = true ;
+
+        if (nameStillInTask == true) {
+            document.getElementById('checkBox' + userList[i].name).checked = true;
         }
-    }   
+    }
 }
 
 function hideContactList() {
@@ -204,7 +254,7 @@ function hideContactList() {
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
     // @ Konrad, warum leerst du hier den contact list Container? 
-    // document.getElementById('addTaskContactList').innerHTML = ``;
+    document.getElementById('addTaskContactList').innerHTML = ``;
 }
 
 function createContactAddTaskHTML(i) {
@@ -252,20 +302,20 @@ function addContactToTask(i) {
     createSelectedContactIcons();
 }
 
-function createSelectedContactIconsDivHTML(){
+function createSelectedContactIconsDivHTML() {
     return /*html*/ `
-        <div class="selected-contacts-icons" id="selectedContactIcons"></div>
+        <div class="add-task-selected-contacts-icons" id="selectedContactIcons"></div>
     `;
 }
 
-function createSelectedContactIcons(){
+function createSelectedContactIcons() {
     let firstLetter;
 
     document.getElementById('selectedContactIcons').innerHTML = ``;
     for (let i = 0; i < taskClipboard[0].contacts.length; i++) {
         firstLetter = taskClipboard[0].contacts[i].charAt(0);
         document.getElementById('selectedContactIcons').innerHTML += `
-        <div class="selectedContact">${firstLetter}</div>
+        <div class="add-task-selected-contact">${firstLetter}</div>
         `;
     }
 }
