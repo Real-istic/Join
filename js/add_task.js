@@ -34,6 +34,7 @@ function insertTask() {
         <form class="task-left">
             ${insertTaskTitleHTML()}
             ${insertTaskContactlistHTML()}
+            <div class="selected-contacts-icons" id="selectedContactIcons"></div>
             ${insertDueDateHTML()}
             ${insertCategorySelectorHTML()}
             ${insertCategoryListHTML()}
@@ -181,7 +182,6 @@ function expandContactList() {
     document.getElementById('addTaskContactList').classList.add('expand-contact-list');
 }
 
-
 function loadContactList() {
     for (i = 0; i < userList.length; i++) {
         document.getElementById('addTaskContactList').innerHTML += createContactAddTaskHTML(i);
@@ -242,11 +242,26 @@ function removeContactFromTask(i) {
         }
 
     }
+    createSelectedContactIcons();
 }
 
 function addContactToTask(i) {
     let newContactForTask = userList[i].name;
     taskClipboard[0].contacts.push(newContactForTask);
+    createSelectedContactIcons();
+}
+
+function createSelectedContactIcons(){
+    let firstLetter;
+
+    document.getElementById('selectedContactIcons').innerHTML = ``;
+    for (let i = 0; i < taskClipboard[0].contacts.length; i++) {
+        firstLetter = taskClipboard[0].contacts[i].charAt(0);
+        document.getElementById('selectedContactIcons').innerHTML += `
+        <div class="selectedContact">${firstLetter}</div>
+        `;
+    }
+    
 }
 
 // function addContactToTask(i){
