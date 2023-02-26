@@ -140,15 +140,16 @@ function searchContacts() {
     checkForExpandedContactList();
 
     let input = document.getElementById('addContactToTaskInput');
-    let filter = input.ariaValueMax.toLowerCase();
+    let filter = input.value.toLowerCase();
 
-    let contacts = document.getElementsByClassName('contact');
+    let contacts = document.getElementsByClassName('add-task-checkbox-container');
+    let container = document.getElementsByClassName('add-task-contact-container');
 
     for (let i = 0; i < contacts.length; i++) {
         if (contacts[i].innerText.toLowerCase().includes(filter)) {
-            contacts[i].style.display = 'flex';
+            container[i].style.display = 'flex';
         } else {
-            contacts[i].style.display = 'none';
+            container[i].style.display = 'none';
         }
     }
 }
@@ -174,8 +175,9 @@ function openAndCloseContactList() {
 
 function expandContactList() {
     contactListExpanded = true;
-    checkForExpandedContactList()
+    checkForExpandedContactList();
     loadContactList();
+    checkCheckboxes();
     document.getElementById('addTaskContactList').classList.add('expand-contact-list');
 }
 
@@ -184,6 +186,17 @@ function loadContactList() {
     for (i = 0; i < userList.length; i++) {
         document.getElementById('addTaskContactList').innerHTML += createContactAddTaskHTML(i);
     }
+}
+
+function checkCheckboxes(){
+    let nameStillInTask
+    for (i = 0; i < userList.length; i++) {
+        nameStillInTask = checkForContactInClipboard(i);
+        
+        if(nameStillInTask == true){
+            document.getElementById('checkBox' + userList[i].name).checked = true ;
+        }
+    }   
 }
 
 function hideContactList() {
@@ -196,7 +209,7 @@ function hideContactList() {
 function createContactAddTaskHTML(i) {
     return /*html*/ `
     <li class="add-task-contact-container" onclick="toggleContactTask(${i})">
-        <input class="add-task-contact-checkbox" type="checkbox">
+        <input class="add-task-contact-checkbox" type="checkbox" id="checkBox${userList[i].name}">
         <label for="confirm" class="add-task-checkbox-container">${userList[i].name}</label>
     </li>
  `
