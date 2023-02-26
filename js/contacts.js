@@ -26,21 +26,21 @@ function insertContacts() {
 function renderUserList() {
     let userListHTML = "";
     for (let i = 0; i < userList.length; i++) {
-        const firstNameLetter = userList[i].vorname.charAt(0);
-        const lastNameLetter = userList[i].nachname.charAt(0);
+        const firstNameLetter = userList[i].firstName.charAt(0);
+        const lastNameLetter = userList[i].lastName.charAt(0);
         const contactName = firstNameLetter + lastNameLetter;
         const randomColor = getRandomColor();
 
         userListHTML += /*html*/ `
             <div class="contact-letter-main">
-                <h4 class="contact-letter">${userList[i].vorname.charAt(0)}</h4>
+                <h4 class="contact-letter">${userList[i].firstName.charAt(0)}</h4>
                 <div id="testLetter">
                     <div class="contact-child-div" onclick="openDetailContact('0', '${contactName}')" id="0">
                         <div style="background-color: ${randomColor}" class="contact-child">
                             <p>${contactName}</p>
                         </div>
                         <div>
-                            <p class="contact-name">${userList[i].vorname} ${userList[i].nachname}</p>
+                            <p class="contact-name">${userList[i].firstName} ${userList[i].lastName}</p>
                             <p class="contact-email">${userList[i].email}</p>
                         </div>                               
                     </div>
