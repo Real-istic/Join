@@ -29,12 +29,12 @@
             <pre class="prettyprint source linenums"><code>
 let taskClipboard = [
     {
-        'title': 0,
+        'title': 'TestTitle',
         'contacts': [],
-        'date': 0,
+        'date': '10.01.2022',
         'categories': [],
-        'prioritie': 0,
-        'description': 0,
+        'priority': 'urgent',
+        'description': 'testtest',
         'subtasks': [],
     }
 ]
@@ -43,6 +43,7 @@ let contactListExpanded = false;
 
 /**
  * call the add task page
+ * 
  * 
  */
 function Task() {
@@ -61,7 +62,10 @@ function insertTask() {
         &lt;form class="task-left">
             ${insertTaskTitleHTML()}
             ${insertTaskContactlistHTML()}
+            ${createSelectedContactIconsDivHTML()} 
             ${insertDueDateHTML()}
+            ${insertCategorySelectorHTML()}
+            ${insertCategoryListHTML()}
             &lt;!--more to do -->
         &lt;/form>
         &lt;div class="task-right">
@@ -99,7 +103,7 @@ function insertTaskContactlistHTML() {
                 &lt;input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
                 &lt;img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
             &lt;/div>
-            &lt;div id="addTaskContactList" class="add-task-contact-list">
+            &lt;div id="addTaskContactList" class="add-task-contact-list scrollbar scrollbar1">
             &lt;/div>
     `;
 }
@@ -113,11 +117,50 @@ function insertDueDateHTML() {
         &lt;div class="add-task-date">
             &lt;span>Due Date&lt;/span>
             &lt;div class="add-task-date-form">
-                &lt;input class="add-task-input-date" id="addTaskInputDate" type="text" required minlength="10" maxlength="10" placeholder="dd/mm/yyyy" name="" id="">
-                &lt;img src="assets/img/calendariconl.svg" alt="">
+                &lt;input class="add-task-input-date" id="addTaskInputDate" type="date" required minlength="10" maxlength="10" placeholder="dd-mm-yyyy" name="" id="">
             &lt;/div>
         &lt;/div>
     `;
+}
+
+function insertCategorySelectorHTML() {
+    return /*html*/ `
+        &lt;div class="add-task-category">
+            &lt;span>Category&lt;/span>
+            &lt;div onclick="toggleCategoryList()" class="add-task-category-form">
+                &lt;span>Select task category&lt;/span>
+                &lt;img class="rotate-arrow-90" id="addTaskCategoryListArrow" src="assets/img/dropdownicon.svg" alt="">
+            &lt;/div>
+        &lt;/div>
+    `;
+}
+
+function insertCategoryListHTML(){
+    return /*html*/ `
+            &lt;div id="addTaskCategoryList" class="add-task-category-list height-0 scrollbar scrollbar1">
+                &lt;input class="add-task-list-element" type="text" placeholder="New category" required minlength="1" maxlength="20">
+                &lt;li class="add-task-list-element">Sales&lt;/li>
+                &lt;li class="add-task-list-element">Backoffice&lt;/li>
+                &lt;li class="add-task-list-element">Management&lt;/li>
+                &lt;li class="add-task-list-element">Support&lt;/li>
+            &lt;/div>
+    `;
+}
+
+function toggleCategoryList(){
+    let expandArrow = document.getElementById('addTaskCategoryListArrow');
+    let categoryList = document.getElementById('addTaskCategoryList');
+    if (categoryList.classList.contains('height-1')) {
+        categoryList.classList.add('height-0')
+        categoryList.classList.remove('height-1')
+        expandArrow.classList.add('rotate-arrow-90');
+        expandArrow.classList.remove('rotate-arrow-0');
+    } else {
+        categoryList.classList.add('height-1')
+        categoryList.classList.remove('height-0')
+        expandArrow.classList.add('rotate-arrow-0');
+        expandArrow.classList.remove('rotate-arrow-90');
+    }
 }
 
 //ADD CONTACT TO TASK
@@ -126,15 +169,16 @@ function searchContacts() {
     checkForExpandedContactList();
 
     let input = document.getElementById('addContactToTaskInput');
-    let filter = input.ariaValueMax.toLowerCase();
+    let filter = input.value.toLowerCase();
 
-    let contacts = document.getElementsByClassName('contact');
+    let contacts = document.getElementsByClassName('add-task-checkbox-container');
+    let container = document.getElementsByClassName('add-task-contact-container');
 
     for (let i = 0; i &lt; contacts.length; i++) {
         if (contacts[i].innerText.toLowerCase().includes(filter)) {
-            contacts[i].style.display = 'flex';
+            container[i].style.display = 'flex';
         } else {
-            contacts[i].style.display = 'none';
+            container[i].style.display = 'none';
         }
     }
 }
@@ -160,11 +204,11 @@ function openAndCloseContactList() {
 
 function expandContactList() {
     contactListExpanded = true;
-    checkForExpandedContactList()
+    checkForExpandedContactList();
     loadContactList();
+    checkCheckboxes();
     document.getElementById('addTaskContactList').classList.add('expand-contact-list');
 }
-
 
 function loadContactList() {
     for (i = 0; i &lt; userList.length; i++) {
@@ -172,17 +216,29 @@ function loadContactList() {
     }
 }
 
+function checkCheckboxes(){
+    let nameStillInTask
+    for (i = 0; i &lt; userList.length; i++) {
+        nameStillInTask = checkForContactInClipboard(i);
+        
+        if(nameStillInTask == true){
+            document.getElementById('checkBox' + userList[i].name).checked = true ;
+        }
+    }   
+}
+
 function hideContactList() {
     contactListExpanded = false
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
-    document.getElementById('addTaskContactList').innerHTML = ``;
+    // @ Konrad, warum leerst du hier den contact list Container? 
+    // document.getElementById('addTaskContactList').innerHTML = ``;
 }
 
 function createContactAddTaskHTML(i) {
     return /*html*/ `
     &lt;li class="add-task-contact-container" onclick="toggleContactTask(${i})">
-        &lt;input class="add-task-contact-checkbox" type="checkbox">
+        &lt;input class="add-task-contact-checkbox" type="checkbox" id="checkBox${userList[i].name}">
         &lt;label for="confirm" class="add-task-checkbox-container">${userList[i].name}&lt;/label>
     &lt;/li>
  `
@@ -215,11 +271,31 @@ function removeContactFromTask(i) {
         }
 
     }
+    createSelectedContactIcons();
 }
 
 function addContactToTask(i) {
     let newContactForTask = userList[i].name;
     taskClipboard[0].contacts.push(newContactForTask);
+    createSelectedContactIcons();
+}
+
+function createSelectedContactIconsDivHTML(){
+    return /*html*/ `
+        &lt;div class="selected-contacts-icons" id="selectedContactIcons">&lt;/div>
+    `;
+}
+
+function createSelectedContactIcons(){
+    let firstLetter;
+
+    document.getElementById('selectedContactIcons').innerHTML = ``;
+    for (let i = 0; i &lt; taskClipboard[0].contacts.length; i++) {
+        firstLetter = taskClipboard[0].contacts[i].charAt(0);
+        document.getElementById('selectedContactIcons').innerHTML += `
+        &lt;div class="selectedContact">${firstLetter}&lt;/div>
+        `;
+    }
 }
 
 // function addContactToTask(i){
@@ -255,7 +331,7 @@ function addContactToTask(i) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Feb 25 2023 16:11:59 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Feb 26 2023 16:20:28 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

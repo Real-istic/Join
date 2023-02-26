@@ -34,7 +34,7 @@ function insertTask() {
         <form class="task-left">
             ${insertTaskTitleHTML()}
             ${insertTaskContactlistHTML()}
-            <div class="selected-contacts-icons" id="selectedContactIcons"></div>
+            ${createSelectedContactIconsDivHTML()} 
             ${insertDueDateHTML()}
             ${insertCategorySelectorHTML()}
             ${insertCategoryListHTML()}
@@ -203,7 +203,8 @@ function hideContactList() {
     contactListExpanded = false
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
-    document.getElementById('addTaskContactList').innerHTML = ``;
+    // @ Konrad, warum leerst du hier den contact list Container? 
+    // document.getElementById('addTaskContactList').innerHTML = ``;
 }
 
 function createContactAddTaskHTML(i) {
@@ -251,6 +252,12 @@ function addContactToTask(i) {
     createSelectedContactIcons();
 }
 
+function createSelectedContactIconsDivHTML(){
+    return /*html*/ `
+        <div class="selected-contacts-icons" id="selectedContactIcons"></div>
+    `;
+}
+
 function createSelectedContactIcons(){
     let firstLetter;
 
@@ -261,7 +268,6 @@ function createSelectedContactIcons(){
         <div class="selectedContact">${firstLetter}</div>
         `;
     }
-    
 }
 
 // function addContactToTask(i){

@@ -608,6 +608,7 @@ span {
   transition: 120ms ease-in-out;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .rotate-arrow-90 {
@@ -615,6 +616,7 @@ span {
   transition: 120ms ease-in-out;
   width: 25px;
   height: 25px;
+  cursor: pointer;
 }
 
 .add-task-select-contacts {
@@ -643,6 +645,8 @@ span {
   align-items: center;
   width: 100%;
   transition: 120ms ease-in-out;
+  overflow-x: hidden;
+
 }
 
 .add-task-contact-container {
@@ -696,12 +700,13 @@ span {
 }
 
 .expand-contact-list {
-  height: 100%;
-  max-height: 145px;
+  height: 153px;
   overflow-y: scroll;
   overflow-x: hidden;
   transition: 120ms ease-in-out;
 }
+
+
 
 .add-task-date {
   display: flex;
