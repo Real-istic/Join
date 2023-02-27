@@ -1,13 +1,13 @@
 
 let taskClipboard = [
     {
-        'title': 'TestTitle',
+        'title': '',
         'firstNames': [],
         'lastNames': [],
-        'date': '10.01.2022',
+        'date': '',
         'categories': [],
-        'priority': 'urgent',
-        'description': 'testtest',
+        'priority': '',
+        'description': '',
         'subtasks': [],
     }
 ]
@@ -40,7 +40,8 @@ function insertTask() {
             ${insertCategorySelectorHTML()}
             ${insertCategoryListHTML()}
             ${insertPriorityHTML()}
-            <!--more to do -->
+            ${addTaskInsertDescriptionHTML()}
+            ${addTaskInsertSubtasksHTML()}
         </form>
         <div class="task-right">
             <button class="btn-clear" onclick="clear()">Clear
@@ -183,10 +184,6 @@ function addTaskSetPriority(priority){
     }
 }
 
-    
-
-
-
 /**
  * toggles the categorylist while rotating the arrow by 90deg
  * 
@@ -206,6 +203,27 @@ function toggleCategoryList() {
         expandArrow.classList.add('rotate-arrow-0');
         expandArrow.classList.remove('rotate-arrow-90');
     }
+}
+
+function addTaskInsertDescriptionHTML(){
+    return /*html*/ `
+        <div class="add-task-description">
+            <span>Description</span>
+            <textarea class="add-task-description-textarea" name="description" id="addTaskDescription" placeholder="Enter a Description" cols="30" rows="10"></textarea>
+        </div>
+    `;
+}
+
+function addTaskInsertSubtasksHTML(){
+    return /*html*/ `
+        <div class="add-task-subtasks">
+            <span>Subtasks</span>
+            <div class="add-task-subtasks-form">
+                <input class="add-task-subtasks-input" id="addTaskSubtasksInput" placeholder="Add a new subtask" type="text" name="" id="">
+                <label for=""></label>
+            </div>
+        </div>
+    `;
 }
 
 //ADD CONTACT TO TASK
@@ -335,11 +353,12 @@ function createSelectedContactIconsDivHTML() {
 }
 
 function createSelectedContactIcons() {
+    let contactContainer = document.getElementById('selectedContactIcons');
     let firstNameFirstLetter;
     let lastNameFirstLetter;
     let backgroundcolor;
 
-    document.getElementById('selectedContactIcons').innerHTML = ``;
+    contactContainer.innerHTML = ``;
     for (let i = 0; i < taskClipboard[0].firstNames.length; i++) {
         firstNameFirstLetter = taskClipboard[0].firstNames[i].charAt(0);
         lastNameFirstLetter = taskClipboard[0].lastNames[i].charAt(0);
@@ -348,10 +367,9 @@ function createSelectedContactIcons() {
             if(taskClipboard[0].firstNames[i] == userList[j]['firstName'] && taskClipboard[0].lastNames[i] == userList[j]['lastName']){
                 backgroundcolor = userList[j]['background-color'];
             }           
-        
         }
 
-        document.getElementById('selectedContactIcons').innerHTML += `
+        contactContainer.innerHTML += `
         <div class="add-task-selected-contact" style="background-color:${backgroundcolor};">${firstNameFirstLetter}${lastNameFirstLetter}</div>
         `;
     }
