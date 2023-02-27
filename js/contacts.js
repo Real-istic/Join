@@ -21,12 +21,12 @@ function insertContacts() {
                 <div style="background-color: #e36d6f" class="contact-detail-big-letter">BK</div>
                 <div class="contact-detail-name-task">
                     <p class="contact-detail-big-name">Bernd Kraft</p>
-                    <p class="contact-detail-add-task" onclick="OpenContactAddTask('0', 0)"><img src="./assets/img/blue-plus.png" alt="">Add Task</p>
+                    <p class="contact-detail-add-task" onclick="OpenContactAddTask('0', 0)"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
                 </div>
             </div>
             <div class="contact-detail-info-main">
                 <p class="contact-detail-info">Contact Information</p>
-                <p class="contact-detail-edit" onclick="editContact('0', 'BK')"><img class="icon-edit-contact" src="./assets/img/icon_edit_contact.png" alt=""> Edit Contact</p>
+                <p class="contact-detail-edit" onclick="editContact('0', 'BK')"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
             </div>
             <div>
                 <div>
