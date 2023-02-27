@@ -2,7 +2,6 @@
 let taskClipboard = [
     {
         'title': 'TestTitle',
-        // 'contacts': [],
         'firstNames': [],
         'lastNames': [],
         'date': '10.01.2022',
@@ -213,8 +212,6 @@ function toggleCategoryList() {
 
 function searchContacts() {
     expandContactList();
-    // contactListExpanded = true;
-    // checkForExpandedContactList();
     
     let input = document.getElementById('addContactToTaskInput');
     let filter = input.value.toLowerCase();
@@ -282,8 +279,6 @@ function hideContactList() {
     contactListExpanded = false
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
-    // @ Konrad, warum leerst du hier den contact list Container? 
-    
 }
 
 function createContactAddTaskHTML(i) {
@@ -321,7 +316,6 @@ function removeContactFromTask(i) {
             taskClipboard[0].firstNames.splice(j, 1);
             taskClipboard[0].lastNames.splice(j, 1);
         }
-
     }
     createSelectedContactIcons();
 }
@@ -362,22 +356,3 @@ function createSelectedContactIcons() {
         `;
     }
 }
-
-// function addContactToTask(i){
-// let newContactForTask;
-//     for(j = 0; j < userList.length; j++){
-//         if (j == i){
-//             newContactForTask = userList[i].name;
-//         }
-//     }
-// taskClipborad[0].contacts.push(newContactForTask);
-// }
-
-//
-// ----- ACHTUNG CSS -------
-//.expand-contact-list{
-//  height: 400px;
-//  overflow-y: scroll;
-//  transition: 120ms ease-in-out;
-//}
-//--------------------------
