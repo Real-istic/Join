@@ -8,7 +8,7 @@ let taskClipboard = [
         'categories': [],
         'priority': '',
         'description': '',
-        'subtasks': [],
+        'subtasks': []
     }
 ]
 
@@ -32,7 +32,7 @@ function Task() {
 function insertTask() {
     return /*html*/ `
     <div class="task-main">
-        <form class="task-left">
+        <form class="task-left scrollbar1">
             ${insertTaskTitleHTML()}
             ${insertTaskContactlistHTML()}
             ${createSelectedContactIconsDivHTML()} 
@@ -164,7 +164,7 @@ function insertPriorityHTML() {
 }
 
 
-function addTaskSetPriority(priority){
+function addTaskSetPriority(priority) {
     let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
     let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
@@ -173,7 +173,7 @@ function addTaskSetPriority(priority){
         urgentBox.classList.add('add-task-priority-urgent');
         mediumBox.classList.remove('add-task-priority-medium');
         lowBox.classList.remove('add-task-priority-low');
-    } else if (priority == 'medium'){
+    } else if (priority == 'medium') {
         urgentBox.classList.remove('add-task-priority-urgent');
         mediumBox.classList.add('add-task-priority-medium');
         lowBox.classList.remove('add-task-priority-low');
@@ -205,7 +205,7 @@ function toggleCategoryList() {
     }
 }
 
-function addTaskInsertDescriptionHTML(){
+function addTaskInsertDescriptionHTML() {
     return /*html*/ `
         <div class="add-task-description">
             <span>Description</span>
@@ -214,23 +214,62 @@ function addTaskInsertDescriptionHTML(){
     `;
 }
 
-function addTaskInsertSubtasksHTML(){
+function addTaskInsertSubtasksHTML() {
     return /*html*/ `
         <div class="add-task-subtasks">
             <span>Subtasks</span>
             <div class="add-task-subtasks-form">
-                <input class="add-task-subtasks-input" id="addTaskSubtasksInput" placeholder="Add a new subtask" type="text" name="" id="">
-                <label for=""></label>
+                <input class="add-task-subtasks-input" id="addTaskSubtasksInput" placeholder="Add a new subtask" type="text" name="addTaskSubtask" id="">
+                <img src="assets/img/plussubtask.svg" class="add-task-create-subtask"  onclick="addTaskCreateSubtask()">
             </div>
+            <div class="add-task-subtask-list" id="addTaskCreateSubtask"></div>
         </div>
     `;
 }
 
+function addTaskCreateSubtask() {
+    let subtaskContainer = document.getElementById('addTaskCreateSubtask');
+    let subtaskInput = document.getElementById('addTaskSubtasksInput');
+
+    if (subtaskInput.value.trim() === '') {
+        subtaskInput.setCustomValidity('Your subtask is empty!');
+        subtaskInput.reportValidity();
+        return;
+    }
+
+    if (!taskClipboard[0].subtasks.includes(subtaskInput.value)) {
+        taskClipboard[0].subtasks.push(subtaskInput.value)
+        subtaskContainer.innerHTML += /*html*/ `
+        <div class="add-task-subtask-div">
+            <input onclick="AddCheckedSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" checked="" name="${subtaskInput.value}" id="">
+            <span>${subtaskInput.value}</span>
+        </div>
+    `;
+        subtaskInput.value = ``;
+    } else {
+        subtaskInput.setCustomValidity('Subtask already exists');
+        subtaskInput.reportValidity();
+        return;
+    }
+}
+
+function AddCheckedSubtaskToClipboard(checkbox) {
+    if (checkbox.checked) {
+        taskClipboard[0].subtasks.push(checkbox.name)
+    } else {
+        for (let i = 0; i < taskClipboard[0].subtasks.length; i++) {
+            const subtaskName = taskClipboard[0].subtasks[i];
+            if (subtaskName == checkbox.name) {
+                taskClipboard[0].subtasks.splice(i, 1)
+            }
+        }
+    }
+}
 //ADD CONTACT TO TASK
 
 function searchContacts() {
     expandContactList();
-    
+
     let input = document.getElementById('addContactToTaskInput');
     let filter = input.value.toLowerCase();
 
@@ -364,9 +403,9 @@ function createSelectedContactIcons() {
         lastNameFirstLetter = taskClipboard[0].lastNames[i].charAt(0);
 
         for (let j = 0; j < userList.length; j++) {
-            if(taskClipboard[0].firstNames[i] == userList[j]['firstName'] && taskClipboard[0].lastNames[i] == userList[j]['lastName']){
+            if (taskClipboard[0].firstNames[i] == userList[j]['firstName'] && taskClipboard[0].lastNames[i] == userList[j]['lastName']) {
                 backgroundcolor = userList[j]['background-color'];
-            }           
+            }
         }
 
         contactContainer.innerHTML += `
