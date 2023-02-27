@@ -42,8 +42,8 @@ h2 {
 /* custom scrollbar */
 
 .scrollbar {
-  height: 300px;
-  width: 50%;
+  /* height: 300px; */
+  /* width: 50%; */
   overflow: auto;
   /* padding: 0 10px; */
 }
@@ -58,7 +58,6 @@ h2 {
   /* border: 1px solid #cacaca; */
   border-left: 1px solid #cacaca;
   border-right: 1px solid #cacaca;
-
 }
 
 .scrollbar1::-webkit-scrollbar-thumb {
@@ -323,7 +322,6 @@ nav {
   display: flex;
 }
 
-
 /* Regular Task Box */
 
 .task-box {
@@ -508,6 +506,7 @@ nav {
   justify-content: flex-start;
   width: 462px;
   overflow-y: auto;
+  overflow-x: hidden;
   z-index: 1;
 }
 
@@ -660,6 +659,7 @@ nav {
   width: 100%;
   transition: 120ms ease-in-out;
   overflow-x: hidden;
+  padding-right: 15px;
 }
 
 .add-task-contact-container {
@@ -679,20 +679,20 @@ nav {
   background-color: white;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container {
+.add-task-contact-checkbox + .add-task-checkbox-container {
   position: absolute;
 }
 
 .add-task-contact-checkbox {
   position: absolute;
-  left: 0;
-  width: 100%;
+  left: 15px;
+  width: 98%;
   height: 100%;
   appearance: none;
   z-index: 1;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container::after {
+.add-task-contact-checkbox + .add-task-checkbox-container::after {
   width: 15px;
   height: 15px;
   background-image: url("assets/img/rectangle.svg");
@@ -702,14 +702,14 @@ nav {
   margin-top: 4px;
 }
 
-.add-task-contact-checkbox:checked+.add-task-checkbox-container::after {
+.add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
   background-image: url("assets/img/checkbutton.svg");
 }
 
 .add-task-checkbox-container {
   display: flex;
   justify-content: space-between;
-  width: 416px;
+  width: 400px;
 }
 
 .expand-contact-list {
@@ -803,7 +803,6 @@ element.style {
   margin-left: 16px;
 }
 
-
 .contact-right {
   width: 58%;
   height: 73vh;
@@ -811,7 +810,6 @@ element.style {
   align-items: flex-start;
   flex-direction: column;
   background-color: white;
-
 }
 
 .new-contact-button {
@@ -908,7 +906,7 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-category>span {
+.add-task-category > span {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -1142,14 +1140,86 @@ element.style {
 
 .add-task-subtasks-form {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   padding: 18px 21px;
   gap: 10px;
   isolation: isolate;
   width: 100%;
+  height: 51px;
+  border-bottom: 1px solid #D1D1D1;
+}
+
+.add-task-subtasks-input {
+  border: none;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 120%;
+}
+
+.add-task-subtasks-input:focus {
+  outline: none;
+}
+
+.add-task-subtasks-input::placeholder {
+  color: #d1d1d1;
+}
+
+.add-task-subtask-list {
+  width: 100%;
+}
+
+.add-task-subtask-div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px 0px 0px;
+  gap: 20px;
+  width: 100%;
+  height: 30px;
+}
+
+.add-task-subtask-div span {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #000000;
+  margin-left: 36px;
+}
+
+.add-task-create-subtask {
+  cursor: pointer;
+}
+
+.add-task-subtask-checkbox {
+  position: absolute;
+  width: 95%;
   height: 100%;
-  background-color: #ffffff;
+  appearance: none;
+}
+
+.add-task-subtask-checkbox::before {
+  width: 18px;
+  height: 18px;
+  background-image: url("assets/img/subtaskunchecked.svg");
+  content: "";
+  float: left;
+  margin-top: 5px;
+  object-fit: cover;
+}
+
+.add-task-subtask-checkbox:checked::before {
+  width: 18px;
+  height: 18px;
+  background-image: url("assets/img/subtaskchecked.svg");
+  content: "";
+  float: left;
+  margin-top: 5px;
+  object-fit: cover;
 }
 
 .contact-left {
@@ -1166,7 +1236,6 @@ element.style {
   left: 48px;
   top: 2px;
   border-radius: 0px;
-
 }
 
 .contact-letter {
@@ -1211,19 +1280,6 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-subtasks-input {
-  border: none;
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 19px;
-  line-height: 120%;
-}
-
-.add-task-subtasks-input:focus {
-  outline: none;
-}
-
 .new-contact-button {
   height: 61px;
   width: 197px;
@@ -1244,10 +1300,6 @@ element.style {
 
 .new-contact-button:hover {
   background: #005dff;
-}
-
-.add-task-subtasks-input::placeholder {
-  color: #d1d1d1;
 }
 
 .contact-right-side {
@@ -1305,11 +1357,10 @@ element.style {
   line-height: 58px;
   letter-spacing: 0em;
   text-align: left;
-
 }
 
 .contact-detail-add-task {
-  color: #005DFF;
+  color: #005dff;
   font-weight: 400;
   font-size: 16px;
   margin: 0;
