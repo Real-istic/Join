@@ -212,8 +212,10 @@ function toggleCategoryList() {
 //ADD CONTACT TO TASK
 
 function searchContacts() {
-    checkForExpandedContactList();
-
+    expandContactList();
+    // contactListExpanded = true;
+    // checkForExpandedContactList();
+    
     let input = document.getElementById('addContactToTaskInput');
     let filter = input.value.toLowerCase();
 
@@ -237,12 +239,14 @@ function checkForExpandedContactList() {
     } else {
         expandArrow.classList.add('rotate-arrow-0');
         expandArrow.classList.remove('rotate-arrow-90');
+        document.getElementById('addTaskContactList').classList.add('expand-contact-list');
     }
 }
 
 function openAndCloseContactList() {
     if (contactListExpanded == false) {
         expandContactList();
+        searchContacts();
     } else {
         hideContactList();
     }
@@ -257,6 +261,7 @@ function expandContactList() {
 }
 
 function loadContactList() {
+    document.getElementById('addTaskContactList').innerHTML = ``;
     for (i = 0; i < userList.length; i++) {
         document.getElementById('addTaskContactList').innerHTML += createContactAddTaskHTML(i);
     }
@@ -278,14 +283,14 @@ function hideContactList() {
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
     // @ Konrad, warum leerst du hier den contact list Container? 
-    //document.getElementById('addTaskContactList').innerHTML = ``;
+    
 }
 
 function createContactAddTaskHTML(i) {
     return /*html*/ `
     <li class="add-task-contact-container" onclick="toggleContactTask(${i})">
         <input class="add-task-contact-checkbox" type="checkbox" id="checkBox${userList[i].firstName}${userList[i].lastName}">
-        <label for="confirm" class="add-task-checkbox-container">${userList[i].firstName}${userList[i].lastName}</label>
+        <label for="confirm" class="add-task-checkbox-container">${userList[i].firstName} ${userList[i].lastName}</label>
     </li>
  `
 }
