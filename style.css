@@ -1050,6 +1050,7 @@ element.style {
   z-index: 1;
   width: 147px;
   height: 51px;
+  appearance: none;
 }
 
 .add-task-priority-urgent,
