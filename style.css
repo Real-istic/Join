@@ -316,10 +316,6 @@ nav {
   display: flex;
 }
 
-.task-picture-and-count img,
-span {
-  /*margin: 0 10px;*/
-}
 
 /* Regular Task Box */
 
@@ -794,14 +790,15 @@ element.style {
   margin-left: 16px;
 }
 
+
 .contact-right {
+  width: 58%;
+  height: 73vh;
   display: flex;
-  position: fixed;
-  align-items: flex-end;
-  justify-content: flex-end;
-  width: 50%;
-  bottom: 12rem;
-  left: 30rem;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: white;
+
 }
 
 .new-contact-button {
@@ -1035,7 +1032,6 @@ element.style {
   left: 0px;
   top: 0px;
   margin: 0 0 0 0;
-  -webkit-appearance: none;
   position: absolute;
   z-index: 1;
   width: 147px;
@@ -1211,15 +1207,6 @@ element.style {
 
 .add-task-subtasks-input:focus {
   outline: none;
-}
-
-.contact-right {
-  width: 50%;
-  height: 80vh;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-
 }
 
 .new-contact-button {
