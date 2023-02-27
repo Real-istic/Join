@@ -35,8 +35,9 @@ function renderUserList() {
             <div class="contact-letter-main">
                 <h4 class="contact-letter">${userList[i].firstName.charAt(0)}</h4>
                 <div id="testLetter">
-                    <div class="contact-child-div" onclick="openDetailContact('0', '${contactName}')" id="0">
-                        <div style="background-color: ${randomColor}" class="contact-child">
+                    <div class="contact-child-div" onclick="openDetailContact('${i}', '${contactName}')" id="0">
+                    <div style="background-color: ${userList[i]['background-color']}" class="contact-child">
+
                             <p>${contactName}</p>
                         </div>
                         <div>
