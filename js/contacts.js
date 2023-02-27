@@ -10,8 +10,43 @@ function insertContacts() {
             </div>
 
             <div class="contact-right">
-                <div class="new-contact-button" onclick="">New Contact</div>
+                 <div class="contact-right-side">
+                    <div class="show-contact">
+                <div id="contactdetails">
+        <div class="contact-detail-main-side animationFadeInRight" id="0">
+            <div class="back-in-media-contact">
+                <img onclick="closeMediaContact(0)" src="./assets/img/arrow-back.png" alt="">
             </div>
+            <div class="contact-detail-head">
+                <div style="background-color: #e36d6f" class="contact-detail-big-letter">BK</div>
+                <div class="contact-detail-name-task">
+                    <p class="contact-detail-big-name">Bernd Kraft</p>
+                    <p class="contact-detail-add-task" onclick="OpenContactAddTask('0', 0)"><img src="./assets/img/blue-plus.png" alt="">Add Task</p>
+                </div>
+            </div>
+            <div class="contact-detail-info-main">
+                <p class="contact-detail-info">Contact Information</p>
+                <p class="contact-detail-edit" onclick="editContact('0', 'BK')"><img class="icon-edit-contact" src="./assets/img/icon_edit_contact.png" alt=""> Edit Contact</p>
+            </div>
+            <div>
+                <div>
+                    <p class="contact-detail-email-number">Email</p>
+                    <a href="mailto:bk@alles.de"><span>bk@alles.de</span></a>
+                </div>
+                <div>
+                    <p class="contact-detail-email-number">Mobile</p>
+                    <p>04321 9876540</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+            </div>
+
+        </div>
+                
+            </div>
+            <div class="new-contact-button" onclick="">New Contact</div>
         </div> 
     `;
         

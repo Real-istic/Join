@@ -971,14 +971,16 @@ element.style {
   justify-content: flex-start;
   width: 100%;
   height: 100%;
+  background-color: #ffffff;
 }
 
 .contact-left {
-  width: 100%;
+  width: 50%;
   height: 80vh;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  background-color: #ffffff;
 }
 
 .contact-letter {
@@ -1023,13 +1025,12 @@ element.style {
 }
 
 .contact-right {
-  display: flex;
-  position: fixed;
-  align-items: flex-end;
-  justify-content: flex-end;
   width: 50%;
-  bottom: 12rem;
-  left: 30rem;
+  height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  
 }
 
 .new-contact-button {
@@ -1045,8 +1046,112 @@ element.style {
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
+  position: fixed;
+  bottom: 6rem;
+  right: 7rem;
 }
 
 .new-contact-button:hover {
   background: #005dff;
 }
+
+.contact-right-side {
+  min-width: 480px;
+  width: 100%;
+  max-width: 700px;
+  padding: 50px 32px 25px 65px;
+}
+
+.show-contact {
+  height: 75vh;
+}
+
+.animationFadeInRight {
+  animation: fadeInright 1s ease 0s 1 normal forwards;
+}
+
+.back-in-media-contact {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.contact-detail-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.contact-detail-big-letter {
+  min-width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  border: 3px solid #ffffff;
+  color: #ffffff;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
+  margin-right: 25px;
+  font-size: 47px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-detail-name-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 25px;
+}
+
+.contact-detail-big-name {
+  font-size: 48px;
+  font-weight: 600;
+  color: #000000;
+  margin-bottom: 13px;
+  margin-top: 13px;
+}
+
+.contact-detail-add-task {
+  color: #005DFF;
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-detail-info-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-detail-info {
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.contact-detail-edit {
+  font-size: 16px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-edit-contact {
+  width: 20px;
+}
+
+.contact-detail-email-number {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.contact-detail-email-number {
+  font-size: 16px;
+  font-weight: 700;
+}
+
