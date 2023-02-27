@@ -715,9 +715,9 @@ span {
   justify-content: center;
   width: 42px;
   height: 42px;
+  border: solid white;
   border-radius: 50%;
-  background-color: #4589ff;
-  margin: 0 10px;
+  margin: 0 -10px 0 5px; /*Icons overlap*/
   color: white;
 }
 

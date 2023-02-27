@@ -1,4 +1,4 @@
-setURL('http://gruppenarbeit-join-473.developerakademie.net/smallest_backend_ever')
+setURL('https://gruppenarbeit-join-473.developerakademie.net/smallest_backend_ever')
 let userList = [];
 
 /**
