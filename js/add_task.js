@@ -2,7 +2,9 @@
 let taskClipboard = [
     {
         'title': 'TestTitle',
-        'contacts': [],
+        // 'contacts': [],
+        'firstNames': [],
+        'lastNames': [],
         'date': '10.01.2022',
         'categories': [],
         'priority': 'urgent',
@@ -266,7 +268,7 @@ function checkCheckboxes() {
         nameStillInTask = checkForContactInClipboard(i);
 
         if (nameStillInTask == true) {
-            document.getElementById('checkBox' + userList[i].name).checked = true;
+            document.getElementById('checkBox' + userList[i].firstName + userList[i].lastName).checked = true;
         }
     }
 }
@@ -276,14 +278,14 @@ function hideContactList() {
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
     // @ Konrad, warum leerst du hier den contact list Container? 
-    document.getElementById('addTaskContactList').innerHTML = ``;
+    //document.getElementById('addTaskContactList').innerHTML = ``;
 }
 
 function createContactAddTaskHTML(i) {
     return /*html*/ `
     <li class="add-task-contact-container" onclick="toggleContactTask(${i})">
-        <input class="add-task-contact-checkbox" type="checkbox" id="checkBox${userList[i].name}">
-        <label for="confirm" class="add-task-checkbox-container">${userList[i].name}</label>
+        <input class="add-task-contact-checkbox" type="checkbox" id="checkBox${userList[i].firstName}${userList[i].lastName}">
+        <label for="confirm" class="add-task-checkbox-container">${userList[i].firstName}${userList[i].lastName}</label>
     </li>
  `
 }
@@ -300,8 +302,8 @@ function toggleContactTask(i) {
 
 function checkForContactInClipboard(i) {
     let nameStillInTask = false;
-    for (k = 0; k < taskClipboard[0].contacts.length; k++) {
-        if (userList[i].name == taskClipboard[0].contacts[k]) {
+    for (k = 0; k < taskClipboard[0].firstNames.length; k++) {
+        if (userList[i].firstName == taskClipboard[0].firstNames[k] && userList[i].lastName == taskClipboard[0].lastNames[k]) {
             nameStillInTask = true;
         }
     }
@@ -309,9 +311,10 @@ function checkForContactInClipboard(i) {
 }
 
 function removeContactFromTask(i) {
-    for (j = 0; j < taskClipboard[0].contacts.length; j++) {
-        if (taskClipboard[0].contacts[j] == userList[i].name) {
-            taskClipboard[0].contacts.splice(j, 1);
+    for (j = 0; j < taskClipboard[0].firstNames.length; j++) {
+        if (taskClipboard[0].firstNames[j] == userList[i].firstName && taskClipboard[0].lastNames[j] == userList[i].lastName) {
+            taskClipboard[0].firstNames.splice(j, 1);
+            taskClipboard[0].lastNames.splice(j, 1);
         }
 
     }
@@ -319,8 +322,10 @@ function removeContactFromTask(i) {
 }
 
 function addContactToTask(i) {
-    let newContactForTask = userList[i].name;
-    taskClipboard[0].contacts.push(newContactForTask);
+    let newFirstNameForTask = userList[i].firstName;
+    let newLastNameForTask = userList[i].lastName;
+    taskClipboard[0].firstNames.push(newFirstNameForTask);
+    taskClipboard[0].lastNames.push(newLastNameForTask);
     createSelectedContactIcons();
 }
 
@@ -331,13 +336,24 @@ function createSelectedContactIconsDivHTML() {
 }
 
 function createSelectedContactIcons() {
-    let firstLetter;
+    let firstNameFirstLetter;
+    let lastNameFirstLetter;
+    let backgroundcolor;
 
     document.getElementById('selectedContactIcons').innerHTML = ``;
-    for (let i = 0; i < taskClipboard[0].contacts.length; i++) {
-        firstLetter = taskClipboard[0].contacts[i].charAt(0);
+    for (let i = 0; i < taskClipboard[0].firstNames.length; i++) {
+        firstNameFirstLetter = taskClipboard[0].firstNames[i].charAt(0);
+        lastNameFirstLetter = taskClipboard[0].lastNames[i].charAt(0);
+
+        for (let j = 0; j < userList.length; j++) {
+            if(taskClipboard[0].firstNames[i] == userList[j]['firstName'] && taskClipboard[0].lastNames[i] == userList[j]['lastName']){
+                backgroundcolor = userList[j]['background-color'];
+            }           
+        
+        }
+
         document.getElementById('selectedContactIcons').innerHTML += `
-        <div class="add-task-selected-contact">${firstLetter}</div>
+        <div class="add-task-selected-contact" style="background-color:${backgroundcolor};">${firstNameFirstLetter}${lastNameFirstLetter}</div>
         `;
     }
 }
