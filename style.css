@@ -1051,6 +1051,7 @@ element.style {
   width: 147px;
   height: 51px;
   appearance: none;
+  cursor: pointer;
 }
 
 .add-task-priority-urgent,
