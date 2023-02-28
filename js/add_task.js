@@ -156,7 +156,11 @@ function createCategoryListHTML(i){
     `
 }
 
-//
+/**
+ * inserts the priority selector
+ * 
+ * @returns the html part of it
+ */
 function insertPriorityHTML() {
     return /*html*/ `
         <div class="add-task-priority-container">
@@ -188,7 +192,11 @@ function insertPriorityHTML() {
     `;
 }
 
-
+/**
+ * Sets the prioritylevel of the Task
+ * 
+ * @param {*} priority name of the specific priority
+ */
 function addTaskSetPriority(priority) {
     let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
     let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
@@ -230,6 +238,11 @@ function toggleCategoryList() {
     }
 }
 
+/**
+ * inserts the the Description
+ * 
+ * @returns the html part of it
+ */
 function addTaskInsertDescriptionHTML() {
     return /*html*/ `
         <div class="add-task-description">
@@ -239,6 +252,11 @@ function addTaskInsertDescriptionHTML() {
     `;
 }
 
+/**
+ * inserts the Subtask and subtasklist
+ * 
+ * @returns the html part of it
+ */
 function addTaskInsertSubtasksHTML() {
     return /*html*/ `
         <div class="add-task-subtasks">
