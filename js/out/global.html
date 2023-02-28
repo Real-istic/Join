@@ -104,7 +104,7 @@
     
 
     
-    <h4 class="name" id="Task"><span class="type-signature"></span>Task<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="AddCheckedSubtaskToClipboard"><span class="type-signature"></span>AddCheckedSubtaskToClipboard<span class="signature">(checkbox)</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +112,7 @@
 
 
 <div class="description">
-    call the add task page
+    checks the checked status of the checkboxes. push to task if checked
 </div>
 
 
@@ -121,6 +121,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>checkbox</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the specific checkbox clicked by the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -156,7 +205,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line22">line 22</a>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line311">line 311</a>
     </li></ul></dd>
     
 
@@ -324,7 +373,7 @@
     
 
     
-    <h4 class="name" id="addTaskInsertDescriptionHTML"><span class="type-signature"></span>addTaskInsertDescriptionHTML<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="addTask"><span class="type-signature"></span>addTask<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -332,7 +381,7 @@
 
 
 <div class="description">
-    inserts the the Description
+    call the add task page
 </div>
 
 
@@ -376,7 +425,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line246">line 246</a>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -401,114 +450,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    the html part of it
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addTaskInsertSubtasksHTML"><span class="type-signature"></span>addTaskInsertSubtasksHTML<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    inserts the Subtask and subtasklist
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line260">line 260</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    the html part of it
-</div>
-
-
-
-    
 
 
 
@@ -789,6 +730,94 @@
     
 
     
+    <h4 class="name" id="clearTask"><span class="type-signature"></span>clearTask<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    resets the add task window and clears the clipboard values
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line339">line 339</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="contactRightSide"><span class="type-signature"></span>contactRightSide<span class="signature">(i)</span><span class="type-signature"></span></h4>
     
 
@@ -891,6 +920,192 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="contacts.js.html">contacts.js</a>, <a href="contacts.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createSubtask"><span class="type-signature"></span>createSubtask<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    creates and inserts the subtask, while validate the form (no empty string, no duplicates)
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line280">line 280</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    validation response
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createTask"><span class="type-signature"></span>createTask<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    pushes all add task informations to the task clipboard
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line328">line 328</a>
     </li></ul></dd>
     
 
@@ -2042,6 +2257,104 @@
     
 
     
+    <h4 class="name" id="insertDescriptionHTML"><span class="type-signature"></span>insertDescriptionHTML<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    inserts the the Description
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line246">line 246</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the html part of it
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="insertDoneTasksHTML"><span class="type-signature"></span>insertDoneTasksHTML<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
@@ -2389,6 +2702,104 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line164">line 164</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    the html part of it
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="insertSubtasksHTML"><span class="type-signature"></span>insertSubtasksHTML<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    inserts the Subtask and subtasklist
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line262">line 262</a>
     </li></ul></dd>
     
 
@@ -2992,6 +3403,368 @@ payload {JSON | Array} - The payload you want to store
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushDescriptionToTaskClipboard"><span class="type-signature"></span>pushDescriptionToTaskClipboard<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    pushes the description information to the task clipboard
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line395">line 395</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushDueDateToTaskClipboard"><span class="type-signature"></span>pushDueDateToTaskClipboard<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    pushes the due date information to the task clipboard
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line377">line 377</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushPriorityToTaskClipboard"><span class="type-signature"></span>pushPriorityToTaskClipboard<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    pushes the priority information to the task clipboard
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line386">line 386</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="pushTitleToTaskClipboard"><span class="type-signature"></span>pushTitleToTaskClipboard<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    pushes the tite information to the task clipboard
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="add_task.js.html">add_task.js</a>, <a href="add_task.js.html#line361">line 361</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    validation response
+</div>
+
+
+
+    
 
 
 
@@ -3679,13 +4452,13 @@ payload {JSON | Array} - The payload you want to store
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#Task">Task</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTaskInsertDescriptionHTML">addTaskInsertDescriptionHTML</a></li><li><a href="global.html#addTaskInsertSubtasksHTML">addTaskInsertSubtasksHTML</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTitleToTaskClipboard">pushTitleToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 28 2023 18:42:37 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 28 2023 21:49:21 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
