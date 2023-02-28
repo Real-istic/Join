@@ -132,6 +132,31 @@ function insertCategoryListHTML() {
     `;
 }
 
+//SELECT CATEGORY
+//side notes: create category list in backend
+//a category consists of categoryName and categoryColor
+
+function loadCategorylist(){
+    document.getElementById('addTaskCategoryList').innerHTML = ``;
+    document.getElementById('addTaskCategoryList').innerHTML += createCategoryInputHTML();
+    for (i = 0; i < categoryList.length; i++) {
+        document.getElementById('addTaskCategoryList').innerHTML += createCategoryListHTML(i);
+    }
+}
+
+function createCategoryInputHTML(){
+    return `
+    <input class="add-task-list-element" type="text" placeholder="New category" required minlength="1" maxlength="20">
+    `
+}
+
+function createCategoryListHTML(i){
+    return `
+    <li class="add-task-list-element">${categoryList[i]['categoryName']}</li>
+    `
+}
+
+//
 function insertPriorityHTML() {
     return /*html*/ `
         <div class="add-task-priority-container">

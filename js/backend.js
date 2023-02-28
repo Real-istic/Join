@@ -1,13 +1,15 @@
 setURL('https://gruppenarbeit-join-473.developerakademie.net/smallest_backend_ever')
 let userList = [];
+let categoryList = [];
 
 /**
- * syncronize data from the backend to the user.
+ * syncronize data from the backend to the user and category.
  * 
  */
 async function initBackend() {
     await downloadFromServer();
     userList = JSON.parse(backend.getItem('users')) || [];
+    category = JSON.parse(backend.getItem('category')) || [];
 }
 
 /**
@@ -30,3 +32,22 @@ async function deleteUser() {
     initBackend();
 }
 
+/**
+ * Adds a category to the categoryList. Push to the backend.
+ * 
+ * @param {} category the category object
+ */
+async function addCategory(category) {
+    categoryList.push(category);
+    await backend.setItem('category', JSON.stringify(categoryList));
+    initBackend();
+}
+
+/**
+ * 
+ * removes all categorys form the backend.
+ */
+async function deleteCategory() {
+    await backend.deleteItem('category');
+    initBackend();
+}
