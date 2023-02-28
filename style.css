@@ -1306,7 +1306,7 @@ element.style {
 }
 
 .show {
-  right: 0%;
+  right: -6%;
 
 }
 
@@ -1403,4 +1403,126 @@ element.style {
 .contact-detail-email-number {
   font-size: 16px;
   font-weight: 700;
+}
+
+/* Add Contact Section*/
+
+.contact-left-fadeIn{
+  width: 580px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: white;
+  border-radius: 0px 30px 30px 0px;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
+  overflow: auto;
+  left: -100%;
+  transition: all 800ms ease-in-out;
+}
+
+.show-left {
+  left: -6%;
+
+}
+
+.add-contact {
+  width: 580px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: white;
+  border-radius: 0px 30px 30px 0px;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
+  overflow: auto;
+  left: -100%;
+  transition: all 800ms ease-in-out;
+}
+
+.add-contact-head {
+  background-color: #4589ff;
+  width: 580px;
+  padding-bottom: 70px;
+  border-radius: 0px 30px 0px 0px;
+}
+
+.add-contact-cross {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.img-cross {
+  margin: 20px;
+}
+
+.add-contact-header-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-contact-h {
+  font-family: Open Sans;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 58px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.add-contact-main {
+  width: 580px;
+  background-color: #ffffff;
+  border-radius: 0px 0px 30px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0;
+}
+
+.input-contact {
+  width: 100%;
+  margin-top: 30px;
+  border-bottom: 1px solid #D1D1D1;
+}
+
+.input-contact-name {
+  width: 90%;
+  height: 50px;
+  border: 0;
+  font-size: 19px;
+  font-weight: 400;
+  outline: none;
+}
+
+.button-container {
+  display: flex;
+  gap: 32px;
+  margin: 30px 0;
+}
+
+.button-cancel {
+  width: 136px;
+  height: 61px;
+  background-color: #ffffff;
+  border: 1px solid #647188;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 23px;
+}
+
+.button-create {
+  width: 210px;
+  height: 61px;
+  background-color: #4589ff;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 0;
 }

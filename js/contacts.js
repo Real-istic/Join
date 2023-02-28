@@ -5,14 +5,14 @@ function insertContacts() {
   contentDiv.innerHTML = /*html*/ `
     <div class="contact-main">
           <div class="contact-left">
-          ${renderUserList()}
+            ${renderUserList()}
           </div>
-  
-          <div class="contact-right" id="contact-right">
-          
-          </div>
+
+          <div class="contact-right" id="contact-right"></div>
     </div>
 
+    <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
+    
     <div class="new-contact-button" onclick="">New Contact</div>
   `;
 
@@ -54,18 +54,16 @@ function renderUserList() {
 
 
 /**
-* Call the contactSideScroll content anf remove the display-none class
+* Call the contactSideScroll content and add show class for fade in from right
 * 
 * @param {number} i The index of the user in the userList
 * 
 * */
 function contactRightSide(i) {
   let rightSide = document.getElementById('contact-right')
-  //rightSide.classList.remove("display-none")
   rightSide.classList.add("show")
   rightSide.innerHTML = renderContactSideScroll(i)
 }
-
 
 
 /**
@@ -75,10 +73,10 @@ function contactRightSide(i) {
  */
 function renderContactSideScroll(i) {
   let ContactSideScrollHTML;
-      const firstNameLetter = userList[i].firstName.charAt(0);
-      const lastNameLetter = userList[i].lastName.charAt(0);
-      const contactNameLetter = firstNameLetter + lastNameLetter;
-      const contactName = userList[i].firstName + " " + userList[i].lastName;
+  const firstNameLetter = userList[i].firstName.charAt(0);
+  const lastNameLetter = userList[i].lastName.charAt(0);
+  const contactNameLetter = firstNameLetter + lastNameLetter;
+  const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
   <div class="contact-right-side">
@@ -98,7 +96,7 @@ function renderContactSideScroll(i) {
               </div>
                   <div class="contact-detail-info-main">
                       <p class="contact-detail-info">Contact Information</p>
-                      <p class="contact-detail-edit" onclick="editContact('0', 'BK')"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
+                      <p class="contact-detail-edit" onclick="contactLeftSide(${i}")><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
                   </div>
           </div>
               <div>
@@ -115,22 +113,72 @@ function renderContactSideScroll(i) {
 
 `;
 
-return ContactSideScrollHTML;
+  return ContactSideScrollHTML;
 }
 
-
+function contactLeftSide(i) {
+  let editContact = document.getElementById('contact-left-fadeIn')
+  editContact.classList.add("showleft")
+  editContact.innerHTML = editContact(i)
+}
 
 
 /**
-* returns a random hex color code
-* 
-* @returns a string representing a hex color code
-*/
-function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+ * Call the editContact content
+ *  
+ * @param {number} i The index of the user in the userList
+ * 
+ */
+
+function editContact(i) {
+  const firstNameLetter = userList[i].firstName.charAt(0);
+  const lastNameLetter = userList[i].lastName.charAt(0);
+  const contactNameLetter = firstNameLetter + lastNameLetter;
+  const contactName = userList[i].firstName + " " + userList[i].lastName;
+  editContact.innerHTML = /*html*/ `
+<div class="add-contact animationFadeIn" onclick="doNotClose(event)">
+<div class="add-contact-head">
+    <div class="add-contact-cross" onclick="hideAddContacts()">
+        <img class="img-cross" src="./assets/img/theCross.svg" alt="">
+    </div>
+    <div class="add-contact-header-info">
+        <div class="add-contact-h">
+            Edit contact
+        </div>                   
+    </div>
+</div>
+<div class="add-contact-main">
+    <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
+        <p>BK</p>
+    </div>
+        <form onsubmit="invEditContact(${userList[i].email}, ${i}, ${contactNameLetter}); return false">
+            <div>
+                <div class="input-contact">
+                    <input required="" type="text" id="contactEditName" class="input-contact-name">
+                    <img src="./assets/img/signup-user.svg" alt="">
+                </div>
+                <div class="input-contact">
+                    <input required="" type="email" id="contactEditEmail" class="input-contact-name">
+                    <img src="./assets/img/login-email.svg" alt="">
+                </div>
+                <div class="input-contact">
+                    <input required="" type="text" id="contactEditNumber" class="input-contact-name">
+                    <img src="./assets/img/phone.svg" alt="">
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="button-cancel" type="button" onclick="deleteContacts(0)">Delete <img src="./assets/img/cancel.png" alt=""></button>
+                <button class="button-create" type="submit">Save <img src="./assets/img/rithe.png" alt=""></button>
+            </div>
+        </form>
+</div>
+</div>
+
+`;
+
 }
+
+
+
+
+
