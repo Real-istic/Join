@@ -679,7 +679,7 @@ nav {
   background-color: white;
 }
 
-.add-task-contact-checkbox + .add-task-checkbox-container {
+.add-task-contact-checkbox+.add-task-checkbox-container {
   position: absolute;
 }
 
@@ -692,7 +692,7 @@ nav {
   z-index: 1;
 }
 
-.add-task-contact-checkbox + .add-task-checkbox-container::after {
+.add-task-contact-checkbox+.add-task-checkbox-container::after {
   width: 15px;
   height: 15px;
   background-image: url("assets/img/rectangle.svg");
@@ -702,7 +702,7 @@ nav {
   margin-top: 4px;
 }
 
-.add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
+.add-task-contact-checkbox:checked+.add-task-checkbox-container::after {
   background-image: url("assets/img/checkbutton.svg");
 }
 
@@ -734,7 +734,8 @@ nav {
   height: 42px;
   border: solid white;
   border-radius: 50%;
-  margin: 14px -10px 14px 5px; /*Icons overlap*/
+  margin: 14px -10px 14px 5px;
+  /*Icons overlap*/
   color: white;
 }
 
@@ -752,6 +753,7 @@ element.style {
   justify-content: flex-start;
   width: 100%;
   height: 100%;
+  
 }
 
 .contact-left {
@@ -766,13 +768,6 @@ element.style {
   padding-left: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid #d1d1d1;
-}
-
-.contact-child-div {
-  display: flex;
-  align-items: center;
-  padding-left: 20px;
-  height: 77px;
 }
 
 .contact-child {
@@ -803,13 +798,17 @@ element.style {
   margin-left: 16px;
 }
 
-.contact-right {
+.contact-right  .display-none{
+  display: flex;
   width: 58%;
   height: 73vh;
-  display: flex;
   align-items: flex-start;
   flex-direction: column;
-  background-color: white;
+  background-color: rgb(70, 40, 40);
+}
+
+.display-none{
+  display: none;
 }
 
 .new-contact-button {
@@ -906,7 +905,7 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-category > span {
+.add-task-category>span {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -1249,7 +1248,14 @@ element.style {
   align-items: center;
   padding-left: 20px;
   height: 77px;
+  cursor: pointer;
 }
+
+.contact-child-div:hover {
+  background-color: #d2e3ff;
+  border-radius: 8px;
+  padding-left: 18px;
+} 
 
 .contact-child-div-klick {
   display: flex;
@@ -1276,7 +1282,6 @@ element.style {
 
 .contact-name {
   height: 51px;
-  background: #ffffff;
   border-bottom: 1px solid #d1d1d1;
 }
 
@@ -1307,6 +1312,8 @@ element.style {
   width: 100%;
   max-width: 700px;
   padding: 50px 32px 25px 65px;
+  
+
 }
 
 .show-contact {
