@@ -42,10 +42,7 @@ h2 {
 /* custom scrollbar */
 
 .scrollbar {
-  /* height: 300px; */
-  /* width: 50%; */
   overflow: auto;
-  /* padding: 0 10px; */
 }
 
 .scrollbar1::-webkit-scrollbar {
@@ -61,7 +58,7 @@ h2 {
 }
 
 .scrollbar1::-webkit-scrollbar-thumb {
-  border-radius: 6px;
+  border-radius: 5px;
   border: 2px solid transparent;
   background-clip: content-box;
   background-color: #4589ff;
