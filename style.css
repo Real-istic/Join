@@ -798,19 +798,6 @@ element.style {
   margin-left: 16px;
 }
 
-.contact-right  .display-none{
-  display: flex;
-  width: 58%;
-  height: 73vh;
-  align-items: flex-start;
-  flex-direction: column;
-  background-color: rgb(70, 40, 40);
-}
-
-.display-none{
-  display: none;
-}
-
 .new-contact-button {
   height: 61px;
   width: 197px;
@@ -1307,21 +1294,29 @@ element.style {
   background: #005dff;
 }
 
+.contact-right  {
+  display: flex;
+  position: fixed;
+  width: 58%;
+  height: 73vh;
+  align-items: flex-start;
+  flex-direction: column;
+  right: -100%;
+  transition: all 800ms ease-in-out;
+}
+
+.show {
+  right: 0%;
+
+}
+
 .contact-right-side {
   min-width: 480px;
   width: 100%;
   max-width: 700px;
   padding: 50px 32px 25px 65px;
-  
-
-}
-
-.show-contact {
-  height: 75vh;
-}
-
-.animationFadeInRight {
-  animation: fadeInright 1s ease 0s 1 normal forwards;
+  right: -100%;
+  transition: all 1s ease-in-out;
 }
 
 .back-in-media-contact {
