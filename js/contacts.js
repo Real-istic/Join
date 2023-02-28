@@ -61,7 +61,8 @@ function renderUserList() {
 * */
 function contactRightSide(i) {
   let rightSide = document.getElementById('contact-right')
-  rightSide.classList.remove("display-none")
+  //rightSide.classList.remove("display-none")
+  rightSide.classList.add("show")
   rightSide.innerHTML = renderContactSideScroll(i)
 }
 
@@ -83,9 +84,9 @@ function renderContactSideScroll(i) {
   <div class="contact-right-side">
   <div class="show-contact">
       <div id="contactdetails">
-          <div class="contact-detail-main-side animationFadeInRight" id="0">
+          <div class="contact-detail-main-side" id="0">
               <div class="back-in-media-contact">
-                  <img onclick="insertSummary()" src="./assets/img/help-arrow.svg" alt="">
+                  <img onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
               </div>
               <div class="contact-detail-head">
                   <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
