@@ -389,7 +389,7 @@ function pushDescriptionToTaskClipboard() {
 }
 
 /**
- * a slide in of the added task to board information
+ * a slide in of the added-task-to-board information
  * 
  */
 function confirmAddedTaskToBoard() {
