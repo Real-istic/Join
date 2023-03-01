@@ -54,7 +54,7 @@ function renderUserList() {
 
 
 /**
-* Call the contactSideScroll content and add show class for fade in from right
+* Call the renderContactSideScroll content and add show class for fade in from right
 * 
 * @param {number} i The index of the user in the userList
 * 
@@ -64,6 +64,20 @@ function contactRightSide(i) {
   rightSide.classList.add("show")
   rightSide.innerHTML = renderContactSideScroll(i)
 }
+
+/* weiß noch nicht ob benötigt!
+/**
+* Call the editContact content and add show-left class for fade in from left
+* 
+* @param {number} i The index of the user in the userList
+* 
+* 
+function contactLeftSide(i) {
+  let editContactFadeIn = document.getElementById('contact-left-fadeIn')
+  editContactFadeIn.classList.add("show-left")
+  editContactFadeIn.innerHTML = editContact(i)
+}
+*/
 
 
 /**
@@ -96,7 +110,7 @@ function renderContactSideScroll(i) {
               </div>
                   <div class="contact-detail-info-main">
                       <p class="contact-detail-info">Contact Information</p>
-                      <p class="contact-detail-edit" onclick="contactLeftSide(${i}")><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
+                      <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
                   </div>
           </div>
               <div>
@@ -116,11 +130,6 @@ function renderContactSideScroll(i) {
   return ContactSideScrollHTML;
 }
 
-function contactLeftSide(i) {
-  let editContact = document.getElementById('contact-left-fadeIn')
-  editContact.classList.add("showleft")
-  editContact.innerHTML = editContact(i)
-}
 
 
 /**
@@ -131,12 +140,14 @@ function contactLeftSide(i) {
  */
 
 function editContact(i) {
+  let editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeIn.classList.add("show-left")
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactName = userList[i].firstName + " " + userList[i].lastName;
-  editContact.innerHTML = /*html*/ `
-<div class="add-contact animationFadeIn" onclick="doNotClose(event)">
+  
+  editContactFadeIn.innerHTML += /*html*/ `
+<div class="add-contact" onclick="doNotClose(event)">
 <div class="add-contact-head">
     <div class="add-contact-cross" onclick="hideAddContacts()">
         <img class="img-cross" src="./assets/img/theCross.svg" alt="">
@@ -149,7 +160,7 @@ function editContact(i) {
 </div>
 <div class="add-contact-main">
     <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
-        <p>BK</p>
+        <p>${contactNameLetter}</p>
     </div>
         <form onsubmit="invEditContact(${userList[i].email}, ${i}, ${contactNameLetter}); return false">
             <div>
@@ -167,8 +178,7 @@ function editContact(i) {
                 </div>
             </div>
             <div class="button-container">
-                <button class="button-cancel" type="button" onclick="deleteContacts(0)">Delete <img src="./assets/img/cancel.png" alt=""></button>
-                <button class="button-create" type="submit">Save <img src="./assets/img/rithe.png" alt=""></button>
+                <button class="button-create" type="submit">Save <img src="./assets/img/ok.svg" alt=""></button>
             </div>
         </form>
 </div>
@@ -176,6 +186,7 @@ function editContact(i) {
 
 `;
 
+return editContactFadeIn;
 }
 
 

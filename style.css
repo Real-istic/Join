@@ -1386,6 +1386,7 @@ element.style {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 }
 
 .icon-edit-contact {
@@ -1409,7 +1410,7 @@ element.style {
   height: 100vh;
   position: absolute;
   top: 0;
-  background-color: white;
+  background-color: rgb(209, 205, 205);
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
   overflow: auto;
@@ -1431,8 +1432,7 @@ element.style {
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
   overflow: auto;
-  left: -100%;
-  transition: all 800ms ease-in-out;
+
 }
 
 .add-contact-head {
