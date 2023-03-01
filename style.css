@@ -951,13 +951,28 @@ element.style {
 }
 
 .add-task-category-form span {
+  display: flex;
+  align-items: center;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 19px;
   line-height: 120%;
   color: #000000;
-  margin: 0 0;
+  margin: 0 10px;
+}
+
+.add-task-create-new-category{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-task-color-picker{
+  height: 15px;
+  width: 15px;
+  border: none;
+  border-radius: 100%;
 }
 
 .add-task-category-list {
@@ -989,6 +1004,10 @@ element.style {
   font-size: 19px;
   line-height: 120%;
   color: #000000;
+}
+
+.add-task-list-element:hover {
+  cursor: pointer;
 }
 
 .height-0 {
