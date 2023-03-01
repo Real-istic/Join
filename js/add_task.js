@@ -215,6 +215,7 @@ function addTaskSetPriority(priority) {
         mediumBox.classList.remove('add-task-priority-medium');
         lowBox.classList.add('add-task-priority-low');
     }
+    pushPriorityToTaskClipboard()
 }
 
 /**
@@ -322,14 +323,22 @@ function AddCheckedSubtaskToClipboard(checkbox) {
 }
 
 /**
- * pushes all add task informations to the task clipboard
+ * pushes all remaining add-task-informations to the task clipboard
  * 
+ * @returns form validation information
  */
 function createTask() {
-    pushTitleToTaskClipboard()
-    pushDueDateToTaskClipboard()
-    pushPriorityToTaskClipboard()
-    pushDescriptionToTaskClipboard()
+    let title = document.getElementById('addTaskInputTitle');
+    if (title.value.trim() === '') {
+        title.setCustomValidity('You need a Title to create a Task!');
+        title.reportValidity();
+        return;
+    } else {
+        taskClipboard[0].title = title.value;
+        pushDueDateToTaskClipboard()
+        pushDescriptionToTaskClipboard()
+        confirmAddedTaskToBoard()
+    }
 }
 
 /**
@@ -350,24 +359,6 @@ function clearTask() {
             'subtasks': []
         }
     ]
-}
-
-
-/**
- * pushes the tite information to the task clipboard
- * 
- * @returns validation response
- */
-function pushTitleToTaskClipboard() {
-    let title = document.getElementById('addTaskInputTitle');
-
-    if (title.value.trim() === '') {
-        title.setCustomValidity('Your Title is empty!');
-        title.reportValidity();
-        return;
-    } else {
-        taskClipboard[0].title = title.value;
-    }
 }
 
 /**
@@ -395,6 +386,25 @@ function pushPriorityToTaskClipboard() {
 function pushDescriptionToTaskClipboard() {
     let description = document.getElementById('addTaskDescription');
     taskClipboard[0].description = description.value;
+}
+
+/**
+ * a slide in of the added task to board information
+ * 
+ */
+function confirmAddedTaskToBoard() {
+    let confirmInfo = document.getElementById('taskAddedToBoard');
+
+    confirmInfo.classList.remove('display-none')
+    setTimeout (function(){
+        confirmInfo.classList.remove('translate-y-110');
+    },0)
+    setTimeout(function(){
+        confirmInfo.classList.add('translate-y-110')
+        setTimeout(function(){
+            confirmInfo.classList.add('display-none')
+        },80)
+    },1500)
 }
 
 //ADD CONTACT TO TASK

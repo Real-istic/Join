@@ -243,6 +243,7 @@ function addTaskSetPriority(priority) {
         mediumBox.classList.remove('add-task-priority-medium');
         lowBox.classList.add('add-task-priority-low');
     }
+    pushPriorityToTaskClipboard()
 }
 
 /**
@@ -350,14 +351,22 @@ function AddCheckedSubtaskToClipboard(checkbox) {
 }
 
 /**
- * pushes all add task informations to the task clipboard
+ * pushes all remaining add-task-informations to the task clipboard
  * 
+ * @returns form validation information
  */
 function createTask() {
-    pushTitleToTaskClipboard()
-    pushDueDateToTaskClipboard()
-    pushPriorityToTaskClipboard()
-    pushDescriptionToTaskClipboard()
+    let title = document.getElementById('addTaskInputTitle');
+    if (title.value.trim() === '') {
+        title.setCustomValidity('You need a Title to create a Task!');
+        title.reportValidity();
+        return;
+    } else {
+        taskClipboard[0].title = title.value;
+        pushDueDateToTaskClipboard()
+        pushDescriptionToTaskClipboard()
+        confirmAddedTaskToBoard()
+    }
 }
 
 /**
@@ -378,24 +387,6 @@ function clearTask() {
             'subtasks': []
         }
     ]
-}
-
-
-/**
- * pushes the tite information to the task clipboard
- * 
- * @returns validation response
- */
-function pushTitleToTaskClipboard() {
-    let title = document.getElementById('addTaskInputTitle');
-
-    if (title.value.trim() === '') {
-        title.setCustomValidity('Your Title is empty!');
-        title.reportValidity();
-        return;
-    } else {
-        taskClipboard[0].title = title.value;
-    }
 }
 
 /**
@@ -423,6 +414,25 @@ function pushPriorityToTaskClipboard() {
 function pushDescriptionToTaskClipboard() {
     let description = document.getElementById('addTaskDescription');
     taskClipboard[0].description = description.value;
+}
+
+/**
+ * a slide in of the added task to board information
+ * 
+ */
+function confirmAddedTaskToBoard() {
+    let confirmInfo = document.getElementById('taskAddedToBoard');
+
+    confirmInfo.classList.remove('display-none')
+    setTimeout (function(){
+        confirmInfo.classList.remove('translate-y-110');
+    },0)
+    setTimeout(function(){
+        confirmInfo.classList.add('translate-y-110')
+        setTimeout(function(){
+            confirmInfo.classList.add('display-none')
+        },80)
+    },1500)
 }
 
 //ADD CONTACT TO TASK
@@ -582,13 +592,13 @@ function createSelectedContactIcons() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTitleToTaskClipboard">pushTitleToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 28 2023 21:49:21 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 01 2023 13:09:39 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

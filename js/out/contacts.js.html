@@ -33,14 +33,14 @@ function insertContacts() {
   contentDiv.innerHTML = /*html*/ `
     &lt;div class="contact-main">
           &lt;div class="contact-left">
-          ${renderUserList()}
+            ${renderUserList()}
           &lt;/div>
-  
-          &lt;div class="contact-right" id="contact-right">
-          
-          &lt;/div>
+
+          &lt;div class="contact-right" id="contact-right">&lt;/div>
     &lt;/div>
 
+    &lt;div class="contact-left-fadeIn" id="contact-left-fadeIn">&lt;/div>
+    
     &lt;div class="new-contact-button" onclick="">New Contact&lt;/div>
   `;
 
@@ -82,18 +82,30 @@ function renderUserList() {
 
 
 /**
-* Call the contactSideScroll content anf remove the display-none class
+* Call the renderContactSideScroll content and add show class for fade in from right
 * 
 * @param {number} i The index of the user in the userList
 * 
 * */
 function contactRightSide(i) {
   let rightSide = document.getElementById('contact-right')
-  //rightSide.classList.remove("display-none")
   rightSide.classList.add("show")
   rightSide.innerHTML = renderContactSideScroll(i)
 }
 
+/* weiß noch nicht ob benötigt!
+/**
+* Call the editContact content and add show-left class for fade in from left
+* 
+* @param {number} i The index of the user in the userList
+* 
+* 
+function contactLeftSide(i) {
+  let editContactFadeIn = document.getElementById('contact-left-fadeIn')
+  editContactFadeIn.classList.add("show-left")
+  editContactFadeIn.innerHTML = editContact(i)
+}
+*/
 
 
 /**
@@ -103,10 +115,10 @@ function contactRightSide(i) {
  */
 function renderContactSideScroll(i) {
   let ContactSideScrollHTML;
-      const firstNameLetter = userList[i].firstName.charAt(0);
-      const lastNameLetter = userList[i].lastName.charAt(0);
-      const contactNameLetter = firstNameLetter + lastNameLetter;
-      const contactName = userList[i].firstName + " " + userList[i].lastName;
+  const firstNameLetter = userList[i].firstName.charAt(0);
+  const lastNameLetter = userList[i].lastName.charAt(0);
+  const contactNameLetter = firstNameLetter + lastNameLetter;
+  const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
   &lt;div class="contact-right-side">
@@ -126,7 +138,7 @@ function renderContactSideScroll(i) {
               &lt;/div>
                   &lt;div class="contact-detail-info-main">
                       &lt;p class="contact-detail-info">Contact Information&lt;/p>
-                      &lt;p class="contact-detail-edit" onclick="editContact('0', 'BK')">&lt;img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact&lt;/p>
+                      &lt;p class="contact-detail-edit" onclick="editContact(${i})">&lt;img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact&lt;/p>
                   &lt;/div>
           &lt;/div>
               &lt;div>
@@ -143,25 +155,72 @@ function renderContactSideScroll(i) {
 
 `;
 
-return ContactSideScrollHTML;
+  return ContactSideScrollHTML;
 }
-
 
 
 
 /**
-* returns a random hex color code
-* 
-* @returns a string representing a hex color code
-*/
-function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i &lt; 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
+ * Call the editContact content
+ *  
+ * @param {number} i The index of the user in the userList
+ * 
+ */
+
+function editContact(i) {
+  let editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeIn.classList.add("show-left")
+  const firstNameLetter = userList[i].firstName.charAt(0);
+  const lastNameLetter = userList[i].lastName.charAt(0);
+  const contactNameLetter = firstNameLetter + lastNameLetter;
+  
+  editContactFadeIn.innerHTML += /*html*/ `
+&lt;div class="add-contact" onclick="doNotClose(event)">
+&lt;div class="add-contact-head">
+    &lt;div class="add-contact-cross" onclick="hideAddContacts()">
+        &lt;img class="img-cross" src="./assets/img/theCross.svg" alt="">
+    &lt;/div>
+    &lt;div class="add-contact-header-info">
+        &lt;div class="add-contact-h">
+            Edit contact
+        &lt;/div>                   
+    &lt;/div>
+&lt;/div>
+&lt;div class="add-contact-main">
+    &lt;div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
+        &lt;p>${contactNameLetter}&lt;/p>
+    &lt;/div>
+        &lt;form onsubmit="invEditContact(${userList[i].email}, ${i}, ${contactNameLetter}); return false">
+            &lt;div>
+                &lt;div class="input-contact">
+                    &lt;input required="" type="text" id="contactEditName" class="input-contact-name">
+                    &lt;img src="./assets/img/signup-user.svg" alt="">
+                &lt;/div>
+                &lt;div class="input-contact">
+                    &lt;input required="" type="email" id="contactEditEmail" class="input-contact-name">
+                    &lt;img src="./assets/img/login-email.svg" alt="">
+                &lt;/div>
+                &lt;div class="input-contact">
+                    &lt;input required="" type="text" id="contactEditNumber" class="input-contact-name">
+                    &lt;img src="./assets/img/phone.svg" alt="">
+                &lt;/div>
+            &lt;/div>
+            &lt;div class="button-container">
+                &lt;button class="button-create" type="submit">Save &lt;img src="./assets/img/ok.svg" alt="">&lt;/button>
+            &lt;/div>
+        &lt;/form>
+&lt;/div>
+&lt;/div>
+
+`;
+
+return editContactFadeIn;
 }
+
+
+
+
+
 </code></pre>
         </article>
     </section>
@@ -172,13 +231,13 @@ function getRandomColor() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTitleToTaskClipboard">pushTitleToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Feb 28 2023 21:49:21 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 01 2023 13:09:39 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

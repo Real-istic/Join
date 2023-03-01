@@ -223,6 +223,47 @@ nav {
   overflow-y: auto;
 }
 
+.task-added-to-board {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 20px;
+  width: 326px;
+  height: 74px;
+  background: #4589ff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  transform: translate(45vw, 50vh);
+  transition: all 80ms ease-in-out;
+  z-index: 2;
+}
+
+.task-added-to-board span {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.display-none {
+  display: none;
+}
+
+.translate-y-110 {
+  transform: translate(45vw, 92vh);
+  transition: all 80ms ease-in-out;
+}
+
+/* .translate-y-50 {
+  transform: translateY(50vh);
+  transition: all 100ms ease-in-out;
+} */
+
 /* Summary */
 
 .summary-div {
@@ -677,7 +718,7 @@ nav {
   background-color: white;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container {
+.add-task-contact-checkbox + .add-task-checkbox-container {
   position: absolute;
 }
 
@@ -690,7 +731,7 @@ nav {
   z-index: 1;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container::after {
+.add-task-contact-checkbox + .add-task-checkbox-container::after {
   width: 15px;
   height: 15px;
   background-image: url("assets/img/rectangle.svg");
@@ -700,7 +741,7 @@ nav {
   margin-top: 4px;
 }
 
-.add-task-contact-checkbox:checked+.add-task-checkbox-container::after {
+.add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
   background-image: url("assets/img/checkbutton.svg");
 }
 
@@ -751,7 +792,6 @@ element.style {
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  
 }
 
 .contact-left {
@@ -890,7 +930,7 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-category>span {
+.add-task-category > span {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -1131,7 +1171,7 @@ element.style {
   isolation: isolate;
   width: 100%;
   height: 51px;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .add-task-subtasks-input {
@@ -1240,7 +1280,7 @@ element.style {
   background-color: #d2e3ff;
   border-radius: 8px;
   padding-left: 18px;
-} 
+}
 
 .contact-child-div-klick {
   display: flex;
@@ -1292,7 +1332,7 @@ element.style {
   background: #005dff;
 }
 
-.contact-right  {
+.contact-right {
   display: flex;
   position: fixed;
   width: 58%;
@@ -1305,7 +1345,6 @@ element.style {
 
 .show {
   right: -6%;
-
 }
 
 .contact-right-side {
@@ -1434,7 +1473,6 @@ element.style {
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
   overflow: auto;
-
 }
 
 .add-contact-head {
@@ -1484,7 +1522,7 @@ element.style {
 .input-contact {
   width: 100%;
   margin-top: 30px;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .input-contact-name {
