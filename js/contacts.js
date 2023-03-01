@@ -2,6 +2,9 @@
  * Call the contacts content
  */
 function insertContacts() {
+
+  document.getElementById("help").classList.remove("help-none");
+
   contentDiv.innerHTML = /*html*/ `
     <div class="contact-main">
           <div class="contact-left">
@@ -20,9 +23,6 @@ function insertContacts() {
 
   eventOnEditContact();
 
-  
-
-  document.getElementById("help").classList.remove("help-none");
 }
 /**
   * Call an event on editContact content
@@ -150,6 +150,7 @@ function editContact(i) {
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
+  const contactName = userList[i].firstName + " " + userList[i].lastName;
   
   editContactFadeIn.innerHTML += /*html*/ `
 <div class="edit-contact">
@@ -171,11 +172,11 @@ function editContact(i) {
         <form onsubmit="invEditContact(${userList[i].email}, ${i}, ${contactNameLetter}); return false">
             <div>
                 <div class="input-contact">
-                    <input required="" type="text" id="contactEditName" class="input-contact-name">
+                    <input required="" placeholder="${contactName}" type="text" id="contactEditName" class="input-contact-name">
                     <img src="./assets/img/signup-user.svg" alt="">
                 </div>
                 <div class="input-contact">
-                    <input required="" type="email" id="contactEditEmail" class="input-contact-name">
+                    <input required="" placeholder="${userList[i].email}" type="email" id="contactEditEmail" class="input-contact-name">
                     <img src="./assets/img/login-email.svg" alt="">
                 </div>
                 <div class="input-contact">
@@ -184,7 +185,7 @@ function editContact(i) {
                 </div>
             </div>
             <div class="button-container">
-                <button class="button-create" type="submit">Save <img src="./assets/img/ok.svg" alt=""></button>
+                <button class="button-create" type="submit">Save</button>
             </div>
         </form>
 </div>
