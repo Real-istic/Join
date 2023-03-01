@@ -120,7 +120,7 @@ function insertDoneTasksHTML(){
 
 function addTaskOfScreenMenu(){
     addTaskSlideInMenu()
-    addTaskGetMenuOffScreen()
+    toggleAddTaskMenuOffScreen()
 }
 
 function addTaskSlideInMenu() {
@@ -140,21 +140,21 @@ function addTaskSlideInMenu() {
     `;
 }
 
+function toggleAddTaskMenuOffScreen() {
+    let slideInMenu = document.getElementById('addTaskSlideInMenu');
+    slideInMenu.classList.toggle('transform-x-off-screen');
+    let opacityDiv = document.getElementById('reduceOpacity');
+    opacityDiv.classList.toggle('reduce-opacity');
+}
+
 function insertTaskSlideInHeader() {
     return /*html*/ `
         <div class="add-task-slide-in-header">
-            <button class="btn-addTask" onclick="createTask()">Create Task</button>
-            <button class="btn-clear" onclick="clearTask()">Clear
-                <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <span>Add Task</span>
+            <button class="add-task-slide-in-create-task-button" onclick="createTask()">Create Task<img class="add-task-slide-in-check-icon" src="assets/img/checkicon.svg" alt=""></button>
             </button>
+            <img onclick="toggleAddTaskMenuOffScreen()" src="assets/img/x.svg" alt="">
         </div>
     `;
 }
 
-function addTaskGetMenuOffScreen() {
-    let slideInMenu = document.getElementById('addTaskSlideInMenu');
-
-    slideInMenu.classList.remove('transform-x-off-screen');
-}
