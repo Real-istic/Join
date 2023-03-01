@@ -213,11 +213,13 @@ nav {
 /* content-area */
 
 .content {
-  position: absolute;
-  top: 40px;
-  left: 232px;
-  bottom: 0px;
-  right: 0px;
+  position: initial;
+  /* top: 40px; */
+  height: 100vh;
+  width: 100vw;
+  /* left: 232px; */
+  /* bottom: 66px; */
+  /* right: 0px; */
   background-color: rgb(255, 255, 255);
   padding: 0 88px;
   overflow-y: auto;
@@ -795,11 +797,20 @@ element.style {
 }
 
 .contact-left {
-  width: 100%;
-  height: 80vh;
   display: flex;
   align-items: flex-start;
+  overflow-y: visible;
   flex-direction: column;
+  padding: 0px;
+  padding-right: 12rem;
+  background-color: #ffffff;
+  box-shadow: 4px 0px 6px 0px #00000014;
+  height: 100vh;
+  width: 357px;
+  left: 17rem;
+  top: 0px;
+  border-radius: 0px;
+  position: absolute;
 }
 
 .contact-letter {
@@ -1246,22 +1257,6 @@ element.style {
   object-fit: cover;
 }
 
-.contact-left {
-  display: flex;
-  align-items: flex-start;
-  overflow-y: visible;
-  flex-direction: column;
-  padding: 0px;
-  padding-right: 12rem;
-  background-color: #ffffff;
-  box-shadow: 4px 0px 6px 0px #00000014;
-  height: 73vh;
-  width: 357px;
-  left: 48px;
-  top: 2px;
-  border-radius: 0px;
-}
-
 .contact-letter {
   padding-left: 30px;
   padding-bottom: 30px;
@@ -1335,7 +1330,8 @@ element.style {
 .contact-right {
   display: flex;
   position: fixed;
-  width: 58%;
+  width: 86rem;
+  bottom: 10rem;
   height: 73vh;
   align-items: flex-start;
   flex-direction: column;
@@ -1482,7 +1478,7 @@ element.style {
 
 }
 
-.add-contact {
+.edit-contact {
   width: 580px;
   height: 100vh;
   position: absolute;
@@ -1493,14 +1489,14 @@ element.style {
   overflow: auto;
 }
 
-.add-contact-head {
-  background-color: #4589ff;
+.edit-contact-head {
+  background-color: #005DFF;
   width: 580px;
   padding-bottom: 70px;
   border-radius: 0px 30px 0px 0px;
 }
 
-.add-contact-cross {
+.edit-contact-cross {
   display: flex;
   justify-content: flex-end;
   
@@ -1509,16 +1505,17 @@ element.style {
 .img-cross {
   margin: 20px;
   cursor: pointer;
+  z-index: 3;
 }
 
-.add-contact-header-info {
+.edit-contact-header-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.add-contact-h {
+.edit-contact-h {
   font-family: Open Sans;
   font-size: 48px;
   font-weight: 700;
@@ -1528,7 +1525,16 @@ element.style {
   color:white;
 }
 
-.add-contact-main {
+.img-edit-contact{
+  height: 66px;
+width: 55px;
+left: 262px;
+top: 108px;
+border-radius: 0px;
+
+}
+
+.edit-contact-main {
   width: 580px;
   background-color: #ffffff;
   border-radius: 0px 0px 30px 0px;

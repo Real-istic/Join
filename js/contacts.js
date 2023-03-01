@@ -142,18 +142,19 @@ function editContact(i) {
   const contactNameLetter = firstNameLetter + lastNameLetter;
   
   editContactFadeIn.innerHTML += /*html*/ `
-<div class="add-contact" onclick="doNotClose(event)">
-<div class="add-contact-head">
-    <div class="add-contact-cross" onclick="hideEditContacts()">
+<div class="edit-contact">
+<div class="edit-contact-head" onclick="hideEditContacts()">
+    <div class="edit-contact-cross">
         <img class="img-cross" src="./assets/img/theCross.svg" alt="">
     </div>
-    <div class="add-contact-header-info">
-        <div class="add-contact-h">
+    <div class="edit-contact-header-info">
+        <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
+        <div class="edit-contact-h">
             Edit contact
         </div>                   
     </div>
 </div>
-<div class="add-contact-main">
+<div class="edit-contact-main" onclick="doNotClose()">
     <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
         <p>${contactNameLetter}</p>
     </div>
@@ -194,6 +195,17 @@ function hideEditContacts(){
   editContactFadeInBg.addEventListener("click", function() {
     editContactFadeInBg.classList.remove("show-left");
     editContactFadeIn.classList.remove("show-left");
+  });
+}
+
+/**
+ * 
+ * Prevent the editContact content from closing when clicking inside the content
+ */
+function doNotClose(){
+  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeIn.addEventListener("click", (event) => {
+    event.stopPropagation();
   });
 }
 
