@@ -11,19 +11,10 @@ function insertContacts() {
           <div class="contact-right" id="contact-right"></div>
     </div>
 
-    <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg">
-      <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
-    </div>
+    <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
     
     <div class="new-contact-button" onclick="">New Contact</div>
   `;
-
-  const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
-  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
-  editContactFadeInBg.addEventListener("click", function() {
-    editContactFadeInBg.classList.remove("show-left");
-    editContactFadeIn.classList.remove("show-left");
-  });
 
   document.getElementById("help").classList.remove("help-none");
 }
@@ -92,7 +83,7 @@ function renderContactSideScroll(i) {
       <div id="contactdetails">
           <div class="contact-detail-main-side" id="0">
               <div class="back-in-media-contact">
-                  <img class="arrow-back-in-media" onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
+                  <img onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
               </div>
               <div class="contact-detail-head">
                   <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
@@ -132,10 +123,9 @@ function renderContactSideScroll(i) {
  * @param {number} i The index of the user in the userList
  * 
  */
+
 function editContact(i) {
   let editContactFadeIn = document.getElementById('contact-left-fadeIn');
-  let editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
-  editContactFadeInBg.classList.add("show-left")
   editContactFadeIn.classList.add("show-left")
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
@@ -144,7 +134,7 @@ function editContact(i) {
   editContactFadeIn.innerHTML += /*html*/ `
 <div class="add-contact" onclick="doNotClose(event)">
 <div class="add-contact-head">
-    <div class="add-contact-cross" onclick="hideEditContacts()">
+    <div class="add-contact-cross" onclick="hideAddContacts()">
         <img class="img-cross" src="./assets/img/theCross.svg" alt="">
     </div>
     <div class="add-contact-header-info">
@@ -183,21 +173,6 @@ function editContact(i) {
 
 return editContactFadeIn;
 }
-
-/**
- * 
- * Close the editContact content and remove the show class from the editContactFadeIn-bg
- */
-function hideEditContacts(){
-  const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
-  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
-  editContactFadeInBg.addEventListener("click", function() {
-    editContactFadeInBg.classList.remove("show-left");
-    editContactFadeIn.classList.remove("show-left");
-  });
-}
-
-
 
 
 
