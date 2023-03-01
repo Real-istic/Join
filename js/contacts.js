@@ -18,14 +18,24 @@ function insertContacts() {
     <div class="new-contact-button" onclick="">New Contact</div>
   `;
 
+  eventOnEditContact();
+
+  
+
+  document.getElementById("help").classList.remove("help-none");
+}
+/**
+  * Call an event on editContact content
+ * 
+ * 
+ */
+function eventOnEditContact() {
   const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
   const editContactFadeIn = document.getElementById('contact-left-fadeIn');
   editContactFadeInBg.addEventListener("click", function() {
     editContactFadeInBg.classList.remove("show-left");
     editContactFadeIn.classList.remove("show-left");
   });
-
-  document.getElementById("help").classList.remove("help-none");
 }
 
 /**

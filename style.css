@@ -1363,11 +1363,11 @@ element.style {
 
 .contact-right {
   display: flex;
-  position: fixed;
-  width: 86rem;
+  width: 100%;
   bottom: 10rem;
   height: 73vh;
-  align-items: flex-start;
+  align-items: flex-end;
+  justify-content: flex-start;
   flex-direction: column;
   right: -100%;
   transition: all 800ms ease-in-out;
