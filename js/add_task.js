@@ -20,7 +20,7 @@ let contactListExpanded = false;
  * 
  */
 function addTask() {
-    contentDiv.innerHTML = insertTask();
+    contentDiv.innerHTML = insertTaskLeft();
     document.getElementById("help").classList.remove("help-none");
 }
 
@@ -29,31 +29,40 @@ function addTask() {
  * 
  * @returns the html part of the page
  */
-function insertTask() {
+function insertTaskLeft() {
     return /*html*/ `
-    <div class="task-main">
-        <form class="task-left scrollbar1">
-            ${insertTaskTitleHTML()}
-            ${insertTaskContactlistHTML()}
-            ${createSelectedContactIconsDivHTML()} 
-            ${insertDueDateHTML()}
-            ${insertCategorySelectorHTML()}
-            ${insertCategoryListHTML()}
-            ${insertPriorityHTML()}
-            ${insertDescriptionHTML()}
-            ${insertSubtasksHTML()}
-        </form>
-        <div class="task-right">
-            <button class="btn-clear" onclick="clearTask()">Clear
-                <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
-            <button class="btn-addTask" onclick="createTask()">Create Task</button>
+        <div class="task-main">
+            <form class="task-left scrollbar1">
+                ${insertTaskTitleHTML()}
+                ${insertTaskContactlistHTML()}
+                ${createSelectedContactIconsDivHTML()} 
+                ${insertDueDateHTML()}
+                ${insertCategorySelectorHTML()}
+                ${insertCategoryListHTML()}
+                ${insertPriorityHTML()}
+                ${insertDescriptionHTML()}
+                ${insertSubtasksHTML()}
+            </form>
+            <div class="task-right">
+                ${insertTaskRightHTML()}
+            </div>
         </div>
-    </div>
+        `;
+}
+/**
+ * inserts the right side of the add-task page
+ * 
+ * @returns the html part of the right hand side add-task page
+ */
+function insertTaskRightHTML(){
+    return /*html*/ `
+        <button class="btn-clear" onclick="clearTask()">Clear
+            <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+        <button class="btn-addTask" onclick="createTask()">Create Task</button>
     `;
-
 }
 
 /**
@@ -74,12 +83,12 @@ function insertTaskTitleHTML() {
  */
 function insertTaskContactlistHTML() {
     return /*html*/ `
-            <div class="add-task-contacts-assign" id="taskContacts">
-                <input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
-                <img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
-            </div>
-            <div id="addTaskContactList" class="add-task-contact-list scrollbar scrollbar1">
-            </div>
+        <div class="add-task-contacts-assign" id="taskContacts">
+            <input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
+            <img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
+        </div>
+        <div id="addTaskContactList" class="add-task-contact-list scrollbar scrollbar1">
+        </div>
     `;
 }
 /**
@@ -92,7 +101,7 @@ function insertDueDateHTML() {
         <div class="add-task-date">
             <span>Due Date</span>
             <div class="add-task-date-form">
-                <input class="add-task-input-date" id="addTaskInputDate" type="date" required minlength="10" maxlength="10" placeholder="dd-mm-yyyy" name="" id="">
+               <input class="add-task-input-date" id="addTaskInputDate" type="date" required minlength="10" maxlength="10" placeholder="dd-mm-yyyy" name="" id="">
             </div>
         </div>
     `;

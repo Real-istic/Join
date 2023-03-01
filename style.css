@@ -151,7 +151,6 @@ header span {
   bottom: 0px;
 }
 
-
 /* navigation bar */
 
 nav {
@@ -524,6 +523,44 @@ nav {
   color: #42526e;
   white-space: nowrap;
   margin-right: 46px;
+}
+
+.to-do-tasks,
+.in-progress-tasks,
+.await-feedback-tasks,
+.done-tasks {
+  height: fit-content;
+}
+
+.add-task-slide-in-menu {
+  z-index: 1;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 30px 0px 30px 30px;
+  padding: 0 36px 0 60px;
+  width: 518px;
+  transform: translateX(0px);
+  transition: all 200ms ease-in-out;
+}
+
+.transform-x-off-screen {
+  transform: translateX(518px);
+  transition: all 200ms ease-in-out;
+}
+
+.add-task-slide-in-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 61px 0px 18px 17px;
+  width: 100%;
+  height: 139px;
+  left: 36px;
+  top: 5px;
 }
 
 /* Task Form */
@@ -1013,8 +1050,7 @@ element.style {
   transition: 120ms ease-in-out;
   overflow: scroll;
   overflow-x: hidden;
-  border-bottom: 1px solid #D1D1D1;
-
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .add-task-priority-container {
@@ -1360,7 +1396,7 @@ element.style {
   justify-content: flex-end;
 }
 
-.arrow-back-in-media{
+.arrow-back-in-media {
   cursor: pointer;
 }
 
@@ -1448,7 +1484,7 @@ element.style {
 
 /* Add Contact Section*/
 
-.contact-left-fadeIn-bg{
+.contact-left-fadeIn-bg {
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -1459,7 +1495,6 @@ element.style {
   overflow: auto;
   left: -100%;
   z-index: 1;
-  
 }
 
 .contact-left-fadeIn {
@@ -1467,8 +1502,8 @@ element.style {
   height: 100vh;
   position: fixed;
   top: 0px;
-  
-  border-radius: 0px 30px 30px 0px; 
+
+  border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
   overflow: auto;
   left: -100%;
@@ -1478,7 +1513,6 @@ element.style {
 
 .show-left {
   left: 0%;
-
 }
 
 .edit-contact {
@@ -1502,7 +1536,6 @@ element.style {
 .edit-contact-cross {
   display: flex;
   justify-content: flex-end;
-  
 }
 
 .img-cross {
@@ -1525,7 +1558,7 @@ element.style {
   line-height: 58px;
   letter-spacing: 0em;
   text-align: left;
-  color:white;
+  color: white;
 }
 
 .img-edit-contact{
