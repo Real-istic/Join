@@ -32,11 +32,17 @@
  * 
  */
 function insertBoard() {
-    contentDiv.innerHTML = insertBoardHeaderHTML();
-    contentDiv.innerHTML += insertBoardTasks();
+    contentDiv.innerHTML = insertBoardHTML();
     document.getElementById("help").classList.remove("help-none");
 }
 
+function insertBoardHTML(){
+    return /*html*/ `
+        ${insertBoardHeaderHTML()}
+        ${insertBoardTasks()}
+        ${addTaskSlideInMenu()}
+    `;
+}
 
 /**
  * inserts board header
@@ -51,7 +57,7 @@ function insertBoardHeaderHTML() {
                 &lt;img src="assets/img/barrier.svg" alt="">
                 &lt;img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
             &lt;/form>
-            &lt;button class="add-task-button" onclick="addTask()">Add task &lt;img src="assets/img/plus.svg" alt="">&lt;/button>
+            &lt;button class="add-task-button" onclick="addTaskOfScreenMenu()">Add task &lt;img src="assets/img/plus.svg" alt="">&lt;/button>
         &lt;/div>`;
 }
 
@@ -140,6 +146,65 @@ function insertDoneTasksHTML(){
     `;
 }
 
+/**
+ * calls the add-task-slide-in-menu from the side,
+ * also fills the html part of it 
+ *
+ */
+function addTaskOfScreenMenu(){
+    addTaskSlideInMenu()
+    toggleAddTaskMenuOffScreen()
+}
+
+/**
+ * inserts the content of the add-task-slide-in-menu
+ * 
+ * @returns the html part
+ */
+function addTaskSlideInMenu() {
+    return /*html*/ `
+        &lt;div class="add-task-slide-in-menu transform-x-off-screen scrollbar1" id="addTaskSlideInMenu">
+                ${insertTaskSlideInHeader()}
+                ${insertTaskTitleHTML()}
+                ${insertTaskContactlistHTML()}
+                ${createSelectedContactIconsDivHTML()} 
+                ${insertDueDateHTML()}
+                ${insertCategorySelectorHTML()}
+                ${insertCategoryListHTML()}
+                ${insertPriorityHTML()}
+                ${insertDescriptionHTML()}
+                ${insertSubtasksHTML()}
+        &lt;/div>
+    `;
+}
+
+/**
+ * toggles the add-task-slide-in-menu in or out
+ * 
+ */
+function toggleAddTaskMenuOffScreen() {
+    let slideInMenu = document.getElementById('addTaskSlideInMenu');
+    slideInMenu.classList.toggle('transform-x-off-screen');
+    let opacityDiv = document.getElementById('reduceOpacity');
+    opacityDiv.classList.toggle('reduce-opacity');
+}
+
+/**
+ * inserts the specific header and buttons to the add-task-slide-in-menu
+ * 
+ * @returns the html part
+ */
+function insertTaskSlideInHeader() {
+    return /*html*/ `
+        &lt;div class="add-task-slide-in-header">
+            &lt;span>Add Task&lt;/span>
+            &lt;button class="add-task-slide-in-create-task-button" onclick="createTask()">Create Task&lt;img class="add-task-slide-in-check-icon" src="assets/img/checkicon.svg" alt="">&lt;/button>
+            &lt;/button>
+            &lt;img onclick="toggleAddTaskMenuOffScreen()" src="assets/img/x.svg" alt="">
+        &lt;/div>
+    `;
+}
+
 </code></pre>
         </article>
     </section>
@@ -150,13 +215,13 @@ function insertDoneTasksHTML(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskOfScreenMenu">addTaskOfScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#eventOnEditContact">eventOnEditContact</a></li><li><a href="global.html#hideEditContacts">hideEditContacts</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#invEditContact">invEditContact</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 01 2023 13:09:39 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 02 2023 10:46:03 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
