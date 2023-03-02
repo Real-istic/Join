@@ -167,8 +167,7 @@ function createNewCategory(){
     toggleCategoryList();
     document.getElementById('addTaskCategory').innerHTML = ``;
     document.getElementById('addTaskCategory').innerHTML = createNewCategoryHTML();
-    document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML = createNewCategoryColorSelectorHTML();
-    
+     createNewCategoryColorSelectorHTML();
 }
 
 function createNewCategoryHTML(){
@@ -178,7 +177,7 @@ function createNewCategoryHTML(){
             <div class="add-task-create-new-category-inner-container">
                 <input class="add-task-list-element" type="text" placeholder="New category name" required minlength="1" maxlength="20">
                 <button class="interrupt-create-new-category" onclick="interruptCreateNewCategory()" style="border-right: solid 1px rgb(232,232,232)"><img src="assets/img/xblue.svg" alt=""></button> 
-                <button class="confirm-create-new-category" onclick="confirmCreateNewCategory()"><img src="assets/img/" alt=""></button>
+                <button class="confirm-create-new-category" onclick="confirmCreateNewCategory()"><img src="assets/img/check.svg" alt=""></button>
             </div>
             <div id="addTaskCreateNewCategoryColorSelector" class="add-task-create-new-category-color-selector"></div>
         </div>
@@ -186,18 +185,20 @@ function createNewCategoryHTML(){
 }
 
 function createNewCategoryColorSelectorHTML(){
+    
     for (let i = 0; i < categoryColors.length; i++) {
         document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML += createNewCategoryColorSelectorRadioButtonHTML(i); 
-    }
+    } 
 }
 
 function createNewCategoryColorSelectorRadioButtonHTML(i){
     return /*html*/`
-        <input type="radio" class="radio-colorPicker" id="radioColorPicker${i}" value="${categoryColors[i]}" style="display:flex; height:15px; width:15px; color: ${categoryColors[i]};">
+        <input type="radio" class="radio-colorPicker" id="radioColorPicker${i}" value="${categoryColors[i]}" name="color">
+        <label for="radioColorPicker${i}" class="radio-colorPickerLabel" style="background-color:${categoryColors[i]}; height: 15px; width: 15px; border-radius:100%;">
+
     `
 }
 
-//<label for="radioColorPicker${i}" class="radio-colorPickerLabel" style="background-color:${categoryColors[i]}; height: 15px; width: 15px; border-radius:100%;">
 
 
 function addCategoryToClipboard(i){
