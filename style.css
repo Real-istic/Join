@@ -1210,7 +1210,52 @@ element.style {
   align-items: center;
 }
 
-.add-task-color-picker {
+.add-task-create-new-category-container{
+  display: flex;
+  flex-direction: column;
+  height: 72px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.add-task-create-new-category-inner-container{
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+}
+
+.add-task-create-new-category-inner-container input{
+  outline: none;
+  border: none;
+  margin: -1px 0;
+  padding: 18px 0 18px 0;
+  width: 80%;
+ }
+
+.add-task-create-new-category-inner-container input:focus{
+ outline: none;
+}
+
+.add-task-create-new-category-inner-container button{
+  width: 10%;
+  border: none;
+  background-color: white;
+  padding: 3px;
+  margin: 0 5px;
+ }
+
+ .add-task-create-new-category-inner-container button:hover{
+  cursor: pointer;
+ }
+
+.add-task-create-new-category-color-selector{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.add-task-color-picker{
   height: 15px;
   width: 15px;
   border: none;
