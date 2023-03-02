@@ -651,16 +651,12 @@ nav {
   flex-direction: column;
   align-items: flex-start;
   padding: 4px 25px;
-  gap: 10px;
-  width: 101px;
-  height: 27px;
-  background: #ff7a00;
   border-radius: 8px;
+  background-color: #0e83f8;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
-  line-height: 120%;
   color: #ffffff;
 }
 
@@ -714,14 +710,19 @@ nav {
 .board-task-subtask-status-info {
 }
 
-.board-task-involved-contacts {
+.board-task-assigned-contacts-and-prority {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+}
+
+.board-task-assigned-contacts {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   padding: 0px;
-  gap: 83px;
-  width: 207px;
   height: 35px;
 }
 

@@ -389,7 +389,8 @@ function createTask() {
         taskClipboard[0].title = title.value;
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
-        insertsTaskInTodolistHTML()
+        insertsTaskToTodolistHTML()
+        insertAssignedContactsToTaskHTML()
         confirmAddedTaskToBoard()
     }
 }

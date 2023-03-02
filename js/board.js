@@ -166,12 +166,13 @@ function toggleAddTaskMenuOffScreen() {
     opacityDiv.classList.toggle('reduce-opacity');
 }
 
-function insertsTaskInTodolistHTML(){
+function insertsTaskToTodolistHTML(){
     let todoList = document.getElementById('toDoTasks');
-
+    let categoryColor = setCategoryColor();
+    
     todoList.innerHTML += /*html*/ `
         <div class="board-task">
-            <span class="board-task-category">${taskClipboard[0].category}</span>
+            <span style="background-color: ${categoryColor};" class="board-task-category">${taskClipboard[0].category}</span>
             <div class="board-task-title-and-description">
                 <span class="board-task-title">${taskClipboard[0].title}</span>
                 <span class="board-task-description">${taskClipboard[0].description}</span>
@@ -184,9 +185,8 @@ function insertsTaskInTodolistHTML(){
 
                 </span>
             </div>
-            <div>
-                <div>
-
+            <div class="board-task-assigned-contacts-and-prority">
+                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${taskClipboard[0].title}">
                 </div>
                 <img src="assets/img/priority${taskClipboard[0].priority.toLowerCase()}.svg" alt="">
             </div>
@@ -194,8 +194,37 @@ function insertsTaskInTodolistHTML(){
     `;
 }
 
-function insertsSubtasksInTaskHTML() {
+function setCategoryColor(){
+    let categoryColor;
 
+    for (let i = 0; i < category.length; i++) {
+        if (taskClipboard[0].category == category[i].categoryName) {
+            categoryColor = category[i].categoryColor
+        }
+    }
+    return categoryColor
+}
+
+function insertAssignedContactsToTaskHTML() {
+    let firstNameFirstLetter;
+    let lastNameFirstLetter;
+    let backgroundcolor;
+    let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskClipboard[0].title);
+
+    for (let i = 0; i < taskClipboard[0].firstNames.length; i++) {
+        firstNameFirstLetter = taskClipboard[0].firstNames[i].charAt(0);
+        lastNameFirstLetter = taskClipboard[0].lastNames[i].charAt(0);
+
+        for (let j = 0; j < userList.length; j++) {
+            if (taskClipboard[0].firstNames[i] == userList[j]['firstName'] && taskClipboard[0].lastNames[i] == userList[j]['lastName']) {
+                backgroundcolor = userList[j]['background-color'];
+            }
+        }
+
+        contactContainer.innerHTML += `
+        <div class="add-task-selected-contact" style="background-color:${backgroundcolor};">${firstNameFirstLetter}${lastNameFirstLetter}</div>
+        `;
+    }
 }
 
 /**
