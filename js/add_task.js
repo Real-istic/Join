@@ -5,7 +5,7 @@ let taskClipboard = [
         'firstNames': [],
         'lastNames': [],
         'dueDate': '',
-        'categorie':'',
+        'category':'',
         'priority': '',
         'description': '',
         'subtasks': []
@@ -195,7 +195,7 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
 
 function addCategoryToClipboard(i){
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
-    taskClipboard.categorie = category[i]['categoryName'];
+    taskClipboard[0].category = category[i]['categoryName'];
     toggleCategoryList();
 }
 
@@ -403,7 +403,7 @@ function clearTask() {
             'firstNames': [],
             'lastNames': [],
             'dueDate': '',
-            'categories': [],
+            'category': '',
             'priority': '',
             'description': '',
             'subtasks': []
