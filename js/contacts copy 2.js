@@ -246,7 +246,6 @@ async function invEditContact(index) {
 
   saveEditContact(userList);
   insertContacts();
-  init
 }
 
 
@@ -262,17 +261,17 @@ async function saveEditContact(userList) {
 }
 
 
-
+/*
 /**
  * 
  * Load the editContact content
-  */
+ 
 async function loadEditContact() {
   // userList aus dem Backend laden
   const userList = await backend.getItem('userList', JSON.stringify(userList));
   return userList;
 }
-
+*/
 
 
 

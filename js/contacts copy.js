@@ -1,8 +1,6 @@
 /**
  * Call the contacts content
  */
-
-
 function insertContacts() {
 
   document.getElementById("help").classList.remove("help-none");
@@ -22,9 +20,7 @@ function insertContacts() {
 
       
       
-      <div class="new-contact-button" onclick="">New Contact
-      <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
-      </div>
+      <div class="new-contact-button" onclick="">New Contact</div>
   `;
   eventOnEditContact();
 }
@@ -102,7 +98,7 @@ function renderContactSideScroll(i) {
   const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
-
+  <div class="contact-right" id="contact-right">
     <div class="contact-right-side">
       <div class="show-contact">
         <div id="contactdetails">
@@ -137,7 +133,7 @@ function renderContactSideScroll(i) {
         </div>
       </div >
     </div >
-    
+  </div>  
 
     `;
 
@@ -245,12 +241,9 @@ async function invEditContact(index) {
   editContactFadeIn.classList.remove('show-left');
 
   saveEditContact(userList);
+
   insertContacts();
-  init
 }
-
-
-
 
 /**
  * 
@@ -260,19 +253,6 @@ async function saveEditContact(userList) {
     // userList im Backend speichern
     await backend.setItem('userList', JSON.stringify(userList));
 }
-
-
-
-/**
- * 
- * Load the editContact content
-  */
-async function loadEditContact() {
-  // userList aus dem Backend laden
-  const userList = await backend.getItem('userList', JSON.stringify(userList));
-  return userList;
-}
-
 
 
 
