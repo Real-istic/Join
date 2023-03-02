@@ -161,7 +161,7 @@ function editContact(i) {
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
  
-  editContactFadeIn.innerHTML += /*html*/ `
+  editContactFadeIn.innerHTML = /*html*/ `
     <div class="edit-contact">
       <div class="edit-contact-head" onclick="hideEditContacts()">
         <div class="edit-contact-cross">
