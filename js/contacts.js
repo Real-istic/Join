@@ -17,6 +17,8 @@ function insertContacts() {
       <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg">
         <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
       </div>
+
+      
       
       <div class="new-contact-button" onclick="">New Contact</div>
   `;
@@ -50,7 +52,7 @@ function renderUserList() {
     const contactName = userList[i].firstName + " " + userList[i].lastName;
 
     userListHTML += /*html*/ `
-    < div class="contact-letter-main" onclick = "contactRightSide(${i})" >
+    <div class="contact-letter-main" onclick ="contactRightSide(${i})">
        <h4 class="contact-letter" >${userList[i].firstName.charAt(0)}</h4>
         <div class="contact-child-div">
           <div class="contact-child-div">
@@ -63,7 +65,7 @@ function renderUserList() {
             </div>
           </div>
         </div>
-      </div >
+    </div >
     `;
   }
 
@@ -96,37 +98,42 @@ function renderContactSideScroll(i) {
   const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
-    < div class="contact-right-side" >
+  <div class="contact-right" id="contact-right">
+    <div class="contact-right-side">
       <div class="show-contact">
         <div id="contactdetails">
           <div class="contact-detail-main-side" id="0">
             <div class="back-in-media-contact">
               <img class="arrow-back-in-media" onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
             </div>
-            <div class="contact-detail-head">
-              <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
+          </div>        
+          <div class="contact-detail-head">
+            <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
               <div class="contact-detail-name-task">
                 <p class="contact-detail-big-name">${contactName}</p>
-                <p class="contact-detail-add-task" onclick="OpenContactAddTask('0', 0)"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
+                <p class="contact-detail-add-task" onclick="addTaskOfScreenMenu()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
               </div>
             </div >
           </div>
+
           <div class="contact-detail-info-main">
             <p class="contact-detail-info">Contact Information</p>
             <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
           </div>
+              
+          <div>
+            <p class="contact-detail-email-number">Email</p>
+            <a href="mailto:${userList[i].email}"><span>${userList[i].email}</span></a>
+          </div>
+
+          <div>
+            <p class="contact-detail-email-number">Mobile</p>
+            <p>${userList[i].phoneNumber}</p> 
+          </div>
         </div>
-        <div>
-          <p class="contact-detail-email-number">Email</p>
-          <a href="mailto:${userList[i].email}"><span>${userList[i].email}</span></a>
-        </div>
-        <div>
-          <p class="contact-detail-email-number">Mobile</p>
-          <p>${userList[i].phoneNumber}</p>
-        </div>
-      </div>
-  </div >
-</div >
+      </div >
+    </div >
+  </div>  
 
     `;
 
@@ -149,50 +156,48 @@ function editContact(i) {
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactName = userList[i].firstName + " " + userList[i].lastName;
-  const oldEmail = userList[i].email;
-  const oldPhoneNumber = userList[i].phoneNumber;
-  const index = [i];
-
+ 
   editContactFadeIn.innerHTML += /*html*/ `
-    < div class="edit-contact" >
-<div class="edit-contact-head" onclick="hideEditContacts()">
-    <div class="edit-contact-cross">
-        <img class="img-cross" src="./assets/img/theCross.svg" alt="">
-    </div>
-    <div class="edit-contact-header-info">
-        <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
-        <div class="edit-contact-h">
-            Edit contact
-        </div>                   
-    </div>
-</div>
-<div class="edit-contact-main" onclick="doNotClose()">
-    <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
-        <p>${contactNameLetter}</p>
-    </div>
-        <form onsubmit="invEditContact(${i}); return false">
+    <div class="edit-contact">
+      <div class="edit-contact-head" onclick="hideEditContacts()">
+        <div class="edit-contact-cross">
+          <img class="img-cross" src="./assets/img/theCross.svg" alt="">
+        </div>
+
+        <div class="edit-contact-header-info">
+          <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
+            <div class="edit-contact-h">Edit contact</div>                   
+          </div>
+        </div>
+
+        <div class="edit-contact-main" onclick="doNotClose()">
+          <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
+            <p>${contactNameLetter}</p>
+          </div>
+
+          <form onsubmit="invEditContact(${i}); return false">
             <div>
-            <div class="input-contact">
-            <input required="" type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
-            <img src="./assets/img/signup-user.svg" alt="">
-        </div>
-        <div class="input-contact">
-            <input required="" type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
-            <img src="./assets/img/login-email.svg" alt="">
-        </div>
-        <div class="input-contact">
-            <input required="" type="text" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
-            <img src="./assets/img/phone.svg" alt="">
-        </div>
-        
+              <div class="input-contact">
+                <input required="" type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
+                <img src="./assets/img/signup-user.svg" alt="">
+              </div>
+
+              <div class="input-contact">
+                <input required="" type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
+                  <img src="./assets/img/login-email.svg" alt="">
+              </div>
+
+              <div class="input-contact">
+                <input required="" type="text" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+                  <img src="./assets/img/phone.svg" alt="">
+              </div>          
             </div>
-            <div class="button-container">
+              <div class="button-container">
                 <button class="button-create" type="submit" onclick="saveEditContact(${i})">Save</button>
-            </div>
-        </form>
-</div>
-</div>
+              </div>
+          </form>
+      </div>
+    </div>
 
 `;
 
@@ -235,10 +240,18 @@ async function invEditContact(index) {
   editContactFadeInBg.classList.remove('show-left');
   editContactFadeIn.classList.remove('show-left');
 
-  // userList im Backend speichern
-  await backend.setItem('userList', JSON.stringify(userList));
+  saveEditContact(userList);
 
   insertContacts();
+}
+
+/**
+ * 
+ * Save the editContact content
+ */
+async function saveEditContact(userList) {
+    // userList im Backend speichern
+    await backend.setItem('userList', JSON.stringify(userList));
 }
 
 
