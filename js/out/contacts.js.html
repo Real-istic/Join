@@ -30,21 +30,39 @@
  * Call the contacts content
  */
 function insertContacts() {
+
+  document.getElementById("help").classList.remove("help-none");
+
   contentDiv.innerHTML = /*html*/ `
-    &lt;div class="contact-main">
+      &lt;div class="contact-main">
           &lt;div class="contact-left">
             ${renderUserList()}
           &lt;/div>
 
           &lt;div class="contact-right" id="contact-right">&lt;/div>
-    &lt;/div>
+      &lt;/div>
 
-    &lt;div class="contact-left-fadeIn" id="contact-left-fadeIn">&lt;/div>
-    
-    &lt;div class="new-contact-button" onclick="">New Contact&lt;/div>
+      &lt;div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg">
+        &lt;div class="contact-left-fadeIn" id="contact-left-fadeIn">&lt;/div>
+      &lt;/div>
+      
+      &lt;div class="new-contact-button" onclick="">New Contact&lt;/div>
   `;
+  eventOnEditContact();
+}
 
-  document.getElementById("help").classList.remove("help-none");
+/**
+ * 
+ * Call an event on editContact content
+ */
+
+function eventOnEditContact() {
+  const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeInBg.addEventListener("click", function () {
+    editContactFadeInBg.classList.remove("show-left");
+    editContactFadeIn.classList.remove("show-left");
+  });
 }
 
 /**
@@ -60,7 +78,7 @@ function renderUserList() {
     const contactName = userList[i].firstName + " " + userList[i].lastName;
 
     userListHTML += /*html*/ `
-      &lt;div class="contact-letter-main" onclick="contactRightSide(${i})" >
+    &lt; div class="contact-letter-main" onclick = "contactRightSide(${i})" >
        &lt;h4 class="contact-letter" >${userList[i].firstName.charAt(0)}&lt;/h4>
         &lt;div class="contact-child-div">
           &lt;div class="contact-child-div">
@@ -73,7 +91,7 @@ function renderUserList() {
             &lt;/div>
           &lt;/div>
         &lt;/div>
-      &lt;/div>
+      &lt;/div >
     `;
   }
 
@@ -93,21 +111,6 @@ function contactRightSide(i) {
   rightSide.innerHTML = renderContactSideScroll(i)
 }
 
-/* weiß noch nicht ob benötigt!
-/**
-* Call the editContact content and add show-left class for fade in from left
-* 
-* @param {number} i The index of the user in the userList
-* 
-* 
-function contactLeftSide(i) {
-  let editContactFadeIn = document.getElementById('contact-left-fadeIn')
-  editContactFadeIn.classList.add("show-left")
-  editContactFadeIn.innerHTML = editContact(i)
-}
-*/
-
-
 /**
  * Renders the contactSideScroll content
  * 
@@ -121,39 +124,39 @@ function renderContactSideScroll(i) {
   const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
-  &lt;div class="contact-right-side">
-  &lt;div class="show-contact">
-      &lt;div id="contactdetails">
+    &lt; div class="contact-right-side" >
+      &lt;div class="show-contact">
+        &lt;div id="contactdetails">
           &lt;div class="contact-detail-main-side" id="0">
-              &lt;div class="back-in-media-contact">
-                  &lt;img onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
+            &lt;div class="back-in-media-contact">
+              &lt;img class="arrow-back-in-media" onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
+            &lt;/div>
+            &lt;div class="contact-detail-head">
+              &lt;div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}&lt;/div>
+              &lt;div class="contact-detail-name-task">
+                &lt;p class="contact-detail-big-name">${contactName}&lt;/p>
+                &lt;p class="contact-detail-add-task" onclick="OpenContactAddTask('0', 0)">&lt;img src="./assets/img/blue-plus.svg" alt="">Add Task&lt;/p>
               &lt;/div>
-              &lt;div class="contact-detail-head">
-                  &lt;div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}&lt;/div>
-                      &lt;div class="contact-detail-name-task">
-                          &lt;p class="contact-detail-big-name">${contactName}&lt;/p>
-                          &lt;p class="contact-detail-add-task" onclick="OpenContactAddTask('0', 0)">&lt;img src="./assets/img/blue-plus.svg" alt="">Add Task&lt;/p>
-                      &lt;/div>
-                  &lt;/div >
-              &lt;/div>
-                  &lt;div class="contact-detail-info-main">
-                      &lt;p class="contact-detail-info">Contact Information&lt;/p>
-                      &lt;p class="contact-detail-edit" onclick="editContact(${i})">&lt;img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact&lt;/p>
-                  &lt;/div>
+            &lt;/div >
           &lt;/div>
-              &lt;div>
-                  &lt;p class="contact-detail-email-number">Email&lt;/p>
-                  &lt;a href="mailto:${userList[i].email}">&lt;span>${userList[i].email}&lt;/span>&lt;/a>
-              &lt;/div>
-              &lt;div>
-                  &lt;p class="contact-detail-email-number">Mobile&lt;/p>
-                  &lt;p>${userList[i].phoneNumber}&lt;/p>
-              &lt;/div>
+          &lt;div class="contact-detail-info-main">
+            &lt;p class="contact-detail-info">Contact Information&lt;/p>
+            &lt;p class="contact-detail-edit" onclick="editContact(${i})">&lt;img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact&lt;/p>
+          &lt;/div>
+        &lt;/div>
+        &lt;div>
+          &lt;p class="contact-detail-email-number">Email&lt;/p>
+          &lt;a href="mailto:${userList[i].email}">&lt;span>${userList[i].email}&lt;/span>&lt;/a>
+        &lt;/div>
+        &lt;div>
+          &lt;p class="contact-detail-email-number">Mobile&lt;/p>
+          &lt;p>${userList[i].phoneNumber}&lt;/p>
+        &lt;/div>
       &lt;/div>
-  &lt;/div>
-&lt;/div>
+  &lt;/div >
+&lt;/div >
 
-`;
+    `;
 
   return ContactSideScrollHTML;
 }
@@ -166,47 +169,54 @@ function renderContactSideScroll(i) {
  * @param {number} i The index of the user in the userList
  * 
  */
-
 function editContact(i) {
   let editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  let editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+  editContactFadeInBg.classList.add("show-left")
   editContactFadeIn.classList.add("show-left")
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  
+  const contactName = userList[i].firstName + " " + userList[i].lastName;
+  const oldEmail = userList[i].email;
+  const oldPhoneNumber = userList[i].phoneNumber;
+  const index = [i];
+
   editContactFadeIn.innerHTML += /*html*/ `
-&lt;div class="add-contact" onclick="doNotClose(event)">
-&lt;div class="add-contact-head">
-    &lt;div class="add-contact-cross" onclick="hideAddContacts()">
+    &lt; div class="edit-contact" >
+&lt;div class="edit-contact-head" onclick="hideEditContacts()">
+    &lt;div class="edit-contact-cross">
         &lt;img class="img-cross" src="./assets/img/theCross.svg" alt="">
     &lt;/div>
-    &lt;div class="add-contact-header-info">
-        &lt;div class="add-contact-h">
+    &lt;div class="edit-contact-header-info">
+        &lt;div>&lt;img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">&lt;/div>
+        &lt;div class="edit-contact-h">
             Edit contact
         &lt;/div>                   
     &lt;/div>
 &lt;/div>
-&lt;div class="add-contact-main">
+&lt;div class="edit-contact-main" onclick="doNotClose()">
     &lt;div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
         &lt;p>${contactNameLetter}&lt;/p>
     &lt;/div>
-        &lt;form onsubmit="invEditContact(${userList[i].email}, ${i}, ${contactNameLetter}); return false">
+        &lt;form onsubmit="invEditContact(${i}); return false">
             &lt;div>
-                &lt;div class="input-contact">
-                    &lt;input required="" type="text" id="contactEditName" class="input-contact-name">
-                    &lt;img src="./assets/img/signup-user.svg" alt="">
-                &lt;/div>
-                &lt;div class="input-contact">
-                    &lt;input required="" type="email" id="contactEditEmail" class="input-contact-name">
-                    &lt;img src="./assets/img/login-email.svg" alt="">
-                &lt;/div>
-                &lt;div class="input-contact">
-                    &lt;input required="" type="text" id="contactEditNumber" class="input-contact-name">
-                    &lt;img src="./assets/img/phone.svg" alt="">
-                &lt;/div>
+            &lt;div class="input-contact">
+            &lt;input required="" type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
+            &lt;img src="./assets/img/signup-user.svg" alt="">
+        &lt;/div>
+        &lt;div class="input-contact">
+            &lt;input required="" type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
+            &lt;img src="./assets/img/login-email.svg" alt="">
+        &lt;/div>
+        &lt;div class="input-contact">
+            &lt;input required="" type="text" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+            &lt;img src="./assets/img/phone.svg" alt="">
+        &lt;/div>
+        
             &lt;/div>
             &lt;div class="button-container">
-                &lt;button class="button-create" type="submit">Save &lt;img src="./assets/img/ok.svg" alt="">&lt;/button>
+                &lt;button class="button-create" type="submit" onclick="saveEditContact(${i})">Save&lt;/button>
             &lt;/div>
         &lt;/form>
 &lt;/div>
@@ -214,8 +224,78 @@ function editContact(i) {
 
 `;
 
-return editContactFadeIn;
+  return editContactFadeIn;
 }
+
+/**
+ * 
+ * invite the editContact content
+ */
+async function invEditContact(index) {
+  const contactEditName = document.getElementById('contactEditName').value;
+  const contactEditEmail = document.getElementById('contactEditEmail').value;
+  const contactEditNumber = document.getElementById('contactEditNumber').value;
+
+  // Änderungen in der userList speichern
+  userList[index].firstName = contactEditName.split(" ")[0];
+  userList[index].lastName = contactEditName.split(" ")[1];
+  userList[index].email = contactEditEmail;
+  userList[index].phoneNumber = contactEditNumber;
+
+  // Benutzerdaten aktualisieren
+  const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
+  const firstNameLetter = userList[index].firstName.charAt(0);
+  const lastNameLetter = userList[index].lastName.charAt(0);
+  const contactNameLetter = firstNameLetter + lastNameLetter;
+  const backgroundColor = userList[index]['background-color'];
+
+  const contactDetailBigLetter = document.querySelector('.contact-detail-big-letter');
+  contactDetailBigLetter.textContent = contactNameLetter;
+  contactDetailBigLetter.style.backgroundColor = backgroundColor;
+
+  const contactDetailBigName = document.querySelector('.contact-detail-big-name');
+  contactDetailBigName.textContent = contactName;
+
+
+  // Edit Kontakt ausblenden
+  const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeInBg.classList.remove('show-left');
+  editContactFadeIn.classList.remove('show-left');
+
+  // userList im Backend speichern
+  await backend.setItem('userList', JSON.stringify(userList));
+
+  insertContacts();
+}
+
+
+
+/**
+ * 
+ * Close the editContact content and remove the show class from the editContactFadeIn-bg
+ */
+function hideEditContacts() {
+  const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeInBg.addEventListener("click", function () {
+    editContactFadeInBg.classList.remove("show-left");
+    editContactFadeIn.classList.remove("show-left");
+  });
+}
+
+/**
+ * 
+ * Prevent the editContact content from closing when clicking inside the content
+ */
+function doNotClose() {
+  const editContactFadeIn = document.getElementById('contact-left-fadeIn');
+  editContactFadeIn.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+}
+
+
 
 
 
@@ -231,13 +311,13 @@ return editContactFadeIn;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTask">insertTask</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddCheckedSubtaskToClipboard">AddCheckedSubtaskToClipboard</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addTaskOfScreenMenu">addTaskOfScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#eventOnEditContact">eventOnEditContact</a></li><li><a href="global.html#hideEditContacts">hideEditContacts</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#invEditContact">invEditContact</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 01 2023 13:09:39 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 02 2023 10:46:03 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>

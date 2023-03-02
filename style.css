@@ -431,6 +431,7 @@ nav {
 /* board */
 
 .board-header {
+  margin-top: 25px;
   display: flex;
   width: 100%;
 }
@@ -495,9 +496,13 @@ nav {
 }
 
 .board-tasks {
-  margin-top: 50px;
-  width: 100%;
   display: flex;
+  align-items: center;
+  padding: 0px;
+  gap: 35px;
+  width: 250px;
+  height: 661px;
+  margin-top: 70px;
 }
 
 .to-do-header,
@@ -519,14 +524,23 @@ nav {
   line-height: 120%;
   color: #42526e;
   white-space: nowrap;
-  margin-right: 46px;
 }
 
 .to-do-tasks,
 .in-progress-tasks,
 .await-feedback-tasks,
 .done-tasks {
-  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 35px;
+  width: 250px;
+  height: 661px;
+}
+
+.board-add-task-plus-icon {
+  cursor: pointer;
 }
 
 .add-task-slide-in-menu {
@@ -574,7 +588,7 @@ nav {
   color: #000000;
 }
 
-.add-task-slide-in-header>img {
+.add-task-slide-in-header > img {
   position: absolute;
   width: 22px;
   height: 22px;
@@ -616,6 +630,99 @@ nav {
   opacity: 0.5;
   z-index: 0;
   background-color: white;
+}
+
+.board-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 18px 19px;
+  gap: 10px;
+  width: 250px;
+  height: 241px;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+
+.board-task-category {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4px 25px;
+  gap: 10px;
+  width: 101px;
+  height: 27px;
+  background: #ff7a00;
+  border-radius: 8px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.board-task-title-and-description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 10px;
+  width: 207px;
+  height: 67px;
+  border-radius: 10px;
+}
+
+.board-task-title {
+  width: 138px;
+  height: 19px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  color: #4589ff;
+}
+
+.board-task-description {
+  width: 207px;
+  height: 38px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 120%;
+  color: #a8a8a8;
+}
+
+.board-task-subtask-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 20px;
+  width: 213px;
+  height: 16px;
+}
+
+.board-task-subtask-statusbar {
+}
+
+.board-task-subtask-status-info {
+}
+
+.board-task-involved-contacts {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 83px;
+  width: 207px;
+  height: 35px;
 }
 
 /* Task Form */
@@ -813,7 +920,7 @@ nav {
   background-color: white;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container {
+.add-task-contact-checkbox + .add-task-checkbox-container {
   position: absolute;
 }
 
@@ -826,7 +933,7 @@ nav {
   z-index: 1;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container::after {
+.add-task-contact-checkbox + .add-task-checkbox-container::after {
   width: 15px;
   height: 15px;
   background-image: url("assets/img/rectangle.svg");
@@ -836,7 +943,7 @@ nav {
   margin-top: 4px;
 }
 
-.add-task-contact-checkbox:checked+.add-task-checkbox-container::after {
+.add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
   background-image: url("assets/img/checkbutton.svg");
 }
 
@@ -907,17 +1014,14 @@ element.style {
   overflow-y: scroll;
 }
 
-
 .contact-left::-webkit-scrollbar {
   width: 6px;
-  background-color: #F5F5F5;
-
+  background-color: #f5f5f5;
 }
 
 .contact-left::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #A8A8A8;
-
+  background-color: #a8a8a8;
 }
 
 .contact-letter {
@@ -1048,7 +1152,7 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-category>span {
+.add-task-category > span {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -1474,7 +1578,6 @@ element.style {
   right: 20%;
   align-items: flex-start;
   justify-content: flex-start;
-
 }
 
 .contact-right-side {
@@ -1725,7 +1828,7 @@ element.style {
   width: 146px;
   border-radius: 10px;
   padding: 18px 10px 18px 10px;
-  background: #4589FF;
+  background: #4589ff;
   box-shadow: 0px 0px 4px 0px #00000029;
   border: none;
   font-family: Open Sans;
@@ -1735,13 +1838,11 @@ element.style {
   letter-spacing: 0em;
   text-align: left;
   color: #ffffff;
-
 }
 
 .button-create:hover {
   box-shadow: 0px 4px 4px 0px #00000040;
-  background: #005DFF;
+  background: #005dff;
   animation-timing-function: ease-in-out;
   animation-duration: 100ms;
-
 }

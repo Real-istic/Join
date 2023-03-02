@@ -1,11 +1,10 @@
-
 let taskClipboard = [
     {
         'title': '',
         'firstNames': [],
         'lastNames': [],
         'dueDate': '',
-        'categorie':'',
+        'category':'',
         'priority': '',
         'description': '',
         'subtasks': []
@@ -18,7 +17,6 @@ let contactListExpanded = false;
 
 /**
  * call the add task page
- * 
  * 
  */
 function addTask() {
@@ -199,7 +197,7 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
 
 function addCategoryToClipboard(i){
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
-    taskClipboard.categorie = category[i]['categoryName'];
+    taskClipboard[0].category = category[i]['categoryName'];
     toggleCategoryList();
 }
 
@@ -391,6 +389,7 @@ function createTask() {
         taskClipboard[0].title = title.value;
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
+        insertsTaskInTodolistHTML()
         confirmAddedTaskToBoard()
     }
 }
@@ -407,7 +406,7 @@ function clearTask() {
             'firstNames': [],
             'lastNames': [],
             'dueDate': '',
-            'categories': [],
+            'category': '',
             'priority': '',
             'description': '',
             'subtasks': []
@@ -443,7 +442,7 @@ function pushDescriptionToTaskClipboard() {
 }
 
 /**
- * a slide in of the added-task-to-board information
+ * a slide-in of the added-task-to-board information
  * 
  */
 function confirmAddedTaskToBoard() {
