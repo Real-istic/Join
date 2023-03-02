@@ -588,7 +588,7 @@ nav {
   color: #000000;
 }
 
-.add-task-slide-in-header > img {
+.add-task-slide-in-header>img {
   position: absolute;
   width: 22px;
   height: 22px;
@@ -704,11 +704,9 @@ nav {
   height: 16px;
 }
 
-.board-task-subtask-statusbar {
-}
+.board-task-subtask-statusbar {}
 
-.board-task-subtask-status-info {
-}
+.board-task-subtask-status-info {}
 
 .board-task-assigned-contacts-and-prority {
   display: flex;
@@ -921,7 +919,7 @@ nav {
   background-color: white;
 }
 
-.add-task-contact-checkbox + .add-task-checkbox-container {
+.add-task-contact-checkbox+.add-task-checkbox-container {
   position: absolute;
 }
 
@@ -934,7 +932,7 @@ nav {
   z-index: 1;
 }
 
-.add-task-contact-checkbox + .add-task-checkbox-container::after {
+.add-task-contact-checkbox+.add-task-checkbox-container::after {
   width: 15px;
   height: 15px;
   background-image: url("assets/img/rectangle.svg");
@@ -944,7 +942,7 @@ nav {
   margin-top: 4px;
 }
 
-.add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
+.add-task-contact-checkbox:checked+.add-task-checkbox-container::after {
   background-image: url("assets/img/checkbutton.svg");
 }
 
@@ -1060,7 +1058,7 @@ element.style {
   height: 61px;
   width: 197px;
   border-radius: 10px;
-  padding: 18px 10px 18px 10px;
+  padding-top: 12px;
   background: #4589ff;
   color: white;
   font-family: Open Sans;
@@ -1069,10 +1067,34 @@ element.style {
   line-height: 28px;
   letter-spacing: 0em;
   text-align: left;
+  position: fixed;
+  bottom: 6rem;
+  right: 7rem;
+
+  display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 10px;
+    gap: 10px;
+    border: 1px solid #4589ff;
+    white-space: nowrap;
+    text-align: left;
+    font-family: "Open Sans";
+    cursor: pointer;
+    transition: all 100ms ease-in-out;
 }
 
+
 .new-contact-button:hover {
-  background: #005dff;
+  cursor: pointer;
+  background-color: #005DFF;
+  box-shadow: 0px 6px 6px rgb(0 0 0 / 40%);
+}
+
+.new-contact-button-img {
+  height: 28px;
+  margin-left: 5px;
 }
 
 .add-task-date {
@@ -1150,7 +1172,7 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-category > span {
+.add-task-category>span {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -1549,28 +1571,6 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.new-contact-button {
-  height: 61px;
-  width: 197px;
-  border-radius: 10px;
-  padding: 18px 10px 18px 10px;
-  background: #4589ff;
-  color: white;
-  font-family: Open Sans;
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: 0em;
-  text-align: left;
-  position: fixed;
-  bottom: 6rem;
-  right: 7rem;
-}
-
-.new-contact-button:hover {
-  background: #005dff;
-}
-
 .contact-right {
   position: relative;
   min-width: 480px;
@@ -1582,8 +1582,8 @@ element.style {
 
 .show {
   position: relative;
-  right: 21%;
-  top: 23px;
+  right: -27%;
+  top: -1rem;
   transition: all 800ms ease-in-out;
 }
 
