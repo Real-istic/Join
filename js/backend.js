@@ -62,5 +62,5 @@ async function pushTaskToBackend(){
 
 async function deleteTasksFromBackend(){
     await backend.deleteItem('tasks');
-    initBackend()
+    await initBackend()
 }

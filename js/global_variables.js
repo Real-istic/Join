@@ -1,7 +1,6 @@
 let contentDiv = document.getElementById('content');
 
-let taskClipboard = [
-    {
+let taskClipboard = {
         'title': '',
         'firstNames': [],
         'lastNames': [],
@@ -11,4 +10,4 @@ let taskClipboard = [
         'description': '',
         'subtasks': []
     }
-]
+

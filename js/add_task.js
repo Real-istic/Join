@@ -190,7 +190,7 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
 
 function addCategoryToClipboard(i){
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
-    taskClipboard[0].category = category[i]['categoryName'];
+    taskClipboard.category = category[i]['categoryName'];
     toggleCategoryList();
 }
 
@@ -333,8 +333,8 @@ function createSubtask() {
         return;
     }
 
-    if (!taskClipboard[0].subtasks.includes(subtaskInput.value)) {
-        taskClipboard[0].subtasks.push(subtaskInput.value)
+    if (!taskClipboard.subtasks.includes(subtaskInput.value)) {
+        taskClipboard.subtasks.push(subtaskInput.value)
         subtaskContainer.innerHTML += /*html*/ `
         <div class="add-task-subtask-div">
             <input onclick="AddCheckedSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" checked="" name="${subtaskInput.value}" id="">
@@ -356,12 +356,12 @@ function createSubtask() {
  */
 function AddCheckedSubtaskToClipboard(checkbox) {
     if (checkbox.checked) {
-        taskClipboard[0].subtasks.push(checkbox.name);
+        taskClipboard.subtasks.push(checkbox.name);
     } else {
-        for (let i = 0; i < taskClipboard[0].subtasks.length; i++) {
-            const subtaskName = taskClipboard[0].subtasks[i];
+        for (let i = 0; i < taskClipboard.subtasks.length; i++) {
+            const subtaskName = taskClipboard.subtasks[i];
             if (subtaskName == checkbox.name) {
-                taskClipboard[0].subtasks.splice(i, 1)
+                taskClipboard.subtasks.splice(i, 1)
             }
         }
     }
@@ -379,7 +379,7 @@ async function createTask() {
         title.reportValidity();
         return;
     } else {
-        taskClipboard[0].title = title.value;
+        taskClipboard.title = title.value;
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
         insertsTaskToTodolistHTML()
@@ -418,7 +418,7 @@ function clearTask() {
  */
 function pushDueDateToTaskClipboard() {
     let dueDate = document.getElementById('addTaskInputDate');
-    taskClipboard[0].dueDate = dueDate.value;
+    taskClipboard.dueDate = dueDate.value;
 }
 
 /**
@@ -427,7 +427,7 @@ function pushDueDateToTaskClipboard() {
  */
 function pushPriorityToTaskClipboard() {
     let priority = document.querySelectorAll('.add-task-priority-input:checked');
-    taskClipboard[0].priority = priority[0].name;
+    taskClipboard.priority = priority[0].name;
 }
 
 /**
@@ -436,7 +436,7 @@ function pushPriorityToTaskClipboard() {
  */
 function pushDescriptionToTaskClipboard() {
     let description = document.getElementById('addTaskDescription');
-    taskClipboard[0].description = description.value;
+    taskClipboard.description = description.value;
 }
 
 /**
@@ -552,8 +552,8 @@ function toggleContactTask(i) {
 
 function checkForContactInClipboard(i) {
     let nameStillInTask = false;
-    for (k = 0; k < taskClipboard[0].firstNames.length; k++) {
-        if (userList[i].firstName == taskClipboard[0].firstNames[k] && userList[i].lastName == taskClipboard[0].lastNames[k]) {
+    for (k = 0; k < taskClipboard.firstNames.length; k++) {
+        if (userList[i].firstName == taskClipboard.firstNames[k] && userList[i].lastName == taskClipboard.lastNames[k]) {
             nameStillInTask = true;
         }
     }
@@ -561,10 +561,10 @@ function checkForContactInClipboard(i) {
 }
 
 function removeContactFromTask(i) {
-    for (j = 0; j < taskClipboard[0].firstNames.length; j++) {
-        if (taskClipboard[0].firstNames[j] == userList[i].firstName && taskClipboard[0].lastNames[j] == userList[i].lastName) {
-            taskClipboard[0].firstNames.splice(j, 1);
-            taskClipboard[0].lastNames.splice(j, 1);
+    for (j = 0; j < taskClipboard.firstNames.length; j++) {
+        if (taskClipboard.firstNames[j] == userList[i].firstName && taskClipboard.lastNames[j] == userList[i].lastName) {
+            taskClipboard.firstNames.splice(j, 1);
+            taskClipboard.lastNames.splice(j, 1);
         }
     }
     createSelectedContactIcons();
@@ -573,8 +573,8 @@ function removeContactFromTask(i) {
 function addContactToTask(i) {
     let newFirstNameForTask = userList[i].firstName;
     let newLastNameForTask = userList[i].lastName;
-    taskClipboard[0].firstNames.push(newFirstNameForTask);
-    taskClipboard[0].lastNames.push(newLastNameForTask);
+    taskClipboard.firstNames.push(newFirstNameForTask);
+    taskClipboard.lastNames.push(newLastNameForTask);
     createSelectedContactIcons();
 }
 
@@ -591,12 +591,12 @@ function createSelectedContactIcons() {
     let backgroundcolor;
 
     contactContainer.innerHTML = ``;
-    for (let i = 0; i < taskClipboard[0].firstNames.length; i++) {
-        firstNameFirstLetter = taskClipboard[0].firstNames[i].charAt(0);
-        lastNameFirstLetter = taskClipboard[0].lastNames[i].charAt(0);
+    for (let i = 0; i < taskClipboard.firstNames.length; i++) {
+        firstNameFirstLetter = taskClipboard.firstNames[i].charAt(0);
+        lastNameFirstLetter = taskClipboard.lastNames[i].charAt(0);
 
         for (let j = 0; j < userList.length; j++) {
-            if (taskClipboard[0].firstNames[i] == userList[j]['firstName'] && taskClipboard[0].lastNames[i] == userList[j]['lastName']) {
+            if (taskClipboard.firstNames[i] == userList[j]['firstName'] && taskClipboard.lastNames[i] == userList[j]['lastName']) {
                 backgroundcolor = userList[j]['background-color'];
             }
         }
