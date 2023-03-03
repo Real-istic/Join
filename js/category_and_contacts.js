@@ -37,6 +37,79 @@ let taskList = [
     }
 ]
 
+// -------------------------------------
+
+[
+    {
+        "title": "TestTask",
+        "firstNames": [
+            "Florian",
+            "Hannah",
+            "Julia"
+        ],
+        "lastNames": [
+            "Schmidt",
+            "Wagner",
+            "Schneider"
+        ],
+        "dueDate": "2023-03-05",
+        "category": "Marketing",
+        "categoryColor": "#de493e",
+        "priority": "Urgent",
+        "description": "asdf asdf asdf",
+        "subtasks": [
+            "Subtask 1",
+            "Create new icons"
+        ]
+        
+    },
+    {
+        "title": "Aufgabe 12344",
+        "firstNames": [
+            "Julia",
+            "Lena",
+            "Marcel"
+        ],
+        "lastNames": [
+            "Schneider",
+            "Müller",
+            "Schulz"
+        ],
+        "dueDate": "2023-03-15",
+        "category": "Finance",
+        "categoryColor": "#259b24",
+        "priority": "Medium",
+        "description": "ballaballa balla",
+        "subtasks": [
+            "Nebenaufgabe 1",
+            "NocheineAufgabe"
+        ]
+    },
+    {
+        "title": "another task",
+        "firstNames": [
+            "Tim",
+            "Sophie",
+            "Sabine"
+        ],
+        "lastNames": [
+            "Fischer",
+            "Hartmann",
+            "Meyer"
+        ],
+        "dueDate": "2023-03-25",
+        "category": "Production",
+        "categoryColor": "#1e88e5",
+        "priority": "Low",
+        "description": "go go go go",
+        "subtasks": [
+            "task1",
+            "task2"
+        ]
+    }
+]
+
+// ------------------------------
 
 userList = [
     {
