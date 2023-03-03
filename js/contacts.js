@@ -21,7 +21,6 @@ function insertContacts() {
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
   `;
-
   eventOnEditContact();
 }
 

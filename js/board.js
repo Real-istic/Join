@@ -13,7 +13,7 @@ function insertBoard() {
  * 
  * @returns the html part
  */
-function insertBoardHTML(){
+function insertBoardHTML() {
     return /*html*/ `
         ${insertBoardHeaderHTML()}
         ${insertBoardTasks()}
@@ -59,9 +59,8 @@ function insertBoardTasks() {
  * 
  * @returns to do content
  */
-function insertTodoTasksHTML(){
+function insertTodoTasksHTML() {
     return/*html*/ `
-    
         <div class="to-do-tasks" id="toDoTasks">
             <div class="to-do-header">
                 <span>To do</span>
@@ -77,7 +76,7 @@ function insertTodoTasksHTML(){
  * 
  * @returns in progress content
  */
-function insertInProgressTasksHTML(){
+function insertInProgressTasksHTML() {
     return /*html*/ `
         <div class="in-progress-tasks" id="inProgressTasks">
             <div class="in-progress-header">
@@ -94,7 +93,7 @@ function insertInProgressTasksHTML(){
  * 
  * @returns await feedback content
  */
-function insertAwaitFeedbackTasksHTML(){
+function insertAwaitFeedbackTasksHTML() {
     return /* html */ `
         <div class="await-feedback-tasks" id="awaitFeedbackTasks">
             <div class="await-feedback-header">
@@ -111,7 +110,7 @@ function insertAwaitFeedbackTasksHTML(){
  * 
  * @returns done content
  */
-function insertDoneTasksHTML(){
+function insertDoneTasksHTML() {
     return /*html*/ `
         <div class="done-tasks" id="doneTasks">
             <div class="done-header">
@@ -128,8 +127,8 @@ function insertDoneTasksHTML(){
  * also fills the html part of it 
  *
  */
-function addTaskOfScreenMenu(){
-    addTaskSlideInMenu()
+function addTaskOfScreenMenu() {
+    addTaskFillSlideInMenu()
     toggleAddTaskMenuOffScreen()
 }
 
@@ -141,18 +140,24 @@ function addTaskOfScreenMenu(){
 function addTaskSlideInMenu() {
     return /*html*/ `
         <div class="add-task-slide-in-menu transform-x-off-screen scrollbar1" id="addTaskSlideInMenu">
-                ${insertTaskSlideInHeader()}
-                ${insertTaskTitleHTML()}
-                ${insertTaskContactlistHTML()}
-                ${createSelectedContactIconsDivHTML()} 
-                ${insertDueDateHTML()}
-                ${insertCategorySelectorHTML()}
-                ${insertCategoryListHTML()}
-                ${insertPriorityHTML()}
-                ${insertDescriptionHTML()}
-                ${insertSubtasksHTML()}
         </div>
     `;
+}
+
+function addTaskFillSlideInMenu() {
+    document.getElementById('addTaskSlideInMenu').innerHTML = ``;
+    document.getElementById('addTaskSlideInMenu').innerHTML = /*html*/ `
+        ${insertTaskSlideInHeader()}
+        ${insertTaskTitleHTML()}
+        ${insertTaskContactlistHTML()}
+        ${createSelectedContactIconsDivHTML()} 
+        ${insertDueDateHTML()}
+        ${insertCategorySelectorHTML()}
+        ${insertCategoryListHTML()}
+        ${insertPriorityHTML()}
+        ${insertDescriptionHTML()}
+        ${insertSubtasksHTML()}
+        `;
 }
 
 /**
@@ -166,10 +171,10 @@ function toggleAddTaskMenuOffScreen() {
     opacityDiv.classList.toggle('reduce-opacity');
 }
 
-function insertsTaskToTodolistHTML(){
+function insertsTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasks');
     let categoryColor = setCategoryColor();
-    
+
     todoList.innerHTML += /*html*/ `
         <div class="board-task">
             <span style="background-color: ${categoryColor};" class="board-task-category">${taskClipboard[0].category}</span>
@@ -194,7 +199,7 @@ function insertsTaskToTodolistHTML(){
     `;
 }
 
-function setCategoryColor(){
+function setCategoryColor() {
     let categoryColor;
 
     for (let i = 0; i < category.length; i++) {
