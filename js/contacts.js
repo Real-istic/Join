@@ -17,7 +17,7 @@ function insertContacts() {
       <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg">
         <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
       </div>
-      <div class="new-contact-button" onclick="">New Contact
+      <div class="new-contact-button" onclick="openNewContact()">New Contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
   `;
@@ -102,9 +102,6 @@ function renderContactSideScroll(i) {
       <div class="show-contact">
         <div id="contactdetails">
           <div class="contact-detail-main-side" id="0">
-            <div class="back-in-media-contact">
-              <img class="arrow-back-in-media" onclick="insertContacts()" src="./assets/img/help-arrow.svg" alt="">
-            </div>
           </div>        
           <div class="contact-detail-head">
             <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
@@ -207,7 +204,7 @@ function editContact(i) {
  * 
  * invite the editContact content
  */
-async function invEditContact(index) {
+function invEditContact(index) {
   const contactEditName = document.getElementById('contactEditName').value;
   const contactEditEmail = document.getElementById('contactEditEmail').value;
   const contactEditNumber = document.getElementById('contactEditNumber').value;
@@ -223,11 +220,11 @@ async function invEditContact(index) {
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  const backgroundColor = userList[index]['background-color'];
+  //const backgroundColor = userList[index]['background-color'];
 
   const contactDetailBigLetter = document.querySelector('.contact-detail-big-letter');
   contactDetailBigLetter.textContent = contactNameLetter;
-  contactDetailBigLetter.style.backgroundColor = backgroundColor;
+  //contactDetailBigLetter.style.backgroundColor = backgroundColor;
 
   const contactDetailBigName = document.querySelector('.contact-detail-big-name');
   contactDetailBigName.textContent = contactName;
