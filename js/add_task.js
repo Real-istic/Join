@@ -1,16 +1,3 @@
-let taskClipboard = [
-    {
-        'title': '',
-        'firstNames': [],
-        'lastNames': [],
-        'dueDate': '',
-        'category':'',
-        'priority': '',
-        'description': '',
-        'subtasks': []
-    }
-]
-
 let categoryColors = ['#8aa4ff', '#ff0000', '#2ad300', '#ff8a00', '#e200be', '#0038ff'];
 
 let contactListExpanded = false;
@@ -385,7 +372,7 @@ function AddCheckedSubtaskToClipboard(checkbox) {
  * 
  * @returns form validation information
  */
-function createTask() {
+async function createTask() {
     let title = document.getElementById('addTaskInputTitle');
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
@@ -397,8 +384,10 @@ function createTask() {
         pushDescriptionToTaskClipboard()
         insertsTaskToTodolistHTML()
         insertAssignedContactsToTaskHTML()
+        await pushTaskToBackend()
         confirmAddedTaskToBoard()
         document.getElementById('addTaskSlideInMenu').innerHTML = ``;
+        // clearTask()
         addTaskFillSlideInMenu()
     }
 }
@@ -408,7 +397,7 @@ function createTask() {
  * 
  */
 function clearTask() {
-    addTask();
+    // addTask();
     taskClipboard = [
         {
             'title': '',

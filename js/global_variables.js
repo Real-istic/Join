@@ -1,2 +1,14 @@
 let contentDiv = document.getElementById('content');
-// let userName = userList[0].name;
+
+let taskClipboard = [
+    {
+        'title': '',
+        'firstNames': [],
+        'lastNames': [],
+        'dueDate': '',
+        'category': '',
+        'priority': '',
+        'description': '',
+        'subtasks': []
+    }
+]

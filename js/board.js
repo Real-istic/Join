@@ -144,6 +144,10 @@ function addTaskSlideInMenu() {
     `;
 }
 
+/**
+ * inserts the html part of the slide-in-menu
+ * 
+ */
 function addTaskFillSlideInMenu() {
     document.getElementById('addTaskSlideInMenu').innerHTML = /*html*/ `
         ${insertTaskSlideInHeader()}
@@ -170,6 +174,10 @@ function toggleAddTaskMenuOffScreen() {
     opacityDiv.classList.toggle('reduce-opacity');
 }
 
+/**
+ * creates a task at the board
+ * 
+ */
 function insertsTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasks');
     let categoryColor = setCategoryColor();
@@ -209,6 +217,10 @@ function setCategoryColor() {
     return categoryColor
 }
 
+/**
+ * inserts the contacts to the task
+ * 
+ */
 function insertAssignedContactsToTaskHTML() {
     let firstNameFirstLetter;
     let lastNameFirstLetter;
@@ -228,7 +240,7 @@ function insertAssignedContactsToTaskHTML() {
         contactContainer.innerHTML += `
         <div class="add-task-selected-contact" style="background-color:${backgroundcolor};">${firstNameFirstLetter}${lastNameFirstLetter}</div>
         `;
-    }
+   }
 }
 
 /**

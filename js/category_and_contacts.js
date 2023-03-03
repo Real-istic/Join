@@ -24,6 +24,20 @@ categoryList = [{
     categoryColor: '#00897b'
 }]
 
+let taskList = [
+    {
+    'title': '',
+    'firstNames': [],
+    'lastNames': [],
+    'dueDate': '',
+    'category':'',
+    'priority': '',
+    'description': '',
+    'subtasks': []
+    }
+]
+
+
 userList = [
     {
         "firstName": "Florian",
