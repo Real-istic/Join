@@ -5,6 +5,7 @@
  */
 function insertBoard() {
     contentDiv.innerHTML = insertBoardHTML();
+    insertsTaskToTodolistHTML()
     document.getElementById("help").classList.remove("help-none");
 }
 
@@ -180,14 +181,15 @@ function toggleAddTaskMenuOffScreen() {
  */
 function insertsTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasks');
-    let categoryColor = setCategoryColor();
 
+    for (let i = 0; i < taskList.length; i++) {
+    const task = taskList[i];
     todoList.innerHTML += /*html*/ `
         <div class="board-task">
-            <span style="background-color: ${categoryColor};" class="board-task-category">${taskClipboard.category}</span>
+            <span style="background-color: ${categoryColor};" class="board-task-category">${taskList[i].category}</span>
             <div class="board-task-title-and-description">
-                <span class="board-task-title">${taskClipboard.title}</span>
-                <span class="board-task-description">${taskClipboard.description}</span>
+                <span class="board-task-title">${taskList[i].title}</span>
+                <span class="board-task-description">${taskList[i].description}</span>
             </div>
             <div class="board-task-subtask-status">
                 <div class="board-task-subtask-statusbar">
@@ -198,12 +200,13 @@ function insertsTaskToTodolistHTML() {
                 </span>
             </div>
             <div class="board-task-assigned-contacts-and-prority">
-                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${taskClipboard.title}">
+                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${taskList[i].title}">
                 </div>
-                <img src="assets/img/priority${taskClipboard.priority.toLowerCase()}.svg" alt="">
+                <img src="assets/img/priority${taskList[i].priority.toLowerCase()}.svg" alt="">
             </div>
         </div>
     `;
+    }
 }
 
 function setCategoryColor() {
