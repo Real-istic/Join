@@ -127,7 +127,7 @@ function renderUserList() {
        <h4 class="contact-letter" >${userList[i].firstName.charAt(0)}</h4>
         <div class="contact-child-div">
           <div class="contact-child-div">
-            <div style="background-color: ${userList[i]['background-color']}" class="contact-child">
+            <div style="background-color: ${userList[i]['backgroundColor']}" class="contact-child">
               <p>${firstNameLetter}${lastNameLetter}</p>
             </div>
             <div>
@@ -176,7 +176,7 @@ function renderContactSideScroll(i) {
           <div class="contact-detail-main-side" id="0">
           </div>        
           <div class="contact-detail-head">
-            <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
+            <div style="background-color: ${userList[i]['backgroundColor']}" class="contact-detail-big-letter">${contactNameLetter}</div>
               <div class="contact-detail-name-task">
                 <p class="contact-detail-big-name">${contactName}</p>
                 <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
@@ -239,7 +239,7 @@ function editContact(i) {
         </div>
 
         <div class="edit-contact-main" onclick="doNotClose()">
-          <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">
+          <div style="background-color: ${userList[i]['backgroundColor']}" class="contact-detail-big-letter">
             <p>${contactNameLetter}</p>
           </div>
 
@@ -292,7 +292,7 @@ function invEditContact(index) {
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  //const backgroundColor = userList[index]['background-color'];
+  //const backgroundColor = userList[index]['backgroundColor'];
 
   const contactDetailBigLetter = document.querySelector('.contact-detail-big-letter');
   contactDetailBigLetter.textContent = contactNameLetter;
