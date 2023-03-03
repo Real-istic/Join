@@ -6,6 +6,7 @@
 function insertBoard() {
     contentDiv.innerHTML = insertBoardHTML();
     insertsTaskToTodolistHTML()
+    insertAssignedContactsToTaskHTML()
     document.getElementById("help").classList.remove("help-none");
 }
 
@@ -181,14 +182,12 @@ function toggleAddTaskMenuOffScreen() {
  */
 function insertsTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasks');
-    let categoryColor;
-    setCategoryColor()
 
     for (let i = 0; i < taskList.length; i++) {
-    const task = taskList[i];
-    todoList.innerHTML += /*html*/ `
+        const task = taskList[i];
+        todoList.innerHTML += /*html*/ `
         <div class="board-task">
-            <span style="background-color: ${categoryColor};" class="board-task-category">${taskList[i].category}</span>
+            <span style="background-color: ${taskList[i].categoryColor};" class="board-task-category">${taskList[i].category}</span>
             <div class="board-task-title-and-description">
                 <span class="board-task-title">${taskList[i].title}</span>
                 <span class="board-task-description">${taskList[i].description}</span>
@@ -211,42 +210,30 @@ function insertsTaskToTodolistHTML() {
     }
 }
 
-function setCategoryColor() {
-    let categoryColor;
-
-    for (let i = 0; i < category.length; i++) {
-        if (taskClipboard.category == category[i].categoryName) {
-            categoryColor = category[i].categoryColor
-        }
-    }
-    return categoryColor
-}
-
 /**
  * inserts the contacts to the task
  * 
  */
 function insertAssignedContactsToTaskHTML() {
-    let firstNameFirstLetter;
-    let lastNameFirstLetter;
-    let backgroundcolor;
-    let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskClipboard.title);
 
-    for (let i = 0; i < taskClipboard.firstNames.length; i++) {
-        firstNameFirstLetter = taskClipboard.firstNames[i].charAt(0);
-        lastNameFirstLetter = taskClipboard.lastNames[i].charAt(0);
+    for (let i = 0; i < taskList.length; i++) {
+        let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
 
-        for (let j = 0; j < userList.length; j++) {
-            if (taskClipboard.firstNames[i] == userList[j]['firstName'] && taskClipboard.lastNames[i] == userList[j]['lastName']) {
-                backgroundcolor = userList[j]['background-color'];
-            }
+        for (let j = 0; j < taskList[i].firstNames.length; j++) {
+            let firstNameTask = taskList[i].firstNames[j];
+            let lastNameTask = taskList[i].lastNames[j];
+            for (let k = 0; k < userList.length; k++) {
+                if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                    let userBackgroundColor = userList[k].backgroundColor;
+                    contactContainer.innerHTML += `
+                        <div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
+                        `;
+                }
+            }      
         }
-
-        contactContainer.innerHTML += `
-        <div class="add-task-selected-contact" style="background-color:${backgroundcolor};">${firstNameFirstLetter}${lastNameFirstLetter}</div>
-        `;
-   }
+    }
 }
+
 
 /**
  * inserts the specific header and buttons to the add-task-slide-in-menu

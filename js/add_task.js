@@ -1,4 +1,4 @@
-let categoryColors = ['#8aa4ff', '#ff0000', '#2ad300', '#ff8a00', '#e200be', '#0038ff'];
+let categoryColors = ['#de493e', '#259b24', '#1e88e5', '#fbc02d', '#9c27b0', '#00897b'];
 
 let contactListExpanded = false;
 
