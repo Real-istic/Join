@@ -8,5 +8,6 @@ let taskClipboard = {
         'category': '',
         'priority': '',
         'description': '',
-        'subtasks': []
+        'subtasks': [],
+        'categoryColor': ''
     }

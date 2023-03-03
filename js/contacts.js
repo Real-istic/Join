@@ -333,6 +333,7 @@ function invNewContact() {
 async function saveEditContact() {
     // userList im Backend speichern
     await backend.setItem('users', JSON.stringify(userList));
+    await initBackend();
 }
 
 
