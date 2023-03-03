@@ -181,6 +181,8 @@ function toggleAddTaskMenuOffScreen() {
  */
 function insertsTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasks');
+    let categoryColor;
+    setCategoryColor()
 
     for (let i = 0; i < taskList.length; i++) {
     const task = taskList[i];
