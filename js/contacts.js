@@ -1,13 +1,13 @@
 /**
+ * 
  * Call the contacts content
  */
-
-
 function insertContacts() {
 
   document.getElementById("help").classList.remove("help-none");
 
   contentDiv.innerHTML = /*html*/ `
+      ${addTaskSlideInMenu()}
       <div class="contact-main">
           <div class="contact-left">
             ${renderUserList()}
@@ -26,6 +26,7 @@ function insertContacts() {
       <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
   `;
+
   eventOnEditContact();
 }
 
@@ -33,7 +34,6 @@ function insertContacts() {
  * 
  * Call an event on editContact content
  */
-
 function eventOnEditContact() {
   const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
   const editContactFadeIn = document.getElementById('contact-left-fadeIn');
@@ -115,7 +115,7 @@ function renderContactSideScroll(i) {
             <div style="background-color: ${userList[i]['background-color']}" class="contact-detail-big-letter">${contactNameLetter}</div>
               <div class="contact-detail-name-task">
                 <p class="contact-detail-big-name">${contactName}</p>
-                <p class="contact-detail-add-task" onclick="addTaskOfScreenMenu()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
+                <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
               </div>
             </div >
           </div>
