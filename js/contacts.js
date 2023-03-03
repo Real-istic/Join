@@ -240,7 +240,7 @@ async function invEditContact(index) {
 
   saveEditContact(userList);
   insertContacts();
-  init
+  initbackend();
 }
 
 
@@ -250,9 +250,9 @@ async function invEditContact(index) {
  * 
  * Save the editContact content
  */
-async function saveEditContact(userList) {
+async function saveEditContact() {
     // userList im Backend speichern
-    await backend.setItem('userList', JSON.stringify(userList));
+    await backend.setItem('users', JSON.stringify(userList));
 }
 
 
