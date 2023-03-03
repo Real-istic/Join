@@ -387,6 +387,7 @@ async function createTask() {
         await pushTaskToBackend()
         confirmAddedTaskToBoard()
         document.getElementById('addTaskSlideInMenu').innerHTML = ``;
+        initBackend()
         // clearTask()
         addTaskFillSlideInMenu()
     }
@@ -398,8 +399,7 @@ async function createTask() {
  */
 function clearTask() {
     // addTask();
-    taskClipboard = [
-        {
+    taskClipboard = {
             'title': '',
             'firstNames': [],
             'lastNames': [],
@@ -409,9 +409,7 @@ function clearTask() {
             'description': '',
             'subtasks': []
         }
-    ]
-}
-
+    }
 /**
  * pushes the due date information to the task clipboard
  * 
