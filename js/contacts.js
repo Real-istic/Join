@@ -17,13 +17,85 @@ function insertContacts() {
       <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg">
         <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
       </div>
-      <div class="new-contact-button" onclick="openNewContact()">New Contact
+      <div class="new-contact-button" onclick="openNewContact()">New contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
   `;
   addTaskFillSlideInMenu()
   eventOnEditContact();
+  
 }
+
+/**
+ * 
+ * Call the newContact content
+ */
+function openNewContact(){
+  
+  for (let i = 0; i < userList.length; i++) {
+    const firstNameLetter = userList[i].firstName.charAt(0);
+    const lastNameLetter = userList[i].lastName.charAt(0);
+    const contactName = userList[i].firstName + " " + userList[i].lastName;
+    const contactNameLetter = firstNameLetter + lastNameLetter;
+
+    let newContactFadeIn = document.getElementById('contact-left-fadeIn');
+    let newContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+    newContactFadeInBg.classList.add("show-left")
+    newContactFadeIn.classList.add("show-left")
+
+    newContactFadeIn.innerHTML = /*html*/ `
+    <div class="new-contact">
+      <div class="new-contact-head" onclick="hideEditContacts()">
+        <div class="new-contact-cross">
+          <img class="img-cross" src="./assets/img/theCross.svg" alt="">
+        </div>
+
+        <div class="new-contact-header-info">
+          <div>
+            <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
+          </div>
+            <div class="new-contact-h">Add contact</div>
+              <div class="add-contact-text">
+                    Tasks are better with a team!
+              </div>
+
+              <div class="new-contact-main" onclick="doNotClose()">
+                <img src="./assets/img/addNewContactProfil.svg">
+              
+              
+                  <form onsubmit="invNewContact(); return false">
+                  <div>
+                    <div class="input-contact">
+                      <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
+                      <img src="./assets/img/signup-user.svg" alt="">
+                    </div>
+      
+                    <div class="input-contact">
+                      <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
+                        <img src="./assets/img/login-email.svg" alt="">
+                    </div>
+      
+                    <div class="input-contact">
+                      <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
+                        <img src="./assets/img/phone.svg" alt="">
+                    </div>          
+                  </div>
+                  <div class="button-container">
+                  <button class="button-cancel" type="reset">Cancel <img src="./assets/img/cancel.png" alt=""></button>
+                  <button class="button-create" type="submit">Create contact <img src="./assets/img/rithe.png" alt=""></button>
+              </div>
+                </form>
+
+
+              </div>                   
+      </div>
+    </div>
+        `;
+        return newContactFadeIn;
+}
+}
+
+
 
 /**
  * 
@@ -241,7 +313,17 @@ function invEditContact(index) {
   initbackend();
 }
 
+/**
+ * 
+ * invite the NewContact content
+ */
+function invNewContact() {
+  const contactEditName = document.getElementById('contactNewName').value;
+  const contactEditEmail = document.getElementById('contactNewEmail').value;
+  const contactEditNumber = document.getElementById('contactNewNumber').value;
 
+  
+}
 
 
 /**
@@ -293,7 +375,19 @@ function doNotClose() {
 }
 
 
-
+/**
+ * returns a random hex color code
+ * 
+ * @returns a string representing a hex color code
+ */
+function getRandomColor() {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 
 
