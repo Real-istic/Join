@@ -145,7 +145,6 @@ function addTaskSlideInMenu() {
 }
 
 function addTaskFillSlideInMenu() {
-    document.getElementById('addTaskSlideInMenu').innerHTML = ``;
     document.getElementById('addTaskSlideInMenu').innerHTML = /*html*/ `
         ${insertTaskSlideInHeader()}
         ${insertTaskTitleHTML()}

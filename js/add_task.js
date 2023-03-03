@@ -398,6 +398,8 @@ function createTask() {
         insertsTaskToTodolistHTML()
         insertAssignedContactsToTaskHTML()
         confirmAddedTaskToBoard()
+        document.getElementById('addTaskSlideInMenu').innerHTML = ``;
+        addTaskFillSlideInMenu()
     }
 }
 
