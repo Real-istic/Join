@@ -205,6 +205,8 @@ function getNewCategoryColor(){
     for (let i = 0; i < colors.length; i++) {
         if(colors[i].checked == true){
             newCategoryColor = colors[i].value;
+        }else{
+            newCategoryColor = '#ffffff';
         }
     }
     return newCategoryColor;
