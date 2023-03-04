@@ -159,6 +159,7 @@ function addTaskFillSlideInMenu() {
         ${insertDueDateHTML()}
         ${insertCategorySelectorHTML()}
         ${insertCategoryListHTML()}
+        ${addTaskCreateNewCategoryColorSelector()}
         ${insertPriorityHTML()}
         ${insertDescriptionHTML()}
         ${insertSubtasksHTML()}
@@ -244,7 +245,7 @@ function insertTaskSlideInHeader() {
     return /*html*/ `
         <div class="add-task-slide-in-header">
             <span>Add Task</span>
-            <button class="add-task-slide-in-create-task-button" onclick="createTask()">Create Task<img class="add-task-slide-in-check-icon" src="assets/img/checkicon.svg" alt=""></button>
+            <button class="add-task-slide-in-create-task-button" onclick="createTaskBoardSite()">Create Task<img class="add-task-slide-in-check-icon" src="assets/img/checkicon.svg" alt=""></button>
             </button>
             <img onclick="toggleAddTaskMenuOffScreen()" src="assets/img/x.svg" alt="">
         </div>
@@ -269,7 +270,6 @@ function toggleTaskBoardTask(){
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
     opacityDiv.classList.toggle('reduce-opacity');
-    // taskDiv.classList.toggle('display-none');
     taskDiv.classList.toggle('board-task-translate-y');
 }
 
@@ -367,6 +367,25 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
                 `;
             }
         }      
+    }
+}
+
+async function createTaskBoardSite() {
+    let title = document.getElementById('addTaskInputTitle');
+    if (title.value.trim() === '') {
+        title.setCustomValidity('You need a Title to create a Task!');
+        title.reportValidity();
+        return;
+    } else {
+        taskClipboard.title = title.value;
+        pushDueDateToTaskClipboard()
+        pushDescriptionToTaskClipboard()
+        await pushTaskToBackend()
+        confirmAddedTaskToBoard()
+        await initBackend()
+        clearTask()
+        document.getElementById('addTaskSlideInMenu').innerHTML = ``;
+        addTaskFillSlideInMenu()
     }
 }
 

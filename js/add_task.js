@@ -6,7 +6,7 @@ let contactListExpanded = false;
  * call the add task page
  * 
  */
-function addTask() {
+function insertAddTask() {
     contentDiv.innerHTML = insertTaskLeft();
     document.getElementById("help").classList.remove("help-none");
 }
@@ -49,7 +49,7 @@ function insertTaskRightHTML(){
                 <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
-        <button class="btn-addTask" onclick="createTask()">Create Task</button>
+        <button class="btn-addTask" onclick="createTaskAddTaskSite()">Create Task</button>
     `;
 }
 
@@ -232,8 +232,6 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
         </div>
     `
 }
-
-
 
 function addCategoryToClipboard(i){
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
@@ -420,7 +418,7 @@ function AddCheckedSubtaskToClipboard(checkbox) {
  * 
  * @returns form validation information
  */
-async function createTask() {
+async function createTaskAddTaskSite() {
     let title = document.getElementById('addTaskInputTitle');
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
@@ -430,14 +428,11 @@ async function createTask() {
         taskClipboard.title = title.value;
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
-        insertsTaskToTodolistHTML()
-        insertAssignedContactsToTaskHTML()
         await pushTaskToBackend()
         confirmAddedTaskToBoard()
-        document.getElementById('addTaskSlideInMenu').innerHTML = ``;
-        initBackend()
-        // clearTask()
-        addTaskFillSlideInMenu()
+        await initBackend()
+        clearTask()
+        insertAddTask();
     }
 }
 
@@ -446,7 +441,6 @@ async function createTask() {
  * 
  */
 function clearTask() {
-    // addTask();
     taskClipboard = {
         'title': '',
         'firstNames': [],
@@ -459,6 +453,7 @@ function clearTask() {
         'categoryColor': ''
     }
 }
+
 /**
  * pushes the due date information to the task clipboard
  * 
@@ -627,12 +622,12 @@ function addContactToTask(i) {
 
 function createSelectedContactIconsDivHTML() {
     return /*html*/ `
-        <div class="add-task-selected-contacts-icons" id="selectedContactIcons"></div>
+        <div class="add-task-selected-contacts-icons" id="boardTaskAssignedContacts"></div>
     `;
 }
 
 function createSelectedContactIcons() {
-    let contactContainer = document.getElementById('selectedContactIcons');
+    let contactContainer = document.getElementById('boardTaskAssignedContacts');
     let firstNameFirstLetter;
     let lastNameFirstLetter;
     let backgroundcolor;
@@ -644,7 +639,7 @@ function createSelectedContactIcons() {
 
         for (let j = 0; j < userList.length; j++) {
             if (taskClipboard.firstNames[i] == userList[j]['firstName'] && taskClipboard.lastNames[i] == userList[j]['lastName']) {
-                backgroundcolor = userList[j]['background-color'];
+                backgroundcolor = userList[j]['backgroundColor'];
             }
         }
 
