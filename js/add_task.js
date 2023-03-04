@@ -103,12 +103,26 @@ function insertDueDateHTML() {
 function insertCategorySelectorHTML() {
     return /*html*/ `
         <div class="add-task-category" id="addTaskCategory">
-            <span>Category</span>
+        <span>Category</span>
             <div onclick="toggleCategoryList()" class="add-task-category-form">
                 <span id="selectedCategory">Select task category</span>
                 <img class="rotate-arrow-90" id="addTaskCategoryListArrow" src="assets/img/dropdownicon.svg" alt="">
             </div>
         </div>
+    `;
+}
+
+// function loadCategorySelector(){
+//     document.getElementById('addTaskCategory').innerHTML = insertCategorySelectorHTML();
+// }
+
+function insertCategorySelectorFromInterruptHTML(){
+    return /*html*/ `
+        <span>Category</span>
+            <div onclick="toggleCategoryList()" class="add-task-category-form">
+                <span id="selectedCategory">Select task category</span>
+                <img class="rotate-arrow-90" id="addTaskCategoryListArrow" src="assets/img/dropdownicon.svg" alt="">
+            </div>
     `;
 }
 
@@ -132,7 +146,7 @@ function insertCategoryListHTML() {
 function loadCategorylist() {
     document.getElementById('addTaskCategoryList').innerHTML = ``;
     document.getElementById('addTaskCategoryList').innerHTML += createCategoryInputHTML();
-    for (i = 0; i < category.length; i++) {
+    for (i = 0; i < categoryList.length; i++) {
         document.getElementById('addTaskCategoryList').innerHTML += createCategoryListHTML(i);
     }
 }
@@ -147,7 +161,7 @@ function createCategoryInputHTML() {
 
 function createCategoryListHTML(i) {
     return `
-    <li onclick="addCategoryToClipboard(${i})" class="add-task-list-element">${category[i]['categoryName']}<div style="background-color:${category[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white"></div></li>
+    <li onclick="addCategoryToClipboard(${i})" class="add-task-list-element">${categoryList[i]['categoryName']}<div style="background-color:${categoryList[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white"></div></li>
     `
 }
 
@@ -160,13 +174,40 @@ function createNewCategory(){
 
 function createNewCategoryHTML(){
     return /*html*/`
-        <span>Category!</span>
+        <span>Category</span>
         <div class="add-task-create-new-category-container">
-            <input class="add-task-list-element" type="text" placeholder="New category name" required minlength="1" maxlength="20">
+            <input class="add-task-list-element" id="newCategoryNameID" type="text" placeholder="New category name" required minlength="1" maxlength="20">
             <button class="interrupt-create-new-category" onclick="interruptCreateNewCategory()" style="border-right: solid 1px rgb(232,232,232)"><img src="assets/img/xblue.svg" alt=""></button> 
             <button class="confirm-create-new-category" onclick="confirmCreateNewCategory()"><img src="assets/img/check.svg" alt=""></button>
         </div>
     `
+}
+
+function interruptCreateNewCategory(){
+    document.getElementById('addTaskCategory').innerHTML = insertCategorySelectorFromInterruptHTML();
+    document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML = ``;
+}
+
+function confirmCreateNewCategory(){
+    let newCategoryName = document.getElementById('newCategoryNameID').value;
+    let newCategoryColor = getNewCategoryColor();
+
+    addCategory({"categoryName": newCategoryName, "categoryColor": newCategoryColor});
+    initBackend();
+    document.getElementById('addTaskCategory').innerHTML = insertCategorySelectorFromInterruptHTML();
+    document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML = ``;
+    addCategoryToClipboard(categoryList.length - 1);
+}
+
+function getNewCategoryColor(){
+    let newCategoryColor;
+    let colors = document.getElementsByClassName('radio-color-picker');
+    for (let i = 0; i < colors.length; i++) {
+        if(colors[i].checked == true){
+            newCategoryColor = colors[i].value;
+        }
+    }
+    return newCategoryColor;
 }
 
 function addTaskCreateNewCategoryColorSelector(){
@@ -194,13 +235,14 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
 
 function addCategoryToClipboard(i){
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
-    taskClipboard.category = category[i]['categoryName'];
+    taskClipboard.category = categoryList[i]['categoryName'];
+    taskClipboard.categoryColor = categoryList[i]['categoryColor'];
     toggleCategoryList();
 }
 
 function addCategoryToClipboardHTML(i){
     return `
-    ${category[i]['categoryName']}<div style="background-color:${category[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white; margin-left:10px;"></div>
+    ${categoryList[i]['categoryName']}<div style="background-color:${categoryList[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white; margin-left:10px;"></div>
     `
 }
 
