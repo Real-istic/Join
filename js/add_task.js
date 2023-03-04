@@ -448,16 +448,17 @@ async function createTask() {
 function clearTask() {
     // addTask();
     taskClipboard = {
-            'title': '',
-            'firstNames': [],
-            'lastNames': [],
-            'dueDate': '',
-            'category': '',
-            'priority': '',
-            'description': '',
-            'subtasks': []
-        }
+        'title': '',
+        'firstNames': [],
+        'lastNames': [],
+        'dueDate': '',
+        'category': '',
+        'priority': '',
+        'description': '',
+        'subtasks': [],
+        'categoryColor': ''
     }
+}
 /**
  * pushes the due date information to the task clipboard
  * 

@@ -126,7 +126,7 @@ function insertDoneTasksHTML() {
 
 /**
  * calls the add-task-slide-in-menu from the side,
- * also fills the html part of it 
+ * and sets the div for it
  *
  */
 function addTaskOfScreenMenu() {
@@ -135,7 +135,7 @@ function addTaskOfScreenMenu() {
 }
 
 /**
- * inserts the content of the add-task-slide-in-menu
+ * inserts the div for the add-task-slide-in-menu
  * 
  * @returns the html part
  */
@@ -147,7 +147,7 @@ function addTaskSlideInMenu() {
 }
 
 /**
- * inserts the html part of the slide-in-menu
+ * inserts the whole html part of the slide-in-menu
  * 
  */
 function addTaskFillSlideInMenu() {
@@ -186,7 +186,7 @@ function insertsTaskToTodolistHTML() {
     for (let i = 0; i < taskList.length; i++) {
         const task = taskList[i];
         todoList.innerHTML += /*html*/ `
-        <div class="board-task">
+        <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
             <span style="background-color: ${taskList[i].categoryColor};" class="board-task-category">${taskList[i].category}</span>
             <div class="board-task-title-and-description">
                 <span class="board-task-title">${taskList[i].title}</span>
@@ -225,7 +225,7 @@ function insertAssignedContactsToTaskHTML() {
             for (let k = 0; k < userList.length; k++) {
                 if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
                     let userBackgroundColor = userList[k].backgroundColor;
-                    contactContainer.innerHTML += `
+                    contactContainer.innerHTML += /*html*/ `
                         <div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
                         `;
                 }
@@ -249,5 +249,124 @@ function insertTaskSlideInHeader() {
             <img onclick="toggleAddTaskMenuOffScreen()" src="assets/img/x.svg" alt="">
         </div>
     `;
+}
+
+/**
+ * toggle and inserts the board-task-slide-in-menu
+ * 
+ * @param {*} i the specific task
+ */
+function openTask(i){
+    toggleTaskBoardTask()
+    insertOpenTaskSlideInHTML(i)
+}
+
+/**
+ * the pure toggle for the board-task-slide-in-menu
+ * 
+ */
+function toggleTaskBoardTask(){
+    let opacityDiv = document.getElementById('reduceOpacityBehindTask');
+    let taskDiv = document.getElementById('boardTaskSlideInDiv');
+    opacityDiv.classList.toggle('reduce-opacity');
+    taskDiv.classList.toggle('display-none');
+    taskDiv.classList.toggle('board-task-translate-y');
+}
+
+/**
+ * inserts the whole html part for the board-task-slide-in-menu
+ * 
+ * @param {*} i 
+ */
+function insertOpenTaskSlideInHTML(i){
+    let taskSlideInDiv = document.getElementById('boardTaskSlideInDiv');
+    taskSlideInDiv.innerHTML = /*html*/ `
+        ${insertBoardTaskSlideInCategoryHTML(i)}
+        ${insertBoardTaskSlideInTitleHTML(i)}
+        ${insertBoardTaskSlideInDescriptionHTML(i)}
+        ${insertBoardTaskSlideInDueDateHTML(i)}
+        ${insertBoardTaskSlideInPriorityHTML(i)}
+        ${insertBoardTaskSlideInAssigned(i)}
+        <div class="board-task-slide-in-editbutton">
+            <img src="assets/img/edit_task.svg" alt="">
+        </div>
+    `;
+    insertBoardTaskSlideInAssignedContactsIteration(i)
+}
+
+/**
+ * inserts the the board-task-slide-in-category
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
+function insertBoardTaskSlideInCategoryHTML(i){
+    return /*html*/ `
+        <div class="board-task-slide-in-category">
+            <img src="assets/img/x.svg" alt="">
+            <span class="board-task-category" style="background-color:${taskList[i].categoryColor};">${taskList[i].category}</span>
+        </div>
+    `;
+}
+
+/**
+ * inserts the the board-task-slide-in-title
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
+function insertBoardTaskSlideInTitleHTML(i){
+    return /*html*/ `
+        <span class="board-task-slide-in-title">${taskList[i].title}</span>
+    `;
+}
+
+function insertBoardTaskSlideInDescriptionHTML(i){
+    return /*html*/ `
+    <span class="board-task-slide-in-description">${taskList[i].description}</span>
+`;
+}
+
+function insertBoardTaskSlideInDueDateHTML(i){
+    return /*html*/ `
+    <div class="board-task-slide-in-date-div">
+        <span class="board-task-slide-in-datename">Due Date:</span>
+        <span class="board-task-slide-in-datevalue">${taskList[i].dueDate}</span>
+    </div>
+`;
+}
+
+function insertBoardTaskSlideInPriorityHTML(i){
+    return /*html*/ `
+    <div class="board-task-slide-in-priority-div">
+        <span class="board-task-slide-in-priorityname">Priority:</span>
+        <span class="board-task-slide-in-priorityvalue board-task-slide-in-priority-${taskList[i].priority.toLowerCase()}">${taskList[i].priority} <img src="assets/img/priority${taskList[i].priority.toLowerCase()}.svg" alt=""></span>
+    </div>
+`;
+}
+
+function insertBoardTaskSlideInAssigned(i) {
+    return /*html*/ `
+            <span class="board-task-slide-in-assignedto">Assigned to:</span>
+    `;
+}
+
+function insertBoardTaskSlideInAssignedContactsIteration(i) {
+    let contactContainer = document.getElementById('boardTaskSlideInDiv');
+
+    for (let j = 0; j < taskList[i].firstNames.length; j++) {
+        let firstNameTask = taskList[i].firstNames[j];
+        let lastNameTask = taskList[i].lastNames[j];
+        for (let k = 0; k < userList.length; k++) {
+            if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                let userBackgroundColor = userList[k].backgroundColor;
+                contactContainer.innerHTML += /*html*/ `
+                    <div class="board-task-slide-in-contact">
+                        <div class="add-task-selected-contact" style="background-color:${userBackgroundColor}; margin:0;">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div><span class="board-task-slide-in-contact-name">${firstNameTask} ${lastNameTask}</span>
+                    </div>    
+                `;
+            }
+        }      
+    }
 }
 
