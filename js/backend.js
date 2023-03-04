@@ -10,7 +10,7 @@ let taskList = [];
 async function initBackend() {
     await downloadFromServer();
     userList = JSON.parse(backend.getItem('users')) || [];
-    category = JSON.parse(backend.getItem('category')) || [];
+    categoryList = JSON.parse(backend.getItem('category')) || [];
     taskList = JSON.parse(backend.getItem('tasks')) || [];
 }
 
