@@ -269,7 +269,7 @@ function toggleTaskBoardTask(){
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
     opacityDiv.classList.toggle('reduce-opacity');
-    taskDiv.classList.toggle('display-none');
+    // taskDiv.classList.toggle('display-none');
     taskDiv.classList.toggle('board-task-translate-y');
 }
 
