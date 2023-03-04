@@ -26,6 +26,7 @@ function insertTaskLeft() {
                 ${insertDueDateHTML()}
                 ${insertCategorySelectorHTML()}
                 ${insertCategoryListHTML()}
+                ${addTaskCreateNewCategoryColorSelector()}
                 ${insertPriorityHTML()}
                 ${insertDescriptionHTML()}
                 ${insertSubtasksHTML()}
@@ -161,18 +162,20 @@ function createNewCategoryHTML(){
     return /*html*/`
         <span>Category!</span>
         <div class="add-task-create-new-category-container">
-            <div class="add-task-create-new-category-inner-container">
-                <input class="add-task-list-element" type="text" placeholder="New category name" required minlength="1" maxlength="20">
-                <button class="interrupt-create-new-category" onclick="interruptCreateNewCategory()" style="border-right: solid 1px rgb(232,232,232)"><img src="assets/img/xblue.svg" alt=""></button> 
-                <button class="confirm-create-new-category" onclick="confirmCreateNewCategory()"><img src="assets/img/check.svg" alt=""></button>
-            </div>
-            <div id="addTaskCreateNewCategoryColorSelector" class="add-task-create-new-category-color-selector"></div>
+            <input class="add-task-list-element" type="text" placeholder="New category name" required minlength="1" maxlength="20">
+            <button class="interrupt-create-new-category" onclick="interruptCreateNewCategory()" style="border-right: solid 1px rgb(232,232,232)"><img src="assets/img/xblue.svg" alt=""></button> 
+            <button class="confirm-create-new-category" onclick="confirmCreateNewCategory()"><img src="assets/img/check.svg" alt=""></button>
         </div>
     `
 }
 
+function addTaskCreateNewCategoryColorSelector(){
+    return /*html*/ `
+        <div id="addTaskCreateNewCategoryColorSelector" class="add-task-create-new-category-color-selector"></div>
+    `;
+}
+
 function createNewCategoryColorSelectorHTML(){
-    
     for (let i = 0; i < categoryColors.length; i++) {
         document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML += createNewCategoryColorSelectorRadioButtonHTML(i); 
     } 
@@ -180,9 +183,10 @@ function createNewCategoryColorSelectorHTML(){
 
 function createNewCategoryColorSelectorRadioButtonHTML(i){
     return /*html*/`
-        <input type="radio" class="radio-colorPicker" id="radioColorPicker${i}" value="${categoryColors[i]}" name="color">
-        <label for="radioColorPicker${i}" class="radio-colorPickerLabel" style="background-color:${categoryColors[i]}; height: 15px; width: 15px; border-radius:100%;">
-
+        <div class="radio-color-picker-container">
+            <input type="radio" class="radio-color-picker" id="radioColorPicker${i}" value="${categoryColors[i]}" name="color">
+            <label for="radioColorPicker${i}" class="radio-color-picker-label" style="background-color:${categoryColors[i]};">
+        </div>
     `
 }
 

@@ -1219,22 +1219,22 @@ element.style {
   align-items: center;
 }
 
-.add-task-create-new-category-container {
+/* .add-task-create-new-category-container {
   display: flex;
   flex-direction: column;
   height: 72px;
   width: 100%;
   padding: 0 10px;
-}
+} */
 
-.add-task-create-new-category-inner-container {
+.add-task-create-new-category-container {
   display: flex;
   justify-content: space-between;
   height: 50px;
   width: 100%;
 }
 
-.add-task-create-new-category-inner-container input {
+.add-task-create-new-category-container input {
   outline: none;
   border: none;
   margin: -1px 0;
@@ -1242,11 +1242,11 @@ element.style {
   width: 80%;
 }
 
-.add-task-create-new-category-inner-container input:focus {
+.add-task-create-new-category-container input:focus {
   outline: none;
 }
 
-.add-task-create-new-category-inner-container button {
+.add-task-create-new-category-container button {
   width: 10%;
   border: none;
   background-color: white;
@@ -1254,14 +1254,40 @@ element.style {
   margin: 0 5px;
 }
 
-.add-task-create-new-category-inner-container button:hover {
+.add-task-create-new-category-container button:hover {
   cursor: pointer;
 }
 
 .add-task-create-new-category-color-selector {
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   margin: 10px 0;
+}
+
+.radio-color-picker-container{
+  position: relative;
+}
+
+.radio-color-picker-container input[type="radio"]:checked+label {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.radio-color-picker{
+  position: absolute;
+  margin: 0 5px;
+  height: 20px;
+  width: 20px;
+  appearance: none;
+}
+
+.radio-color-picker-label{
+  display: flex;
+  margin: 0 5px;
+  height: 20px;
+  width: 20px;
+  border: 2px solid #ffffff;
+  border-radius:100%;
 }
 
 .add-task-color-picker {
