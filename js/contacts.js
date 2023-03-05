@@ -372,8 +372,9 @@ function addNewContact() {
     contactEditName.reportValidity();
   } else {
     addUser(newUser);
-  // Benutzerdaten aktualisieren
+    
   }
+  insertContacts();
 }
 
 
