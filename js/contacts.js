@@ -81,8 +81,8 @@ function openNewContact(){
                     </div>          
                   </div>
                   <div class="button-container">
-                  <button class="button-cancel" type="reset">Cancel <img src="./assets/img/cancel.png" alt=""></button>
-                  <button class="button-create" type="submit">Create contact <img src="./assets/img/rithe.png" alt=""></button>
+                  <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
+                  <button class="button-create" onclick="addNewContact()" type="submit">Create contact <img src="" alt=""></button>
               </div>
                 </form>
 
@@ -313,18 +313,58 @@ function invEditContact(index) {
   initbackend();
 }
 
+
 /**
  * 
  * invite the NewContact content
  */
-function invNewContact() {
+
+
+
+function addNewContact() {
   const contactEditName = document.getElementById('contactNewName').value;
   const contactEditEmail = document.getElementById('contactNewEmail').value;
   const contactEditNumber = document.getElementById('contactNewNumber').value;
 
-  
+  let nameParts = contactEditName.split(" ");
+  let newUser = {
+    firstName: nameParts[0],
+    lastName: nameParts.length > 1 ? nameParts[1] : "",
+    email: contactEditEmail,
+    phoneNumber: contactEditNumber,
+    backgroundColor: getRandomColor()
+  }
+
+  if (newUser.lastName === "") {
+    alert("Es wurde kein Nachname eingegeben.");
+  } else {
+    console.log(newUser);
+  }
+
+  userListTest.push(newUser);
+  saveEditContactTest(userListTest);
+  initBackendTest();
 }
 
+/**TEST ********************
+ * 
+ * Save the editContact content
+ */
+async function saveEditContactTest() {
+  // userList im Backend speichern
+  await backend.setItem('users', JSON.stringify(userListTest));
+  await initBackendTest();
+}
+
+/**TEST *********************
+ * syncronize data from the backend to the user and category.
+ * 
+ */
+async function initBackendTest() {
+  await downloadFromServer();
+  userListTest = JSON.parse(backend.getItem('users')) || [];
+ 
+}
 
 /**
  * 
