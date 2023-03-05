@@ -140,9 +140,12 @@ function insertCategoryListHTML() {
 }
 
 //SELECT CATEGORY
-//side notes: create category list in backend
-//a category consists of categoryName and categoryColor
 
+/**
+ * inserts the category list
+ * 
+ * @returns load available categorys from backend
+ */
 function loadCategorylist() {
     document.getElementById('addTaskCategoryList').innerHTML = ``;
     document.getElementById('addTaskCategoryList').innerHTML += createCategoryInputHTML();
@@ -151,6 +154,11 @@ function loadCategorylist() {
     }
 }
 
+/**
+ * inserts the category list
+ * 
+ * @returns the html part of single category
+ */
 function createCategoryInputHTML() {
     return `
     <div class="add-task-create-new-category">
@@ -159,12 +167,22 @@ function createCategoryInputHTML() {
     `
 }
 
+/**
+ * create category list item
+ * 
+ * @returns the html part of the category list
+ */
 function createCategoryListHTML(i) {
     return `
     <li onclick="addCategoryToClipboard(${i})" class="add-task-list-element">${categoryList[i]['categoryName']}<div style="background-color:${categoryList[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white"></div></li>
     `
 }
 
+/**
+ * function that build the surface to create a new category
+ * 
+ * @returns function that build the surface to create a new category
+ */
 function createNewCategory(){
     toggleCategoryList();
     document.getElementById('addTaskCategory').innerHTML = ``;
@@ -172,6 +190,11 @@ function createNewCategory(){
      createNewCategoryColorSelectorHTML();
 }
 
+/**
+ * create the input html and button html for creating a new category
+ * 
+ * @returns create the input html and button html for creating a new category
+ */
 function createNewCategoryHTML(){
     return /*html*/`
         <span>Category</span>
@@ -183,11 +206,22 @@ function createNewCategoryHTML(){
     `
 }
 
+/**
+ * button function that interrupt the creation of a new category and return back to the category selecor
+ * 
+ * @returns button function that interrupt the creation of a new category and return back to the category selecor
+ */
 function interruptCreateNewCategory(){
     document.getElementById('addTaskCategory').innerHTML = insertCategorySelectorFromInterruptHTML();
     document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML = ``;
 }
 
+
+/**
+ * button function: create new category, load new category to backend, put new category to current task, return to category selecter surface, fill input with new category
+ * 
+ * @returns button function: create new category, load new category to backend, put new category to current task, return to category selecter surface, fill input with new category
+ */
 function confirmCreateNewCategory(){
     let newCategoryName = document.getElementById('newCategoryNameID').value;
     let newCategoryColor = getNewCategoryColor();
@@ -199,31 +233,51 @@ function confirmCreateNewCategory(){
     addCategoryToClipboard(categoryList.length - 1);
 }
 
+/**
+ * function that connects selected color with new category name in the "create new category part"
+ * iterate all radio buttons, check for selected radio button, get value if button is selected, return value
+ * 
+ * @returns the html part of the category list
+ */
 function getNewCategoryColor(){
     let newCategoryColor;
     let colors = document.getElementsByClassName('radio-color-picker');
     for (let i = 0; i < colors.length; i++) {
         if(colors[i].checked == true){
             newCategoryColor = colors[i].value;
-        }else{
-            newCategoryColor = '#ffffff';
         }
     }
     return newCategoryColor;
 }
 
+/**
+ * creates the container where all color selector radio buttons will be loaded in for the create new category section
+ * 
+ * @returns creates the container where all color selector radio buttons will be loaded in for the create new category section
+ */
 function addTaskCreateNewCategoryColorSelector(){
     return /*html*/ `
         <div id="addTaskCreateNewCategoryColorSelector" class="add-task-create-new-category-color-selector"></div>
     `;
 }
 
+/**
+ * creates the color selector html part for creating a new category
+ * counting thew all available colors and creates a radio button for each color
+ * 
+ * @returns creates the color selector html part for creating a new category
+ */
 function createNewCategoryColorSelectorHTML(){
     for (let i = 0; i < categoryColors.length; i++) {
         document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML += createNewCategoryColorSelectorRadioButtonHTML(i); 
     } 
 }
 
+/**
+ * returns the html part for each color picker radio button 
+ * 
+ * @returns returns the html part for each color picker radio button 
+ */
 function createNewCategoryColorSelectorRadioButtonHTML(i){
     return /*html*/`
         <div class="radio-color-picker-container">
@@ -233,6 +287,11 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
     `
 }
 
+/**
+ * function that add the created category values (name, color) to the clipboard and fill the input with new name and color
+ * 
+ * @returns function that add the created category values (name, color) to the clipboard and fill the input with new name and color
+ */
 function addCategoryToClipboard(i){
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
     taskClipboard.category = categoryList[i]['categoryName'];
@@ -240,6 +299,11 @@ function addCategoryToClipboard(i){
     toggleCategoryList();
 }
 
+/**
+ * html part for filling the category input  
+ * 
+ * @returns html part for filling the category input 
+ */
 function addCategoryToClipboardHTML(i){
     return `
     ${categoryList[i]['categoryName']}<div style="background-color:${categoryList[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white; margin-left:10px;"></div>
@@ -502,6 +566,12 @@ function confirmAddedTaskToBoard() {
 
 //ADD CONTACT TO TASK
 
+/**
+ * open contact list / load contacts 
+ * search contact in the new task contact list
+ * 
+ * @returns search contact in the new task contact list
+ */
 function searchContacts() {
     expandContactList();
 
@@ -520,6 +590,11 @@ function searchContacts() {
     }
 }
 
+/**
+ * check if contact list is expanded or not and toggles current status
+ * 
+ * @returns check if contact list is expanded or not and toggles current status
+ */
 function checkForExpandedContactList() {
     let expandArrow = document.getElementById('addTaskExpandArrow');
     if (contactListExpanded == false) {
@@ -532,6 +607,11 @@ function checkForExpandedContactList() {
     }
 }
 
+/**
+ * open and close contact list in create new tast section
+ * 
+ * @returns open and close contact list in create new tast section
+ */
 function openAndCloseContactList() {
     if (contactListExpanded == false) {
         expandContactList();
@@ -541,6 +621,11 @@ function openAndCloseContactList() {
     }
 }
 
+/**
+ * function that runs several functions for expanding contact list
+ * 
+ * @returns function that runs several functions for expanding contact list
+ */
 function expandContactList() {
     contactListExpanded = true;
     checkForExpandedContactList();
@@ -549,6 +634,10 @@ function expandContactList() {
     document.getElementById('addTaskContactList').classList.add('expand-contact-list');
 }
 
+/**
+ * load all available contacts from userList and creates the html for them
+ * 
+ */
 function loadContactList() {
     document.getElementById('addTaskContactList').innerHTML = ``;
     for (i = 0; i < userList.length; i++) {
@@ -556,6 +645,11 @@ function loadContactList() {
     }
 }
 
+/**
+ * check each contact in contact list if its in the task and put it on checked=true if it is already in it
+ * 
+ * @returns check each contact in contact list if its in the task and put it on checked=true if it is already in it
+ */
 function checkCheckboxes() {
     let nameStillInTask
     for (i = 0; i < userList.length; i++) {
@@ -567,12 +661,22 @@ function checkCheckboxes() {
     }
 }
 
+/**
+ * function that hides the contact list 
+ * 
+ * @returns function that hides the contact list 
+ */
 function hideContactList() {
     contactListExpanded = false
     checkForExpandedContactList()
     document.getElementById('addTaskContactList').classList.remove('expand-contact-list');
 }
 
+/**
+ * returns the html list element for each contact
+ * 
+ * @returns returns the html list element for each contact
+ */
 function createContactAddTaskHTML(i) {
     return /*html*/ `
     <li class="add-task-contact-container" onclick="toggleContactTask(${i})">
@@ -582,6 +686,11 @@ function createContactAddTaskHTML(i) {
  `
 }
 
+/**
+ * function that removes/add contact to task
+ * 
+ * @returns function that removes/add contact to task
+ */
 function toggleContactTask(i) {
     let nameStillInTask = checkForContactInClipboard(i);
 
@@ -592,6 +701,11 @@ function toggleContactTask(i) {
     }
 }
 
+/**
+ * function that checks if contact is in task or not
+ * 
+ * @returns function that checks if contact is in task or not
+ */
 function checkForContactInClipboard(i) {
     let nameStillInTask = false;
     for (k = 0; k < taskClipboard.firstNames.length; k++) {
@@ -602,6 +716,11 @@ function checkForContactInClipboard(i) {
     return nameStillInTask;
 }
 
+/**
+ * function that removes contact from task
+ * 
+ * @returns function that removes contact from task
+ */
 function removeContactFromTask(i) {
     for (j = 0; j < taskClipboard.firstNames.length; j++) {
         if (taskClipboard.firstNames[j] == userList[i].firstName && taskClipboard.lastNames[j] == userList[i].lastName) {
@@ -612,6 +731,11 @@ function removeContactFromTask(i) {
     createSelectedContactIcons();
 }
 
+/**
+ * function that adds contact to task
+ * 
+ * @returns function that adds contact to task
+ */
 function addContactToTask(i) {
     let newFirstNameForTask = userList[i].firstName;
     let newLastNameForTask = userList[i].lastName;
@@ -620,12 +744,22 @@ function addContactToTask(i) {
     createSelectedContactIcons();
 }
 
+/**
+ * function that returns html code that creates a div where the selected contacts for the task gets shown as icon 
+ * 
+ * @returns function that returns html code that creates a div where the selected contacts for the task gets shown as icon
+ */
 function createSelectedContactIconsDivHTML() {
     return /*html*/ `
         <div class="add-task-selected-contacts-icons" id="boardTaskAssignedContacts"></div>
     `;
 }
 
+/**
+ * function that creates the contact icons from selected contacts for a task
+ * 
+ * @returns function that creates the contact icons from selected contacts for a task
+ */
 function createSelectedContactIcons() {
     let contactContainer = document.getElementById('boardTaskAssignedContacts');
     let firstNameFirstLetter;
