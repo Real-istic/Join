@@ -1,3 +1,5 @@
+let randomColor = Math.floor(Math.random()*16777215).toString(16);
+
 /**
  * 
  * Call the contacts content
@@ -308,9 +310,9 @@ function invEditContact(index) {
   editContactFadeInBg.classList.remove('show-left');
   editContactFadeIn.classList.remove('show-left');
 
-  saveEditContact(userList);
-  insertContacts();
+  saveEditContact();
   initbackend();
+  insertContacts();
 }
 
 
@@ -328,11 +330,11 @@ function addNewContact() {
 
   let nameParts = contactEditName.split(" ");
   let newUser = {
-    firstName: nameParts[0],
-    lastName: nameParts.length > 1 ? nameParts[1] : "",
-    email: contactEditEmail,
-    phoneNumber: contactEditNumber,
-    backgroundColor: getRandomColor()
+    "firstName": nameParts[0],
+    "lastName": nameParts.length > 1 ? nameParts[1] : "",
+    "email": contactEditEmail,
+    "phoneNumber": contactEditNumber,
+    "backgroundColor": randomColor,
   }
 
   if (newUser.lastName === "") {
@@ -341,39 +343,9 @@ function addNewContact() {
     console.log(newUser);
   }
 
-  userListTest.push(newUser);
-  saveEditContactTest(userListTest);
-  initBackendTest();
-}
-
-/**TEST ********************
- * 
- * Save the editContact content
- */
-async function saveEditContactTest() {
-  // userList im Backend speichern
-  await backend.setItem('users', JSON.stringify(userListTest));
-  await initBackendTest();
-}
-
-/**TEST *********************
- * syncronize data from the backend to the user and category.
- * 
- */
-async function initBackendTest() {
-  await downloadFromServer();
-  userListTest = JSON.parse(backend.getItem('users')) || [];
- 
-}
-
-/**
- * 
- * Save the editContact content
- */
-async function saveEditContact() {
-    // userList im Backend speichern
-    await backend.setItem('users', JSON.stringify(userList));
-    await initBackend();
+  addUser(newUser);
+  saveEditContact();
+  initBackend();
 }
 
 
@@ -384,7 +356,7 @@ async function saveEditContact() {
   */
 async function loadEditContact() {
   // userList aus dem Backend laden
-  const userList = await backend.getItem('userList', JSON.stringify(userList));
+  const userList = await backend.getItem('users', JSON.stringify(userList));
   return userList;
 }
 
