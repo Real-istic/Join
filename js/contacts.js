@@ -85,8 +85,7 @@ function openNewContact(){
                     </div>
                     <div class="button-container">
                         <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
-                        <button class="button-create" onclick="addNewContact()" >Create contact <img src=""
-                                alt=""></button>
+                        <button class="button-create" onclick="addNewContact()" >Create contact <img src="" alt=""></button>
                     </div>
                 </div>
 
