@@ -1,6 +1,5 @@
 setURL('https://gruppenarbeit-join-473.developerakademie.net/smallest_backend_ever')
 let userList = [];
-let userListTest = [];
 let categoryList = [];
 let taskList = [];
 
@@ -24,6 +23,16 @@ async function addUser(user) {
     userList.push(user);
     await backend.setItem('users', JSON.stringify(userList));
     initBackend();
+}
+
+/**
+ * 
+ * Save the editContact content
+ */
+async function saveEditContact() {
+    // userList im Backend speichern
+    await backend.setItem('users', JSON.stringify(userList));
+    await initBackend();
 }
 
 /**

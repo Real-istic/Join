@@ -44,7 +44,7 @@ userList = [
         "email": "florian.schmidt@example.com",
         "phoneNumber": "0123456799",
         "password": "trustno1",
-        "background-color": "#FF5733"
+        "backgroundColor": "#FF5733"
     },
     {
         "firstName": "Hannah",
@@ -52,7 +52,7 @@ userList = [
         "email": "hannah.wagner@example.com",
         "phoneNumber": "0123456792",
         "password": "securepassword",
-        "background-color": "#FFC300"
+        "backgroundColor": "#FFC300"
     },
     {
         "firstName": "Julia",
@@ -60,7 +60,7 @@ userList = [
         "email": "julia.schneider@example.com",
         "phoneNumber": "0123456794",
         "password": "football23",
-        "background-color": "#C70039"
+        "backgroundColor": "#C70039"
     },
     {
         "firstName": "Lena",
@@ -68,7 +68,7 @@ userList = [
         "email": "lena.mueller@example.com",
         "phoneNumber": "0123456790",
         "password": "qwerty",
-        "background-color": "#FF5733"
+        "backgroundColor": "#FF5733"
     },
     {
         "firstName": "Marcel",
@@ -76,7 +76,7 @@ userList = [
         "email": "marcel.schulz@example.com",
         "phoneNumber": "0123456797",
         "password": "monkey123",
-        "background-color": "#900C3F"
+        "backgroundColor": "#900C3F"
     },
     {
         "firstName": "Markus",
@@ -84,7 +84,7 @@ userList = [
         "email": "markus.schmidt@example.com",
         "phoneNumber": "0123456791",
         "password": "password123",
-        "background-color": "#FFC300"
+        "backgroundColor": "#FFC300"
     },
     {
         "firstName": "Paula",
@@ -92,7 +92,7 @@ userList = [
         "email": "paula.becker@example.com",
         "phoneNumber": "0123456793",
         "password": "p@ssw0rd",
-        "background-color": "#581845"
+        "backgroundColor": "#581845"
     },
     {
         "firstName": "Sabine",
@@ -100,7 +100,7 @@ userList = [
         "email": "sabine.meyer@example.com",
         "phoneNumber": "0123456796",
         "password": "letmein",
-        "background-color": "#FF5733"
+        "backgroundColor": "#FF5733"
     },
     {
         "firstName": "Sophie",
@@ -108,7 +108,7 @@ userList = [
         "email": "sophie.hartmann@example.com",
         "phoneNumber": "0123456798",
         "password": "abcdefg",
-        "background-color": "#C70039"
+        "backgroundColor": "#C70039"
     },
     {
         "firstName": "Tim",
@@ -116,7 +116,7 @@ userList = [
         "email": "tim.fischer@example.com",
         "phoneNumber": "0123456795",
         "password": "iloveyou",
-        "background-color": "#900C3F"
+        "backgroundColor": "#900C3F"
     }
 ]
 
