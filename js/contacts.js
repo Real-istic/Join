@@ -345,7 +345,7 @@ async function addNewContact() {
     subtaskInput.reportValidity();
   } else {
     await addUser(newUser);
-  
+  // Benutzerdaten aktualisieren
   }
 }
 
