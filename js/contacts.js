@@ -115,21 +115,38 @@ function eventOnEditContact() {
 }
 
 /**
- * Renders the contacts content
+ * Renders the contacts content with a sort the list of initial letters alphabetically
  * 
  * @returns The HTML part
  */
 function renderUserList() {
   let userListHTML = "";
-  for (let i = 0; i < userList.length; i++) {
-    const firstNameLetter = userList[i].firstName.charAt(0);
-    const lastNameLetter = userList[i].lastName.charAt(0);
-    const contactName = userList[i].firstName + " " + userList[i].lastName;
+  let initialLetters = [];
+  
+  // get a list of initial letters for all first names
+  for (let h = 0; h < userList.length; h++) {
+    const firstNameLetter = userList[h].firstName.charAt(0);
+    if (!initialLetters.includes(firstNameLetter)) {
+      initialLetters.push(firstNameLetter);
+    }
+  }
+  
+  // sort the list of initial letters alphabetically
+  initialLetters.sort();
+  
+  // create a list of users for each initial letter
+  for (let x = 0; x < initialLetters.length; x++) {
+    const initialLetter = initialLetters[x];
+    let usersForLetterHTML = "";
+    
+    for (let i = 0; i < userList.length; i++) {
+      const firstNameLetter = userList[i].firstName.charAt(0);
+      const lastNameLetter = userList[i].lastName.charAt(0);
+      const contactName = userList[i].firstName + " " + userList[i].lastName;
 
-    userListHTML += /*html*/ `
-    <div class="contact-letter-main" onclick ="contactRightSide(${i})">
-       <h4 class="contact-letter" >${userList[i].firstName.charAt(0)}</h4>
-        <div class="contact-child-div">
+      if (firstNameLetter === initialLetter) {
+        usersForLetterHTML += /*html*/ `
+        <div class="contact-child-div" onclick ="contactRightSide(${i})">
           <div class="contact-child-div">
             <div style="background-color: ${userList[i]['backgroundColor']}" class="contact-child">
               <p>${firstNameLetter}${lastNameLetter}</p>
@@ -140,12 +157,22 @@ function renderUserList() {
             </div>
           </div>
         </div>
-    </div >
+        `;
+      }
+    }
+    
+    userListHTML += /*html*/ `
+      <div class="contact-letter-main" >
+        <h4 class="contact-letter">${initialLetter}</h4>
+        ${usersForLetterHTML}
+      </div>
     `;
   }
 
   return userListHTML;
 }
+
+
 
 
 /**
@@ -337,8 +364,6 @@ function addNewContact() {
   let newUser = {
     "firstName": nameParts[0],
     "lastName": nameParts.length > 1 ? nameParts[1] : "",
-    "email": contactEditEmail.value,
-    "phoneNumber": contactEditNumber.value,
     "backgroundColor": randomColor, 
   };
 
