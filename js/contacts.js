@@ -46,51 +46,53 @@ function openNewContact(){
     newContactFadeIn.classList.add("show-left")
 
     newContactFadeIn.innerHTML = /*html*/ `
-    <div class="new-contact">
-      <div class="new-contact-head" onclick="hideEditContacts()">
+
+<div class="new-contact">
+    <div class="new-contact-head" onclick="hideEditContacts()">
         <div class="new-contact-cross">
-          <img class="img-cross" src="./assets/img/theCross.svg" alt="">
+            <img class="img-cross" src="./assets/img/theCross.svg" alt="">
         </div>
 
         <div class="new-contact-header-info">
-          <div>
-            <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
-          </div>
+            <div>
+                <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
+            </div>
             <div class="new-contact-h">Add contact</div>
-              <div class="add-contact-text">
-                    Tasks are better with a team!
-              </div>
+            <div class="add-contact-text">
+                Tasks are better with a team!
+            </div>
 
-              <div class="new-contact-main" onclick="doNotClose()">
+            <div class="new-contact-main" onclick="doNotClose()">
                 <img src="./assets/img/addNewContactProfil.svg">
-              
-              
-                  <form onsubmit="invNewContact(); return false">
-                  <div>
-                    <div class="input-contact">
-                      <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
-                      <img src="./assets/img/signup-user.svg" alt="">
-                    </div>
-      
-                    <div class="input-contact">
-                      <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
-                        <img src="./assets/img/login-email.svg" alt="">
-                    </div>
-      
-                    <div class="input-contact">
-                      <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
-                        <img src="./assets/img/phone.svg" alt="">
-                    </div>          
-                  </div>
-                  <div class="button-container">
-                  <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
-                  <button class="button-create" onclick="addNewContact()" type="submit">Create contact <img src="" alt=""></button>
-              </div>
-                </form>
 
 
-              </div>                   
-      </div>
+                <div>
+                    <div>
+                        <div class="input-contact">
+                            <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
+                            <img src="./assets/img/signup-user.svg" alt="">
+                        </div>
+
+                        <div class="input-contact">
+                            <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
+                            <img src="./assets/img/login-email.svg" alt="">
+                        </div>
+
+                        <div class="input-contact">
+                            <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
+                            <img src="./assets/img/phone.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
+                        <button class="button-create" onclick="addNewContact()" >Create contact <img src=""
+                                alt=""></button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
     </div>
         `;
         return newContactFadeIn;
@@ -263,7 +265,7 @@ function editContact(i) {
               </div>          
             </div>
               <div class="button-container">
-                <button class="button-create" type="submit" onclick="saveEditContact(${i})">Save</button>
+                <button class="button-create" type="" onclick="saveEditContact(${i})">Save</button>
               </div>
           </form>
       </div>
@@ -323,28 +325,28 @@ function invEditContact(index) {
 
 
 
-async function addNewContact() {
+function addNewContact() {
   let color = Math.floor(Math.random()*16777215).toString(16);
   const randomColor = `#${color}`;
 
-  const contactEditName = document.getElementById('contactNewName').value;
-  const contactEditEmail = document.getElementById('contactNewEmail').value;
-  const contactEditNumber = document.getElementById('contactNewNumber').value;
+  const contactEditName = document.getElementById('contactNewName');
+  const contactEditEmail = document.getElementById('contactNewEmail');
+  const contactEditNumber = document.getElementById('contactNewNumber');
 
-  let nameParts = contactEditName.split(" ");
+  let nameParts = contactEditName.value.split(" ");
   let newUser = {
     "firstName": nameParts[0],
     "lastName": nameParts.length > 1 ? nameParts[1] : "",
-    "email": contactEditEmail,
-    "phoneNumber": contactEditNumber,
+    "email": contactEditEmail.value,
+    "phoneNumber": contactEditNumber.value,
     "backgroundColor": randomColor, 
   };
 
   if (newUser.lastName === "") {
-    contactEditName.setCustomValidity("Es wurde kein Nachname eingegeben.");
-    subtaskInput.reportValidity();
+    contactEditName.setCustomValidity('Es wurde kein Nachname eingegeben.');
+    contactEditName.reportValidity();
   } else {
-    await addUser(newUser);
+    addUser(newUser);
   // Benutzerdaten aktualisieren
   }
 }
