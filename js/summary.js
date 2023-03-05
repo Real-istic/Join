@@ -77,7 +77,7 @@ function summaryBottomHTML() {
     <div class="task-box" id="taskBoxTaskInBoard">
         <div class="task-picture-and-count">
             <img src="assets/img/tasksinboard.svg" alt="">
-            <span class="task-number">10</span>
+            <span class="task-number">${taskList.length}</span>
         </div>
         <span>
             Tasks in <br> Board
