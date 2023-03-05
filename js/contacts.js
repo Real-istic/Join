@@ -294,7 +294,7 @@ function invEditContact(index) {
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  //const backgroundColor = userList[index]['backgroundColor'];
+  //const backgroundColor = userList[index]['background-color'];
 
   const contactDetailBigLetter = document.querySelector('.contact-detail-big-letter');
   contactDetailBigLetter.textContent = contactNameLetter;
@@ -310,9 +310,9 @@ function invEditContact(index) {
   editContactFadeInBg.classList.remove('show-left');
   editContactFadeIn.classList.remove('show-left');
 
-  saveEditContact();
-  initbackend();
+  saveEditContact(userList);
   insertContacts();
+  initbackend();
 }
 
 
@@ -323,7 +323,10 @@ function invEditContact(index) {
 
 
 
-function addNewContact() {
+async function addNewContact() {
+  let color = Math.floor(Math.random()*16777215).toString(16);
+  const randomColor = `#${color}`;
+
   const contactEditName = document.getElementById('contactNewName').value;
   const contactEditEmail = document.getElementById('contactNewEmail').value;
   const contactEditNumber = document.getElementById('contactNewNumber').value;
@@ -334,19 +337,18 @@ function addNewContact() {
     "lastName": nameParts.length > 1 ? nameParts[1] : "",
     "email": contactEditEmail,
     "phoneNumber": contactEditNumber,
-    "backgroundColor": randomColor,
-  }
+    "backgroundColor": randomColor, 
+  };
 
   if (newUser.lastName === "") {
-    alert("Es wurde kein Nachname eingegeben.");
+    contactEditName.setCustomValidity("Es wurde kein Nachname eingegeben.");
+    subtaskInput.reportValidity();
   } else {
-    console.log(newUser);
+    await addUser(newUser);
+  
   }
-
-  addUser(newUser);
-  saveEditContact();
-  initBackend();
 }
+
 
 
 

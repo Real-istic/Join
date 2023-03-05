@@ -22,7 +22,7 @@ async function initBackend() {
 async function addUser(user) {
     userList.push(user);
     await backend.setItem('users', JSON.stringify(userList));
-    initBackend();
+    await initBackend();
 }
 
 /**
@@ -41,7 +41,7 @@ async function saveEditContact() {
  */
 async function deleteUser() {
     await backend.deleteItem('users');
-    initBackend();
+    await initBackend();
 }
 
 /**
@@ -52,7 +52,7 @@ async function deleteUser() {
 async function addCategory(category) {
     categoryList.push(category);
     await backend.setItem('category', JSON.stringify(categoryList));
-    initBackend();
+    await initBackend();
 }
 
 /**
@@ -61,13 +61,13 @@ async function addCategory(category) {
  */
 async function deleteCategory() {
     await backend.deleteItem('category');
-    initBackend();
+    await initBackend();
 }
 
 async function pushTaskToBackend(){
     taskList.push(taskClipboard);
     await backend.setItem('tasks', JSON.stringify(taskList));
-    initBackend()
+    await initBackend()
 }
 
 async function deleteTasksFromBackend(){
