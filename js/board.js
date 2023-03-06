@@ -201,11 +201,11 @@ function insertTaskToTodolistHTML() {
                 <span class="board-task-title">${task.title}</span>
                 <span class="board-task-description">${task.description}</span>
             </div>
-            <div class="board-task-subtask-status" id="boardTaskSubtaskStatus">
-                <div class="board-task-subtask-statusbar" id="boardTaskSubtaskStatusbar">
+            <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
+                <div class="board-task-subtask-statusbar" id="boardTaskSubtaskStatusbar${i}">
                     
                 </div>
-                <span class="board-task-subtask-status-info" id="boardTaskSubTaskStatusInfo">
+                <span class="board-task-subtask-status-info" id="boardTaskSubTaskStatusInfo${i}">
                     
                 </span>
             </div>
@@ -219,10 +219,10 @@ function insertTaskToTodolistHTML() {
     insertAssignedContactsToTaskHTML()
 }
 
-function insertSubtaskStatusBarHTML() {
-    let statusDiv = document.getElementById('boardTaskSubtaskStatusbar');
-    statusDiv.innerHTML = `
-        
+function insertSubtaskStatusBarHTML(i) {
+    let statusDiv = document.getElementById('boardTaskSubtaskStatusbar' + i);
+    statusDiv.innerHTML = /*html*/ `
+        <div class></div>
     `;
 }
 
