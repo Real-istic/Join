@@ -28,11 +28,11 @@ function privacyHTML() {
         <hr>
     </p>
 
-    <p><br>Patrizio</p>
-    <h3>Postanschrift:</h3>
+    <p><br>P. Marzullo</p>
+    <h3>Postanschrift: n/a</h3>
     <p><br> <br></p>
-    <h3>Kontakt:</h3>
-    <p>Telefon: <br>E-Mail: </p>
+    <h3>Kontakt: P.Marzullo@gmx.net</h3>
+    <p>Telefon: n/a <br>E-Mail: P.Marzullo@gmx.net</p>
     <p></p>
     <p><br></p>
     <p></p>
