@@ -202,11 +202,11 @@ function insertTaskToTodolistHTML() {
                 <span class="board-task-description">${task.description}</span>
             </div>
             <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
-                <div class="board-task-subtask-statusbar" id="boardTaskSubtaskStatusbar${i}">
-                    
+                <div class="board-task-subtask-statusbar">
+                    <div class="board-task-subtask-filled-statusbar" id="boardTaskSubtaskFilledStatusbar" style="width:${fillSubtaskStatusbar(i)  / task.subtasksState.length * 100}%;"></div>
                 </div>
-                <span class="board-task-subtask-status-info" id="boardTaskSubTaskStatusInfo${i}">
-                    
+                <span class="board-task-subtask-status-info">
+                    ${fillSubtaskStatusbar(i)} / ${task.subtasksState.length} Done
                 </span>
             </div>
             <div class="board-task-assigned-contacts-and-prority">
@@ -219,11 +219,23 @@ function insertTaskToTodolistHTML() {
     insertAssignedContactsToTaskHTML()
 }
 
-function insertSubtaskStatusBarHTML(i) {
-    let statusDiv = document.getElementById('boardTaskSubtaskStatusbar' + i);
-    statusDiv.innerHTML = /*html*/ `
-        <div class></div>
-    `;
+/**
+ * fills the subtask-statusbar and sets the status-count on the board-tasks
+ * 
+ * @param {*} i for the specific task
+ * @returns the checked subtask-count
+ */
+function fillSubtaskStatusbar(i) {
+    const task = taskList[i];
+    let checkedSubtaskCount = 0;
+
+    for (let j = 0; j < task.subtasksState.length; j++) {
+        const state = task.subtasksState[j];
+        if (state === true) {
+            checkedSubtaskCount++;
+        }
+    }
+    return checkedSubtaskCount;
 }
 
 /**

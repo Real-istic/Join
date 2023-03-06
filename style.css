@@ -206,7 +206,7 @@ nav {
 }
 
 .nav-element:active {
-  background-color: #005DFF;
+  background-color: #005dff;
 }
 
 .nav-element img {
@@ -707,7 +707,7 @@ nav {
 .board-task-subtask-status {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0px;
   gap: 20px;
@@ -716,9 +716,24 @@ nav {
 }
 
 .board-task-subtask-statusbar {
+  width: 138px;
+  height: 8px;
+  background: #f4f4f4;
+  border-radius: 2px;
+}
+
+.board-task-subtask-filled-statusbar {
+  height: 100%;
+  background: #4589FF;
 }
 
 .board-task-subtask-status-info {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  color: #000000;
+  white-space: nowrap;
 }
 
 .board-task-assigned-contacts-and-prority {
