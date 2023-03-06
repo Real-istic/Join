@@ -1082,7 +1082,7 @@ nav {
   width: 100%;
   transition: 120ms ease-in-out;
   overflow-x: hidden;
-  padding-right: 15px;
+  /* padding-right: 15px; */
 }
 
 .add-task-contact-container {
@@ -1113,6 +1113,15 @@ nav {
   height: 100%;
   appearance: none;
   z-index: 1;
+}
+
+.add-task-contact-checkbox:hover{
+  cursor: pointer;
+}
+
+.add-task-contact-container:hover{
+  background-color: #D2E3FF;
+  cursor: pointer;
 }
 
 .add-task-contact-checkbox + .add-task-checkbox-container::after {
@@ -1390,14 +1399,6 @@ element.style {
   align-items: center;
 }
 
-/* .add-task-create-new-category-container {
-  display: flex;
-  flex-direction: column;
-  height: 72px;
-  width: 100%;
-  padding: 0 10px;
-} */
-
 .add-task-create-new-category-container {
   display: flex;
   justify-content: space-between;
@@ -1502,6 +1503,7 @@ element.style {
 
 .add-task-list-element:hover {
   cursor: pointer;
+  background-color: #D2E3FF;
 }
 
 .height-0 {
