@@ -205,6 +205,10 @@ nav {
   background-color: #d2e3ff;
 }
 
+.nav-element:active {
+  background-color: #005DFF;
+}
+
 .nav-element img {
   height: 22px;
   width: 22px;
