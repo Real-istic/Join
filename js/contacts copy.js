@@ -28,6 +28,77 @@ function insertContacts() {
   
 }
 
+/**
+ * 
+ * Call the newContact content
+ */
+function openNewContact(){
+  
+  for (let i = 0; i < userList.length; i++) {
+    const firstNameLetter = userList[i].firstName.charAt(0);
+    const lastNameLetter = userList[i].lastName.charAt(0);
+    const contactName = userList[i].firstName + " " + userList[i].lastName;
+    const contactNameLetter = firstNameLetter + lastNameLetter;
+
+    let newContactFadeIn = document.getElementById('contact-left-fadeIn');
+    let newContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+    newContactFadeInBg.classList.add("show-left")
+    newContactFadeIn.classList.add("show-left")
+
+    newContactFadeIn.innerHTML = /*html*/ `
+
+<div class="new-contact">
+    <div class="new-contact-head" onclick="hideEditContacts()">
+        <div class="new-contact-cross">
+            <img class="img-cross" src="./assets/img/theCross.svg" alt="">
+        </div>
+
+        <div class="new-contact-header-info">
+            <div>
+                <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
+            </div>
+            <div class="new-contact-h">Add contact</div>
+            <div class="add-contact-text">
+                Tasks are better with a team!
+            </div>
+
+            <div class="new-contact-main" onclick="doNotClose()">
+                <img src="./assets/img/addNewContactProfil.svg">
+
+
+                <div>
+                    <div>
+                        <div class="input-contact">
+                            <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
+                            <img src="./assets/img/signup-user.svg" alt="">
+                        </div>
+
+                        <div class="input-contact">
+                            <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
+                            <img src="./assets/img/login-email.svg" alt="">
+                        </div>
+
+                        <div class="input-contact">
+                            <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
+                            <img src="./assets/img/phone.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
+                        <button class="button-create" onclick="addNewContact()" >Create contact <img src="" alt=""></button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+        `;
+        return newContactFadeIn;
+}
+}
+
+
 
 /**
  * 
@@ -72,7 +143,7 @@ function renderUserList() {
       const lastNameLetter = userList[i].lastName.charAt(0);
       const contactName = userList[i].firstName + " " + userList[i].lastName;
 
-      if (firstNameLetter === initialLetter && userList[i].lastName !== "") {
+      if (firstNameLetter === initialLetter) {
         usersForLetterHTML += /*html*/ `
         <div class="contact-child-div" onclick ="contactRightSide(${i})">
           <div class="contact-child-div">
@@ -86,7 +157,7 @@ function renderUserList() {
           </div>
         </div>
         `;
-      }     
+      }
     }
     
     userListHTML += /*html*/ `
@@ -240,25 +311,28 @@ function invEditContact(index) {
   const contactEditEmail = document.getElementById('contactEditEmail').value;
   const contactEditNumber = document.getElementById('contactEditNumber').value;
 
-// Save changes in the userList
+  // Änderungen in der userList speichern
   userList[index].firstName = contactEditName.split(" ")[0];
   userList[index].lastName = contactEditName.split(" ")[1];
   userList[index].email = contactEditEmail;
   userList[index].phoneNumber = contactEditNumber;
 
-// Update user data
+  // Benutzerdaten aktualisieren
   const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
+  //const backgroundColor = userList[index]['background-color'];
 
   const contactDetailBigLetter = document.querySelector('.contact-detail-big-letter');
   contactDetailBigLetter.textContent = contactNameLetter;
- 
+  //contactDetailBigLetter.style.backgroundColor = backgroundColor;
+
   const contactDetailBigName = document.querySelector('.contact-detail-big-name');
   contactDetailBigName.textContent = contactName;
 
-// Edit Hide contact
+
+  // Edit Kontakt ausblenden
   const editContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
   const editContactFadeIn = document.getElementById('contact-left-fadeIn');
   editContactFadeInBg.classList.remove('show-left');
@@ -272,111 +346,36 @@ function invEditContact(index) {
 
 /**
  * 
- * Call the newContact content
- */
-function openNewContact(){
-  
-  for (let i = 0; i < userList.length; i++) {
-    //const firstNameLetter = userList[i].firstName.charAt(0);
-    //const lastNameLetter = userList[i].lastName.charAt(0);
-    //const contactName = userList[i].firstName + " " + userList[i].lastName;
-    //const contactNameLetter = firstNameLetter + lastNameLetter;
-
-    let newContactFadeIn = document.getElementById('contact-left-fadeIn');
-    let newContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
-    newContactFadeInBg.classList.add("show-left")
-    newContactFadeIn.classList.add("show-left")
-
-    newContactFadeIn.innerHTML = /*html*/ `
-
-<div class="new-contact">
-    <div class="new-contact-head" onclick="hideEditContacts()">
-        <div class="new-contact-cross">
-            <img class="img-cross" src="./assets/img/theCross.svg" alt="">
-        </div>
-
-        <div class="new-contact-header-info">
-            <div>
-                <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
-            </div>
-            <div class="new-contact-h">Add contact</div>
-            <div class="add-contact-text">
-                Tasks are better with a team!
-            </div>
-
-            <div class="new-contact-main" onclick="doNotClose()">
-                <img src="./assets/img/addNewContactProfil.svg">
-
-
-                <div>
-                    <div>
-                        <div class="input-contact">
-                            <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
-                            <img src="./assets/img/signup-user.svg" alt="">
-                        </div>
-
-                        <div class="input-contact">
-                            <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
-                            <img src="./assets/img/login-email.svg" alt="">
-                        </div>
-
-                        <div class="input-contact">
-                            <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
-                            <img src="./assets/img/phone.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="button-container">
-                        <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
-                        <button class="button-create" onclick="addNewContact()" >Create contact <img src="" alt=""></button>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-        `;
-        return newContactFadeIn;
-}
-}
-
-/**
- * 
  * invite the NewContact content
  */
+
+
+
 function addNewContact() {
+ 
+
   const contactEditName = document.getElementById('contactNewName');
   const contactEditEmail = document.getElementById('contactNewEmail');
   const contactEditNumber = document.getElementById('contactNewNumber');
 
-// Verify that the first and last name have been entered.
-  if (contactEditName.value === "" || contactEditName.value.split(" ").length < 2) {
-    alert("Please enter a valid first and last name");
-    return;
-  }
-
-// Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
-  let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
-  let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
-
   let newUser = {
-    "firstName": firstName,
-    "lastName": lastName,
+    "firstName": nameParts[0],
+    "lastName": nameParts.length > 1 ? nameParts[1] : "",
     "email": contactEditEmail.value,
     "phoneNumber": contactEditNumber.value,
     "backgroundColor": `${getRandomColor()}`
   };
 
-  addUser(newUser);
-  hideEditContacts();
+  if (newUser.lastName === "") {
+    contactEditName.setCustomValidity('Es wurde kein Nachname eingegeben.');
+    contactEditName.reportValidity();
+  } else {
+    addUser(newUser);
+    
+  }
   insertContacts();
 }
-
-
-
-
-
 
 
 
