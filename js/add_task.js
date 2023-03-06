@@ -42,7 +42,7 @@ function insertTaskLeft() {
  * 
  * @returns the html part of the right hand side add-task page
  */
-function insertTaskRightHTML(){
+function insertTaskRightHTML() {
     return /*html*/ `
         <button class="btn-clear" onclick="clearTask()">Clear
             <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
@@ -117,7 +117,7 @@ function insertCategorySelectorHTML() {
  * 
  * @returns html for category selector
  */
-function insertCategorySelectorFromInterruptHTML(){
+function insertCategorySelectorFromInterruptHTML() {
     return /*html*/ `
         <span>Category</span>
             <div onclick="toggleCategoryList()" class="add-task-category-form">
@@ -182,11 +182,11 @@ function createCategoryListHTML(i) {
  * function that build the surface to create a new category
  * 
  */
-function createNewCategory(){
+function createNewCategory() {
     toggleCategoryList();
     document.getElementById('addTaskCategory').innerHTML = ``;
     document.getElementById('addTaskCategory').innerHTML = createNewCategoryHTML();
-     createNewCategoryColorSelectorHTML();
+    createNewCategoryColorSelectorHTML();
 }
 
 /**
@@ -194,7 +194,7 @@ function createNewCategory(){
  * 
  * @returns  html and button html for creating a new category
  */
-function createNewCategoryHTML(){
+function createNewCategoryHTML() {
     return /*html*/`
         <span>Category</span>
         <div class="add-task-create-new-category-container">
@@ -209,21 +209,20 @@ function createNewCategoryHTML(){
  * button function that interrupt the creation of a new category and return back to the category selecor
  * 
  */
-function interruptCreateNewCategory(){
+function interruptCreateNewCategory() {
     document.getElementById('addTaskCategory').innerHTML = insertCategorySelectorFromInterruptHTML();
     document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML = ``;
 }
-
 
 /**
  * button function: create new category, load new category to backend, put new category to current task, return to category selecter surface, fill input with new category
  * 
  */
-function confirmCreateNewCategory(){
+function confirmCreateNewCategory() {
     let newCategoryName = document.getElementById('newCategoryNameID').value;
     let newCategoryColor = getNewCategoryColor();
 
-    addCategory({"categoryName": newCategoryName, "categoryColor": newCategoryColor});
+    addCategory({ "categoryName": newCategoryName, "categoryColor": newCategoryColor });
     initBackend();
     document.getElementById('addTaskCategory').innerHTML = insertCategorySelectorFromInterruptHTML();
     document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML = ``;
@@ -236,11 +235,11 @@ function confirmCreateNewCategory(){
  * 
  * @returns the html part of the category list
  */
-function getNewCategoryColor(){
+function getNewCategoryColor() {
     let newCategoryColor;
     let colors = document.getElementsByClassName('radio-color-picker');
     for (let i = 0; i < colors.length; i++) {
-        if(colors[i].checked == true){
+        if (colors[i].checked == true) {
             newCategoryColor = colors[i].value;
         }
     }
@@ -252,7 +251,7 @@ function getNewCategoryColor(){
  * 
  * @returns  the container where all color selector radio buttons will be loaded in for the create new category section
  */
-function addTaskCreateNewCategoryColorSelector(){
+function addTaskCreateNewCategoryColorSelector() {
     return /*html*/ `
         <div id="addTaskCreateNewCategoryColorSelector" class="add-task-create-new-category-color-selector"></div>
     `;
@@ -263,10 +262,10 @@ function addTaskCreateNewCategoryColorSelector(){
  * counting thew all available colors and creates a radio button for each color
  * 
  */
-function createNewCategoryColorSelectorHTML(){
+function createNewCategoryColorSelectorHTML() {
     for (let i = 0; i < categoryColors.length; i++) {
-        document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML += createNewCategoryColorSelectorRadioButtonHTML(i); 
-    } 
+        document.getElementById('addTaskCreateNewCategoryColorSelector').innerHTML += createNewCategoryColorSelectorRadioButtonHTML(i);
+    }
 }
 
 /**
@@ -274,7 +273,7 @@ function createNewCategoryColorSelectorHTML(){
  * 
  * @returns  html part for each color picker radio button 
  */
-function createNewCategoryColorSelectorRadioButtonHTML(i){
+function createNewCategoryColorSelectorRadioButtonHTML(i) {
     return /*html*/`
         <div class="radio-color-picker-container">
             <input type="radio" class="radio-color-picker" id="radioColorPicker${i}" value="${categoryColors[i]}" name="color">
@@ -287,7 +286,7 @@ function createNewCategoryColorSelectorRadioButtonHTML(i){
  * function that add the created category values (name, color) to the clipboard and fill the input with new name and color
  * 
  */
-function addCategoryToClipboard(i){
+function addCategoryToClipboard(i) {
     document.getElementById('selectedCategory').innerHTML = addCategoryToClipboardHTML(i);
     taskClipboard.category = categoryList[i]['categoryName'];
     taskClipboard.categoryColor = categoryList[i]['categoryColor'];
@@ -299,7 +298,7 @@ function addCategoryToClipboard(i){
  * 
  * @returns html part for filling the category input 
  */
-function addCategoryToClipboardHTML(i){
+function addCategoryToClipboardHTML(i) {
     return `
     ${categoryList[i]['categoryName']}<div style="background-color:${categoryList[i]['categoryColor']}; height: 19px; width: 19px; border-radius:100%; border: 1px solid white; margin-left:10px;"></div>
     `
@@ -440,12 +439,13 @@ function createSubtask() {
 
     if (!taskClipboard.subtasks.includes(subtaskInput.value)) {
         taskClipboard.subtasks.push(subtaskInput.value)
+        taskClipboard.subtasksState.push(false);
         subtaskContainer.innerHTML += /*html*/ `
-        <div class="add-task-subtask-div">
-            <input onclick="AddCheckedSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" checked="" name="${subtaskInput.value}" id="">
-            <span>${subtaskInput.value}</span>
-        </div>
-        `;
+            <div class="add-task-subtask-div">
+             <input onclick="addSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" name="${subtaskInput.value}" id="">
+                <span>${subtaskInput.value}</span>
+            </div>
+            `;
         subtaskInput.value = ``;
     } else {
         subtaskInput.setCustomValidity('Subtask already exists');
@@ -455,18 +455,24 @@ function createSubtask() {
 }
 
 /**
- * checks the checked status of the checkboxes. push to task if checked
+ * checks the checked status of the checkboxes. pushes true or false to the subtaskState
  * 
  * @param {*} checkbox the specific checkbox clicked by the user
  */
-function AddCheckedSubtaskToClipboard(checkbox) {
+function addSubtaskToClipboard(checkbox) {
+
     if (checkbox.checked) {
-        taskClipboard.subtasks.push(checkbox.name);
+        for (let i = 0; i < taskClipboard.subtasks.length; i++) {
+            const subtaskName = taskClipboard.subtasks[i];
+            if (subtaskName == checkbox.name) {
+                taskClipboard.subtasksState.splice(i, 1, true)
+            }
+        }
     } else {
         for (let i = 0; i < taskClipboard.subtasks.length; i++) {
             const subtaskName = taskClipboard.subtasks[i];
             if (subtaskName == checkbox.name) {
-                taskClipboard.subtasks.splice(i, 1)
+                taskClipboard.subtasksState.splice(i, 1, false)
             }
         }
     }
@@ -500,16 +506,26 @@ async function createTaskAddTaskSite() {
  * 
  */
 function clearTask() {
+    clearTaskClipboard()
+    insertAddTask();
+}
+
+/**
+ * clears the taskClipboard
+ * 
+ */
+function clearTaskClipboard() {
     taskClipboard = {
         'title': '',
         'firstNames': [],
         'lastNames': [],
         'dueDate': '',
         'category': '',
+        'categoryColor': '',
         'priority': '',
         'description': '',
         'subtasks': [],
-        'categoryColor': ''
+        'subtasksState': []
     }
 }
 
@@ -548,15 +564,15 @@ function confirmAddedTaskToBoard() {
     let confirmInfo = document.getElementById('taskAddedToBoard');
 
     confirmInfo.classList.remove('display-none')
-    setTimeout (function(){
+    setTimeout(function () {
         confirmInfo.classList.remove('translate-y-110');
-    },0)
-    setTimeout(function(){
+    }, 0)
+    setTimeout(function () {
         confirmInfo.classList.add('translate-y-110')
-        setTimeout(function(){
+        setTimeout(function () {
             confirmInfo.classList.add('display-none')
-        },80)
-    },1500)
+        }, 80)
+    }, 1500)
 }
 
 //ADD CONTACT TO TASK

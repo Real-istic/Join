@@ -7,8 +7,9 @@ let taskClipboard = {
         'lastNames': [],
         'dueDate': '',
         'category': '',
+        'categoryColor': '',
         'priority': '',
         'description': '',
         'subtasks': [],
-        'categoryColor': ''
+        'subtasksState': []
     }

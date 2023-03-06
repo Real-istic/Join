@@ -141,7 +141,8 @@ userList = [
         "subtasks": [
             "Subtask 1",
             "Create new icons"
-        ]
+        ],
+        "subtasksState": []
         
     },
     {
@@ -164,7 +165,8 @@ userList = [
         "subtasks": [
             "Nebenaufgabe 1",
             "NocheineAufgabe"
-        ]
+        ],
+        "subtasksState": []
     },
     {
         "title": "another task",
@@ -186,7 +188,8 @@ userList = [
         "subtasks": [
             "task1",
             "task2"
-        ]
+        ],
+        "subtasksState": []
     }
 ]
 

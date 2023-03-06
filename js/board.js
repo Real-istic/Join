@@ -4,7 +4,7 @@
  */
 function insertBoard() {
     contentDiv.innerHTML = insertBoardHTML();
-    insertsTaskToTodolistHTML()
+    insertTaskToTodolistHTML()
     // document.getElementById("help").classList.remove("help-none");
 }
 
@@ -136,6 +136,7 @@ function insertDoneTasksHTML() {
  *
  */
 function addTaskOfScreenMenu() {
+    clearTaskClipboard()
     addTaskFillSlideInMenu()
     toggleAddTaskMenuOffScreen()
 }
@@ -187,7 +188,7 @@ function toggleAddTaskMenuOffScreen() {
  * creates a task at the board
  * 
  */
-function insertsTaskToTodolistHTML() {
+function insertTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasksContainer');
     todoList.innerHTML = ``;
 
@@ -195,28 +196,34 @@ function insertsTaskToTodolistHTML() {
         const task = taskList[i];
         todoList.innerHTML += /*html*/ `
         <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-            <span style="background-color: ${taskList[i].categoryColor};" class="board-task-category">${taskList[i].category}</span>
+            <span style="background-color: ${task.categoryColor};" class="board-task-category">${task.category}</span>
             <div class="board-task-title-and-description">
-                <span class="board-task-title">${taskList[i].title}</span>
-                <span class="board-task-description">${taskList[i].description}</span>
+                <span class="board-task-title">${task.title}</span>
+                <span class="board-task-description">${task.description}</span>
             </div>
-            <div class="board-task-subtask-status">
-                <div class="board-task-subtask-statusbar">
-                    <!-- to do -->
+            <div class="board-task-subtask-status" id="boardTaskSubtaskStatus">
+                <div class="board-task-subtask-statusbar" id="boardTaskSubtaskStatusbar">
+                    
                 </div>
-                <span class="board-task-subtask-status-info">
-                    <!-- to do -->
+                <span class="board-task-subtask-status-info" id="boardTaskSubTaskStatusInfo">
+                    
                 </span>
             </div>
             <div class="board-task-assigned-contacts-and-prority">
-                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${taskList[i].title}">
-                </div>
-                <img src="assets/img/priority${taskList[i].priority.toLowerCase()}.svg" alt="">
+                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
+                <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
             </div>
         </div>
     `;
     }
     insertAssignedContactsToTaskHTML()
+}
+
+function insertSubtaskStatusBarHTML() {
+    let statusDiv = document.getElementById('boardTaskSubtaskStatusbar');
+    statusDiv.innerHTML = `
+        
+    `;
 }
 
 /**
@@ -446,7 +453,7 @@ async function createTaskBoardSite() {
         await pushTaskToBackend()
         confirmAddedTaskToBoard()
         await initBackend()
-        insertsTaskToTodolistHTML()
+        insertTaskToTodolistHTML()
         clearTask()
         document.getElementById('addTaskSlideInMenu').innerHTML = ``;
         addTaskFillSlideInMenu()
