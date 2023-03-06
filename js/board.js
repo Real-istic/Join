@@ -257,7 +257,7 @@ function insertAssignedContactsToTaskHTML() {
         }
         contactContainer.innerHTML += /*html*/ `
         <div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}</div>
-        `; 
+        `;
     }
 }
 
