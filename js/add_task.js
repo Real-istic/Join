@@ -398,7 +398,7 @@ function insertDescriptionHTML() {
     return /*html*/ `
         <div class="add-task-description">
             <span>Description</span>
-            <textarea class="add-task-description-textarea" name="description" id="addTaskDescription" placeholder="Enter a Description" cols="30" rows="10"></textarea>
+            <textarea class="add-task-description-textarea scrollbar1" name="description" id="addTaskDescription" placeholder="Enter a Description" cols="30" rows="10"></textarea>
         </div>
     `;
 }
