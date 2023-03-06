@@ -454,8 +454,6 @@ async function createTaskBoardSite() {
         confirmAddedTaskToBoard()
         await initBackend()
         insertTaskToTodolistHTML()
-        clearTask()
-        document.getElementById('addTaskSlideInMenu').innerHTML = ``;
-        addTaskFillSlideInMenu()
+        clearTaskClipboard()
     }
 }
