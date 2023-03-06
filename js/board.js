@@ -1,4 +1,3 @@
-
 /**
  * inserts board content
  * 
@@ -6,8 +5,7 @@
 function insertBoard() {
     contentDiv.innerHTML = insertBoardHTML();
     insertsTaskToTodolistHTML()
-    insertAssignedContactsToTaskHTML()
-    document.getElementById("help").classList.remove("help-none");
+    // document.getElementById("help").classList.remove("help-none");
 }
 
 /**
@@ -183,6 +181,7 @@ function toggleAddTaskMenuOffScreen() {
  */
 function insertsTaskToTodolistHTML() {
     let todoList = document.getElementById('toDoTasks');
+    todoList.innerHTML = ``;
 
     for (let i = 0; i < taskList.length; i++) {
         const task = taskList[i];
@@ -195,10 +194,10 @@ function insertsTaskToTodolistHTML() {
             </div>
             <div class="board-task-subtask-status">
                 <div class="board-task-subtask-statusbar">
-
+                    <!-- to do -->
                 </div>
                 <span class="board-task-subtask-status-info">
-
+                    <!-- to do -->
                 </span>
             </div>
             <div class="board-task-assigned-contacts-and-prority">
@@ -209,6 +208,7 @@ function insertsTaskToTodolistHTML() {
         </div>
     `;
     }
+    insertAssignedContactsToTaskHTML()
 }
 
 /**
@@ -234,7 +234,6 @@ function insertAssignedContactsToTaskHTML() {
         }
     }
 }
-
 
 /**
  * inserts the specific header and buttons to the add-task-slide-in-menu
@@ -276,7 +275,7 @@ function toggleTaskBoardTask(){
 /**
  * inserts the whole html part for the board-task-slide-in-menu
  * 
- * @param {*} i 
+ * @param {*} i for the specific Task
  */
 function insertOpenTaskSlideInHTML(i){
     let taskSlideInDiv = document.getElementById('boardTaskSlideInDiv');
@@ -321,12 +320,24 @@ function insertBoardTaskSlideInTitleHTML(i){
     `;
 }
 
+/**
+ * inserts the board-task-slide-in-description
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
 function insertBoardTaskSlideInDescriptionHTML(i){
     return /*html*/ `
     <span class="board-task-slide-in-description">${taskList[i].description}</span>
 `;
 }
 
+/**
+ * inserts the board-task-slide-in-due_date
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
 function insertBoardTaskSlideInDueDateHTML(i){
     return /*html*/ `
     <div class="board-task-slide-in-date-div">
@@ -336,6 +347,12 @@ function insertBoardTaskSlideInDueDateHTML(i){
 `;
 }
 
+/**
+ * inserts the board-task-slide-in-priority
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part of it
+ */
 function insertBoardTaskSlideInPriorityHTML(i){
     return /*html*/ `
     <div class="board-task-slide-in-priority-div">
@@ -345,12 +362,23 @@ function insertBoardTaskSlideInPriorityHTML(i){
 `;
 }
 
+/**
+ * inserts the board-task-slide-in-assigned-contacts-container
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part of it
+ */
 function insertBoardTaskSlideInAssigned(i) {
     return /*html*/ `
             <span class="board-task-slide-in-assignedto">Assigned to:</span>
     `;
 }
 
+/**
+ * inserts the board-task-slide-in-assigned-contacts (iteration)
+ * 
+ * @param {*} i for the specific task
+ */
 function insertBoardTaskSlideInAssignedContactsIteration(i) {
     let contactContainer = document.getElementById('boardTaskSlideInDiv');
 
@@ -370,6 +398,11 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
     }
 }
 
+/**
+ * creates the task and adds it to the board
+ * 
+ * @returns the validation
+ */
 async function createTaskBoardSite() {
     let title = document.getElementById('addTaskInputTitle');
     if (title.value.trim() === '') {
@@ -383,9 +416,9 @@ async function createTaskBoardSite() {
         await pushTaskToBackend()
         confirmAddedTaskToBoard()
         await initBackend()
+        insertsTaskToTodolistHTML()
         clearTask()
         document.getElementById('addTaskSlideInMenu').innerHTML = ``;
         addTaskFillSlideInMenu()
     }
 }
-
