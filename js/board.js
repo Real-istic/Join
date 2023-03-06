@@ -61,12 +61,14 @@ function insertBoardTasks() {
  */
 function insertTodoTasksHTML() {
     return/*html*/ `
-        <div class="to-do-tasks" id="toDoTasks">
+        <div class="to-do-tasks">
             <div class="to-do-header">
                 <span>To do</span>
                 <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
             </div>
-            <!-- tasks here -->
+            <div class="to-do-tasks-container" id="toDoTasksContainer">
+                <!-- tasks here -->
+            </div>
         </div>
         `;
 }
@@ -78,12 +80,14 @@ function insertTodoTasksHTML() {
  */
 function insertInProgressTasksHTML() {
     return /*html*/ `
-        <div class="in-progress-tasks" id="inProgressTasks">
+        <div class="in-progress-tasks">
             <div class="in-progress-header">
                 <span>In progress</span>
                 <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
             </div>
-            <!-- tasks here -->
+            <div class="in-progress-tasks-container" id="inProgressTasksContainer">
+                <!-- tasks here -->
+            </div>
         </div>
     `;
 }
@@ -95,12 +99,14 @@ function insertInProgressTasksHTML() {
  */
 function insertAwaitFeedbackTasksHTML() {
     return /* html */ `
-        <div class="await-feedback-tasks" id="awaitFeedbackTasks">
+        <div class="await-feedback-tasks">
             <div class="await-feedback-header">
                 <span>Await feedback</span>
                 <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
             </div>
-            <!-- tasks here -->
+            <div class="await-feedback-tasks-container" id="awaitFeedbackTasksContainer">
+                <!-- tasks here -->
+            </div>
         </div>
     `;
 }
@@ -112,12 +118,14 @@ function insertAwaitFeedbackTasksHTML() {
  */
 function insertDoneTasksHTML() {
     return /*html*/ `
-        <div class="done-tasks" id="doneTasks">
+        <div class="done-tasks">
             <div class="done-header">
                 <span>Done</span>
                 <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
             </div>
-            <!-- tasks here -->
+            <div class="done-tasks-container" id="doneTasksContainer">
+                <!-- tasks here -->
+            </div>
         </div>
     `;
 }
@@ -180,7 +188,7 @@ function toggleAddTaskMenuOffScreen() {
  * 
  */
 function insertsTaskToTodolistHTML() {
-    let todoList = document.getElementById('toDoTasks');
+    let todoList = document.getElementById('toDoTasksContainer');
     todoList.innerHTML = ``;
 
     for (let i = 0; i < taskList.length; i++) {
@@ -220,18 +228,37 @@ function insertAssignedContactsToTaskHTML() {
     for (let i = 0; i < taskList.length; i++) {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
 
-        for (let j = 0; j < taskList[i].firstNames.length; j++) {
-            let firstNameTask = taskList[i].firstNames[j];
-            let lastNameTask = taskList[i].lastNames[j];
-            for (let k = 0; k < userList.length; k++) {
-                if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
-                    let userBackgroundColor = userList[k].backgroundColor;
-                    contactContainer.innerHTML += /*html*/ `
+        if (!taskList[i].firstNames.length > 3) {
+
+            for (let j = 0; j < taskList[i].firstNames.length; j++) {
+                let firstNameTask = taskList[i].firstNames[j];
+                let lastNameTask = taskList[i].lastNames[j];
+                for (let k = 0; k < userList.length; k++) {
+                    if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                        let userBackgroundColor = userList[k].backgroundColor;
+                        contactContainer.innerHTML += /*html*/ `
                         <div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
                         `;
+                    }
                 }
-            }      
+            }
+        } else {
+            for (let j = 0; j < 2; j++) {
+                let firstNameTask = taskList[i].firstNames[j];
+                let lastNameTask = taskList[i].lastNames[j];
+                for (let k = 0; k < userList.length; k++) {
+                    if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                        let userBackgroundColor = userList[k].backgroundColor;
+                        contactContainer.innerHTML += /*html*/ `
+                        <div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
+                        `;
+                    }
+                }
+            }
         }
+        contactContainer.innerHTML += /*html*/ `
+        <div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}</div>
+        `; 
     }
 }
 
@@ -256,7 +283,7 @@ function insertTaskSlideInHeader() {
  * 
  * @param {*} i the specific task
  */
-function openTask(i){
+function openTask(i) {
     toggleTaskBoardTask()
     insertOpenTaskSlideInHTML(i)
 }
@@ -265,7 +292,7 @@ function openTask(i){
  * the pure toggle for the board-task-slide-in-menu
  * 
  */
-function toggleTaskBoardTask(){
+function toggleTaskBoardTask() {
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
     opacityDiv.classList.toggle('reduce-opacity');
@@ -277,7 +304,7 @@ function toggleTaskBoardTask(){
  * 
  * @param {*} i for the specific Task
  */
-function insertOpenTaskSlideInHTML(i){
+function insertOpenTaskSlideInHTML(i) {
     let taskSlideInDiv = document.getElementById('boardTaskSlideInDiv');
     taskSlideInDiv.innerHTML = /*html*/ `
         ${insertBoardTaskSlideInCategoryHTML(i)}
@@ -299,7 +326,7 @@ function insertOpenTaskSlideInHTML(i){
  * @param {*} i for the specific task
  * @returns the html part
  */
-function insertBoardTaskSlideInCategoryHTML(i){
+function insertBoardTaskSlideInCategoryHTML(i) {
     return /*html*/ `
         <div class="board-task-slide-in-category">
             <img src="assets/img/x.svg" alt="">
@@ -314,7 +341,7 @@ function insertBoardTaskSlideInCategoryHTML(i){
  * @param {*} i for the specific task
  * @returns the html part
  */
-function insertBoardTaskSlideInTitleHTML(i){
+function insertBoardTaskSlideInTitleHTML(i) {
     return /*html*/ `
         <span class="board-task-slide-in-title">${taskList[i].title}</span>
     `;
@@ -326,7 +353,7 @@ function insertBoardTaskSlideInTitleHTML(i){
  * @param {*} i for the specific task
  * @returns the html part
  */
-function insertBoardTaskSlideInDescriptionHTML(i){
+function insertBoardTaskSlideInDescriptionHTML(i) {
     return /*html*/ `
     <span class="board-task-slide-in-description">${taskList[i].description}</span>
 `;
@@ -338,7 +365,7 @@ function insertBoardTaskSlideInDescriptionHTML(i){
  * @param {*} i for the specific task
  * @returns the html part
  */
-function insertBoardTaskSlideInDueDateHTML(i){
+function insertBoardTaskSlideInDueDateHTML(i) {
     return /*html*/ `
     <div class="board-task-slide-in-date-div">
         <span class="board-task-slide-in-datename">Due Date:</span>
@@ -353,7 +380,7 @@ function insertBoardTaskSlideInDueDateHTML(i){
  * @param {*} i for the specific task
  * @returns the html part of it
  */
-function insertBoardTaskSlideInPriorityHTML(i){
+function insertBoardTaskSlideInPriorityHTML(i) {
     return /*html*/ `
     <div class="board-task-slide-in-priority-div">
         <span class="board-task-slide-in-priorityname">Priority:</span>
@@ -394,7 +421,7 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
                     </div>    
                 `;
             }
-        }      
+        }
     }
 }
 
@@ -407,6 +434,10 @@ async function createTaskBoardSite() {
     let title = document.getElementById('addTaskInputTitle');
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
+        title.reportValidity();
+        return;
+    } else if (title.value.length >= 35) {
+        title.setCustomValidity('Title is too long');
         title.reportValidity();
         return;
     } else {

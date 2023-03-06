@@ -522,30 +522,27 @@ nav {
 .await-feedback-header,
 .done-header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0px;
-  gap: 35px;
   width: 230px;
   height: 30px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 23px;
-  line-height: 120%;
   color: #42526e;
   white-space: nowrap;
 }
 
-.to-do-tasks,
-.in-progress-tasks,
-.await-feedback-tasks,
-.done-tasks {
+.to-do-tasks-container,
+.in-progress-tasks-container,
+.await-feedback-tasks-container,
+.done-tasks-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px;
+  padding: 40px 0;
   gap: 35px;
   width: 250px;
   height: 661px;
@@ -675,30 +672,32 @@ nav {
   padding: 0px;
   gap: 10px;
   width: 207px;
-  height: 67px;
   border-radius: 10px;
 }
 
 .board-task-title {
   width: 138px;
-  height: 19px;
+  max-height: 57px;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 120%;
   color: #4589ff;
+  overflow: hidden;
 }
 
 .board-task-description {
   width: 207px;
   height: 38px;
+  max-height: 76px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
   color: #a8a8a8;
+  overflow: hidden;
 }
 
 .board-task-subtask-status {
@@ -731,18 +730,20 @@ nav {
   justify-content: flex-start;
   align-items: center;
   padding: 0px;
-  height: 35px;
+  height: 40px;
+  width: 85%;
+  overflow: hidden;
 }
 
 .board-task-slide-in-div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 50px 50px 100px 50px ;
+  padding: 50px 50px 100px 50px;
   gap: 25px;
   position: absolute;
   width: 623px;
-  height: fit-content;
+  height: 818px;
   left: 400px;
   top: 105px;
   background: #ffffff;
@@ -751,6 +752,11 @@ nav {
   z-index: 1;
   transform: translateY(0vh);
   transition: all 200ms ease-in-out;
+  overflow: auto;
+}
+
+.board-task-slide-in-div::-webkit-scrollbar {
+  display: none;
 }
 
 .board-task-translate-y {
@@ -1115,12 +1121,12 @@ nav {
   z-index: 1;
 }
 
-.add-task-contact-checkbox:hover{
+.add-task-contact-checkbox:hover {
   cursor: pointer;
 }
 
-.add-task-contact-container:hover{
-  background-color: #D2E3FF;
+.add-task-contact-container:hover {
+  background-color: #d2e3ff;
   cursor: pointer;
 }
 
@@ -1163,12 +1169,33 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
+  min-width: 42px;
   height: 42px;
   border: solid white;
   border-radius: 50%;
   margin: 14px -10px 14px 5px;
   /*Icons overlap*/
+  color: white;
+}
+
+.add-task-assigned-contact-overflow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 8px;
+  gap: 10px;
+  height: 42px;
+  width: 42px;
+  background: #4589ff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  min-width: 42px;
+  border: solid white;
+  border-radius: 50%;
+  margin: 14px -10px 14px 5px;
   color: white;
 }
 
@@ -1411,7 +1438,7 @@ element.style {
   padding: 18px 0 18px 18px;
   width: 100%;
   border-bottom: 1px solid #d1d1d1;
-  cursor: text!important;
+  cursor: text !important;
 }
 
 .add-task-create-new-category-container input:focus {
@@ -1503,7 +1530,7 @@ element.style {
 
 .add-task-list-element:hover {
   cursor: pointer;
-  background-color: #D2E3FF;
+  background-color: #d2e3ff;
 }
 
 .height-0 {
