@@ -725,6 +725,8 @@ nav {
 .board-task-subtask-filled-statusbar {
   height: 100%;
   background: #4589FF;
+  border-radius: 2px;
+
 }
 
 .board-task-subtask-status-info {
