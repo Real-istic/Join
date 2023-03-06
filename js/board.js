@@ -229,7 +229,6 @@ function insertAssignedContactsToTaskHTML() {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
 
         if (!taskList[i].firstNames.length > 3) {
-
             for (let j = 0; j < taskList[i].firstNames.length; j++) {
                 let firstNameTask = taskList[i].firstNames[j];
                 let lastNameTask = taskList[i].lastNames[j];
