@@ -597,7 +597,7 @@ nav {
   color: #000000;
 }
 
-.add-task-slide-in-header>img {
+.add-task-slide-in-header > img {
   position: absolute;
   width: 22px;
   height: 22px;
@@ -721,9 +721,8 @@ nav {
 
 .board-task-subtask-filled-statusbar {
   height: 100%;
-  background: #4589FF;
+  background: #4589ff;
   border-radius: 2px;
-
 }
 
 .board-task-subtask-status-info {
@@ -1126,7 +1125,7 @@ nav {
   background-color: white;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container {
+.add-task-contact-checkbox + .add-task-checkbox-container {
   position: absolute;
 }
 
@@ -1148,7 +1147,7 @@ nav {
   cursor: pointer;
 }
 
-.add-task-contact-checkbox+.add-task-checkbox-container::after {
+.add-task-contact-checkbox + .add-task-checkbox-container::after {
   width: 15px;
   height: 15px;
   background-image: url("assets/img/rectangle.svg");
@@ -1158,7 +1157,7 @@ nav {
   margin-top: 4px;
 }
 
-.add-task-contact-checkbox:checked+.add-task-checkbox-container::after {
+.add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
   background-image: url("assets/img/checkbutton.svg");
 }
 
@@ -1243,19 +1242,19 @@ element.style {
 
 .contact-left::-webkit-scrollbar {
   width: 10px;
-  background-color: #A8A8A8;
+  background-color: #a8a8a8;
 }
 
 .contact-left::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: #A8A8A8;
+  background-color: #a8a8a8;
   height: 3px;
 }
 
-.contact-left::-webkit-scrollbar-track{
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+.contact-left::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .contact-letter {
@@ -1406,7 +1405,7 @@ element.style {
   border-bottom: 1px solid #d1d1d1;
 }
 
-.add-task-category>span {
+.add-task-category > span {
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
@@ -1486,7 +1485,7 @@ element.style {
   position: relative;
 }
 
-.radio-color-picker-container input[type="radio"]:checked+label {
+.radio-color-picker-container input[type="radio"]:checked + label {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -2212,10 +2211,8 @@ element.style {
   stroke: #4589ff;
 }
 
-
-.cancel-contact:hover{
-  background: #4589FF;
-
+.cancel-contact:hover {
+  background: #4589ff;
 }
 
 .button-create {
@@ -2246,58 +2243,58 @@ element.style {
 }
 
 /* LOG IN - SCREEN */
-.registration-container{
-  display:flex;
-  width:100%; 
-  height:100vh; 
-  position:relative; 
-  align-items:center; 
-  justify-content:center; 
-  z-index: 3; 
-  background-color: #4589FF;
+.registration-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  background-color: #4589ff;
 }
 
-.join-logo-login{
-  position:absolute; 
-  width:265px; 
-  height:323px; 
-  display:none;
+.join-logo-login {
+  position: absolute;
+  width: 265px;
+  height: 323px;
+  display: none;
 }
 
-.registration-upper-right-inner-container{
-  position:absolute; 
-  display:flex; 
-  width:350px; 
-  height: 50px; 
-  align-items:center; 
-  top:65px; 
-  right: 90px; 
-  gap:35px;
+.registration-upper-right-inner-container {
+  position: absolute;
+  display: flex;
+  width: 350px;
+  height: 50px;
+  align-items: center;
+  top: 65px;
+  right: 90px;
+  gap: 35px;
 }
 
-.registration-upper-right-inner-container a{
-  width: 168px; 
+.registration-upper-right-inner-container a {
+  width: 168px;
   height: 28px;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 23px;
   line-height: 28px;
 }
 
-.registration-upper-right-inner-container button{
-  display:flex; 
-  justify-content: center; 
-  align-items:center; 
-  padding: 10px 16px; 
-  width:112px; 
-  height: 48px; 
-  background: #4589FF; 
-  border-radius: 8px; 
-  border:none;
+.registration-upper-right-inner-container button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 16px;
+  width: 112px;
+  height: 48px;
+  background: #4589ff;
+  border-radius: 8px;
+  border: none;
 }
 
-.log-in-container{
+.log-in-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2305,12 +2302,12 @@ element.style {
   gap: 35px;
   width: 652px;
   height: 457px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
 }
 
-.log-in-headline-container{
+.log-in-headline-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2320,18 +2317,18 @@ element.style {
   height: 82px;
 }
 
-.log-in-headline-and-border-container{
-  display:flex; 
-  flex-direction: column; 
-  align-items:center; 
-  justify-content:flex-start; 
-  border-bottom: 3px solid #4589FF;
-  height:100%;
-  width:150px;
+.log-in-headline-and-border-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 3px solid #4589ff;
+  height: 100%;
+  width: 150px;
 }
 
-.log-in-headline-and-border-container span{
-  font-family: 'Open Sans';
+.log-in-headline-and-border-container span {
+  font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 48px;
@@ -2339,83 +2336,83 @@ element.style {
   text-align: center;
 }
 
-.log-in-input-container{
+.log-in-input-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
-  justify-content:space-between;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 420px;
   height: 130px;
 }
 
-.log-in-input-field{
+.log-in-input-field {
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
   padding: 13px 21px;
   gap: 10px;
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #d1d1d1;
 }
 
-.log-in-input-field input{
-  border:none; 
-  font-size:20px; 
+.log-in-input-field input {
+  border: none;
+  font-size: 20px;
   width: 100%;
 }
 
-.log-in-input-field img{
-  width:20px; 
-  height:20px;
+.log-in-input-field img {
+  width: 20px;
+  height: 20px;
 }
 
-.log-in-remember-me-forgot-password-section{
+.log-in-remember-me-forgot-password-section {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 384px;
   height: 23px;
 }
 
-.log-in-remember-me-forgot-password-section input{
-  height:16px;
-  width:16px;
-  margin:0;
-  appearance:none; 
+.log-in-remember-me-forgot-password-section input {
+  height: 16px;
+  width: 16px;
+  margin: 0;
+  appearance: none;
   margin-bottom: 2px;
 }
 
-.log-in-remember-me-forgot-password-section a{
+.log-in-remember-me-forgot-password-section a {
   width: 181px;
   height: 23px;
   font-weight: 400;
   font-size: 19px;
   line-height: 23px;
-  color: #005DFF;
+  color: #005dff;
 }
 
-.log-in-remember-me-input-label{
+.log-in-remember-me-input-label {
   align-items: center;
   display: flex;
   gap: 20px;
 }
 
-.log-in-commit-guest-log-in-section{
+.log-in-commit-guest-log-in-section {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-between;
+  justify-content: space-between;
   width: 370px;
   height: 50px;
 }
 
-.log-in-commit-guest-log-in-section-button-guest{
-  height:100%;
-  width:200px;
-  background: #FFFFFF;
+.log-in-commit-guest-log-in-section-button-guest {
+  height: 100%;
+  width: 200px;
+  background: #ffffff;
   border: 1px solid #647188;
   border-radius: 8px;
   font-weight: 400;
@@ -2424,19 +2421,19 @@ element.style {
   color: #647188;
 }
 
-.log-in-commit-guest-log-in-section-button-log-in{
-  height:100%;
+.log-in-commit-guest-log-in-section-button-log-in {
+  height: 100%;
   width: 135px;
-  background: #4589FF;
+  background: #4589ff;
   border-radius: 8px;
   font-weight: 400;
   font-size: 23px;
   line-height: 28px;
-  border:none; 
-  color:#ffffff;
+  border: none;
+  color: #ffffff;
 }
 
-.remember-me-checkbox::before{
+.remember-me-checkbox::before {
   /* position: absolute;
   left:0; */
   width: 18px;
@@ -2447,19 +2444,18 @@ element.style {
   object-fit: cover;
 }
 
-.remember-me-checkbox:checked::before{
+.remember-me-checkbox:checked::before {
   /* position: absolute;
   left:0; */
   width: 18px;
-    height: 18px;
-    background-image: url(assets/img/subtaskchecked.svg);
-    content: "";
-    float: left;
-    object-fit: cover;
-=======
+  height: 18px;
+  background-image: url(assets/img/subtaskchecked.svg);
+  content: "";
+  float: left;
+  object-fit: cover;
   animation-duration: 200ms;
 }
 
-.create-contact{
+.create-contact {
   padding-left: 8px;
 }
