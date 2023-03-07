@@ -20,9 +20,9 @@ function privacyHTML() {
 
     <p><br>Konrad</p>
     <h3>Postanschrift:</h3>
-    <p><br> <br></p>
+    <p>Kastanienallee 35<br> <br>38104 Braunschweig</p>
     <h3>Kontakt:</h3>
-    <p><br>E-Mail: </p>
+    <p><br>E-Mail: konrad.gruss@t-online.de</p>
     <p>
         <br>
         <hr>
