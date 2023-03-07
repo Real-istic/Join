@@ -277,11 +277,6 @@ function invEditContact(index) {
 function openNewContact(){
   
   for (let i = 0; i < userList.length; i++) {
-    //const firstNameLetter = userList[i].firstName.charAt(0);
-    //const lastNameLetter = userList[i].lastName.charAt(0);
-    //const contactName = userList[i].firstName + " " + userList[i].lastName;
-    //const contactNameLetter = firstNameLetter + lastNameLetter;
-
     let newContactFadeIn = document.getElementById('contact-left-fadeIn');
     let newContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
     newContactFadeInBg.classList.add("show-left")
@@ -289,8 +284,8 @@ function openNewContact(){
 
     newContactFadeIn.innerHTML = /*html*/ `
 
-<div class="new-contact">
-    <div class="new-contact-head" onclick="hideEditContacts()">
+    <div class="new-contact">
+    <div class="new-contact-head" onclick="hideNewContacts()">
         <div class="new-contact-cross">
             <img class="img-cross" src="./assets/img/theCross.svg" alt="">
         </div>
@@ -304,37 +299,43 @@ function openNewContact(){
                 Tasks are better with a team!
             </div>
 
-            <div class="new-contact-main" onclick="doNotClose()">
+            <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
 
-
-                <div>
+                <form onsubmit="addNewContact()">
                     <div>
-                        <div class="input-contact">
-                            <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
-                            <img src="./assets/img/signup-user.svg" alt="">
-                        </div>
+                        <div onclick="doNotClose()">
+                            <div class="input-contact">
+                                <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
+                                    <img src="./assets/img/signup-user.svg" alt="">
+                                    </div>
 
-                        <div class="input-contact">
-                            <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
-                            <img src="./assets/img/login-email.svg" alt="">
-                        </div>
+                                    <div class="input-contact">
+                                        <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
+                                            <img src="./assets/img/login-email.svg" alt="">
+                                            </div>
 
-                        <div class="input-contact">
-                            <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
-                            <img src="./assets/img/phone.svg" alt="">
+                                            <div class="input-contact">
+                                                <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
+                                                    <img src="./assets/img/phone.svg" alt="">
+                                                    </div>
+                                            </div>
+                                            <div class="button-container">
+                                                <button class="button-cancel" onclick="hideNewContacts()">Cancel
+                                                    <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                                    </svg>
+                                                </button>
+
+                                                <button class="button-create" onclick="addNewContact()">
+                                                    Create contact
+                                                    <img class="create-contact" src="./assets/img/akar-icons_check.svg" alt=""></button>
+                                            </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="button-container">
-                        <button class="button-cancel" type="reset">Cancel <img src="" alt=""></button>
-                        <button class="button-create" onclick="addNewContact()" >Create contact <img src="" alt=""></button>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
+                </form>    
         `;
         return newContactFadeIn;
 }
@@ -375,10 +376,18 @@ function addNewContact() {
 
 
 
-
-
-
-
+/**
+ * 
+ * Close the NewContact content and remove the show class from the newContactFadeIn-bg
+ */
+function hideNewContacts() {
+  let newContactFadeIn = document.getElementById('contact-left-fadeIn');
+    let newContactFadeInBg = document.getElementById('contact-left-fadeIn-bg');
+    newContactFadeInBg.addEventListener("click", function () {
+    newContactFadeInBg.classList.remove("show-left")
+    newContactFadeIn.classList.remove("show-left")
+  });
+}
 
 
 /**
@@ -390,9 +399,6 @@ async function loadEditContact() {
   const userList = await backend.getItem('users', JSON.stringify(userList));
   return userList;
 }
-
-
-
 
 /**
  * 
