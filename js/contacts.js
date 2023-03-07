@@ -138,7 +138,7 @@ function renderContactSideScroll(i) {
                 <p class="contact-detail-big-name">${contactName}</p>
                 <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
               </div>
-            </div >
+            </div>
           </div>
 
           <div class="contact-detail-info-main">
@@ -156,8 +156,8 @@ function renderContactSideScroll(i) {
             <p>${userList[i].phoneNumber}</p> 
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
     `;
 
   return ContactSideScrollHTML;
