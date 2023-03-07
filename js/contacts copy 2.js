@@ -302,7 +302,7 @@ function openNewContact(){
             <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
 
-
+                <form onsubmit="addNewContact()">
                     <div>
                         <div onclick="doNotClose()">
                             <div class="input-contact">
@@ -335,6 +335,7 @@ function openNewContact(){
                             </div>
                         </div>
                     </div>
+                </form>    
         `;
         return newContactFadeIn;
 }
@@ -345,17 +346,24 @@ function openNewContact(){
  * invite the NewContact content
  */
 function addNewContact() {
+ 
+
   const contactEditName = document.getElementById('contactNewName');
   const contactEditEmail = document.getElementById('contactNewEmail');
   const contactEditNumber = document.getElementById('contactNewNumber');
+  const formErrors = document.getElementById('form-errors');
 
-// Verify that the first and last name have been entered.
+  // Verify that the first and last name have been entered.
   if (contactEditName.value === "" || contactEditName.value.split(" ").length < 2) {
-    alert("Please enter a valid first and last name");
+    contactEditName.setCustomValidity("Please enter a valid first and last name");
+    formErrors.innerText = "Please enter a valid first and last name";
     return;
+  } else {
+    contactEditName.setCustomValidity("");
+    formErrors.innerText = "";
   }
 
-// Separate first and last names and make sure that the first letter is capitalized.
+  // Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
   let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
   let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
@@ -372,6 +380,8 @@ function addNewContact() {
   hideEditContacts();
   insertContacts();
 }
+
+
 
 /**
  * 
