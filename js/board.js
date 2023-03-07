@@ -443,6 +443,13 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
     }
 }
 
+function boardTaskSlideInEditTask(){
+    let slideInTask = document.getElementById('boardTaskSlideInDiv');
+    slideInTask.innerHTML = /*html*/ `
+        
+    `;
+}
+
 /**
  * creates the task and adds it to the board
  * 
