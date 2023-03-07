@@ -331,7 +331,7 @@ function insertOpenTaskSlideInHTML(i) {
         ${insertBoardTaskSlideInDueDateHTML(i)}
         ${insertBoardTaskSlideInPriorityHTML(i)}
         ${insertBoardTaskSlideInAssigned(i)}
-        <div class="board-task-slide-in-editbutton">
+        <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
             <img src="assets/img/edit_task.svg" alt="">
         </div>
     `;
@@ -347,7 +347,7 @@ function insertOpenTaskSlideInHTML(i) {
 function insertBoardTaskSlideInCategoryHTML(i) {
     return /*html*/ `
         <div class="board-task-slide-in-category">
-            <img src="assets/img/x.svg" alt="">
+            <img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
             <span class="board-task-category" style="background-color:${taskList[i].categoryColor};">${taskList[i].category}</span>
         </div>
     `;
@@ -443,10 +443,28 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
     }
 }
 
-function boardTaskSlideInEditTask(){
+function boardTaskSlideInEditTask(i){
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
     slideInTask.innerHTML = /*html*/ `
-        
+    <div class="board-task-slide-in-edit-div">
+        <img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
+        ${insertTaskTitleHTML()}
+        <div style="margin-bottom: 25px"></div>
+        ${insertDescriptionHTML()}
+        ${insertDueDateHTML()}
+        ${insertPriorityHTML()}
+        ${insertTaskContactlistHTML()}
+        <div style="margin-top: 25px"></div>
+        ${insertBoardTaskSlideInAssigned()}
+        ${createSelectedContactIconsDivHTML()} 
+        ${boardTaskSlideInOkButton(i)}
+    </div>
+    `;
+}
+
+function boardTaskSlideInOkButton(i) {
+    return /*html*/ `
+        <div onclick="insertOpenTaskSlideInHTML(${i})" class="board-task-slide-in-edit-task-ok-Button">Ok <img src="assets/img/checkicon.svg" alt=""></div>
     `;
 }
 

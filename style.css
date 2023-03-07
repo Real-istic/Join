@@ -790,6 +790,7 @@ nav {
   position: absolute;
   top: -20px;
   right: -20px;
+  cursor: pointer;
 }
 
 .board-task-slide-in-title {
@@ -928,6 +929,55 @@ nav {
   top: 86%;
   background: #4589ff;
   border-radius: 10px;
+  cursor: pointer;
+  transition: 80ms all ease-in-out;
+}
+
+.board-task-slide-in-editbutton:hover {
+  background: #005dff;
+  transition: 80ms all ease-in-out;
+}
+
+.board-task-slide-in-edit-div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 30px;
+}
+
+.board-task-slide-in-edit-div > img{
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  cursor: pointer;
+}
+
+.board-task-slide-in-edit-task-ok-Button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 10px;
+  gap: 10px;
+  position: absolute;
+  width: 84px;
+  height: 61px;
+  left: 457px;
+  top: 674px;
+  background: #4589ff;
+  border-radius: 10px;
+  transition: 80ms all ease-in-out;
+  color: white;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.board-task-slide-in-edit-task-ok-Button:hover {
+  background: #005dff;
+  transition: 80ms all ease-in-out;
 }
 
 /* Task Form */
