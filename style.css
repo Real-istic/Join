@@ -935,7 +935,7 @@ nav {
   padding: 0 30px;
 }
 
-.board-task-slide-in-edit-div > img{
+.board-task-slide-in-edit-div > img {
   position: absolute;
   top: -20px;
   right: -20px;
@@ -968,6 +968,24 @@ nav {
 .board-task-slide-in-edit-task-ok-Button:hover {
   background: #005dff;
   transition: 80ms all ease-in-out;
+}
+
+.board-task-slide-in-edit-task-subtask {
+  display: flex;
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 120%;
+  color: #42526e;
+}
+
+.board-task-slide-in-edit-task-Assigned-to {
+  display: flex;
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 120%;
+  color: #42526e;
 }
 
 /* Task Form */
