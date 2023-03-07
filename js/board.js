@@ -324,18 +324,23 @@ function toggleTaskBoardTask() {
  */
 function insertOpenTaskSlideInHTML(i) {
     let taskSlideInDiv = document.getElementById('boardTaskSlideInDiv');
+
     taskSlideInDiv.innerHTML = /*html*/ `
         ${insertBoardTaskSlideInCategoryHTML(i)}
         ${insertBoardTaskSlideInTitleHTML(i)}
         ${insertBoardTaskSlideInDescriptionHTML(i)}
         ${insertBoardTaskSlideInDueDateHTML(i)}
         ${insertBoardTaskSlideInPriorityHTML(i)}
+        ${boardTaskSlideInSubtaskHeaderHTML()}
+        <div class="add-task-subtask-list" id="addTaskCreateSubtask"></div>
         ${insertBoardTaskSlideInAssigned(i)}
         <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
             <img src="assets/img/edit_task.svg" alt="">
         </div>
+
     `;
     insertBoardTaskSlideInAssignedContactsIteration(i)
+    boardTaskSlideInInsertSubtasksHTML(i)
 }
 
 /**
@@ -454,12 +459,67 @@ function boardTaskSlideInEditTask(i){
         ${insertDueDateHTML()}
         ${insertPriorityHTML()}
         ${insertTaskContactlistHTML()}
-        <div style="margin-top: 25px"></div>
-        ${insertBoardTaskSlideInAssigned()}
+        ${boardTaskSlideInSubtaskHeaderHTML()}
+        <div class="add-task-subtask-list" id="addTaskCreateSubtask"></div>
+        ${boardTaskSlideInAssignedToHeaderHTML()}
         ${createSelectedContactIconsDivHTML()} 
         ${boardTaskSlideInOkButton(i)}
     </div>
     `;
+    boardTaskInsertValues(i)
+}
+
+function boardTaskInsertValues(i) {
+    boardTaskSlideInInsertSubtasksHTML(i)
+
+}
+
+function boardTaskSlideInSubtaskHeaderHTML() {
+    return /*html*/ `
+        <span class="board-task-slide-in-edit-task-subtask">Subtasks</span>
+    `;
+}
+
+function boardTaskSlideInAssignedToHeaderHTML() {
+    return /*html*/ `
+    <span class="board-task-slide-in-edit-task-Assigned-to">Assigned to</span>
+`;
+}
+
+function boardTaskSlideInInsertSubtasksHTML(i) {
+    let subtaskContainer = document.getElementById('addTaskCreateSubtask');
+
+    for (let j = 0; j < taskList[i].subtasks.length; j++) {
+        const subtask = taskList[i].subtasks[j];
+        const subtaskState = taskList[i].subtasksState[j];
+        if (subtaskState == true) {
+            subtaskContainer.innerHTML += /*html*/ `
+            <div class="add-task-subtask-div">
+                <input checked onclick="toggleSubtaskInTasklist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+                <span>${subtask}</span>
+            </div>
+        `;
+        } else {
+        subtaskContainer.innerHTML += /*html*/ `
+            <div class="add-task-subtask-div">
+                <input onclick="toggleSubtaskInTasklist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+                <span>${subtask}</span>
+            </div>
+        `;
+        }
+    }
+}
+
+async function toggleSubtaskInTasklist(i, j) {
+    let subtaskCheckbox = document.getElementById('editSubtask' + i + `-` + j)
+    if (subtaskCheckbox.checked) {
+        taskList[i].subtasksState.splice(j, 1, true)
+    } else {
+        taskList[i].subtasksState.splice(j, 1, false)
+    }
+    await backend.setItem('tasks', JSON.stringify(taskList));
+    await initBackend()
+    insertTaskToTodolistHTML()
 }
 
 function boardTaskSlideInOkButton(i) {

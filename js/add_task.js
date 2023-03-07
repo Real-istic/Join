@@ -442,7 +442,7 @@ function createSubtask() {
         taskClipboard.subtasksState.push(false);
         subtaskContainer.innerHTML += /*html*/ `
             <div class="add-task-subtask-div">
-             <input onclick="addSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" name="${subtaskInput.value}" id="">
+                <input onclick="addSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" name="${subtaskInput.value}" id="">
                 <span>${subtaskInput.value}</span>
             </div>
             `;
