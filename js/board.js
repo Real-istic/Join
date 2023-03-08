@@ -247,7 +247,7 @@ function insertAssignedContactsToTaskHTML() {
     for (let i = 0; i < taskList.length; i++) {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
 
-        if (!taskList[i].firstNames.length > 3) {
+        if (!(taskList[i].firstNames.length > 2)) {
             for (let j = 0; j < taskList[i].firstNames.length; j++) {
                 let firstNameTask = taskList[i].firstNames[j];
                 let lastNameTask = taskList[i].lastNames[j];
@@ -273,10 +273,10 @@ function insertAssignedContactsToTaskHTML() {
                     }
                 }
             }
+            contactContainer.innerHTML += /*html*/ `
+                <div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}</div>
+                `;
         }
-        contactContainer.innerHTML += /*html*/ `
-        <div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}</div>
-        `;
     }
 }
 
@@ -335,14 +335,14 @@ function insertOpenTaskSlideInHTML(i) {
         ${insertBoardTaskSlideInDueDateHTML(i)}
         ${insertBoardTaskSlideInPriorityHTML(i)}
         ${boardTaskSlideInSubtaskHeaderHTML()}
-        <div class="add-task-subtask-list" id="addTaskCreateSubtask"></div>
+        <div class="add-task-subtask-list" id="addTaskCreateSubtask${i}"></div>
         ${insertBoardTaskSlideInAssigned(i)}
         <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
             <img src="assets/img/edit_task.svg" alt="">
         </div>
     `;
     insertBoardTaskSlideInAssignedContactsIteration(i)
-    boardTaskEditSlideInInsertSubtasks(i)
+    boardTaskSlideInInsertSubtasks(i)
 }
 
 async function boardTaskSaveEditTaskToTaskList(i) {
@@ -371,7 +371,6 @@ function pushBoardTaskToTaskList(i) {
     taskList[i].dueDate = document.getElementById('addTaskInputDate').value;
     taskList[i].category = taskClipboard.category
     taskList[i].categoryColor = taskClipboard.categoryColor
-    // taskList[i].priority = taskClipboard.priority
     pushPriorityToTaskClipboard()
     taskList[i].description = document.getElementById('addTaskDescription').value
     taskList[i].subtasks = taskClipboard.subtasks
@@ -576,8 +575,8 @@ function boardTaskSlideInAssignedToHeaderHTML() {
 `;
 }
 
-function boardTaskEditSlideInInsertSubtasks(i) {
-    let subtaskContainer = document.getElementById('addTaskCreateSubtask');
+function boardTaskSlideInInsertSubtasks(i) {
+    let subtaskContainer = document.getElementById('addTaskCreateSubtask' + i);
 
     for (let j = 0; j < taskList[i].subtasks.length; j++) {
         const subtask = taskList[i].subtasks[j];
