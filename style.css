@@ -1772,8 +1772,13 @@ nav {
   position: absolute;
   width: 265px;
   height: 323px;
-  display: none;
 }
+
+.join-logo-login-color{
+  fill:white;
+}
+
+
 
 .registration-upper-right-inner-container {
   position: absolute;
@@ -1784,6 +1789,8 @@ nav {
   top: 65px;
   right: 90px;
   gap: 35px;
+
+  display: none;
 }
 
 .registration-upper-right-inner-container a {
@@ -1819,6 +1826,8 @@ nav {
   background: #ffffff;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
+
+  display: none;
 }
 
 .log-in-headline-container {
@@ -1877,6 +1886,10 @@ nav {
   width: 100%;
 }
 
+.log-in-input-field input:hover {
+  cursor: pointer;
+}
+
 .log-in-input-field img {
   width: 20px;
   height: 20px;
@@ -1923,16 +1936,9 @@ nav {
   height: 50px;
 }
 
-.log-in-commit-guest-log-in-section-button-guest {
-  height: 100%;
-  width: 200px;
-  background: #ffffff;
-  border: 1px solid #647188;
-  border-radius: 8px;
-  font-weight: 400;
-  font-size: 23px;
-  line-height: 28px;
-  color: #647188;
+.log-in-commit-guest-log-in-section button:hover{
+  cursor: pointer;
+  transition: 100ms ease-in-out;
 }
 
 .log-in-commit-guest-log-in-section-button-log-in {
@@ -1947,9 +1953,36 @@ nav {
   color: #ffffff;
 }
 
+.log-in-commit-guest-log-in-section-button-log-in:hover {
+  background-color: #005DFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: 100ms ease-in-out;
+}
+
+.log-in-commit-guest-log-in-section-button-guest {
+  height: 100%;
+  width: 200px;
+  background: #ffffff;
+  border: 1px solid #647188;
+  border-radius: 8px;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 28px;
+  color: #647188;
+}
+
+.log-in-commit-guest-log-in-section-button-guest:hover {
+  border: 2px solid #4589FF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: #4589FF;
+  transition: 100ms ease-in-out;
+}
+
+.remember-me-checkbox:hover{
+  cursor: pointer;
+}
+
 .remember-me-checkbox::before {
-  /* position: absolute;
-  left:0; */
   width: 18px;
   height: 18px;
   background-image: url(assets/img/subtaskunchecked.svg);
@@ -1958,9 +1991,8 @@ nav {
   object-fit: cover;
 }
 
+
 .remember-me-checkbox:checked::before {
-  /* position: absolute;
-  left:0; */
   width: 18px;
   height: 18px;
   background-image: url(assets/img/subtaskchecked.svg);
