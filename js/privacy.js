@@ -5,41 +5,6 @@ function insertPrivacy() {
 
 function privacyHTML() {
     return /*html*/`
-    <div>
-    <h2>Impressum</h2>
-    <h3>Angaben gemäß § 5 TMG:</h3>
-    <p><br>Daniel Bergmann</p>
-    <h3>Postanschrift:</h3>
-    <p>Blümnerstraße 22<br>04229 Leipzig<br></p>
-    <h3>Kontakt:</h3>
-    <p>Telefon: 0151 54694058<br>E-Mail: dhetzer3@gmail.com</p>
-    <p>
-        <br>
-        <hr>
-    </p>
-
-    <p><br>Konrad</p>
-    <h3>Postanschrift:</h3>
-    <p>Kastanienallee 35<br> <br>38104 Braunschweig</p>
-    <h3>Kontakt:</h3>
-    <p><br>E-Mail: konrad.gruss@t-online.de</p>
-    <p>
-        <br>
-        <hr>
-    </p>
-
-    <p><br>P. Marzullo</p>
-    <h3>Postanschrift: n/a</h3>
-    <p><br> <br></p>
-    <h3>Kontakt: P.Marzullo@gmx.net</h3>
-    <p>Telefon: n/a <br>E-Mail: P.Marzullo@gmx.net</p>
-    <p></p>
-    <p><br></p>
-    <p></p>
-    <p><em>Das Impressum wurde mit dem<br>
-            <a href="https://www.activemind.de/datenschutz/impressums-generator/">Impressums-Generator der activeMind AG</a> erstellt.</em></p>
-</div>
-
 <div>
     <h2>Datenschutzerklärung</h2>
     <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>

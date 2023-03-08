@@ -7,13 +7,14 @@ function insertContacts() {
   contentDiv.innerHTML = /*html*/ `
       ${addTaskSlideInMenu()}
       <div class="contact-main">
+      <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
           <div class="contact-left">
             ${renderUserList()}
           </div>
           <div class="contact-right" id="contact-right"></div>
       </div>
       <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg">
-        <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
+       
       </div>
       <div class="new-contact-button" onclick="openNewContact()">New contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
@@ -21,6 +22,7 @@ function insertContacts() {
   `;
   addTaskFillSlideInMenu()
   eventOnEditContact();
+
 }
 
 /**

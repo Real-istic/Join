@@ -366,7 +366,7 @@ element.style {
     overflow: auto;
     left: -100%;
     z-index: 2;
-    transition: all 800ms ease-in-out;
+    transition: all 200ms ease-in-out;
 }
 
 .show-left {
