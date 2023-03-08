@@ -345,6 +345,12 @@ function insertOpenTaskSlideInHTML(i) {
     boardTaskSlideInInsertSubtasks(i)
 }
 
+/**
+ * saves the edited task to the task-list, then the task gets pushed to the backend
+ *  
+ * @param {*} i for the specific task
+ * @returns validation information
+ */
 async function boardTaskSaveEditTaskToTaskList(i) {
     let title = document.getElementById('addTaskInputTitle');
     if (title.value.trim() === '') {
@@ -356,7 +362,7 @@ async function boardTaskSaveEditTaskToTaskList(i) {
         title.reportValidity();
         return;
     } else {
-        pushBoardTaskToTaskList(i)
+        pushEditedTaskToTaskList(i)
         await backend.setItem('tasks', JSON.stringify(taskList));
         insertTaskToTodolistHTML()
         insertOpenTaskSlideInHTML(i)
@@ -364,7 +370,12 @@ async function boardTaskSaveEditTaskToTaskList(i) {
     }
 }
 
-function pushBoardTaskToTaskList(i) {
+/**
+ * pushes the edited task to the task-list
+ * 
+ * @param {*} i for the specific task
+ */
+function pushEditedTaskToTaskList(i) {
     taskList[i].title = document.getElementById('addTaskInputTitle').value;
     taskList[i].firstNames = taskClipboard.firstNames
     taskList[i].lastNames = taskClipboard.lastNames
@@ -640,6 +651,7 @@ async function createTaskBoardSite() {
         confirmAddedTaskToBoard()
         await initBackend()
         insertTaskToTodolistHTML()
+        addTaskFillSlideInMenu()
         clearTaskClipboard()
     }
 }
