@@ -7,6 +7,7 @@ let contactListExpanded = false;
  * 
  */
 function insertAddTask() {
+    clearTaskClipboard()
     contentDiv.innerHTML = insertTaskLeft();
     document.getElementById("help").classList.remove("help-none");
 }
@@ -543,8 +544,8 @@ function pushDueDateToTaskClipboard() {
  * 
  */
 function pushPriorityToTaskClipboard() {
-    let priority = document.querySelectorAll('.add-task-priority-input:checked');
-    taskClipboard.priority = priority[0].name;
+    let taskPriority = document.querySelectorAll('.add-task-priority-input:checked');
+    taskClipboard.priority = taskPriority[0].name;
 }
 
 /**
