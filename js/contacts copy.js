@@ -21,6 +21,7 @@ function insertContacts() {
   `;
   addTaskFillSlideInMenu()
   eventOnEditContact();
+
 }
 
 /**
@@ -101,6 +102,9 @@ function renderUserList() {
 
   return userListHTML;
 }
+
+
+
 
 /**
 * Call the renderContactSideScroll content and add show class for fade in from right
