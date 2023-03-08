@@ -158,7 +158,7 @@ function loadCategorylist() {
 /**
  * inserts the category list
  * 
- * @returns the html part of single category
+ * @returns the html part of a single category
  */
 function createCategoryInputHTML() {
     return `
@@ -207,7 +207,7 @@ function createNewCategoryHTML() {
 }
 
 /**
- * button function that interrupt the creation of a new category and return back to the category selecor
+ * button function that interrupts the creation of a new category and returns it back to the category selecor
  * 
  */
 function interruptCreateNewCategory() {
@@ -390,7 +390,7 @@ function toggleCategoryList() {
 }
 
 /**
- * inserts the the Description
+ * inserts the the description
  * 
  * @returns the html part of it
  */
@@ -406,7 +406,7 @@ function insertDescriptionHTML() {
 
 
 /**
- * inserts the Subtask and subtasklist
+ * inserts the subtask and subtasklist
  * 
  * @returns the html part of it
  */
@@ -426,7 +426,7 @@ function insertSubtasksHTML() {
 /**
  * creates and inserts the subtask, while validate the form (no empty string, no duplicates)
  * 
- * @returns validation response
+ * @returns the validation
  */
 function createSubtask() {
     let subtaskContainer = document.getElementById('addTaskCreateSubtask');
@@ -482,7 +482,7 @@ function addSubtaskToClipboard(checkbox) {
 /**
  * pushes all remaining add-task-informations to the task clipboard
  * 
- * @returns form validation information
+ * @returns validation information
  */
 async function createTaskAddTaskSite() {
     let title = document.getElementById('addTaskInputTitle');
@@ -710,7 +710,7 @@ function toggleContactTask(i) {
  * function that checks if contact is in task or not
  * 
  * @returns if contact is in task or not
- * @param {*} i
+ * @param {*} i for the specific contact
  */
 function checkForContactInClipboard(i) {
     let nameStillInTask = false;
@@ -725,7 +725,7 @@ function checkForContactInClipboard(i) {
 /**
  * function that removes contact from task
  * 
- * @param {*} i 
+ * @param {*} i for the specific task
  */
 function removeContactFromTask(i) {
     for (j = 0; j < taskClipboard.firstNames.length; j++) {

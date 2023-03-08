@@ -493,6 +493,11 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
     }
 }
 
+/**
+ * inserts the edit window of the board area (klick on task -> edit)
+ * 
+ * @param {*} i for the specific task
+ */
 function boardTaskSlideInEditTask(i){
     pushBoardTaskToClipboard(i)
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
@@ -515,6 +520,11 @@ function boardTaskSlideInEditTask(i){
     createSelectedContactIcons();
 }
 
+/**
+ * pushes the board-task-values to the clipboard
+ * 
+ * @param {*} i for the specific task
+ */
 function pushBoardTaskToClipboard(i) {
     taskClipboard.title = taskList[i].title
     taskClipboard.firstNames = taskList[i].firstNames
@@ -528,6 +538,10 @@ function pushBoardTaskToClipboard(i) {
     taskClipboard.subtasksState = taskList[i].subtasksState
 }
 
+/**
+ * inserts the taskvalues for the edit-task-window
+ * 
+ */
 function boardTaskEditSlideInInsertValues() {
     boardTaskEditSlideInInsertTitle()
     boardTaskEditSlideInInsertDescription()
@@ -535,21 +549,37 @@ function boardTaskEditSlideInInsertValues() {
     boardTaskEditSlideInInsertPriority()
 }
 
+/**
+ * inserts the task title for the edit-window
+ * 
+ */
 function boardTaskEditSlideInInsertTitle() {
     let title = document.getElementById('addTaskInputTitle');
     title.value = taskClipboard.title
 }
 
+/**
+ * inserts the description fot the edit-task-window
+ * 
+ */
 function boardTaskEditSlideInInsertDescription() {
     let description = document.getElementById('addTaskDescription');
     description.value = taskClipboard.description
 }
 
+/**
+ * inserts the due-date for the edit-task-window
+ * 
+ */
 function boardTaskEditSlideInInsertDueDate() {
     let dueDate = document.getElementById('addTaskInputDate');
     dueDate.value = taskClipboard.dueDate
 }
 
+/**
+ * inserts and checks the task-priority for the edit-task-window
+ * 
+ */
 function boardTaskEditSlideInInsertPriority() {
     let priorityValue = taskClipboard.priority
     let priorityDocument = document.getElementById('addTaskPriorityInput' + priorityValue);
@@ -574,18 +604,33 @@ function boardTaskEditSlideInInsertPriority() {
     }
 }
 
+/**
+ * inserts the subtask-header for the task-slide-in-menu
+ * 
+ * @returns the html part
+ */
 function boardTaskSlideInSubtaskHeaderHTML() {
     return /*html*/ `
         <span class="board-task-slide-in-edit-task-subtask">Subtasks</span>
     `;
 }
 
+/**
+ * inserts the assigned-to-header for the task-slide-in-menu
+ * 
+ * @returns the html part
+ */
 function boardTaskSlideInAssignedToHeaderHTML() {
     return /*html*/ `
     <span class="board-task-slide-in-edit-task-Assigned-to">Assigned to</span>
 `;
 }
 
+/**
+ * inserts the checkable subtasks for the task-slide-in-window 
+ * 
+ * @param {*} i for the specific task
+ */
 function boardTaskSlideInInsertSubtasks(i) {
     let subtaskContainer = document.getElementById('addTaskCreateSubtask' + i);
 
@@ -610,6 +655,12 @@ function boardTaskSlideInInsertSubtasks(i) {
     }
 }
 
+/**
+ * inserts/removes the subtask of the specific task. changes are made in real time at the task list for the specific task
+ * 
+ * @param {*} i for the specific task
+ * @param {*} j for the specific subtask
+ */
 async function toggleSubtaskInTasklist(i, j) {
     let subtaskCheckbox = document.getElementById('editSubtask' + i + `-` + j)
     if (subtaskCheckbox.checked) {
@@ -622,6 +673,12 @@ async function toggleSubtaskInTasklist(i, j) {
     insertTaskToTodolistHTML()
 }
 
+/**
+ * inserts the ok-button for the edit-task-window
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
 function boardTaskSlideInOkButton(i) {
     return /*html*/ `
         <div onclick="boardTaskSaveEditTaskToTaskList(${i})" class="board-task-slide-in-edit-task-ok-Button">Ok <img src="assets/img/checkicon.svg" alt=""></div>
