@@ -302,6 +302,7 @@ function insertTaskSlideInHeader() {
  * @param {*} i the specific task
  */
 function openTask(i) {
+    pushBoardTaskToClipboard(i)
     toggleTaskBoardTask()
     insertOpenTaskSlideInHTML(i)
 }
@@ -311,6 +312,8 @@ function openTask(i) {
  * 
  */
 function toggleTaskBoardTask() {
+    clearTaskClipboard()
+    
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
     opacityDiv.classList.toggle('reduce-opacity');
@@ -337,10 +340,42 @@ function insertOpenTaskSlideInHTML(i) {
         <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
             <img src="assets/img/edit_task.svg" alt="">
         </div>
-
     `;
     insertBoardTaskSlideInAssignedContactsIteration(i)
     boardTaskEditSlideInInsertSubtasks(i)
+}
+
+async function boardTaskSaveEditTaskToTaskList(i) {
+    let title = document.getElementById('addTaskInputTitle');
+    if (title.value.trim() === '') {
+        title.setCustomValidity('You need a Title to create a Task!');
+        title.reportValidity();
+        return;
+    } else if (title.value.length >= 35) {
+        title.setCustomValidity('Title is too long');
+        title.reportValidity();
+        return;
+    } else {
+        pushBoardTaskToTaskList(i)
+        await backend.setItem('tasks', JSON.stringify(taskList));
+        insertTaskToTodolistHTML()
+        insertOpenTaskSlideInHTML(i)
+        clearTaskClipboard()
+    }
+}
+
+function pushBoardTaskToTaskList(i) {
+    taskList[i].title = document.getElementById('addTaskInputTitle').value;
+    taskList[i].firstNames = taskClipboard.firstNames
+    taskList[i].lastNames = taskClipboard.lastNames
+    taskList[i].dueDate = document.getElementById('addTaskInputDate').value;
+    taskList[i].category = taskClipboard.category
+    taskList[i].categoryColor = taskClipboard.categoryColor
+    // taskList[i].priority = taskClipboard.priority
+    pushPriorityToTaskClipboard()
+    taskList[i].description = document.getElementById('addTaskDescription').value
+    taskList[i].subtasks = taskClipboard.subtasks
+    taskList[i].subtasksState = taskClipboard.subtasksState
 }
 
 /**
@@ -449,6 +484,7 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
 }
 
 function boardTaskSlideInEditTask(i){
+    pushBoardTaskToClipboard(i)
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
     slideInTask.innerHTML = /*html*/ `
     <div class="board-task-slide-in-edit-div">
@@ -458,43 +494,54 @@ function boardTaskSlideInEditTask(i){
         ${insertDescriptionHTML()}
         ${insertDueDateHTML()}
         ${insertPriorityHTML()}
-        ${boardTaskSlideInSubtaskHeaderHTML()}
         <div style="margin-bottom: 25px"></div>
-        <div class="add-task-subtask-list" id="addTaskCreateSubtask"></div>
-        ${insertTaskContactlistHTML()}
         ${boardTaskSlideInAssignedToHeaderHTML()}
+        ${insertTaskContactlistHTML()}
         ${createSelectedContactIconsDivHTML()} 
         ${boardTaskSlideInOkButton(i)}
     </div>
     `;
     boardTaskEditSlideInInsertValues(i)
+    createSelectedContactIcons();
 }
 
-function boardTaskEditSlideInInsertValues(i) {
-    boardTaskEditSlideInInsertSubtasks(i)
-    boardTaskEditSlideInInsertTitle(i)
-    boardTaskEditSlideInInsertDescription(i)
-    boardTaskEditSlideInInsertDueDate(i)
-    boardTaskEditSlideInInsertPriority(i)
+function pushBoardTaskToClipboard(i) {
+    taskClipboard.title = taskList[i].title
+    taskClipboard.firstNames = taskList[i].firstNames
+    taskClipboard.lastNames = taskList[i].lastNames
+    taskClipboard.dueDate = taskList[i].dueDate
+    taskClipboard.category = taskList[i].category
+    taskClipboard.categoryColor = taskList[i].categoryColor
+    taskClipboard.priority = taskList[i].priority
+    taskClipboard.description = taskList[i].description
+    taskClipboard.subtasks = taskList[i].subtasks
+    taskClipboard.subtasksState = taskList[i].subtasksState
 }
 
-function boardTaskEditSlideInInsertTitle(i) {
+function boardTaskEditSlideInInsertValues() {
+    boardTaskEditSlideInInsertTitle()
+    boardTaskEditSlideInInsertDescription()
+    boardTaskEditSlideInInsertDueDate()
+    boardTaskEditSlideInInsertPriority()
+}
+
+function boardTaskEditSlideInInsertTitle() {
     let title = document.getElementById('addTaskInputTitle');
-    title.value = taskList[i].title
+    title.value = taskClipboard.title
 }
 
-function boardTaskEditSlideInInsertDescription(i) {
+function boardTaskEditSlideInInsertDescription() {
     let description = document.getElementById('addTaskDescription');
-    description.value = taskList[i].description
+    description.value = taskClipboard.description
 }
 
-function boardTaskEditSlideInInsertDueDate(i) {
+function boardTaskEditSlideInInsertDueDate() {
     let dueDate = document.getElementById('addTaskInputDate');
-    dueDate.value = taskList[i].dueDate
+    dueDate.value = taskClipboard.dueDate
 }
 
-function boardTaskEditSlideInInsertPriority(i) {
-    let priorityValue = taskList[i].priority
+function boardTaskEditSlideInInsertPriority() {
+    let priorityValue = taskClipboard.priority
     let priorityDocument = document.getElementById('addTaskPriorityInput' + priorityValue);
     priorityDocument.checked = true
 
@@ -538,14 +585,14 @@ function boardTaskEditSlideInInsertSubtasks(i) {
         if (subtaskState == true) {
             subtaskContainer.innerHTML += /*html*/ `
             <div class="add-task-subtask-div">
-                <input checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+                <input onclick="toggleSubtaskInTasklist(${i}, ${j})" checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
                 <span>${subtask}</span>
             </div>
         `;
         } else {
         subtaskContainer.innerHTML += /*html*/ `
             <div class="add-task-subtask-div">
-                <input class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+                <input onclick="toggleSubtaskInTasklist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
                 <span>${subtask}</span>
             </div>
         `;
@@ -553,21 +600,21 @@ function boardTaskEditSlideInInsertSubtasks(i) {
     }
 }
 
-// async function toggleSubtaskInTasklist(i, j) {
-//     let subtaskCheckbox = document.getElementById('editSubtask' + i + `-` + j)
-//     if (subtaskCheckbox.checked) {
-//         taskList[i].subtasksState.splice(j, 1, true)
-//     } else {
-//         taskList[i].subtasksState.splice(j, 1, false)
-//     }
-//     await backend.setItem('tasks', JSON.stringify(taskList));
-//     await initBackend()
-//     insertTaskToTodolistHTML()
-// }
+async function toggleSubtaskInTasklist(i, j) {
+    let subtaskCheckbox = document.getElementById('editSubtask' + i + `-` + j)
+    if (subtaskCheckbox.checked) {
+        taskList[i].subtasksState.splice(j, 1, true)
+    } else {
+        taskList[i].subtasksState.splice(j, 1, false)
+    }
+    await backend.setItem('tasks', JSON.stringify(taskList));
+    await initBackend()
+    insertTaskToTodolistHTML()
+}
 
 function boardTaskSlideInOkButton(i) {
     return /*html*/ `
-        <div onclick="insertOpenTaskSlideInHTML(${i})" class="board-task-slide-in-edit-task-ok-Button">Ok <img src="assets/img/checkicon.svg" alt=""></div>
+        <div onclick="boardTaskSaveEditTaskToTaskList(${i})" class="board-task-slide-in-edit-task-ok-Button">Ok <img src="assets/img/checkicon.svg" alt=""></div>
     `;
 }
 

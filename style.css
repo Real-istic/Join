@@ -958,7 +958,7 @@ nav {
   width: 84px;
   height: 61px;
   left: 460px;
-  bottom: -20px;
+  top: 103%;
   background: #4589ff;
   border-radius: 10px;
   transition: 80ms all ease-in-out;
