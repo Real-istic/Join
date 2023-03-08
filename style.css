@@ -833,7 +833,7 @@ nav {
 .board-task-slide-in-priority-div {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   padding: 0px;
   gap: 25px;
   width: 246px;
