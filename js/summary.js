@@ -1,7 +1,7 @@
 
 /**
  * 
- * call the summary content
+ * calls the summary-page
  */
 function insertSummary() {
     activeTab = 'summary';

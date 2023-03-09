@@ -2,7 +2,7 @@ let categoryColors = ['#de493e', '#259b24', '#1e88e5', '#fbc02d', '#9c27b0', '#0
 let contactListExpanded = false;
 
 /**
- * call the add task page
+ * calls the add-task-page
  * 
  */
 function insertAddTask() {
@@ -493,6 +493,7 @@ async function createTaskAddTaskSite() {
         return;
     } else {
         taskClipboard.title = title.value;
+        taskClipboard.taskStatus = 'toDo';
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
         await pushTaskToBackend()
@@ -527,7 +528,8 @@ function clearTaskClipboard() {
         'priority': '',
         'description': '',
         'subtasks': [],
-        'subtasksState': []
+        'subtasksState': [],
+        'taskStatus': ''
     }
 }
 

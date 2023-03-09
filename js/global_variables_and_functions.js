@@ -38,6 +38,7 @@ let taskClipboard = {
     'priority': '',
     'description': '',
     'subtasks': [],
-    'subtasksState': []
+    'subtasksState': [],
+    'taskStatus': ''
 }
 

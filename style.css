@@ -202,7 +202,7 @@ nav {
 }
 
 .nav-element:hover {
-  background: #D2E3FF;
+  background: #d2e3ff80;
 }
 
 .nav-element-active {
