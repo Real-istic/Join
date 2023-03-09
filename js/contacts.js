@@ -14,8 +14,7 @@ function insertContacts() {
             <div class="contact-left">${renderUserList()}</div>
             <div class="contact-right" id="contact-right"></div>
       </div>
-    
-      <div class="new-contact-button" onclick="openNewContact()">New contact
+        <div class="new-contact-button" onclick="openNewContact()">New contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
   `;
@@ -347,7 +346,7 @@ function showAddContact() {
 
             <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
-                <form onsubmit="return validateForm(); addNewContact();">
+                <form onsubmit="return validateForm(); addNewContact() return false;">
                 <div>
                     <div onclick="doNotClose()">
                         <div class="input-contact">
@@ -361,7 +360,7 @@ function showAddContact() {
                                         </div>
                 
                                         <div class="input-contact">
-                                            <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
+                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" value="">
                                                 <img src="./assets/img/phone.svg" alt="">
                                                 </div>
                                         </div>
