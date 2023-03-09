@@ -1,5 +1,7 @@
+let boardTaskStatus;
+
 /**
- * inserts board content
+ * calls the board-page
  * 
  */
 function insertBoard() {
@@ -7,7 +9,7 @@ function insertBoard() {
     markActiveNavElement(activeTab);
     removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
-    insertTaskToTodolistHTML()
+    insertTaskTolistHTML()
     // document.getElementById("help").classList.remove("help-none");
 }
 
@@ -37,7 +39,7 @@ function insertBoardHeaderHTML() {
                 <img src="assets/img/barrier.svg" alt="">
                 <img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
             </form>
-            <button class="add-task-button" onclick="addTaskOfScreenMenu()">Add task <img src="assets/img/plus.svg" alt=""></button>
+            <button class="add-task-button" onclick="addTaskOffScreenMenu('toDo')">Add task <img src="assets/img/plus.svg" alt=""></button>
         </div>`;
 }
 
@@ -67,7 +69,7 @@ function insertTodoTasksHTML() {
         <div class="to-do-tasks">
             <div class="to-do-header">
                 <span>To do</span>
-                <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                <img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('toDo')" src="assets/img/plusbutton.svg" alt="">
             </div>
             <div class="to-do-tasks-container" id="toDoTasksContainer">
                 <!-- tasks here -->
@@ -86,7 +88,7 @@ function insertInProgressTasksHTML() {
         <div class="in-progress-tasks">
             <div class="in-progress-header">
                 <span>In progress</span>
-                <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                <img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('inProgress')" src="assets/img/plusbutton.svg" alt="">
             </div>
             <div class="in-progress-tasks-container" id="inProgressTasksContainer">
                 <!-- tasks here -->
@@ -105,7 +107,7 @@ function insertAwaitFeedbackTasksHTML() {
         <div class="await-feedback-tasks">
             <div class="await-feedback-header">
                 <span>Await feedback</span>
-                <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                <img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('awaitFeedback')" src="assets/img/plusbutton.svg" alt="">
             </div>
             <div class="await-feedback-tasks-container" id="awaitFeedbackTasksContainer">
                 <!-- tasks here -->
@@ -124,7 +126,7 @@ function insertDoneTasksHTML() {
         <div class="done-tasks">
             <div class="done-header">
                 <span>Done</span>
-                <img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                <img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('done')" src="assets/img/plusbutton.svg" alt="">
             </div>
             <div class="done-tasks-container" id="doneTasksContainer">
                 <!-- tasks here -->
@@ -138,7 +140,8 @@ function insertDoneTasksHTML() {
  * and sets the div for it
  *
  */
-function addTaskOfScreenMenu() {
+function addTaskOffScreenMenu(taskStatus) {
+    boardTaskStatus = taskStatus;
     clearTaskClipboard()
     addTaskFillSlideInMenu()
     toggleAddTaskMenuOffScreen()
@@ -191,13 +194,17 @@ function toggleAddTaskMenuOffScreen() {
  * creates a task at the board
  * 
  */
-function insertTaskToTodolistHTML() {
-    let todoList = document.getElementById('toDoTasksContainer');
-    todoList.innerHTML = ``;
+function insertTaskTolistHTML() {
+    document.getElementById('toDoTasksContainer').innerHTML = ``;
+    document.getElementById('inProgressTasksContainer').innerHTML = ``;
+    document.getElementById('awaitFeedbackTasksContainer').innerHTML = ``;
+    document.getElementById('doneTasksContainer').innerHTML = ``;
+    let list;
 
     for (let i = 0; i < taskList.length; i++) {
+        list = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
         const task = taskList[i];
-        todoList.innerHTML += /*html*/ `
+        list.innerHTML += /*html*/ `
         <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
             <span style="background-color: ${task.categoryColor};" class="board-task-category">${task.category}</span>
             <div class="board-task-title-and-description">
@@ -367,7 +374,7 @@ async function boardTaskSaveEditTaskToTaskList(i) {
     } else {
         pushEditedTaskToTaskList(i)
         await backend.setItem('tasks', JSON.stringify(taskList));
-        insertTaskToTodolistHTML()
+        insertTaskTolistHTML()
         insertOpenTaskSlideInHTML(i)
         clearTaskClipboard()
     }
@@ -673,7 +680,7 @@ async function toggleSubtaskInTasklist(i, j) {
     }
     await backend.setItem('tasks', JSON.stringify(taskList));
     await initBackend()
-    insertTaskToTodolistHTML()
+    insertTaskTolistHTML()
 }
 
 /**
@@ -705,12 +712,13 @@ async function createTaskBoardSite() {
         return;
     } else {
         taskClipboard.title = title.value;
+        taskClipboard.taskStatus = boardTaskStatus;
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
         await pushTaskToBackend()
         confirmAddedTaskToBoard()
         await initBackend()
-        insertTaskToTodolistHTML()
+        insertTaskTolistHTML()
         addTaskFillSlideInMenu()
         clearTaskClipboard()
     }

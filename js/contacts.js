@@ -1,6 +1,6 @@
 /**
  *
- * Call the contacts content
+ * Call the contacts-page
  */
 function insertContacts() {
   activeTab = "contacts";
