@@ -486,11 +486,23 @@ function addSubtaskToClipboard(checkbox) {
  * @returns validation information
  */
 async function createTaskAddTaskSite() {
+
     let title = document.getElementById('addTaskInputTitle');
+    let searchKey = 'title';
+    let searchValue = title.value
+    let isValuePresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
         return;
+    } else if (title.value.length >= 35) {
+        title.setCustomValidity('Title is too long');
+        title.reportValidity();
+        return;
+    } else if (isValuePresent) {
+        title.setCustomValidity('Title is already assigned!');
+        title.reportValidity();
+        return
     } else {
         taskClipboard.title = title.value;
         taskClipboard.taskStatus = 'toDo';

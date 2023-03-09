@@ -206,7 +206,7 @@ function insertTaskTolistHTML() {
         const task = taskList[i];
         list.innerHTML += /*html*/ `
         <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-            <span style="background-color: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+            <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
             <div class="board-task-title-and-description">
                 <span class="board-task-title">${task.title}</span>
                 <span class="board-task-description">${task.description}</span>
@@ -265,7 +265,7 @@ function insertAssignedContactsToTaskHTML() {
                     if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
                         let userBackgroundColor = userList[k].backgroundColor;
                         contactContainer.innerHTML += /*html*/ `
-                        <div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
+                        <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
                         `;
                     }
                 }
@@ -278,7 +278,7 @@ function insertAssignedContactsToTaskHTML() {
                     if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
                         let userBackgroundColor = userList[k].backgroundColor;
                         contactContainer.innerHTML += /*html*/ `
-                        <div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
+                        <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
                         `;
                     }
                 }
@@ -408,7 +408,7 @@ function insertBoardTaskSlideInCategoryHTML(i) {
     return /*html*/ `
         <div class="board-task-slide-in-category">
             <img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
-            <span class="board-task-category" style="background-color:${taskList[i].categoryColor};">${taskList[i].category}</span>
+            <span class="board-task-category" style="background:${taskList[i].categoryColor};">${taskList[i].category}</span>
         </div>
     `;
 }
@@ -495,7 +495,7 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
                 let userBackgroundColor = userList[k].backgroundColor;
                 contactContainer.innerHTML += /*html*/ `
                     <div class="board-task-slide-in-contact">
-                        <div class="add-task-selected-contact" style="background-color:${userBackgroundColor}; margin:0;">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div><span class="board-task-slide-in-contact-name">${firstNameTask} ${lastNameTask}</span>
+                        <div class="add-task-selected-contact" style="background:${userBackgroundColor}; margin:0;">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div><span class="board-task-slide-in-contact-name">${firstNameTask} ${lastNameTask}</span>
                     </div>    
                 `;
             }
@@ -621,7 +621,7 @@ function boardTaskEditSlideInInsertPriority() {
  */
 function boardTaskSlideInSubtaskHeaderHTML() {
     return /*html*/ `
-        <span class="board-task-slide-in-edit-task-subtask">Subtasks</span>
+        <span class="board-task-slide-in-edit-task-subtask">Subtasks:</span>
     `;
 }
 
@@ -702,6 +702,10 @@ function boardTaskSlideInOkButton(i) {
  */
 async function createTaskBoardSite() {
     let title = document.getElementById('addTaskInputTitle');
+    let searchKey = 'title';
+    let searchValue = title.value
+    let isValuePresent = taskList.some(obj => obj[searchKey] == searchValue);
+
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
@@ -710,6 +714,10 @@ async function createTaskBoardSite() {
         title.setCustomValidity('Title is too long');
         title.reportValidity();
         return;
+    } else if (isValuePresent) {
+        title.setCustomValidity('Title is already assigned!');
+        title.reportValidity();
+        return
     } else {
         taskClipboard.title = title.value;
         taskClipboard.taskStatus = boardTaskStatus;
