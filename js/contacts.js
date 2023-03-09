@@ -359,7 +359,7 @@ function showAddContact() {
                                         </div>
                 
                                         <div class="input-contact">
-                                            <input required="" type="text" id="contactNewNumber" class="input-contact-name" value="">
+                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" value="">
                                                 <img src="./assets/img/phone.svg" alt="">
                                                 </div>
                                         </div>
