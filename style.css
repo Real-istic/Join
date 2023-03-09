@@ -206,7 +206,7 @@ nav {
 }
 
 .nav-element-active {
-  background: #D2E3FF;
+  background: #D2E3FF!important;
 }
 
 .nav-element img {
