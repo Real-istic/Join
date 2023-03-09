@@ -3,7 +3,7 @@
  * Call the contacts content
  */
 function insertContacts() {
-  activeTab = 'contacts';
+  activeTab = "contacts";
   markActiveNavElement(activeTab);
   removeHelp();
   contentDiv.innerHTML = /*html*/ `
@@ -97,7 +97,6 @@ function renderUserList() {
       </div>
     `;
   }
-
   return userListHTML;
 }
 
@@ -180,9 +179,9 @@ function editContact(i) {
 
   editContactFadeIn.innerHTML = /*html*/ `
     <div class="edit-contact">
-      <div class="edit-contact-head" onclick="hideEditContacts()">
+      <div class="edit-contact-head">
         <div class="edit-contact-cross">
-          <img class="img-cross" src="./assets/img/theCross.svg" alt="">
+          <img class="img-cross" src="./assets/img/theCross.svg" onclick="hideEditContacts()" alt="">
         </div>
 
         <div class="edit-contact-header-info">
@@ -290,7 +289,7 @@ function bgHide() {
  * remove the gray background from content
  */
 function bgHideRemove() {
-  RemoveAddContact();
+  removeAddContact();
   const bgHideRemove = document.getElementById("contact-left-fadeIn-bg");
   bgHideRemove.classList.remove("show-left");
 }
@@ -299,7 +298,7 @@ function bgHideRemove() {
  *
  *  remove the Add contact content from the left Side
  */
-function RemoveAddContact() {
+function removeAddContact() {
   let newContactFadeIn = document.getElementById("contact-left-fadeIn");
   newContactFadeIn.classList.remove("show-left");
 }
@@ -385,8 +384,6 @@ function showAddContact() {
   return newContactFadeIn;
 }
 
-
-
 /**
  *
  * invite the NewContact content
@@ -397,7 +394,10 @@ function addNewContact() {
   const contactEditNumber = document.getElementById("contactNewNumber");
 
   // Verify that the first and last name have been entered.
-  if (contactEditName.value === "" || contactEditName.value.split(" ").length < 2) {
+  if (
+    contactEditName.value === "" ||
+    contactEditName.value.split(" ").length < 2
+  ) {
     alert("Please enter a valid first and last name");
     return;
   }
@@ -435,12 +435,8 @@ async function loadEditContact() {
  * Close the editContact content and remove the show class from the editContactFadeIn-bg
  */
 function hideEditContacts() {
-  const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
-  const editContactFadeIn = document.getElementById("contact-left-fadeIn");
-  editContactFadeInBg.addEventListener("click", function () {
-    editContactFadeInBg.classList.remove("show-left");
-    editContactFadeIn.classList.remove("show-left");
-  });
+  bgHideRemove();
+  removeAddContact()
 }
 
 /**

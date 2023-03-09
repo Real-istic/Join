@@ -1,9 +1,19 @@
+/**
+ * 
+ * hide question mark on the top right side   * 
+ * @param {string} helpHTML
+ */
 function help() {
     contentDiv.innerHTML = helpHTML();
     document.getElementById("help").classList.add("help-none");
 
 }
 
+/**
+ * 
+ * show content of the help page
+ * @param {string} helpHTML 
+ */ 
 function helpHTML() {
     return /*html*/`
      <div onclick="insertSummary()"><img class="help-arrow" src="assets/img/help-arrow.svg" alt=""></div>

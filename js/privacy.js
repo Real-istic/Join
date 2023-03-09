@@ -1,8 +1,17 @@
+/**
+  * remove class help-none to show the question mark on the top right side
+ * @param {string} contentDivId
+ */
 function insertPrivacy() {
     contentDiv.innerHTML = privacyHTML();
     document.getElementById("help").classList.remove("help-none");
 }
 
+/**
+ * 
+ * show content of the privacy page
+ * @returns
+ */
 function privacyHTML() {
     return /*html*/`
 <div>
