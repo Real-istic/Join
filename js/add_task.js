@@ -1,5 +1,4 @@
 let categoryColors = ['#de493e', '#259b24', '#1e88e5', '#fbc02d', '#9c27b0', '#00897b'];
-
 let contactListExpanded = false;
 
 /**
@@ -7,7 +6,9 @@ let contactListExpanded = false;
  * 
  */
 function insertAddTask() {
-    clearTaskClipboard()
+    activeTab = 'addTask';
+    markActiveNavElement(activeTab);
+    clearTaskClipboard();
     contentDiv.innerHTML = insertTaskLeft();
     document.getElementById("help").classList.remove("help-none");
 }

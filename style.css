@@ -202,8 +202,11 @@ nav {
 }
 
 .nav-element:hover {
-  background-color: #005dff;
-  color: white;
+  background: #D2E3FF;
+}
+
+.nav-element-active {
+  background: #D2E3FF;
 }
 
 .nav-element img {

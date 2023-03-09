@@ -3,6 +3,8 @@
  * Call the contacts content
  */
 function insertContacts() {
+  activeTab = 'contacts';
+  markActiveNavElement(activeTab);
   removeHelp();
   contentDiv.innerHTML = /*html*/ `
       ${addTaskSlideInMenu()}
