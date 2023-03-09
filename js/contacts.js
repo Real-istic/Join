@@ -345,7 +345,7 @@ function showAddContact() {
 
             <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
-                <form onsubmit="return validateForm(); addNewContact();">
+                <form onsubmit="return validateForm(); addNewContact() return false;">
                 <div>
                     <div onclick="doNotClose()">
                         <div class="input-contact">
