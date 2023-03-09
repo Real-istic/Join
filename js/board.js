@@ -5,6 +5,7 @@
 function insertBoard() {
     activeTab = 'board';
     markActiveNavElement(activeTab);
+    removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
     insertTaskToTodolistHTML()
     // document.getElementById("help").classList.remove("help-none");

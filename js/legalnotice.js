@@ -1,8 +1,17 @@
+/**
+ * remove class help-none to show the question mark on the top right side
+ * @param {string} contentDivId
+ */
 function insertLegalNotice(){
     contentDiv.innerHTML = legalNoticeHTML();
     document.getElementById("help").classList.remove("help-none");
 }
 
+/**
+ * 
+ * show content of the legal notice page
+ * @returns 
+ */
 function legalNoticeHTML(){
     return /*html*/`
     <div>
