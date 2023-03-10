@@ -490,7 +490,7 @@ async function createTaskAddTaskSite() {
     let title = document.getElementById('addTaskInputTitle');
     let searchKey = 'title';
     let searchValue = title.value
-    let isValuePresent = taskList.some(obj => obj[searchKey] == searchValue);
+    let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
@@ -499,7 +499,7 @@ async function createTaskAddTaskSite() {
         title.setCustomValidity('Title is too long');
         title.reportValidity();
         return;
-    } else if (isValuePresent) {
+    } else if (valueIsPresent) {
         title.setCustomValidity('Title is already assigned!');
         title.reportValidity();
         return

@@ -1,3 +1,7 @@
+/**
+ * variable for the addTaskOffScreenMenu() function.
+ * so the function is able to push the task to the specific column in the board
+ */
 let boardTaskStatus;
 
 /**
@@ -223,6 +227,12 @@ function insertTaskTolistHTML() {
     insertAssignedContactsToTaskHTML()
 }
 
+/**
+ * checks if subtasks exist, if the exist, the subtaskstatus gets implemented
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
 function insertSubtaskProgress(i) {
     const task = taskList[i]
     if (task.subtasks.length > 0) {
@@ -259,7 +269,7 @@ function fillSubtaskStatusbar(i) {
 }
 
 /**
- * inserts the contacts to the task
+ * inserts the assigned contacts to the task
  * 
  */
 function insertAssignedContactsToTaskHTML() {
@@ -375,7 +385,7 @@ async function boardTaskSaveEditTaskToTaskList(i) {
     let title = document.getElementById('addTaskInputTitle');
     let searchKey = 'title';
     let searchValue = title.value
-    let isValuePresent = taskList.some(obj => obj[searchKey] == searchValue);
+    let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
@@ -384,6 +394,10 @@ async function boardTaskSaveEditTaskToTaskList(i) {
         title.setCustomValidity('Title is too long!');
         title.reportValidity();
         return;
+    } else if (!(title.value == taskClipboard.title) && (valueIsPresent)) {
+        title.setCustomValidity('Title is already assigned!');
+        title.reportValidity();
+        return
     } else {
         pushEditedTaskToTaskList(i)
         await backend.setItem('tasks', JSON.stringify(taskList));
