@@ -37,11 +37,11 @@ function insertBoardHTML() {
 function insertBoardHeaderHTML() {
     return /*html*/ `
             <div class="board-header">
-            <form class="task-form" action="" onsubmit="searchTask()">
-                <input onkeyup="searchTask()" class="search-task-input-field" id="searchTaskInputField" type="text" placeholder="Find Task">
+            <div class="task-form" action="" >
+                <input onkeydown="if(event.keyCode==13){event.preventDefault(); searchTask()}" class="search-task-input-field" id="searchTaskInputField" type="text" placeholder="Find Task">
                 <img src="assets/img/barrier.svg" alt="">
                 <img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
-            </form>
+            </div>
             <button class="add-task-button" onclick="addTaskOffScreenMenu('toDo')">Add task <img src="assets/img/plus.svg" alt=""></button>
         </div>`;
 }
