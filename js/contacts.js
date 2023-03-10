@@ -208,12 +208,12 @@ function editContact(i) {
               </div>
 
               <div class="input-contact">
-                <input required type="text" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+                <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
                   <img src="./assets/img/phone.svg" alt="">
               </div>          
             </div>
               <div class="button-container">
-                <button class="button-create" type="" onclick="saveEditContact(${i})">Save</button>
+                <button class="button-create">Save</button>
               </div>
           </form>
       </div>
@@ -394,11 +394,17 @@ function addNewContact() {
   const contactEditNumber = document.getElementById("contactNewNumber");
 
   // Verify that the first and last name have been entered.
-  if (
-    contactEditName.value === "" ||
-    contactEditName.value.split(" ").length < 2
-  ) {
-    alert("Please enter a valid first and last name");
+  if (contactEditName.value === "" || contactEditName.value.split(" ").length < 2) {
+    contactEditName.setCustomValidity("Please enter your first and last name.");
+    contactEditName.reportValidity();
+    return;
+  } if (contactEditEmail.value === "") {
+    contactEditEmail.setCustomValidity("Please enter your email.");
+    contactEditEmail.reportValidity();
+    return;
+  } if (contactEditNumber.value === "") {
+    contactEditNumber.setCustomValidity("Please enter your phone number.");
+    contactEditNumber.reportValidity();
     return;
   }
 
