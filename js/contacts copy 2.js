@@ -6,24 +6,6 @@ function insertContacts() {
   activeTab = "contacts";
   markActiveNavElement(activeTab);
   removeHelp();
-  insertContentHTML();
-  addTaskFillSlideInMenu();
-  eventOnEditContact();
-}
-
-/**
- *
- * remove classlist of ID help
- */
-function removeHelp() {
-  document.getElementById("help").classList.remove("help-none");
-}
-
-/**
- * Renders the contacts content
- * @returns The HTML part
- * */
-function insertContentHTML() {
   contentDiv.innerHTML = /*html*/ `
       ${addTaskSlideInMenu()}
       <div class="contact-main">
@@ -36,7 +18,18 @@ function insertContentHTML() {
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
       <div class="newContactCreated display-none" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>
-`;
+
+  `;
+  addTaskFillSlideInMenu();
+  eventOnEditContact();
+}
+
+/**
+ *
+ * remove classlist of ID help
+ */
+function removeHelp() {
+  document.getElementById("help").classList.remove("help-none");
 }
 
 /**
@@ -54,6 +47,7 @@ function eventOnEditContact() {
 
 /**
  * Renders the contacts content with a sort the list of initial letters alphabetically
+ *
  * @returns The HTML part
  */
 function renderUserList() {
@@ -93,22 +87,26 @@ function renderUserList() {
               <p class="contact-email">${userList[i].email}</p>
             </div>
           </div>
-        </div>`;
+        </div>
+        `;
       }
     }
+
     userListHTML += /*html*/ `
       <div class="contact-letter-main" >
         <h4 class="contact-letter">${initialLetter}</h4>
         ${usersForLetterHTML}
-      </div>`;
+      </div>
+    `;
   }
   return userListHTML;
 }
 
 /**
  * Call the renderContactSideScroll content and add show class for fade in from right
- * 
+ *
  * @param {number} i The index of the user in the userList
+ *
  * */
 function contactRightSide(i) {
   let rightSide = document.getElementById("contact-right");
@@ -129,6 +127,7 @@ function renderContactSideScroll(i) {
   const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
+
     <div class="contact-right-side">
       <div class="show-contact">
         <div id="contactdetails">
@@ -142,21 +141,26 @@ function renderContactSideScroll(i) {
               </div>
             </div>
           </div>
+
           <div class="contact-detail-info-main">
             <p class="contact-detail-info">Contact Information</p>
             <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
-          </div>              
+          </div>
+              
           <div>
             <p class="contact-detail-email-number">Email</p>
             <a href="mailto:${userList[i].email}"><span>${userList[i].email}</span></a>
           </div>
+
           <div>
             <p class="contact-detail-email-number">Mobile</p>
             <p>${userList[i].phoneNumber}</p> 
           </div>
         </div>
       </div>
-    </div>`;
+    </div>
+    `;
+
   return ContactSideScrollHTML;
 }
 
@@ -164,6 +168,7 @@ function renderContactSideScroll(i) {
  * Call the editContact content
  *
  * @param {number} i The index of the user in the userList
+ *
  */
 function editContact(i) {
   let editContactFadeIn = document.getElementById("contact-left-fadeIn");
@@ -186,20 +191,24 @@ function editContact(i) {
             <div class="edit-contact-h">Edit contact</div>                   
           </div>
         </div>
+
         <div class="edit-contact-main" onclick="doNotClose()">
           <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
             <p>${contactNameLetter}</p>
           </div>
+
           <form onsubmit="invEditContact(${i}); return false">
             <div>
               <div class="input-contact">
                 <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
                 <img src="./assets/img/signup-user.svg" alt="">
               </div>
+
               <div class="input-contact">
                 <input required type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
                   <img src="./assets/img/login-email.svg" alt="">
               </div>
+
               <div class="input-contact">
                 <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
                   <img src="./assets/img/phone.svg" alt="">
@@ -210,7 +219,9 @@ function editContact(i) {
               </div>
           </form>
       </div>
-    </div>`;
+    </div>
+`;
+
   return editContactFadeIn;
 }
 
@@ -234,27 +245,27 @@ function invEditContact(index) {
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
+
+  const contactDetailBigLetter = document.querySelector(
+    ".contact-detail-big-letter"
+  );
   contactDetailBigLetter.textContent = contactNameLetter;
-  const contactDetailBigName = document.querySelector(".contact-detail-big-name");
+
+  const contactDetailBigName = document.querySelector(
+    ".contact-detail-big-name"
+  );
   contactDetailBigName.textContent = contactName;
 
-hideEditContacts();
-saveEditContact(userList);
-insertContacts();
-initbackend();
-}
+  // Edit Hide contact
+  const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
+  const editContactFadeIn = document.getElementById("contact-left-fadeIn");
+  editContactFadeInBg.classList.remove("show-left");
+  editContactFadeIn.classList.remove("show-left");
 
-/**
- * Hide the editContact content
- * @param {number} i The index of the user in the userList
- */
-  function hideEditContacts() {
-    const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
-    const editContactFadeIn = document.getElementById("contact-left-fadeIn");
-    editContactFadeInBg.classList.remove("show-left");
-    editContactFadeIn.classList.remove("show-left");
-  }
+  saveEditContact(userList);
+  insertContacts();
+  initbackend();
+}
 
 /**
  *
