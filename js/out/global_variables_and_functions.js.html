@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: mini_backend.js</title>
+    <title>JSDoc: Source: global_variables_and_functions.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: mini_backend.js</h1>
+    <h1 class="page-title">Source: global_variables_and_functions.js</h1>
 
     
 
@@ -26,117 +26,50 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let jsonFromServer = {};
-let BASE_SERVER_URL;
-
-const backend = {
-    setItem: function(key, item) {
-        jsonFromServer[key] = item;
-        return saveJSONToServer();
-    },
-    getItem: function(key) {
-        if (!jsonFromServer[key]) {
-            return null;
-        }
-        return jsonFromServer[key];
-    },
-    deleteItem: function(key) {
-        delete jsonFromServer[key];
-        return saveJSONToServer();
-    }
-};
-window.onload = async function() {
-    downloadFromServer();
-}
-
-async function downloadFromServer() {
-    let result = await loadJSONFromServer();
-    jsonFromServer = JSON.parse(result);
-    console.log('Loaded', result);
-}
-
-function setURL(url) {
-    BASE_SERVER_URL = url;
-}
+            <pre class="prettyprint source linenums"><code>/**
+ * the main render window
+ */
+let contentDiv = document.getElementById('content');
 
 /**
- * Loads a JSON or JSON Array to the Server
- * payload {JSON | Array} - The payload you want to store
+ * for the markActiveNavElement function
+ * 
  */
-
-async function loadJSONFromServer() {
-    let response = await fetch(BASE_SERVER_URL + '/nocors.php?json=database&amp;noache=' + (new Date().getTime()));
-    return await response.text();
-
-}
-
-function loadJSONFromServerOld() {
-    return new Promise(function(resolve, reject) {
-        let xhttp = new XMLHttpRequest();
-        let proxy = determineProxySettings();
-        let serverURL = proxy + BASE_SERVER_URL + '/nocors.php?json=database&amp;noache=' + (new Date().getTime());
-
-
-
-
-        xhttp.open('GET', serverURL);
-
-        xhttp.onreadystatechange = function(oEvent) {
-            if (xhttp.readyState === 4) {
-                if (xhttp.status >= 200 &amp;&amp; xhttp.status &lt;= 399) {
-                    resolve(xhttp.responseText);
-                } else {
-                    reject(xhttp.statusText);
-                }
-            }
-        };
-
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send();
-
-    });
-}
-
-
-
-
+let activeTab;
 
 /**
- * Saves a JSON or JSON Array to the Server
+ * marks the active tab in the nav-area
+ * 
+ * @param {*} navElement the executed tab
  */
-function saveJSONToServer() {
-    return new Promise(function(resolve, reject) {
-        let xhttp = new XMLHttpRequest();
-        let proxy = determineProxySettings();
-        let serverURL = proxy + BASE_SERVER_URL + '/save_json.php';
-        xhttp.open('POST', serverURL);
-
-        xhttp.onreadystatechange = function(oEvent) {
-            if (xhttp.readyState === 4) {
-                if (xhttp.status >= 200 &amp;&amp; xhttp.status &lt;= 399) {
-                    resolve(xhttp.responseText);
-                } else {
-                    reject(xhttp.statusText);
-                }
-            }
-        };
-
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify(jsonFromServer));
-
-    });
+function markActiveNavElement(activeTab) {
+    let summaryNavElement = document.getElementById('summaryNavElement');
+    summaryNavElement.classList.remove('nav-element-active')
+    let boardNavElement = document.getElementById('boardNavElement');
+    boardNavElement.classList.remove('nav-element-active')
+    let addTaskNavElement = document.getElementById('addTaskNavElement');
+    addTaskNavElement.classList.remove('nav-element-active')
+    let contactsNavElement = document.getElementById('contactsNavElement');
+    contactsNavElement.classList.remove('nav-element-active')
+    let tab = document.getElementById(activeTab + 'NavElement')
+    tab.classList.add('nav-element-active')
 }
 
-
-function determineProxySettings() {
-    return '';
-
-    if (window.location.href.indexOf('.developerakademie.com') > -1) {
-        return '';
-    } else {
-        return 'https://cors-anywhere.herokuapp.com/';
-    }
+/* if changes are made in this object, these changes must be made in the add_task.js, too. (function clearTask) !! */
+let taskClipboard = {
+    'title': '',
+    'firstNames': [],
+    'lastNames': [],
+    'dueDate': '',
+    'category': '',
+    'categoryColor': '',
+    'priority': '',
+    'description': '',
+    'subtasks': [],
+    'subtasksState': [],
+    'taskStatus': ''
 }
+
 </code></pre>
         </article>
     </section>

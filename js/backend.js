@@ -78,7 +78,7 @@ async function deleteCategory() {
  * pushes the taskClipboard to the backend
  * 
  */
-async function pushTaskToBackend(){
+async function pushTaskToBackend() {
     taskList.push(taskClipboard);
     await backend.setItem('tasks', JSON.stringify(taskList));
     await initBackend()
@@ -88,7 +88,7 @@ async function pushTaskToBackend(){
  * deletes all tasks from the backend
  * 
  */
-async function deleteTasksFromBackend(){
+async function deleteTasksFromBackend() {
     await backend.deleteItem('tasks');
     await initBackend()
 }
@@ -202,14 +202,14 @@ async function restoreBackend() {
         categoryName: 'Human Resources',
         categoryColor: '#9c27b0'
     },
-    
+
     {
         categoryName: 'Customer Service',
         categoryColor: '#00897b'
     }]
     await backend.setItem('category', JSON.stringify(categoryList));
 
-   taskList = [
+    taskList = [
         {
             "title": "Pitch for the Project",
             "firstNames": [

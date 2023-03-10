@@ -27,13 +27,23 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * inserts board content
+ * variable for the addTaskOffScreenMenu() function.
+ * so the function is able to push the task to the specific column in the board
+ */
+let boardTaskStatus;
+let list;
+
+/**
+ * calls the board-page
  * 
  */
 function insertBoard() {
+    list = taskList;
+    activeTab = 'board';
+    markActiveNavElement(activeTab);
+    removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
-    insertTaskToTodolistHTML()
-    // document.getElementById("help").classList.remove("help-none");
+    insertTaskTolistHTML()
 }
 
 /**
@@ -57,42 +67,54 @@ function insertBoardHTML() {
 function insertBoardHeaderHTML() {
     return /*html*/ `
             &lt;div class="board-header">
-            &lt;form class="task-form" action="" onsubmit="searchTask()">
-                &lt;input class="search-task-input-field" type="text" placeholder="Find Task" required>
+            &lt;div class="task-form" action="" >
+                &lt;input onkeyup="event.preventDefault(); searchTask()" class="search-task-input-field" id="searchTaskInputField" type="text" placeholder="Find Task">
                 &lt;img src="assets/img/barrier.svg" alt="">
                 &lt;img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
-            &lt;/form>
-            &lt;button class="add-task-button" onclick="addTaskOfScreenMenu()">Add task &lt;img src="assets/img/plus.svg" alt="">&lt;/button>
+            &lt;/div>
+            &lt;button class="add-task-button" onclick="addTaskOffScreenMenu('toDo')">Add task &lt;img src="assets/img/plus.svg" alt="">&lt;/button>
         &lt;/div>`;
 }
 
 /**
- * inserts board task content
+ * filters the titles of taskList for matches, then renders the results in the board
+ * 
+ */
+function searchTask() {
+    let searchInput = document.getElementById('searchTaskInputField').value;
+    list = taskList
+    list = list.filter(a => a.title.toLowerCase().includes(searchInput.toLowerCase()));
+    console.log(list); // gefundene Elemente protokollieren
+    insertTaskTolistHTML()
+}
+
+/**
+ * inserts board task status header
  * 
  * @returns board task content
  */
 function insertBoardTasks() {
     return /*html*/ `
     &lt;div class="board-tasks">
-     ${insertTodoTasksHTML()}
-     ${insertInProgressTasksHTML()}
-     ${insertAwaitFeedbackTasksHTML()}
-     ${insertDoneTasksHTML()}
+     ${insertTodoTasksHeaderHTML()}
+     ${insertInProgressTasksHeaderHTML()}
+     ${insertAwaitFeedbackTasksHeaderHTML()}
+     ${insertDoneTasksHeaderHTML()}
     &lt;/div>
     `;
 }
 
 /**
- * inserts to do tasks
+ * inserts to-do tasks header
  * 
- * @returns to do content
+ * @returns the html part
  */
-function insertTodoTasksHTML() {
+function insertTodoTasksHeaderHTML() {
     return/*html*/ `
         &lt;div class="to-do-tasks">
             &lt;div class="to-do-header">
                 &lt;span>To do&lt;/span>
-                &lt;img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                &lt;img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('toDo')" src="assets/img/plusbutton.svg" alt="">
             &lt;/div>
             &lt;div class="to-do-tasks-container" id="toDoTasksContainer">
                 &lt;!-- tasks here -->
@@ -102,16 +124,16 @@ function insertTodoTasksHTML() {
 }
 
 /**
- * inserts in progress tasks
+ * inserts in progress tasks header
  * 
- * @returns in progress content
+ * @returns the html part
  */
-function insertInProgressTasksHTML() {
+function insertInProgressTasksHeaderHTML() {
     return /*html*/ `
         &lt;div class="in-progress-tasks">
             &lt;div class="in-progress-header">
                 &lt;span>In progress&lt;/span>
-                &lt;img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                &lt;img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('inProgress')" src="assets/img/plusbutton.svg" alt="">
             &lt;/div>
             &lt;div class="in-progress-tasks-container" id="inProgressTasksContainer">
                 &lt;!-- tasks here -->
@@ -121,16 +143,16 @@ function insertInProgressTasksHTML() {
 }
 
 /**
- * inserts await feedback tasks
+ * inserts await feedback tasks header
  * 
- * @returns await feedback content
+ * @returns the html part
  */
-function insertAwaitFeedbackTasksHTML() {
+function insertAwaitFeedbackTasksHeaderHTML() {
     return /* html */ `
         &lt;div class="await-feedback-tasks">
             &lt;div class="await-feedback-header">
                 &lt;span>Await feedback&lt;/span>
-                &lt;img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                &lt;img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('awaitFeedback')" src="assets/img/plusbutton.svg" alt="">
             &lt;/div>
             &lt;div class="await-feedback-tasks-container" id="awaitFeedbackTasksContainer">
                 &lt;!-- tasks here -->
@@ -140,16 +162,16 @@ function insertAwaitFeedbackTasksHTML() {
 }
 
 /**
- * inserts done tasks
+ * inserts the done tasks header
  * 
- * @returns done content
+ * @returns the html part
  */
-function insertDoneTasksHTML() {
+function insertDoneTasksHeaderHTML() {
     return /*html*/ `
         &lt;div class="done-tasks">
             &lt;div class="done-header">
                 &lt;span>Done&lt;/span>
-                &lt;img class="board-add-task-plus-icon" onclick="addTaskOfScreenMenu()" src="assets/img/plusbutton.svg" alt="">
+                &lt;img class="board-add-task-plus-icon" onclick="addTaskOffScreenMenu('done')" src="assets/img/plusbutton.svg" alt="">
             &lt;/div>
             &lt;div class="done-tasks-container" id="doneTasksContainer">
                 &lt;!-- tasks here -->
@@ -163,7 +185,8 @@ function insertDoneTasksHTML() {
  * and sets the div for it
  *
  */
-function addTaskOfScreenMenu() {
+function addTaskOffScreenMenu(taskStatus) {
+    boardTaskStatus = taskStatus;
     clearTaskClipboard()
     addTaskFillSlideInMenu()
     toggleAddTaskMenuOffScreen()
@@ -216,26 +239,26 @@ function toggleAddTaskMenuOffScreen() {
  * creates a task at the board
  * 
  */
-function insertTaskToTodolistHTML() {
-    let todoList = document.getElementById('toDoTasksContainer');
-    todoList.innerHTML = ``;
-
-    for (let i = 0; i &lt; taskList.length; i++) {
-        const task = taskList[i];
-        todoList.innerHTML += /*html*/ `
+function insertTaskTolistHTML() {
+    document.getElementById('toDoTasksContainer').innerHTML = ``;
+    document.getElementById('inProgressTasksContainer').innerHTML = ``;
+    document.getElementById('awaitFeedbackTasksContainer').innerHTML = ``;
+    document.getElementById('doneTasksContainer').innerHTML = ``;
+    let lists;
+    for (let i = 0; i &lt; list.length; i++) {
+        lists = document.getElementById(list[i].taskStatus + 'TasksContainer');
+        const task = list[i];
+        lists.innerHTML += /*html*/ `
         &lt;div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-            &lt;span style="background-color: ${task.categoryColor};" class="board-task-category">${task.category}&lt;/span>
+            &lt;div class="board-task-category-div">
+                &lt;span style="background: ${task.categoryColor};" class="board-task-category">${task.category}&lt;/span>
+            &lt;/div>
             &lt;div class="board-task-title-and-description">
                 &lt;span class="board-task-title">${task.title}&lt;/span>
                 &lt;span class="board-task-description">${task.description}&lt;/span>
             &lt;/div>
             &lt;div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
-                &lt;div class="board-task-subtask-statusbar">
-                    &lt;div class="board-task-subtask-filled-statusbar" id="boardTaskSubtaskFilledStatusbar" style="width:${fillSubtaskStatusbar(i)  / task.subtasksState.length * 100}%;">&lt;/div>
-                &lt;/div>
-                &lt;span class="board-task-subtask-status-info">
-                    ${fillSubtaskStatusbar(i)} / ${task.subtasksState.length} Done
-                &lt;/span>
+                ${insertSubtaskProgress(i)}
             &lt;/div>
             &lt;div class="board-task-assigned-contacts-and-prority">
                 &lt;div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}">&lt;/div>
@@ -247,6 +270,32 @@ function insertTaskToTodolistHTML() {
     insertAssignedContactsToTaskHTML()
 }
 
+
+
+/**
+ * checks if subtasks exist, if the exist, the subtaskstatus gets implemented
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
+function insertSubtaskProgress(i) {
+    const task = list[i]
+    if (task.subtasks.length > 0) {
+        return /*html*/ `
+            &lt;div class="board-task-subtask-statusbar">
+                &lt;div class="board-task-subtask-filled-statusbar" id="boardTaskSubtaskFilledStatusbar" style="width:${fillSubtaskStatusbar(i) / task.subtasksState.length * 100}%;">&lt;/div>
+            &lt;/div>
+            &lt;span class="board-task-subtask-status-info">
+                    ${fillSubtaskStatusbar(i)} / ${task.subtasksState.length} Done
+            &lt;/span>
+        `;
+    } else {
+        return /*html*/ `
+            &lt;div class="board-task-subtask-filled-statusbar">&lt;/div>
+        `;
+    }
+}
+
 /**
  * fills the subtask-statusbar and sets the status-count on the board-tasks
  * 
@@ -254,7 +303,7 @@ function insertTaskToTodolistHTML() {
  * @returns the checked subtask-count
  */
 function fillSubtaskStatusbar(i) {
-    const task = taskList[i];
+    const task = list[i];
     let checkedSubtaskCount = 0;
 
     for (let j = 0; j &lt; task.subtasksState.length; j++) {
@@ -267,42 +316,42 @@ function fillSubtaskStatusbar(i) {
 }
 
 /**
- * inserts the contacts to the task
+ * inserts the assigned contacts to the task
  * 
  */
 function insertAssignedContactsToTaskHTML() {
 
-    for (let i = 0; i &lt; taskList.length; i++) {
-        let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
+    for (let i = 0; i &lt; list.length; i++) {
+        let contactContainer = document.getElementById('boardTaskAssignedContacts' + list[i].title);
 
-        if (!(taskList[i].firstNames.length > 2)) {
-            for (let j = 0; j &lt; taskList[i].firstNames.length; j++) {
-                let firstNameTask = taskList[i].firstNames[j];
-                let lastNameTask = taskList[i].lastNames[j];
+        if (!(list[i].firstNames.length > 2)) {
+            for (let j = 0; j &lt; list[i].firstNames.length; j++) {
+                let firstNameTask = list[i].firstNames[j];
+                let lastNameTask = list[i].lastNames[j];
                 for (let k = 0; k &lt; userList.length; k++) {
                     if (firstNameTask == userList[k].firstName &amp;&amp; lastNameTask == userList[k].lastName) {
                         let userBackgroundColor = userList[k].backgroundColor;
                         contactContainer.innerHTML += /*html*/ `
-                        &lt;div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>
+                        &lt;div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>
                         `;
                     }
                 }
             }
         } else {
             for (let j = 0; j &lt; 2; j++) {
-                let firstNameTask = taskList[i].firstNames[j];
-                let lastNameTask = taskList[i].lastNames[j];
+                let firstNameTask = list[i].firstNames[j];
+                let lastNameTask = list[i].lastNames[j];
                 for (let k = 0; k &lt; userList.length; k++) {
                     if (firstNameTask == userList[k].firstName &amp;&amp; lastNameTask == userList[k].lastName) {
                         let userBackgroundColor = userList[k].backgroundColor;
                         contactContainer.innerHTML += /*html*/ `
-                        &lt;div class="add-task-selected-contact" style="background-color:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>
+                        &lt;div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>
                         `;
                     }
                 }
             }
             contactContainer.innerHTML += /*html*/ `
-                &lt;div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}&lt;/div>
+                &lt;div class="add-task-assigned-contact-overflow">+${list[i].firstNames.length - 2}&lt;/div>
                 `;
         }
     }
@@ -341,7 +390,7 @@ function openTask(i) {
  */
 function toggleTaskBoardTask() {
     clearTaskClipboard()
-    
+
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
     opacityDiv.classList.toggle('reduce-opacity');
@@ -379,20 +428,27 @@ function insertOpenTaskSlideInHTML(i) {
  * @param {*} i for the specific task
  * @returns validation information
  */
-async function boardTaskSaveEditTaskToTaskList(i) {
+async function boardTaskSaveEditTaskTolist(i) {
     let title = document.getElementById('addTaskInputTitle');
+    let searchKey = 'title';
+    let searchValue = title.value
+    let valueIsPresent = list.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
         return;
     } else if (title.value.length >= 35) {
-        title.setCustomValidity('Title is too long');
+        title.setCustomValidity('Title is too long!');
         title.reportValidity();
         return;
+    } else if (!(title.value == taskClipboard.title) &amp;&amp; (valueIsPresent)) {
+        title.setCustomValidity('Title is already assigned!');
+        title.reportValidity();
+        return
     } else {
-        pushEditedTaskToTaskList(i)
+        pushEditedTaskTolist(i)
         await backend.setItem('tasks', JSON.stringify(taskList));
-        insertTaskToTodolistHTML()
+        insertTaskTolistHTML()
         insertOpenTaskSlideInHTML(i)
         clearTaskClipboard()
     }
@@ -403,17 +459,17 @@ async function boardTaskSaveEditTaskToTaskList(i) {
  * 
  * @param {*} i for the specific task
  */
-function pushEditedTaskToTaskList(i) {
-    taskList[i].title = document.getElementById('addTaskInputTitle').value;
-    taskList[i].firstNames = taskClipboard.firstNames
-    taskList[i].lastNames = taskClipboard.lastNames
-    taskList[i].dueDate = document.getElementById('addTaskInputDate').value;
-    taskList[i].category = taskClipboard.category
-    taskList[i].categoryColor = taskClipboard.categoryColor
+function pushEditedTaskTolist(i) {
+    list[i].title = document.getElementById('addTaskInputTitle').value;
+    list[i].firstNames = taskClipboard.firstNames
+    list[i].lastNames = taskClipboard.lastNames
+    list[i].dueDate = document.getElementById('addTaskInputDate').value;
+    list[i].category = taskClipboard.category
+    list[i].categoryColor = taskClipboard.categoryColor
     pushPriorityToTaskClipboard()
-    taskList[i].description = document.getElementById('addTaskDescription').value
-    taskList[i].subtasks = taskClipboard.subtasks
-    taskList[i].subtasksState = taskClipboard.subtasksState
+    list[i].description = document.getElementById('addTaskDescription').value
+    list[i].subtasks = taskClipboard.subtasks
+    list[i].subtasksState = taskClipboard.subtasksState
 }
 
 /**
@@ -426,7 +482,7 @@ function insertBoardTaskSlideInCategoryHTML(i) {
     return /*html*/ `
         &lt;div class="board-task-slide-in-category">
             &lt;img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
-            &lt;span class="board-task-category" style="background-color:${taskList[i].categoryColor};">${taskList[i].category}&lt;/span>
+            &lt;span class="board-task-category" style="background:${list[i].categoryColor};">${list[i].category}&lt;/span>
         &lt;/div>
     `;
 }
@@ -439,7 +495,7 @@ function insertBoardTaskSlideInCategoryHTML(i) {
  */
 function insertBoardTaskSlideInTitleHTML(i) {
     return /*html*/ `
-        &lt;span class="board-task-slide-in-title">${taskList[i].title}&lt;/span>
+        &lt;span class="board-task-slide-in-title">${list[i].title}&lt;/span>
     `;
 }
 
@@ -451,7 +507,7 @@ function insertBoardTaskSlideInTitleHTML(i) {
  */
 function insertBoardTaskSlideInDescriptionHTML(i) {
     return /*html*/ `
-    &lt;span class="board-task-slide-in-description">${taskList[i].description}&lt;/span>
+    &lt;span class="board-task-slide-in-description">${list[i].description}&lt;/span>
 `;
 }
 
@@ -465,7 +521,7 @@ function insertBoardTaskSlideInDueDateHTML(i) {
     return /*html*/ `
     &lt;div class="board-task-slide-in-date-div">
         &lt;span class="board-task-slide-in-datename">Due Date:&lt;/span>
-        &lt;span class="board-task-slide-in-datevalue">${taskList[i].dueDate}&lt;/span>
+        &lt;span class="board-task-slide-in-datevalue">${list[i].dueDate}&lt;/span>
     &lt;/div>
 `;
 }
@@ -480,7 +536,7 @@ function insertBoardTaskSlideInPriorityHTML(i) {
     return /*html*/ `
     &lt;div class="board-task-slide-in-priority-div">
         &lt;span class="board-task-slide-in-priorityname">Priority:&lt;/span>
-        &lt;span class="board-task-slide-in-priorityvalue board-task-slide-in-priority-${taskList[i].priority.toLowerCase()}">${taskList[i].priority} &lt;img src="assets/img/priority${taskList[i].priority.toLowerCase()}.svg" alt="">&lt;/span>
+        &lt;span class="board-task-slide-in-priorityvalue board-task-slide-in-priority-${list[i].priority.toLowerCase()}">${list[i].priority} &lt;img src="assets/img/priority${list[i].priority.toLowerCase()}.svg" alt="">&lt;/span>
     &lt;/div>
 `;
 }
@@ -505,15 +561,15 @@ function insertBoardTaskSlideInAssigned(i) {
 function insertBoardTaskSlideInAssignedContactsIteration(i) {
     let contactContainer = document.getElementById('boardTaskSlideInDiv');
 
-    for (let j = 0; j &lt; taskList[i].firstNames.length; j++) {
-        let firstNameTask = taskList[i].firstNames[j];
-        let lastNameTask = taskList[i].lastNames[j];
+    for (let j = 0; j &lt; list[i].firstNames.length; j++) {
+        let firstNameTask = list[i].firstNames[j];
+        let lastNameTask = list[i].lastNames[j];
         for (let k = 0; k &lt; userList.length; k++) {
             if (firstNameTask == userList[k].firstName &amp;&amp; lastNameTask == userList[k].lastName) {
                 let userBackgroundColor = userList[k].backgroundColor;
                 contactContainer.innerHTML += /*html*/ `
                     &lt;div class="board-task-slide-in-contact">
-                        &lt;div class="add-task-selected-contact" style="background-color:${userBackgroundColor}; margin:0;">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>&lt;span class="board-task-slide-in-contact-name">${firstNameTask} ${lastNameTask}&lt;/span>
+                        &lt;div class="add-task-selected-contact" style="background:${userBackgroundColor}; margin:0;">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>&lt;span class="board-task-slide-in-contact-name">${firstNameTask} ${lastNameTask}&lt;/span>
                     &lt;/div>    
                 `;
             }
@@ -526,7 +582,7 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
  * 
  * @param {*} i for the specific task
  */
-function boardTaskSlideInEditTask(i){
+function boardTaskSlideInEditTask(i) {
     pushBoardTaskToClipboard(i)
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
     slideInTask.innerHTML = /*html*/ `
@@ -554,16 +610,16 @@ function boardTaskSlideInEditTask(i){
  * @param {*} i for the specific task
  */
 function pushBoardTaskToClipboard(i) {
-    taskClipboard.title = taskList[i].title
-    taskClipboard.firstNames = taskList[i].firstNames
-    taskClipboard.lastNames = taskList[i].lastNames
-    taskClipboard.dueDate = taskList[i].dueDate
-    taskClipboard.category = taskList[i].category
-    taskClipboard.categoryColor = taskList[i].categoryColor
-    taskClipboard.priority = taskList[i].priority
-    taskClipboard.description = taskList[i].description
-    taskClipboard.subtasks = taskList[i].subtasks
-    taskClipboard.subtasksState = taskList[i].subtasksState
+    taskClipboard.title = list[i].title
+    taskClipboard.firstNames = list[i].firstNames
+    taskClipboard.lastNames = list[i].lastNames
+    taskClipboard.dueDate = list[i].dueDate
+    taskClipboard.category = list[i].category
+    taskClipboard.categoryColor = list[i].categoryColor
+    taskClipboard.priority = list[i].priority
+    taskClipboard.description = list[i].description
+    taskClipboard.subtasks = list[i].subtasks
+    taskClipboard.subtasksState = list[i].subtasksState
 }
 
 /**
@@ -639,7 +695,7 @@ function boardTaskEditSlideInInsertPriority() {
  */
 function boardTaskSlideInSubtaskHeaderHTML() {
     return /*html*/ `
-        &lt;span class="board-task-slide-in-edit-task-subtask">Subtasks&lt;/span>
+        &lt;span class="board-task-slide-in-edit-task-subtask">Subtasks:&lt;/span>
     `;
 }
 
@@ -662,20 +718,20 @@ function boardTaskSlideInAssignedToHeaderHTML() {
 function boardTaskSlideInInsertSubtasks(i) {
     let subtaskContainer = document.getElementById('addTaskCreateSubtask' + i);
 
-    for (let j = 0; j &lt; taskList[i].subtasks.length; j++) {
-        const subtask = taskList[i].subtasks[j];
-        const subtaskState = taskList[i].subtasksState[j];
+    for (let j = 0; j &lt; list[i].subtasks.length; j++) {
+        const subtask = list[i].subtasks[j];
+        const subtaskState = list[i].subtasksState[j];
         if (subtaskState == true) {
             subtaskContainer.innerHTML += /*html*/ `
             &lt;div class="add-task-subtask-div">
-                &lt;input onclick="toggleSubtaskInTasklist(${i}, ${j})" checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+                &lt;input onclick="toggleSubtaskInlist(${i}, ${j})" checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
                 &lt;span>${subtask}&lt;/span>
             &lt;/div>
         `;
         } else {
-        subtaskContainer.innerHTML += /*html*/ `
+            subtaskContainer.innerHTML += /*html*/ `
             &lt;div class="add-task-subtask-div">
-                &lt;input onclick="toggleSubtaskInTasklist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+                &lt;input onclick="toggleSubtaskInlist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
                 &lt;span>${subtask}&lt;/span>
             &lt;/div>
         `;
@@ -689,16 +745,16 @@ function boardTaskSlideInInsertSubtasks(i) {
  * @param {*} i for the specific task
  * @param {*} j for the specific subtask
  */
-async function toggleSubtaskInTasklist(i, j) {
+async function toggleSubtaskInlist(i, j) {
     let subtaskCheckbox = document.getElementById('editSubtask' + i + `-` + j)
     if (subtaskCheckbox.checked) {
-        taskList[i].subtasksState.splice(j, 1, true)
+        list[i].subtasksState.splice(j, 1, true)
     } else {
-        taskList[i].subtasksState.splice(j, 1, false)
+        list[i].subtasksState.splice(j, 1, false)
     }
     await backend.setItem('tasks', JSON.stringify(taskList));
     await initBackend()
-    insertTaskToTodolistHTML()
+    insertTaskTolistHTML()
 }
 
 /**
@@ -709,7 +765,7 @@ async function toggleSubtaskInTasklist(i, j) {
  */
 function boardTaskSlideInOkButton(i) {
     return /*html*/ `
-        &lt;div onclick="boardTaskSaveEditTaskToTaskList(${i})" class="board-task-slide-in-edit-task-ok-Button">Ok &lt;img src="assets/img/checkicon.svg" alt="">&lt;/div>
+        &lt;div onclick="boardTaskSaveEditTaskTolist(${i})" class="board-task-slide-in-edit-task-ok-Button">Ok &lt;img src="assets/img/checkicon.svg" alt="">&lt;/div>
     `;
 }
 
@@ -720,6 +776,10 @@ function boardTaskSlideInOkButton(i) {
  */
 async function createTaskBoardSite() {
     let title = document.getElementById('addTaskInputTitle');
+    let searchKey = 'title';
+    let searchValue = title.value
+    let valueIsPresent = list.some(obj => obj[searchKey] == searchValue);
+
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
@@ -728,14 +788,23 @@ async function createTaskBoardSite() {
         title.setCustomValidity('Title is too long');
         title.reportValidity();
         return;
+    } else if (valueIsPresent) {
+        title.setCustomValidity('Title is already assigned!');
+        title.reportValidity();
+        return
+    } else if (taskClipboard.priority == '') {
+        let priorityArea = document.getElementById('addTaskPriorityInputMedium');
+        priorityArea.setCustomValidity('No Priority given yet!')
+        priorityArea.reportValidity();
     } else {
         taskClipboard.title = title.value;
+        taskClipboard.taskStatus = boardTaskStatus;
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
         await pushTaskToBackend()
         confirmAddedTaskToBoard()
         await initBackend()
-        insertTaskToTodolistHTML()
+        insertTaskTolistHTML()
         addTaskFillSlideInMenu()
         clearTaskClipboard()
     }
@@ -750,13 +819,13 @@ async function createTaskBoardSite() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addCategoryToClipboard">addCategoryToClipboard</a></li><li><a href="global.html#addCategoryToClipboardHTML">addCategoryToClipboardHTML</a></li><li><a href="global.html#addContactToTask">addContactToTask</a></li><li><a href="global.html#addNewContact">addNewContact</a></li><li><a href="global.html#addSubtaskToClipboard">addSubtaskToClipboard</a></li><li><a href="global.html#addTaskCreateNewCategoryColorSelector">addTaskCreateNewCategoryColorSelector</a></li><li><a href="global.html#addTaskFillSlideInMenu">addTaskFillSlideInMenu</a></li><li><a href="global.html#addTaskOfScreenMenu">addTaskOfScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#boardTaskEditSlideInInsertDescription">boardTaskEditSlideInInsertDescription</a></li><li><a href="global.html#boardTaskEditSlideInInsertDueDate">boardTaskEditSlideInInsertDueDate</a></li><li><a href="global.html#boardTaskEditSlideInInsertPriority">boardTaskEditSlideInInsertPriority</a></li><li><a href="global.html#boardTaskEditSlideInInsertTitle">boardTaskEditSlideInInsertTitle</a></li><li><a href="global.html#boardTaskEditSlideInInsertValues">boardTaskEditSlideInInsertValues</a></li><li><a href="global.html#boardTaskSaveEditTaskToTaskList">boardTaskSaveEditTaskToTaskList</a></li><li><a href="global.html#boardTaskSlideInAssignedToHeaderHTML">boardTaskSlideInAssignedToHeaderHTML</a></li><li><a href="global.html#boardTaskSlideInEditTask">boardTaskSlideInEditTask</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasks">boardTaskSlideInInsertSubtasks</a></li><li><a href="global.html#boardTaskSlideInOkButton">boardTaskSlideInOkButton</a></li><li><a href="global.html#boardTaskSlideInSubtaskHeaderHTML">boardTaskSlideInSubtaskHeaderHTML</a></li><li><a href="global.html#checkCheckboxes">checkCheckboxes</a></li><li><a href="global.html#checkForContactInClipboard">checkForContactInClipboard</a></li><li><a href="global.html#checkForExpandedContactList">checkForExpandedContactList</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskClipboard">clearTaskClipboard</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#confirmCreateNewCategory">confirmCreateNewCategory</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#createCategoryInputHTML">createCategoryInputHTML</a></li><li><a href="global.html#createCategoryListHTML">createCategoryListHTML</a></li><li><a href="global.html#createContactAddTaskHTML">createContactAddTaskHTML</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createNewCategoryColorSelectorHTML">createNewCategoryColorSelectorHTML</a></li><li><a href="global.html#createNewCategoryColorSelectorRadioButtonHTML">createNewCategoryColorSelectorRadioButtonHTML</a></li><li><a href="global.html#createNewCategoryHTML">createNewCategoryHTML</a></li><li><a href="global.html#createSelectedContactIcons">createSelectedContactIcons</a></li><li><a href="global.html#createSelectedContactIconsDivHTML">createSelectedContactIconsDivHTML</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTaskAddTaskSite">createTaskAddTaskSite</a></li><li><a href="global.html#createTaskBoardSite">createTaskBoardSite</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#eventOnEditContact">eventOnEditContact</a></li><li><a href="global.html#expandContactList">expandContactList</a></li><li><a href="global.html#fillSubtaskStatusbar">fillSubtaskStatusbar</a></li><li><a href="global.html#getNewCategoryColor">getNewCategoryColor</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#hideContactList">hideContactList</a></li><li><a href="global.html#hideEditContacts">hideEditContacts</a></li><li><a href="global.html#hideNewContacts">hideNewContacts</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAddTask">insertAddTask</a></li><li><a href="global.html#insertAssignedContactsToTaskHTML">insertAssignedContactsToTaskHTML</a></li><li><a href="global.html#insertAwaitFeedbackTasksHTML">insertAwaitFeedbackTasksHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHTML">insertBoardHTML</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTaskSlideInAssigned">insertBoardTaskSlideInAssigned</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIteration">insertBoardTaskSlideInAssignedContactsIteration</a></li><li><a href="global.html#insertBoardTaskSlideInCategoryHTML">insertBoardTaskSlideInCategoryHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDescriptionHTML">insertBoardTaskSlideInDescriptionHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDueDateHTML">insertBoardTaskSlideInDueDateHTML</a></li><li><a href="global.html#insertBoardTaskSlideInPriorityHTML">insertBoardTaskSlideInPriorityHTML</a></li><li><a href="global.html#insertBoardTaskSlideInTitleHTML">insertBoardTaskSlideInTitleHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorFromInterruptHTML">insertCategorySelectorFromInterruptHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHTML">insertDoneTasksHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHTML">insertInProgressTasksHTML</a></li><li><a href="global.html#insertOpenTaskSlideInHTML">insertOpenTaskSlideInHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTaskToTodolistHTML">insertTaskToTodolistHTML</a></li><li><a href="global.html#insertTodoTasksHTML">insertTodoTasksHTML</a></li><li><a href="global.html#interruptCreateNewCategory">interruptCreateNewCategory</a></li><li><a href="global.html#invEditContact">invEditContact</a></li><li><a href="global.html#loadCategorylist">loadCategorylist</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadEditContact">loadEditContact</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#openAndCloseContactList">openAndCloseContactList</a></li><li><a href="global.html#openNewContact">openNewContact</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#pushBoardTaskToClipboard">pushBoardTaskToClipboard</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushEditedTaskToTaskList">pushEditedTaskToTaskList</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#removeContactFromTask">removeContactFromTask</a></li><li><a href="global.html#removeHelp">removeHelp</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#saveEditContact">saveEditContact</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li><li><a href="global.html#toggleContactTask">toggleContactTask</a></li><li><a href="global.html#toggleSubtaskInTasklist">toggleSubtaskInTasklist</a></li><li><a href="global.html#toggleTaskBoardTask">toggleTaskBoardTask</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#activeTab">activeTab</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addCategoryToClipboard">addCategoryToClipboard</a></li><li><a href="global.html#addCategoryToClipboardHTML">addCategoryToClipboardHTML</a></li><li><a href="global.html#addContactToTask">addContactToTask</a></li><li><a href="global.html#addNewContact">addNewContact</a></li><li><a href="global.html#addSubtaskToClipboard">addSubtaskToClipboard</a></li><li><a href="global.html#addTaskCreateNewCategoryColorSelector">addTaskCreateNewCategoryColorSelector</a></li><li><a href="global.html#addTaskFillSlideInMenu">addTaskFillSlideInMenu</a></li><li><a href="global.html#addTaskOffScreenMenu">addTaskOffScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#bgHide">bgHide</a></li><li><a href="global.html#bgHideRemove">bgHideRemove</a></li><li><a href="global.html#boardTaskEditSlideInInsertDescription">boardTaskEditSlideInInsertDescription</a></li><li><a href="global.html#boardTaskEditSlideInInsertDueDate">boardTaskEditSlideInInsertDueDate</a></li><li><a href="global.html#boardTaskEditSlideInInsertPriority">boardTaskEditSlideInInsertPriority</a></li><li><a href="global.html#boardTaskEditSlideInInsertTitle">boardTaskEditSlideInInsertTitle</a></li><li><a href="global.html#boardTaskEditSlideInInsertValues">boardTaskEditSlideInInsertValues</a></li><li><a href="global.html#boardTaskSaveEditTaskTolist">boardTaskSaveEditTaskTolist</a></li><li><a href="global.html#boardTaskSlideInAssignedToHeaderHTML">boardTaskSlideInAssignedToHeaderHTML</a></li><li><a href="global.html#boardTaskSlideInEditTask">boardTaskSlideInEditTask</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasks">boardTaskSlideInInsertSubtasks</a></li><li><a href="global.html#boardTaskSlideInOkButton">boardTaskSlideInOkButton</a></li><li><a href="global.html#boardTaskSlideInSubtaskHeaderHTML">boardTaskSlideInSubtaskHeaderHTML</a></li><li><a href="global.html#boardTaskStatus">boardTaskStatus</a></li><li><a href="global.html#checkCheckboxes">checkCheckboxes</a></li><li><a href="global.html#checkForContactInClipboard">checkForContactInClipboard</a></li><li><a href="global.html#checkForExpandedContactList">checkForExpandedContactList</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskClipboard">clearTaskClipboard</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#confirmCreateNewCategory">confirmCreateNewCategory</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#contentDiv">contentDiv</a></li><li><a href="global.html#createCategoryInputHTML">createCategoryInputHTML</a></li><li><a href="global.html#createCategoryListHTML">createCategoryListHTML</a></li><li><a href="global.html#createContactAddTaskHTML">createContactAddTaskHTML</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createNewCategoryColorSelectorHTML">createNewCategoryColorSelectorHTML</a></li><li><a href="global.html#createNewCategoryColorSelectorRadioButtonHTML">createNewCategoryColorSelectorRadioButtonHTML</a></li><li><a href="global.html#createNewCategoryHTML">createNewCategoryHTML</a></li><li><a href="global.html#createSelectedContactIcons">createSelectedContactIcons</a></li><li><a href="global.html#createSelectedContactIconsDivHTML">createSelectedContactIconsDivHTML</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTaskAddTaskSite">createTaskAddTaskSite</a></li><li><a href="global.html#createTaskBoardSite">createTaskBoardSite</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteTasksFromBackend">deleteTasksFromBackend</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#eventOnEditContact">eventOnEditContact</a></li><li><a href="global.html#expandContactList">expandContactList</a></li><li><a href="global.html#fillSubtaskStatusbar">fillSubtaskStatusbar</a></li><li><a href="global.html#getNewCategoryColor">getNewCategoryColor</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#helpHTML">helpHTML</a></li><li><a href="global.html#hideContactList">hideContactList</a></li><li><a href="global.html#hideEditContacts">hideEditContacts</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAddTask">insertAddTask</a></li><li><a href="global.html#insertAssignedContactsToTaskHTML">insertAssignedContactsToTaskHTML</a></li><li><a href="global.html#insertAwaitFeedbackTasksHeaderHTML">insertAwaitFeedbackTasksHeaderHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHTML">insertBoardHTML</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTaskSlideInAssigned">insertBoardTaskSlideInAssigned</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIteration">insertBoardTaskSlideInAssignedContactsIteration</a></li><li><a href="global.html#insertBoardTaskSlideInCategoryHTML">insertBoardTaskSlideInCategoryHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDescriptionHTML">insertBoardTaskSlideInDescriptionHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDueDateHTML">insertBoardTaskSlideInDueDateHTML</a></li><li><a href="global.html#insertBoardTaskSlideInPriorityHTML">insertBoardTaskSlideInPriorityHTML</a></li><li><a href="global.html#insertBoardTaskSlideInTitleHTML">insertBoardTaskSlideInTitleHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorFromInterruptHTML">insertCategorySelectorFromInterruptHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHeaderHTML">insertDoneTasksHeaderHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHeaderHTML">insertInProgressTasksHeaderHTML</a></li><li><a href="global.html#insertLegalNotice">insertLegalNotice</a></li><li><a href="global.html#insertOpenTaskSlideInHTML">insertOpenTaskSlideInHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertPrivacy">insertPrivacy</a></li><li><a href="global.html#insertSubtaskProgress">insertSubtaskProgress</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTaskTolistHTML">insertTaskTolistHTML</a></li><li><a href="global.html#insertTodoTasksHeaderHTML">insertTodoTasksHeaderHTML</a></li><li><a href="global.html#interruptCreateNewCategory">interruptCreateNewCategory</a></li><li><a href="global.html#invEditContact">invEditContact</a></li><li><a href="global.html#legalNoticeHTML">legalNoticeHTML</a></li><li><a href="global.html#loadCategorylist">loadCategorylist</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadEditContact">loadEditContact</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#markActiveNavElement">markActiveNavElement</a></li><li><a href="global.html#openAndCloseContactList">openAndCloseContactList</a></li><li><a href="global.html#openNewContact">openNewContact</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#privacyHTML">privacyHTML</a></li><li><a href="global.html#pushBoardTaskToClipboard">pushBoardTaskToClipboard</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushEditedTaskTolist">pushEditedTaskTolist</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTaskToBackend">pushTaskToBackend</a></li><li><a href="global.html#removeAddContact">removeAddContact</a></li><li><a href="global.html#removeContactFromTask">removeContactFromTask</a></li><li><a href="global.html#removeHelp">removeHelp</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#restoreBackend">restoreBackend</a></li><li><a href="global.html#saveEditContact">saveEditContact</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#searchTask">searchTask</a></li><li><a href="global.html#showAddContact">showAddContact</a></li><li><a href="global.html#showNewContactMessage">showNewContactMessage</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li><li><a href="global.html#toggleContactTask">toggleContactTask</a></li><li><a href="global.html#toggleSubtaskInlist">toggleSubtaskInlist</a></li><li><a href="global.html#toggleTaskBoardTask">toggleTaskBoardTask</a></li><li><a href="global.html#userList">userList</a></li><li><a href="global.html#validateForm">validateForm</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Mar 08 2023 20:40:01 GMT+0100 (Mitteleuropäische Normalzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 10 2023 20:25:36 GMT+0100 (Mitteleuropäische Normalzeit)
 </footer>
 
 <script> prettyPrint(); </script>
