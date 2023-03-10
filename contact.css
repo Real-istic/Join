@@ -1,7 +1,20 @@
 /* New Contact section*/
+.newContactCreated{
+    align-items: center;
+    justify-content: center;
+    padding-top: 26rem;
+    position: fixed;
+    padding-bottom: 20px;
+    height: 74px;
+    width: 326px;
+    left: 100%;
+    top: 0px;
+    border-radius: 20px;
+    z-index: 3;
+}
 
 .display-none {
-    display: none !important;
+    display: none;
    }
 
 .translate-y-110 {
@@ -382,6 +395,9 @@ element.style {
     left: 0%;
 }
 
+.show-message {
+    left: 24rem;
+}
 /*  edit Contact Section  */
 
 .edit-contact {
