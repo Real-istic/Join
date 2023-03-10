@@ -466,18 +466,13 @@ nav {
   font-size: 16px;
   text-align: left;
   width: 100%;
-  background: white;
+  background-color: white;
 }
 
 .search-task-input-field:focus {
   outline: none!important;
   border: none!important;
-  background: white;
-}
-
-.search-task-input-field:active {
-  background: white;
-  
+  background-color: white!important;
 }
 
 .add-task-button {
