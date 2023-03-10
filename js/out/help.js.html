@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: mini_backend.js</title>
+    <title>JSDoc: Source: help.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: mini_backend.js</h1>
+    <h1 class="page-title">Source: help.js</h1>
 
     
 
@@ -26,118 +26,47 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>let jsonFromServer = {};
-let BASE_SERVER_URL;
+            <pre class="prettyprint source linenums"><code>/**
+ * 
+ * hide question mark on the top right side   * 
+ * @param {string} helpHTML
+ */
+function help() {
+    contentDiv.innerHTML = helpHTML();
+    document.getElementById("help").classList.add("help-none");
 
-const backend = {
-    setItem: function(key, item) {
-        jsonFromServer[key] = item;
-        return saveJSONToServer();
-    },
-    getItem: function(key) {
-        if (!jsonFromServer[key]) {
-            return null;
-        }
-        return jsonFromServer[key];
-    },
-    deleteItem: function(key) {
-        delete jsonFromServer[key];
-        return saveJSONToServer();
-    }
-};
-window.onload = async function() {
-    downloadFromServer();
-}
-
-async function downloadFromServer() {
-    let result = await loadJSONFromServer();
-    jsonFromServer = JSON.parse(result);
-    console.log('Loaded', result);
-}
-
-function setURL(url) {
-    BASE_SERVER_URL = url;
 }
 
 /**
- * Loads a JSON or JSON Array to the Server
- * payload {JSON | Array} - The payload you want to store
- */
-
-async function loadJSONFromServer() {
-    let response = await fetch(BASE_SERVER_URL + '/nocors.php?json=database&amp;noache=' + (new Date().getTime()));
-    return await response.text();
-
-}
-
-function loadJSONFromServerOld() {
-    return new Promise(function(resolve, reject) {
-        let xhttp = new XMLHttpRequest();
-        let proxy = determineProxySettings();
-        let serverURL = proxy + BASE_SERVER_URL + '/nocors.php?json=database&amp;noache=' + (new Date().getTime());
-
-
-
-
-        xhttp.open('GET', serverURL);
-
-        xhttp.onreadystatechange = function(oEvent) {
-            if (xhttp.readyState === 4) {
-                if (xhttp.status >= 200 &amp;&amp; xhttp.status &lt;= 399) {
-                    resolve(xhttp.responseText);
-                } else {
-                    reject(xhttp.statusText);
-                }
-            }
-        };
-
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send();
-
-    });
-}
-
-
-
-
-
-/**
- * Saves a JSON or JSON Array to the Server
- */
-function saveJSONToServer() {
-    return new Promise(function(resolve, reject) {
-        let xhttp = new XMLHttpRequest();
-        let proxy = determineProxySettings();
-        let serverURL = proxy + BASE_SERVER_URL + '/save_json.php';
-        xhttp.open('POST', serverURL);
-
-        xhttp.onreadystatechange = function(oEvent) {
-            if (xhttp.readyState === 4) {
-                if (xhttp.status >= 200 &amp;&amp; xhttp.status &lt;= 399) {
-                    resolve(xhttp.responseText);
-                } else {
-                    reject(xhttp.statusText);
-                }
-            }
-        };
-
-        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhttp.send(JSON.stringify(jsonFromServer));
-
-    });
-}
-
-
-function determineProxySettings() {
-    return '';
-
-    if (window.location.href.indexOf('.developerakademie.com') > -1) {
-        return '';
-    } else {
-        return 'https://cors-anywhere.herokuapp.com/';
-    }
-}
-</code></pre>
+ * 
+ * show content of the help page
+ * @param {string} helpHTML 
+ */ 
+function helpHTML() {
+    return /*html*/`
+     &lt;div onclick="insertSummary()">&lt;img class="help-arrow" src="assets/img/help-arrow.svg" alt="">&lt;/div>
+            &lt;h1>HELP&lt;/h1>
+            &lt;h2>What is Join?&lt;/h2>
+            &lt;p class="help-p">Join is your project management tool of choice. It is a typical Kanban board for you and your team. Kanban boards visually depict work at various stages of a process using cards to represent work items and columns to represent each stage of the process. Cards are moved from left to right to show progress and to help coordinate teams performing the work.
+            &lt;/p>
+            &lt;h2>How to use it&lt;/h2>
+            &lt;div class="how-to-container">
+                &lt;div class="help-container">
+                    &lt;p class="help-number">1.&lt;/p>
+                    &lt;p>Add a task with title, description and category. Assign the task to other team members of your contact list or invite new contacts.&lt;/p>
+                &lt;/div>
+                &lt;div class="help-container">
+                    &lt;p class="help-number">2.&lt;/p>
+                    &lt;p>Check the current status of your tasks in the kanban-board. You can drag and drop your task to change the status. Also it is possible to edit the task details.&lt;/p>
+                &lt;/div>
+                &lt;div class="help-container">
+                    &lt;p class="help-number">3.&lt;/p>
+                    &lt;p>Add team members to your contact list to communicate to them fastly. Also you can assign tasks directly to your contacts.&lt;/p>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    `
+}</code></pre>
         </article>
     </section>
 
