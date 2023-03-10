@@ -17,6 +17,8 @@ function insertContacts() {
         <div class="new-contact-button" onclick="openNewContact()">New contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
+      <div class="newContactCreated" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>
+
   `;
   addTaskFillSlideInMenu();
   eventOnEditContact();
@@ -422,9 +424,23 @@ function addNewContact() {
   };
 
   addUser(newUser);
+  showNewContactMessage();
   hideEditContacts();
   insertContacts();
 }
+
+/**
+ * show new contact created message
+ * 
+ */
+function showNewContactMessage() {
+  const newContactMessage = document.getElementById("newContactCreated");
+  newContactMessage.classList.add("show-message");
+  setTimeout(() => {
+    newContactMessage.classList.remove("show-message");
+  }, 3000);
+}  
+ 
 
 /**
  *
