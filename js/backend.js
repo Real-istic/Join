@@ -1,4 +1,14 @@
+/**
+ * backend URL
+ * 
+ */
 setURL('https://gruppenarbeit-join-473.developerakademie.net/smallest_backend_ever')
+
+/**
+ * userList = list of our contacts/users
+ * categorylist = list of our choosable task-categories
+ * taskList = list of all saved tasks
+ */
 let userList = [];
 let categoryList = [];
 let taskList = [];
@@ -64,13 +74,245 @@ async function deleteCategory() {
     await initBackend();
 }
 
+/**
+ * pushes the taskClipboard to the backend
+ * 
+ */
 async function pushTaskToBackend(){
     taskList.push(taskClipboard);
     await backend.setItem('tasks', JSON.stringify(taskList));
     await initBackend()
 }
 
+/**
+ * deletes all tasks from the backend
+ * 
+ */
 async function deleteTasksFromBackend(){
     await backend.deleteItem('tasks');
     await initBackend()
+}
+
+/**
+ * restores test-data to the backend
+ * 
+ */
+async function restoreBackend() {
+    userList = [
+        {
+            "firstName": "Florian",
+            "lastName": "Schmidt",
+            "email": "florian.schmidt@example.com",
+            "phoneNumber": "0123456799",
+            "password": "trustno1",
+            "backgroundColor": "#FF5733"
+        },
+        {
+            "firstName": "Hannah",
+            "lastName": "Wagner",
+            "email": "hannah.wagner@example.com",
+            "phoneNumber": "0123456792",
+            "password": "securepassword",
+            "backgroundColor": "#FFC300"
+        },
+        {
+            "firstName": "Julia",
+            "lastName": "Schneider",
+            "email": "julia.schneider@example.com",
+            "phoneNumber": "0123456794",
+            "password": "football23",
+            "backgroundColor": "#C70039"
+        },
+        {
+            "firstName": "Lena",
+            "lastName": "Müller",
+            "email": "lena.mueller@example.com",
+            "phoneNumber": "0123456790",
+            "password": "qwerty",
+            "backgroundColor": "#FF5733"
+        },
+        {
+            "firstName": "Marcel",
+            "lastName": "Schulz",
+            "email": "marcel.schulz@example.com",
+            "phoneNumber": "0123456797",
+            "password": "monkey123",
+            "backgroundColor": "#900C3F"
+        },
+        {
+            "firstName": "Markus",
+            "lastName": "Schmidt",
+            "email": "markus.schmidt@example.com",
+            "phoneNumber": "0123456791",
+            "password": "password123",
+            "backgroundColor": "#FFC300"
+        },
+        {
+            "firstName": "Paula",
+            "lastName": "Becker",
+            "email": "paula.becker@example.com",
+            "phoneNumber": "0123456793",
+            "password": "p@ssw0rd",
+            "backgroundColor": "#581845"
+        },
+        {
+            "firstName": "Sabine",
+            "lastName": "Meyer",
+            "email": "sabine.meyer@example.com",
+            "phoneNumber": "0123456796",
+            "password": "letmein",
+            "backgroundColor": "#FF5733"
+        },
+        {
+            "firstName": "Sophie",
+            "lastName": "Hartmann",
+            "email": "sophie.hartmann@example.com",
+            "phoneNumber": "0123456798",
+            "password": "abcdefg",
+            "backgroundColor": "#C70039"
+        },
+        {
+            "firstName": "Tim",
+            "lastName": "Fischer",
+            "email": "tim.fischer@example.com",
+            "phoneNumber": "0123456795",
+            "password": "iloveyou",
+            "backgroundColor": "#900C3F"
+        }
+    ]
+    await backend.setItem('users', JSON.stringify(userList));
+
+    categoryList = [{
+        categoryName: 'Marketing',
+        categoryColor: '#de493e'
+    },
+    {
+        categoryName: 'Finance',
+        categoryColor: '#259b24'
+    },
+    {
+        categoryName: 'Production',
+        categoryColor: '#1e88e5'
+    },
+    {
+        categoryName: 'Sales',
+        categoryColor: '#fbc02d'
+    },
+    {
+        categoryName: 'Human Resources',
+        categoryColor: '#9c27b0'
+    },
+    
+    {
+        categoryName: 'Customer Service',
+        categoryColor: '#00897b'
+    }]
+    await backend.setItem('category', JSON.stringify(categoryList));
+
+   taskList = [
+        {
+            "title": "Pitch for the Project",
+            "firstNames": [
+                "Florian",
+                "Hannah",
+                "Julia",
+                "Lena"
+            ],
+            "lastNames": [
+                "Schmidt",
+                "Wagner",
+                "Schneider",
+                "Müller"
+            ],
+            "dueDate": "2023-03-08",
+            "category": "Marketing",
+            "categoryColor": "#de493e",
+            "priority": "Urgent",
+            "description": "Test Text without any Meaning because it is just for the test.",
+            "subtasks": [
+                "Subtask 1",
+                "Create new icons"
+            ],
+            "subtasksState": [
+                false,
+                false
+            ],
+            "taskStatus": "toDo"
+        },
+        {
+            "title": "Create the header",
+            "firstNames": [
+                "Julia",
+                "Sabine",
+                "Sophie",
+                "Tim"
+            ],
+            "lastNames": [
+                "Schneider",
+                "Meyer",
+                "Hartmann",
+                "Fischer"
+            ],
+            "dueDate": "2023-03-31",
+            "category": "Finance",
+            "categoryColor": "#259b24",
+            "priority": "Medium",
+            "description": "Test Text without any Meaning because it is just for the test.",
+            "subtasks": [
+                "Coding all day long"
+            ],
+            "subtasksState": [
+                false
+            ],
+            "taskStatus": "inProgress"
+        },
+        {
+            "title": "Do the Nav-Area",
+            "firstNames": [
+                "Hannah",
+                "Florian"
+            ],
+            "lastNames": [
+                "Wagner",
+                "Schmidt"
+            ],
+            "dueDate": "2023-03-31",
+            "category": "",
+            "categoryColor": "",
+            "priority": "Low",
+            "description": "Test Text without any Meaning because it is just for the test.",
+            "subtasks": [
+                "Coding all day long"
+            ],
+            "subtasksState": [
+                false
+            ],
+            "taskStatus": "awaitFeedback"
+        },
+        {
+            "title": "Contacts and stuff",
+            "firstNames": [
+                "Julia",
+                "Tim",
+                "Sophie",
+                "Daniel"
+            ],
+            "lastNames": [
+                "Schneider",
+                "Fischer",
+                "Hartmann",
+                "Ewr54345"
+            ],
+            "dueDate": "2023-03-21",
+            "category": "Human Resources",
+            "categoryColor": "#9c27b0",
+            "priority": "Low",
+            "description": "Test Text without any Meaning because it is just for the test.",
+            "subtasks": [],
+            "subtasksState": [],
+            "taskStatus": "done"
+        }
+    ]
+    await backend.setItem('tasks', JSON.stringify(taskList));
+    await initBackend();
 }

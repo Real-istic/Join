@@ -466,10 +466,13 @@ nav {
   font-size: 16px;
   text-align: left;
   width: 100%;
+  background-color: white;
 }
 
 .search-task-input-field:focus {
-  outline: none;
+  outline: none!important;
+  border: none!important;
+  background-color: white!important;
 }
 
 .add-task-button {
@@ -656,6 +659,13 @@ nav {
   transition: all 100ms ease-in-out;
 }
 
+.board-task-category-div {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  height: 30px;
+}
+
 .board-task-category {
   padding: 4px 25px;
   border-radius: 8px;
@@ -673,11 +683,12 @@ nav {
   padding: 0px;
   gap: 10px;
   width: 207px;
+  height: 85px;
   border-radius: 10px;
 }
 
 .board-task-title {
-  width: 138px;
+  width: 100%;
   max-height: 57px;
   font-family: "Open Sans";
   font-style: normal;
