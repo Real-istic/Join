@@ -4,7 +4,7 @@
 let contentDiv = document.getElementById('content');
 
 /**
- * variable for the markActiveNavElement function
+ * for the markActiveNavElement function
  * 
  */
 let activeTab;
@@ -27,7 +27,7 @@ function markActiveNavElement(activeTab) {
     tab.classList.add('nav-element-active')
 }
 
-/* if adding changes are made in this Clipboard, these changes must be made in the add_task.js, too. (function clearTask) !! */
+/* if changes are made in this object, these changes must be made in the add_task.js, too. (function clearTask) !! */
 let taskClipboard = {
     'title': '',
     'firstNames': [],

@@ -532,6 +532,7 @@ function clearTask() {
 /**
  * clears the taskClipboard
  * 
+ * if changes are made in this object, these changes must be made in the global_variables.js, too!! 
  */
 function clearTaskClipboard() {
     taskClipboard = {

@@ -38,7 +38,7 @@ function insertBoardHeaderHTML() {
     return /*html*/ `
             <div class="board-header">
             <form class="task-form" action="" onsubmit="searchTask()">
-                <input class="search-task-input-field" type="text" placeholder="Find Task" required>
+                <input onkeyup="searchTask()" class="search-task-input-field" id="searchTaskInputField" type="text" placeholder="Find Task">
                 <img src="assets/img/barrier.svg" alt="">
                 <img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
             </form>
@@ -46,28 +46,42 @@ function insertBoardHeaderHTML() {
         </div>`;
 }
 
+
+let filteredTaskList = [];
+
+function searchTask() {
+    let searchInput = document.getElementById('searchTaskInputField').value;
+    console.log(searchInput); // Suchbegriff protokollieren
+
+    console.log(taskList); // taskList protokollieren
+
+    filteredTaskList = taskList.filter(a => a.title.toLowerCase().includes(searchInput.toLowerCase()));
+    console.log(filteredTaskList); // gefundene Elemente protokollieren
+}
+
+
 /**
- * inserts board task content
+ * inserts board task status header
  * 
  * @returns board task content
  */
 function insertBoardTasks() {
     return /*html*/ `
     <div class="board-tasks">
-     ${insertTodoTasksHTML()}
-     ${insertInProgressTasksHTML()}
-     ${insertAwaitFeedbackTasksHTML()}
-     ${insertDoneTasksHTML()}
+     ${insertTodoTasksHeaderHTML()}
+     ${insertInProgressTasksHeaderHTML()}
+     ${insertAwaitFeedbackTasksHeaderHTML()}
+     ${insertDoneTasksHeaderHTML()}
     </div>
     `;
 }
 
 /**
- * inserts to do tasks
+ * inserts to-do tasks header
  * 
- * @returns to do content
+ * @returns the html part
  */
-function insertTodoTasksHTML() {
+function insertTodoTasksHeaderHTML() {
     return/*html*/ `
         <div class="to-do-tasks">
             <div class="to-do-header">
@@ -82,11 +96,11 @@ function insertTodoTasksHTML() {
 }
 
 /**
- * inserts in progress tasks
+ * inserts in progress tasks header
  * 
- * @returns in progress content
+ * @returns the html part
  */
-function insertInProgressTasksHTML() {
+function insertInProgressTasksHeaderHTML() {
     return /*html*/ `
         <div class="in-progress-tasks">
             <div class="in-progress-header">
@@ -101,11 +115,11 @@ function insertInProgressTasksHTML() {
 }
 
 /**
- * inserts await feedback tasks
+ * inserts await feedback tasks header
  * 
- * @returns await feedback content
+ * @returns the html part
  */
-function insertAwaitFeedbackTasksHTML() {
+function insertAwaitFeedbackTasksHeaderHTML() {
     return /* html */ `
         <div class="await-feedback-tasks">
             <div class="await-feedback-header">
@@ -120,11 +134,11 @@ function insertAwaitFeedbackTasksHTML() {
 }
 
 /**
- * inserts done tasks
+ * inserts the done tasks header
  * 
- * @returns done content
+ * @returns the html part
  */
-function insertDoneTasksHTML() {
+function insertDoneTasksHeaderHTML() {
     return /*html*/ `
         <div class="done-tasks">
             <div class="done-header">
@@ -209,7 +223,9 @@ function insertTaskTolistHTML() {
         const task = taskList[i];
         list.innerHTML += /*html*/ `
         <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-            <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+            <div class="board-task-category-div">
+                <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+            </div>
             <div class="board-task-title-and-description">
                 <span class="board-task-title">${task.title}</span>
                 <span class="board-task-description">${task.description}</span>
@@ -226,6 +242,8 @@ function insertTaskTolistHTML() {
     }
     insertAssignedContactsToTaskHTML()
 }
+
+
 
 /**
  * checks if subtasks exist, if the exist, the subtaskstatus gets implemented
@@ -245,7 +263,9 @@ function insertSubtaskProgress(i) {
             </span>
         `;
     } else {
-        return ``;
+        return /*html*/ `
+            <div class="board-task-subtask-filled-statusbar"></div>
+        `;
     }
 }
 
