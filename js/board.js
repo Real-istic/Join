@@ -294,7 +294,7 @@ function insertAssignedContactsToTaskHTML() {
 
     for (let i = 0; i < taskList.length; i++) {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
-
+        let task = taskList[i];
         if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
 
             if (!(taskList[i].firstNames.length > 2)) {
