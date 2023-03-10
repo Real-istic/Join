@@ -3,14 +3,12 @@
  * so the function is able to push the task to the specific column in the board
  */
 let boardTaskStatus;
-let list;
 
 /**
  * calls the board-page
  * 
  */
 function insertBoard() {
-    list = taskList;
     activeTab = 'board';
     markActiveNavElement(activeTab);
     removeHelp();
@@ -53,10 +51,6 @@ function insertBoardHeaderHTML() {
  * 
  */
 function searchTask() {
-    let searchInput = document.getElementById('searchTaskInputField').value;
-    list = taskList
-    list = list.filter(a => a.title.toLowerCase().includes(searchInput.toLowerCase()));
-    console.log(list); // gefundene Elemente protokollieren
     insertTaskTolistHTML()
 }
 
@@ -217,27 +211,31 @@ function insertTaskTolistHTML() {
     document.getElementById('awaitFeedbackTasksContainer').innerHTML = ``;
     document.getElementById('doneTasksContainer').innerHTML = ``;
     let lists;
-    for (let i = 0; i < list.length; i++) {
-        lists = document.getElementById(list[i].taskStatus + 'TasksContainer');
-        const task = list[i];
-        lists.innerHTML += /*html*/ `
-        <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-            <div class="board-task-category-div">
-                <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+    let searchInput = document.getElementById('searchTaskInputField').value;
+
+    for (let i = 0; i < taskList.length; i++) {
+        lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
+        const task = taskList[i];
+        if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
+            lists.innerHTML += /*html*/ `
+            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
+                <div class="board-task-category-div">
+                    <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+                </div>
+                <div class="board-task-title-and-description">
+                    <span class="board-task-title">${task.title}</span>
+                    <span class="board-task-description">${task.description}</span>
+                </div>
+                <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
+                    ${insertSubtaskProgress(i)}
+                </div>
+                <div class="board-task-assigned-contacts-and-prority">
+                    <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
+                    <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
+                </div>
             </div>
-            <div class="board-task-title-and-description">
-                <span class="board-task-title">${task.title}</span>
-                <span class="board-task-description">${task.description}</span>
-            </div>
-            <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
-                ${insertSubtaskProgress(i)}
-            </div>
-            <div class="board-task-assigned-contacts-and-prority">
-                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
-                <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
-            </div>
-        </div>
-    `;
+            `;
+        }
     }
     insertAssignedContactsToTaskHTML()
 }
@@ -251,7 +249,7 @@ function insertTaskTolistHTML() {
  * @returns the html part
  */
 function insertSubtaskProgress(i) {
-    const task = list[i]
+    const task = taskList[i]
     if (task.subtasks.length > 0) {
         return /*html*/ `
             <div class="board-task-subtask-statusbar">
@@ -275,7 +273,7 @@ function insertSubtaskProgress(i) {
  * @returns the checked subtask-count
  */
 function fillSubtaskStatusbar(i) {
-    const task = list[i];
+    const task = taskList[i];
     let checkedSubtaskCount = 0;
 
     for (let j = 0; j < task.subtasksState.length; j++) {
@@ -292,39 +290,43 @@ function fillSubtaskStatusbar(i) {
  * 
  */
 function insertAssignedContactsToTaskHTML() {
+    let searchInput = document.getElementById('searchTaskInputField').value;
 
-    for (let i = 0; i < list.length; i++) {
-        let contactContainer = document.getElementById('boardTaskAssignedContacts' + list[i].title);
+    for (let i = 0; i < taskList.length; i++) {
+        let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
 
-        if (!(list[i].firstNames.length > 2)) {
-            for (let j = 0; j < list[i].firstNames.length; j++) {
-                let firstNameTask = list[i].firstNames[j];
-                let lastNameTask = list[i].lastNames[j];
-                for (let k = 0; k < userList.length; k++) {
-                    if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
-                        let userBackgroundColor = userList[k].backgroundColor;
-                        contactContainer.innerHTML += /*html*/ `
+        if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
+
+            if (!(taskList[i].firstNames.length > 2)) {
+                for (let j = 0; j < taskList[i].firstNames.length; j++) {
+                    let firstNameTask = taskList[i].firstNames[j];
+                    let lastNameTask = taskList[i].lastNames[j];
+                    for (let k = 0; k < userList.length; k++) {
+                        if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                            let userBackgroundColor = userList[k].backgroundColor;
+                            contactContainer.innerHTML += /*html*/ `
                         <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
                         `;
+                        }
                     }
                 }
-            }
-        } else {
-            for (let j = 0; j < 2; j++) {
-                let firstNameTask = list[i].firstNames[j];
-                let lastNameTask = list[i].lastNames[j];
-                for (let k = 0; k < userList.length; k++) {
-                    if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
-                        let userBackgroundColor = userList[k].backgroundColor;
-                        contactContainer.innerHTML += /*html*/ `
+            } else {
+                for (let j = 0; j < 2; j++) {
+                    let firstNameTask = taskList[i].firstNames[j];
+                    let lastNameTask = taskList[i].lastNames[j];
+                    for (let k = 0; k < userList.length; k++) {
+                        if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                            let userBackgroundColor = userList[k].backgroundColor;
+                            contactContainer.innerHTML += /*html*/ `
                         <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
                         `;
+                        }
                     }
                 }
-            }
-            contactContainer.innerHTML += /*html*/ `
-                <div class="add-task-assigned-contact-overflow">+${list[i].firstNames.length - 2}</div>
+                contactContainer.innerHTML += /*html*/ `
+                <div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}</div>
                 `;
+            }
         }
     }
 }
@@ -404,7 +406,7 @@ async function boardTaskSaveEditTaskTolist(i) {
     let title = document.getElementById('addTaskInputTitle');
     let searchKey = 'title';
     let searchValue = title.value
-    let valueIsPresent = list.some(obj => obj[searchKey] == searchValue);
+    let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
@@ -432,16 +434,16 @@ async function boardTaskSaveEditTaskTolist(i) {
  * @param {*} i for the specific task
  */
 function pushEditedTaskTolist(i) {
-    list[i].title = document.getElementById('addTaskInputTitle').value;
-    list[i].firstNames = taskClipboard.firstNames
-    list[i].lastNames = taskClipboard.lastNames
-    list[i].dueDate = document.getElementById('addTaskInputDate').value;
-    list[i].category = taskClipboard.category
-    list[i].categoryColor = taskClipboard.categoryColor
+    taskList[i].title = document.getElementById('addTaskInputTitle').value;
+    taskList[i].firstNames = taskClipboard.firstNames
+    taskList[i].lastNames = taskClipboard.lastNames
+    taskList[i].dueDate = document.getElementById('addTaskInputDate').value;
+    taskList[i].category = taskClipboard.category
+    taskList[i].categoryColor = taskClipboard.categoryColor
     pushPriorityToTaskClipboard()
-    list[i].description = document.getElementById('addTaskDescription').value
-    list[i].subtasks = taskClipboard.subtasks
-    list[i].subtasksState = taskClipboard.subtasksState
+    taskList[i].description = document.getElementById('addTaskDescription').value
+    taskList[i].subtasks = taskClipboard.subtasks
+    taskList[i].subtasksState = taskClipboard.subtasksState
 }
 
 /**
@@ -454,7 +456,7 @@ function insertBoardTaskSlideInCategoryHTML(i) {
     return /*html*/ `
         <div class="board-task-slide-in-category">
             <img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
-            <span class="board-task-category" style="background:${list[i].categoryColor};">${list[i].category}</span>
+            <span class="board-task-category" style="background:${taskList[i].categoryColor};">${taskList[i].category}</span>
         </div>
     `;
 }
@@ -467,7 +469,7 @@ function insertBoardTaskSlideInCategoryHTML(i) {
  */
 function insertBoardTaskSlideInTitleHTML(i) {
     return /*html*/ `
-        <span class="board-task-slide-in-title">${list[i].title}</span>
+        <span class="board-task-slide-in-title">${taskList[i].title}</span>
     `;
 }
 
@@ -479,7 +481,7 @@ function insertBoardTaskSlideInTitleHTML(i) {
  */
 function insertBoardTaskSlideInDescriptionHTML(i) {
     return /*html*/ `
-    <span class="board-task-slide-in-description">${list[i].description}</span>
+    <span class="board-task-slide-in-description">${taskList[i].description}</span>
 `;
 }
 
@@ -493,7 +495,7 @@ function insertBoardTaskSlideInDueDateHTML(i) {
     return /*html*/ `
     <div class="board-task-slide-in-date-div">
         <span class="board-task-slide-in-datename">Due Date:</span>
-        <span class="board-task-slide-in-datevalue">${list[i].dueDate}</span>
+        <span class="board-task-slide-in-datevalue">${taskList[i].dueDate}</span>
     </div>
 `;
 }
@@ -508,7 +510,7 @@ function insertBoardTaskSlideInPriorityHTML(i) {
     return /*html*/ `
     <div class="board-task-slide-in-priority-div">
         <span class="board-task-slide-in-priorityname">Priority:</span>
-        <span class="board-task-slide-in-priorityvalue board-task-slide-in-priority-${list[i].priority.toLowerCase()}">${list[i].priority} <img src="assets/img/priority${list[i].priority.toLowerCase()}.svg" alt=""></span>
+        <span class="board-task-slide-in-priorityvalue board-task-slide-in-priority-${taskList[i].priority.toLowerCase()}">${taskList[i].priority} <img src="assets/img/priority${taskList[i].priority.toLowerCase()}.svg" alt=""></span>
     </div>
 `;
 }
@@ -533,9 +535,9 @@ function insertBoardTaskSlideInAssigned(i) {
 function insertBoardTaskSlideInAssignedContactsIteration(i) {
     let contactContainer = document.getElementById('boardTaskSlideInDiv');
 
-    for (let j = 0; j < list[i].firstNames.length; j++) {
-        let firstNameTask = list[i].firstNames[j];
-        let lastNameTask = list[i].lastNames[j];
+    for (let j = 0; j < taskList[i].firstNames.length; j++) {
+        let firstNameTask = taskList[i].firstNames[j];
+        let lastNameTask = taskList[i].lastNames[j];
         for (let k = 0; k < userList.length; k++) {
             if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
                 let userBackgroundColor = userList[k].backgroundColor;
@@ -582,16 +584,16 @@ function boardTaskSlideInEditTask(i) {
  * @param {*} i for the specific task
  */
 function pushBoardTaskToClipboard(i) {
-    taskClipboard.title = list[i].title
-    taskClipboard.firstNames = list[i].firstNames
-    taskClipboard.lastNames = list[i].lastNames
-    taskClipboard.dueDate = list[i].dueDate
-    taskClipboard.category = list[i].category
-    taskClipboard.categoryColor = list[i].categoryColor
-    taskClipboard.priority = list[i].priority
-    taskClipboard.description = list[i].description
-    taskClipboard.subtasks = list[i].subtasks
-    taskClipboard.subtasksState = list[i].subtasksState
+    taskClipboard.title = taskList[i].title
+    taskClipboard.firstNames = taskList[i].firstNames
+    taskClipboard.lastNames = taskList[i].lastNames
+    taskClipboard.dueDate = taskList[i].dueDate
+    taskClipboard.category = taskList[i].category
+    taskClipboard.categoryColor = taskList[i].categoryColor
+    taskClipboard.priority = taskList[i].priority
+    taskClipboard.description = taskList[i].description
+    taskClipboard.subtasks = taskList[i].subtasks
+    taskClipboard.subtasksState = taskList[i].subtasksState
 }
 
 /**
@@ -690,9 +692,9 @@ function boardTaskSlideInAssignedToHeaderHTML() {
 function boardTaskSlideInInsertSubtasks(i) {
     let subtaskContainer = document.getElementById('addTaskCreateSubtask' + i);
 
-    for (let j = 0; j < list[i].subtasks.length; j++) {
-        const subtask = list[i].subtasks[j];
-        const subtaskState = list[i].subtasksState[j];
+    for (let j = 0; j < taskList[i].subtasks.length; j++) {
+        const subtask = taskList[i].subtasks[j];
+        const subtaskState = taskList[i].subtasksState[j];
         if (subtaskState == true) {
             subtaskContainer.innerHTML += /*html*/ `
             <div class="add-task-subtask-div">
@@ -720,9 +722,9 @@ function boardTaskSlideInInsertSubtasks(i) {
 async function toggleSubtaskInlist(i, j) {
     let subtaskCheckbox = document.getElementById('editSubtask' + i + `-` + j)
     if (subtaskCheckbox.checked) {
-        list[i].subtasksState.splice(j, 1, true)
+        taskList[i].subtasksState.splice(j, 1, true)
     } else {
-        list[i].subtasksState.splice(j, 1, false)
+        taskList[i].subtasksState.splice(j, 1, false)
     }
     await backend.setItem('tasks', JSON.stringify(taskList));
     await initBackend()
@@ -750,7 +752,7 @@ async function createTaskBoardSite() {
     let title = document.getElementById('addTaskInputTitle');
     let searchKey = 'title';
     let searchValue = title.value
-    let valueIsPresent = list.some(obj => obj[searchKey] == searchValue);
+    let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
 
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
