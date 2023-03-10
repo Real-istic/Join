@@ -503,6 +503,10 @@ async function createTaskAddTaskSite() {
         title.setCustomValidity('Title is already assigned!');
         title.reportValidity();
         return
+    } else if (taskClipboard.priority == '') {
+        let priorityArea = document.getElementById('addTaskPriorityInputMedium');
+        priorityArea.setCustomValidity('No Priority given yet!')
+        priorityArea.reportValidity();
     } else {
         taskClipboard.title = title.value;
         taskClipboard.taskStatus = 'toDo';

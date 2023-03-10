@@ -10,7 +10,6 @@ function insertBoard() {
     removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
     insertTaskTolistHTML()
-    // document.getElementById("help").classList.remove("help-none");
 }
 
 /**
@@ -212,12 +211,7 @@ function insertTaskTolistHTML() {
                 <span class="board-task-description">${task.description}</span>
             </div>
             <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
-                <div class="board-task-subtask-statusbar">
-                    <div class="board-task-subtask-filled-statusbar" id="boardTaskSubtaskFilledStatusbar" style="width:${fillSubtaskStatusbar(i)  / task.subtasksState.length * 100}%;"></div>
-                </div>
-                <span class="board-task-subtask-status-info">
-                    ${fillSubtaskStatusbar(i)} / ${task.subtasksState.length} Done
-                </span>
+                ${insertSubtaskProgress(i)}
             </div>
             <div class="board-task-assigned-contacts-and-prority">
                 <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
@@ -227,6 +221,22 @@ function insertTaskTolistHTML() {
     `;
     }
     insertAssignedContactsToTaskHTML()
+}
+
+function insertSubtaskProgress(i) {
+    const task = taskList[i]
+    if (task.subtasks.length > 0) {
+        return /*html*/ `
+            <div class="board-task-subtask-statusbar">
+                <div class="board-task-subtask-filled-statusbar" id="boardTaskSubtaskFilledStatusbar" style="width:${fillSubtaskStatusbar(i) / task.subtasksState.length * 100}%;"></div>
+            </div>
+            <span class="board-task-subtask-status-info">
+                    ${fillSubtaskStatusbar(i)} / ${task.subtasksState.length} Done
+            </span>
+        `;
+    } else {
+        return ``;
+    }
 }
 
 /**
@@ -323,7 +333,7 @@ function openTask(i) {
  */
 function toggleTaskBoardTask() {
     clearTaskClipboard()
-    
+
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
     opacityDiv.classList.toggle('reduce-opacity');
@@ -363,12 +373,15 @@ function insertOpenTaskSlideInHTML(i) {
  */
 async function boardTaskSaveEditTaskToTaskList(i) {
     let title = document.getElementById('addTaskInputTitle');
+    let searchKey = 'title';
+    let searchValue = title.value
+    let isValuePresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
         title.reportValidity();
         return;
     } else if (title.value.length >= 35) {
-        title.setCustomValidity('Title is too long');
+        title.setCustomValidity('Title is too long!');
         title.reportValidity();
         return;
     } else {
@@ -508,7 +521,7 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
  * 
  * @param {*} i for the specific task
  */
-function boardTaskSlideInEditTask(i){
+function boardTaskSlideInEditTask(i) {
     pushBoardTaskToClipboard(i)
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
     slideInTask.innerHTML = /*html*/ `
@@ -655,7 +668,7 @@ function boardTaskSlideInInsertSubtasks(i) {
             </div>
         `;
         } else {
-        subtaskContainer.innerHTML += /*html*/ `
+            subtaskContainer.innerHTML += /*html*/ `
             <div class="add-task-subtask-div">
                 <input onclick="toggleSubtaskInTasklist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
                 <span>${subtask}</span>
@@ -704,7 +717,7 @@ async function createTaskBoardSite() {
     let title = document.getElementById('addTaskInputTitle');
     let searchKey = 'title';
     let searchValue = title.value
-    let isValuePresent = taskList.some(obj => obj[searchKey] == searchValue);
+    let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
 
     if (title.value.trim() === '') {
         title.setCustomValidity('You need a Title to create a Task!');
@@ -714,10 +727,14 @@ async function createTaskBoardSite() {
         title.setCustomValidity('Title is too long');
         title.reportValidity();
         return;
-    } else if (isValuePresent) {
+    } else if (valueIsPresent) {
         title.setCustomValidity('Title is already assigned!');
         title.reportValidity();
         return
+    } else if (taskClipboard.priority == '') {
+        let priorityArea = document.getElementById('addTaskPriorityInputMedium');
+        priorityArea.setCustomValidity('No Priority given yet!')
+        priorityArea.reportValidity();
     } else {
         taskClipboard.title = title.value;
         taskClipboard.taskStatus = boardTaskStatus;
