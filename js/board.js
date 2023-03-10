@@ -388,9 +388,6 @@ function insertOpenTaskSlideInHTML(i) {
         ${boardTaskSlideInSubtaskHeaderHTML()}
         <div class="add-task-subtask-list" id="addTaskCreateSubtask${i}"></div>
         ${insertBoardTaskSlideInAssigned(i)}
-        <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
-            <img src="assets/img/edit_task.svg" alt="">
-        </div>
     `;
     insertBoardTaskSlideInAssignedContactsIteration(i)
     boardTaskSlideInInsertSubtasks(i)
@@ -549,6 +546,11 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
             }
         }
     }
+    contactContainer.innerHTML += /*html*/ `
+        <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
+            <img src="assets/img/edit_task.svg" alt="">
+        </div>
+        `;
 }
 
 /**
