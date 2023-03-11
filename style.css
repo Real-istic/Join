@@ -1797,15 +1797,20 @@ nav {
   position: absolute;
   width: 265px;
   height: 323px;
-  transition: 300ms ease-in-out;
+  transition: 1000ms ease-in-out;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
 }
 
 .join-logo-login-new-position{
-  transition: 300ms ease-in-out;
+  transition: 1000ms ease-in-out;
   top: 80px;
   left: 77px;
   width: 100px;
   height: 120px;
+  transform: translateY(0);
+  transform: translateX(0);
 }
 
 /* .join-logo-login-color{
