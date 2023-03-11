@@ -38,20 +38,12 @@ function insertBoardHeaderHTML() {
     return /*html*/ `
             <div class="board-header">
             <div class="task-form" action="" >
-                <input onkeyup="event.preventDefault(); searchTask()" class="search-task-input-field" id="searchTaskInputField" type="text" placeholder="Find Task">
+                <input onkeyup="event.preventDefault(); insertTaskTolistHTML()" class="search-task-input-field" id="searchTaskInputField" type="text" placeholder="Find Task">
                 <img src="assets/img/barrier.svg" alt="">
-                <img class="search-glass" onclick="searchTask()" src="assets/img/searchglass.svg" alt="">
+                <img class="search-glass" onclick="insertTaskTolistHTML()" src="assets/img/searchglass.svg" alt="">
             </div>
             <button class="add-task-button" onclick="addTaskOffScreenMenu('toDo')">Add task <img src="assets/img/plus.svg" alt=""></button>
         </div>`;
-}
-
-/**
- * filters the titles of taskList for matches, then renders the results in the board
- * 
- */
-function searchTask() {
-    insertTaskTolistHTML()
 }
 
 /**
@@ -216,6 +208,7 @@ function insertTaskTolistHTML() {
     for (let i = 0; i < taskList.length; i++) {
         lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
         const task = taskList[i];
+
         if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
             lists.innerHTML += /*html*/ `
             <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
