@@ -14,6 +14,38 @@ function insertBoard() {
     removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
     insertTaskTolistHTML()
+    new Sortable(toDoTasksContainer, {
+        group: 'dropList',
+        animation: 400,
+        ghostClass: 'sortable-ghost',
+        dragClass: 'sortable-drag',
+        chosenClass: 'sortable-chosen'
+    });
+    
+    new Sortable(inProgressTasksContainer, {
+        group: 'dropList',
+        animation: 400,
+        ghostClass: 'sortable-ghost',
+        dragClass: 'sortable-drag',
+        chosenClass: 'sortable-chosen'
+    });
+    
+    new Sortable(awaitFeedbackTasksContainer, {
+        group: 'dropList',
+        animation: 400,
+        ghostClass: 'sortable-ghost',
+        dragClass: 'sortable-drag',
+        chosenClass: 'sortable-chosen'
+    });
+    
+    new Sortable(doneTasksContainer, {
+        group: 'dropList',
+        animation: 400,
+        ghostClass: 'sortable-ghost',
+        dragClass: 'sortable-drag',
+        chosenClass: 'sortable-chosen'
+    });
+    
 }
 
 /**
@@ -211,7 +243,7 @@ function insertTaskTolistHTML() {
 
         if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
             lists.innerHTML += /*html*/ `
-            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
+            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}" data-id="${i}">
                 <div class="board-task-category-div">
                     <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
                 </div>
@@ -778,3 +810,4 @@ async function createTaskBoardSite() {
         clearTaskClipboard()
     }
 }
+
