@@ -5,7 +5,7 @@
 let boardTaskStatus;
 
 /**
- * calls the board-page
+ * calls the board-page and loads the dragfunctionalities
  * 
  */
 function insertBoard() {
@@ -14,38 +14,42 @@ function insertBoard() {
     removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
     insertTaskTolistHTML()
+
     new Sortable(toDoTasksContainer, {
         group: 'dropList',
-        animation: 400,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        chosenClass: 'sortable-chosen'
+        forceFallback: false,
+        animation: 300,
+        dragClass: "sortable-drag",
+        ghostClass: "sortable-ghost",
+        chosenClass: "sortable-chosen"
     });
-    
+
     new Sortable(inProgressTasksContainer, {
         group: 'dropList',
-        animation: 400,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        chosenClass: 'sortable-chosen'
+        forceFallback: false,
+        animation: 300,
+        dragClass: "sortable-drag",
+        ghostClass: "sortable-ghost",
+        chosenClass: "sortable-chosen"
     });
-    
+
     new Sortable(awaitFeedbackTasksContainer, {
         group: 'dropList',
-        animation: 400,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        chosenClass: 'sortable-chosen'
+        forceFallback: false,
+        animation: 300,
+        dragClass: "sortable-drag",
+        ghostClass: "sortable-ghost",
+        chosenClass: "sortable-chosen"
     });
-    
+
     new Sortable(doneTasksContainer, {
         group: 'dropList',
-        animation: 400,
-        ghostClass: 'sortable-ghost',
-        dragClass: 'sortable-drag',
-        chosenClass: 'sortable-chosen'
+        forceFallback: false,
+        animation: 300,
+        dragClass: "sortable-drag",
+        ghostClass: "sortable-ghost",
+        chosenClass: "sortable-chosen"
     });
-    
 }
 
 /**

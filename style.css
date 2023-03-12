@@ -550,18 +550,17 @@ nav {
 }
 
 .sortable-ghost {
-  border: 5px dotted rgb(199, 199, 199);
-  border-style: dashed;
-
+  opacity: 0;
 }
 
-.sortable-drag {
-  scale: 1.5!important;
-}
-
-/* .sortable-chosen {
-  scale: 1.1;
+/* .sortable-drag {
+scale: 1.4;
+border: 2px solid red;
 } */
+
+.sortable-chosen {
+  scale: 1.1;
+}
 
 .add-task-slide-in-menu {
   z-index: 1;
