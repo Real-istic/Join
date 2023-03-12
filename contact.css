@@ -145,10 +145,9 @@ element.style {
 }
 
 .contact-main {
-  min-width: 430px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  position: absolute;
+  top: 40px;
+  left: 60px;
 }
 
 .contact-left {
@@ -264,17 +263,20 @@ element.style {
 
 .contact-right {
   position: relative;
+  right: -300%;
+  top: -6rem;
+ /* position: relative;
   min-width: 480px;
   width: 100%;
   max-width: 700px;
   right: -100%;
-  bottom: 40px;
+  bottom: 40px;*/
 }
 
 .show {
   position: relative;
-  right: -34%;
-  top: -1rem;
+  right: -27rem;
+  top: -6rem;
   transition: all 800ms ease-in-out;
 }
 
