@@ -1,10 +1,10 @@
 function loadRegistrationPage() {
-    loadRegistrationPageHTML();
+    //loadRegistrationPageHTML();
     setTimeout(createAnimation,300);
 }
 
 function loadRegistrationPageHTML() {
-    document.body.innerHTML += loadRegistrationPageBackgroundAndLogo();
+    document.getElementById('login').innerHTML = loadRegistrationPageBackgroundAndLogo();
 }
 
 function loadRegistrationPageBackgroundAndLogo() {
@@ -46,8 +46,8 @@ function loadRegistrationPageBackgroundAndLogo() {
                     <a onclick="">Forgot my password</a>
                 </div>
                 <div class="log-in-commit-guest-log-in-section">
-                    <button class="log-in-commit-guest-log-in-section-button-log-in" style="">Log in</button>
-                    <button class="log-in-commit-guest-log-in-section-button-guest" style="">Guest log in</button>
+                    <button class="log-in-commit-guest-log-in-section-button-log-in">Log in</button>
+                    <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
                 </div>
             </div>
         </div>
@@ -125,3 +125,10 @@ function togglePasswordVisibility() {
     }
   }
 
+// GUEST LOGIN
+
+function guestLogIn(){
+    document.getElementById('registrationContainer').style.display = 'none';
+    currentUser = 'guest';
+    insertSummary();
+}

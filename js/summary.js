@@ -34,10 +34,10 @@ function summaryHTML() {
  * @returns the html part
  */
 function summaryTopHTML() {
-    if (userList[0].firstName) {
-        return /*html*/ `Good morning,` + `<div><span>${userList[0].firstName}</span></div>`;
+    if (currentUser === 'guest') {
+        return /*html*/ `Good morning,` + `<span> &nbsp; guest</span>`;
     } else {
-        return /*html*/ `Good morning,` + `<span>Guest</span>`;
+        return /*html*/ `Good morning,` + `<div><span>&nbsp;${currentUser}</span></div>`;
     }
 }
 
