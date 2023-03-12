@@ -549,6 +549,20 @@ nav {
   cursor: pointer;
 }
 
+.sortable-ghost {
+  border: 5px dotted rgb(199, 199, 199);
+  border-style: dashed;
+
+}
+
+.sortable-drag {
+  scale: 1.5!important;
+}
+
+/* .sortable-chosen {
+  scale: 1.1;
+} */
+
 .add-task-slide-in-menu {
   z-index: 1;
   position: fixed;
@@ -650,7 +664,6 @@ nav {
   background: #ffffff;
   border-radius: 30px;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-  transition: all 100ms ease-in-out;
   cursor: pointer;
 }
 
