@@ -362,7 +362,7 @@ element.style {
     font-size: 27px;
     color: #ffffff;
     padding-top: 12px;
-    padding-bottom: 91px;
+    padding-bottom: 71px;
 }
 
 .contact-left-fadeIn-bg {
@@ -467,6 +467,22 @@ element.style {
     padding-bottom: 20px;
 }
 
+.input-contact-main{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    width: 400px;
+    flex-direction: column;
+    padding-bottom: 30px;
+}
+.input-newContact-main{
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
 .input-contact {
     width: 100%;
     margin-top: 35px;
@@ -477,7 +493,7 @@ element.style {
     width: 90%;
     height: 50px;
     border: 0;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 400;
     outline: none;
     background-color: #ffffff;
@@ -487,7 +503,7 @@ element.style {
     width: 90%;
     height: 50px;
     border: 0;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 400;
     outline: none;
     background-color: #ffffff;
@@ -497,7 +513,7 @@ element.style {
     width: 90%;
     height: 50px;
     border: 0;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 400;
     outline: none;
     background-color: #ffffff;

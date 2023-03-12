@@ -35,8 +35,7 @@ function insertContentHTML() {
         <div class="new-contact-button" onclick="openNewContact()">New contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
-      <div class="newContactCreated display-none" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>
-`;
+      <div class="newContactCreated display-none" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
 }
 
 /**
@@ -166,52 +165,68 @@ function renderContactSideScroll(i) {
  * @param {number} i The index of the user in the userList
  */
 function editContact(i) {
-  let editContactFadeIn = document.getElementById("contact-left-fadeIn");
-  let editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
-  editContactFadeInBg.classList.add("show-left");
-  editContactFadeIn.classList.add("show-left");
+  showEditContacts();
+  showEditContactsHTML(i);
+}
+
+/**
+ * show the editContact content
+ * @param {number} i The index of the user in the userList
+ */
+  function showEditContacts() {
+    const editContactFadeIn = document.getElementById("contact-left-fadeIn");
+    const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
+    editContactFadeInBg.classList.add("show-left");
+    editContactFadeIn.classList.add("show-left");
+   }
+
+/**
+ * show the editContact HMTMLcontent
+ * 
+ */
+function showEditContactsHTML(i) {
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-
+  const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeIn.innerHTML = /*html*/ `
-    <div class="edit-contact">
-      <div class="edit-contact-head">
-        <div class="edit-contact-cross">
-          <img class="img-cross" src="./assets/img/theCross.svg" onclick="hideEditContacts()" alt="">
-        </div>
-
-        <div class="edit-contact-header-info">
-          <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
-            <div class="edit-contact-h">Edit contact</div>                   
-          </div>
-        </div>
-        <div class="edit-contact-main" onclick="doNotClose()">
-          <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
-            <p>${contactNameLetter}</p>
-          </div>
-          <form onsubmit="invEditContact(${i}); return false">
-            <div>
-              <div class="input-contact">
-                <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
-                <img src="./assets/img/signup-user.svg" alt="">
-              </div>
-              <div class="input-contact">
-                <input required type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
-                  <img src="./assets/img/login-email.svg" alt="">
-              </div>
-              <div class="input-contact">
-                <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
-                  <img src="./assets/img/phone.svg" alt="">
-              </div>          
-            </div>
-              <div class="button-container">
-                <button class="button-create">Save</button>
-              </div>
-          </form>
+  <div class="edit-contact">
+    <div class="edit-contact-head">
+      <div class="edit-contact-cross">
+        <img class="img-cross" src="./assets/img/theCross.svg" onclick="hideEditContacts()" alt="">
       </div>
-    </div>`;
-  return editContactFadeIn;
+
+      <div class="edit-contact-header-info">
+        <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
+          <div class="edit-contact-h">Edit contact</div>                   
+        </div>
+      </div>
+      <div class="edit-contact-main">
+        <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
+          <p>${contactNameLetter}</p>
+        </div>
+        <form onsubmit="invEditContact(${i}); return false">
+          <div class="input-contact-main">
+            <div class="input-contact">
+              <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
+              <img src="./assets/img/signup-user.svg" alt="">
+            </div>
+            <div class="input-contact">
+              <input required type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
+                <img src="./assets/img/login-email.svg" alt="">
+            </div>
+            <div class="input-contact">
+              <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+                <img src="./assets/img/phone.svg" alt="">
+            </div>          
+          </div>
+            <div class="button-container">
+              <button class="button-create">Save</button>
+            </div>
+        </form>
+    </div>
+  </div>`;
+return editContactFadeIn;
 }
 
 /**
@@ -336,21 +351,21 @@ function showAddContact() {
 
             <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
-                <form onsubmit="return validateForm(); addNewContact() return false;">
-                <div>
-                    <div onclick="doNotClose()">
+                <form onsubmit="return validateForm(); addNewContact()">
+           
+                    <div class="input-newContact-main">
                         <div class="input-contact">
-                            <input required="" type="text" id="contactNewName" class="input-contact-name" value="">
+                            <input required type="text" id="contactNewName" class="input-contact-name" placeholder="Name">
                                 <img src="./assets/img/signup-user.svg" alt="">
                                 </div>
                 
                                 <div class="input-contact">
-                                    <input required="" type="email" id="contactNewEmail" class="input-contact-email" value="">
+                                    <input required="" type="email" id="contactNewEmail" class="input-contact-email" placeholder="Email">
                                         <img src="./assets/img/login-email.svg" alt="">
                                         </div>
                 
                                         <div class="input-contact">
-                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" value="">
+                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                                 <img src="./assets/img/phone.svg" alt="">
                                                 </div>
                                         </div>
@@ -367,7 +382,7 @@ function showAddContact() {
                                         </div>
                                 </div>
                         </div>
-                    </div>
+             
                 </div>
                 </form>  
              
