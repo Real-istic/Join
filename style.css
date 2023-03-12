@@ -206,7 +206,7 @@ nav {
 }
 
 .nav-element-active {
-  background: #D2E3FF!important;
+  background: #d2e3ff !important;
 }
 
 .nav-element img {
@@ -470,9 +470,9 @@ nav {
 }
 
 .search-task-input-field:focus {
-  outline: none!important;
-  border: none!important;
-  background-color: white!important;
+  outline: none !important;
+  border: none !important;
+  background-color: white !important;
 }
 
 .add-task-button {
@@ -553,13 +553,18 @@ nav {
   opacity: 0;
 }
 
-/* .sortable-drag {
-scale: 1.4;
-border: 2px solid red;
-} */
+.sortable-drag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 270px;
+  height: 260px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 35px;
+}
 
 .sortable-chosen {
-  scale: 1.1;
+  /* scale: 0.9; */
 }
 
 .add-task-slide-in-menu {
@@ -662,7 +667,7 @@ border: 2px solid red;
   height: 241px;
   background: #ffffff;
   border-radius: 30px;
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 
@@ -1815,7 +1820,7 @@ border: 2px solid red;
   left: 50%;
 }
 
-.join-logo-login-new-position{
+.join-logo-login-new-position {
   transition: 1000ms ease-in-out;
   top: 80px;
   left: 77px;
@@ -1828,8 +1833,6 @@ border: 2px solid red;
 /* .join-logo-login-color{
   fill:white;
 } */
-
-
 
 .registration-upper-right-inner-container {
   position: absolute;
@@ -1873,7 +1876,7 @@ border: 2px solid red;
 
 .registration-upper-right-inner-container button:hover {
   cursor: pointer;
-  background-color: #005DFF;
+  background-color: #005dff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -1962,7 +1965,7 @@ border: 2px solid red;
   height: 20px;
 }
 
-.cursor-pointer:hover{
+.cursor-pointer:hover {
   cursor: pointer;
 }
 
@@ -2007,7 +2010,7 @@ border: 2px solid red;
   height: 50px;
 }
 
-.log-in-commit-guest-log-in-section button:hover{
+.log-in-commit-guest-log-in-section button:hover {
   cursor: pointer;
   transition: 100ms ease-in-out;
 }
@@ -2025,7 +2028,7 @@ border: 2px solid red;
 }
 
 .log-in-commit-guest-log-in-section-button-log-in:hover {
-  background-color: #005DFF;
+  background-color: #005dff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   transition: 100ms ease-in-out;
 }
@@ -2043,13 +2046,13 @@ border: 2px solid red;
 }
 
 .log-in-commit-guest-log-in-section-button-guest:hover {
-  border: 2px solid #4589FF;
+  border: 2px solid #4589ff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  color: #4589FF;
+  color: #4589ff;
   transition: 100ms ease-in-out;
 }
 
-.remember-me-checkbox:hover{
+.remember-me-checkbox:hover {
   cursor: pointer;
 }
 
@@ -2061,7 +2064,6 @@ border: 2px solid red;
   float: left;
   object-fit: cover;
 }
-
 
 .remember-me-checkbox:checked::before {
   width: 18px;

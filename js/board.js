@@ -5,7 +5,7 @@
 let boardTaskStatus;
 
 /**
- * calls the board-page and loads the dragfunctionalities
+ * calls the board-page and loads drag-and-drop functionality
  * 
  */
 function insertBoard() {
@@ -14,42 +14,7 @@ function insertBoard() {
     removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
     insertTaskTolistHTML()
-
-    new Sortable(toDoTasksContainer, {
-        group: 'dropList',
-        forceFallback: false,
-        animation: 300,
-        dragClass: "sortable-drag",
-        ghostClass: "sortable-ghost",
-        chosenClass: "sortable-chosen"
-    });
-
-    new Sortable(inProgressTasksContainer, {
-        group: 'dropList',
-        forceFallback: false,
-        animation: 300,
-        dragClass: "sortable-drag",
-        ghostClass: "sortable-ghost",
-        chosenClass: "sortable-chosen"
-    });
-
-    new Sortable(awaitFeedbackTasksContainer, {
-        group: 'dropList',
-        forceFallback: false,
-        animation: 300,
-        dragClass: "sortable-drag",
-        ghostClass: "sortable-ghost",
-        chosenClass: "sortable-chosen"
-    });
-
-    new Sortable(doneTasksContainer, {
-        group: 'dropList',
-        forceFallback: false,
-        animation: 300,
-        dragClass: "sortable-drag",
-        ghostClass: "sortable-ghost",
-        chosenClass: "sortable-chosen"
-    });
+    loadDragAndDrop()
 }
 
 /**
@@ -247,7 +212,8 @@ function insertTaskTolistHTML() {
 
         if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
             lists.innerHTML += /*html*/ `
-            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}" data-id="${i}">
+        <div id="${i}">
+            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}" data-id="">
                 <div class="board-task-category-div">
                     <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
                 </div>
@@ -263,6 +229,7 @@ function insertTaskTolistHTML() {
                     <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
                 </div>
             </div>
+        </div>
             `;
         }
     }
