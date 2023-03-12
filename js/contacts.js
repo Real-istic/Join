@@ -35,7 +35,7 @@ function insertContentHTML() {
         <div class="new-contact-button" onclick="openNewContact()">New contact
         <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
       </div>
-      <div class="newContactCreated display-none" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
+      <div class="newContactCreated" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
 }
 
 /**
@@ -439,10 +439,10 @@ function addNewContact() {
  */
 function showNewContactMessage() {
   const newContactMessage = document.getElementById("newContactCreated");
-  newContactMessage.classList.remove("display-none");
+  newContactMessage.classList.add("showNewContactFadeIn");
   setTimeout(() => {
-    newContactMessage.classList.add("display-none");
-  }, 2000);
+    newContactMessage.classList.remove("showNewContactFadeIn");
+  }, 3000);
 }  
  
 
