@@ -42,3 +42,4 @@ let taskClipboard = {
     'taskStatus': ''
 }
 
+let currentUser;
