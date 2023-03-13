@@ -6,8 +6,7 @@ let contactListExpanded = false;
  * 
  */
 function insertAddTask() {
-    activeTab = 'addTask';
-    markActiveNavElement(activeTab);
+    markActiveNavElement('addTask');
     clearTaskClipboard();
     contentDiv.innerHTML = insertTaskLeft();
     document.getElementById("help").classList.remove("help-none");

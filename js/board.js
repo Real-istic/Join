@@ -9,8 +9,7 @@ let boardTaskStatus;
  * 
  */
 function insertBoard() {
-    activeTab = 'board';
-    markActiveNavElement(activeTab);
+    markActiveNavElement('board');
     removeHelp();
     contentDiv.innerHTML = insertBoardHTML();
     insertTaskTolistHTML()
@@ -212,8 +211,8 @@ function insertTaskTolistHTML() {
 
         if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
             lists.innerHTML += /*html*/ `
-        <div id="${i}">
-            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}" data-id="">
+        <div class="task-wrapper" id="${i}">
+            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
                 <div class="board-task-category-div">
                     <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
                 </div>
@@ -781,4 +780,3 @@ async function createTaskBoardSite() {
         clearTaskClipboard()
     }
 }
-

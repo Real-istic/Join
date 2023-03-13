@@ -4,8 +4,7 @@
  * calls the summary-page
  */
 function insertSummary() {
-    activeTab = 'summary';
-    markActiveNavElement(activeTab);
+    markActiveNavElement('summary');
     contentDiv.innerHTML = summaryHTML();
     document.getElementById("help").classList.remove("help-none");
 }

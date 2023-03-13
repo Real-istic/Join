@@ -277,8 +277,8 @@ async function restoreBackend() {
                 "Schmidt"
             ],
             "dueDate": "2023-03-31",
-            "category": "",
-            "categoryColor": "",
+            "category": "Sales",
+            "categoryColor": "#fbc02d",
             "priority": "Low",
             "description": "Test Text without any Meaning because it is just for the test.",
             "subtasks": [

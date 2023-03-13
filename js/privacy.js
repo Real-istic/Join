@@ -3,6 +3,7 @@
  * @param {string} contentDivId
  */
 function insertPrivacy() {
+    markActiveNavElement('privacy')
     contentDiv.innerHTML = privacyHTML();
     document.getElementById("help").classList.remove("help-none");
 }
@@ -10,7 +11,7 @@ function insertPrivacy() {
 /**
  * 
  * show content of the privacy page
- * @returns
+ * @returns the html part
  */
 function privacyHTML() {
     return /*html*/`

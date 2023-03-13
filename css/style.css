@@ -1,0 +1,282 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans";
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+h1 {
+  color: #4589ff;
+  font-family: Open Sans;
+  font-size: 61px;
+  font-weight: 700;
+  line-height: 73px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+h2 {
+  color: #005dff;
+  font-family: Open Sans;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+/* custom scrollbar */
+
+.scrollbar {
+  overflow: auto;
+}
+
+.scrollbar1::-webkit-scrollbar {
+  width: 16px;
+}
+
+.scrollbar1::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background-color: #ffffff;
+  /* border: 1px solid #cacaca; */
+  border-left: 1px solid #cacaca;
+  border-right: 1px solid #cacaca;
+}
+
+.scrollbar1::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  background-color: #4589ff;
+}
+
+/* header */
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 39px;
+  gap: 34px;
+  z-index: 1;
+  position: fixed;
+  width: 100vw;
+  height: 100px;
+  left: 0px;
+  top: 0px;
+  background: #4589ff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 36px;
+}
+
+header span {
+  color: white;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 120%;
+}
+
+/* question mark on the header*/
+
+.help {
+  cursor: pointer;
+}
+
+.help-none {
+  display: none;
+}
+
+.help-arrow {
+  position: absolute;
+  right: 200px;
+  top: 114px;
+  cursor: pointer;
+}
+
+.help-p {
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #000000;
+}
+
+.help-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.help-number {
+  font-family: Open Sans;
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #005dff;
+}
+
+/*nav and content outer div*/
+
+.nav-and-content {
+  display: flex;
+  position: absolute;
+  top: 100px;
+  width: 100vw;
+  bottom: 0px;
+}
+
+/* navigation bar */
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 20px;
+  gap: 35px;
+  width: 232px;
+  height: 100%;
+  left: 0px;
+  bottom: 0;
+  background: #ffffff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
+  border-radius: 0px;
+  border-right: 1px solid #d1d1d1;
+}
+
+.nav-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 15px;
+  width: 186px;
+  height: 229px;
+}
+
+.nav-element {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 30px;
+  gap: 20px;
+  width: 186px;
+  height: 46px;
+  background-color: white;
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  white-space: nowrap;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.nav-element:hover {
+  background: #d2e3ff80;
+}
+
+.nav-element-active {
+  background: #d2e3ff !important;
+}
+
+.nav-element img {
+  height: 22px;
+  width: 22px;
+}
+
+/* content-area */
+
+.content {
+  position: absolute;
+  top: 40px;
+  left: 232px;
+  bottom: 0px;
+  right: 0px;
+  background-color: rgb(255, 255, 255);
+  padding: 0 88px;
+  overflow-y: auto;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.task-added-to-board {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 20px;
+  width: 326px;
+  height: 74px;
+  background: #4589ff;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  transform: translate(45vw, 50vh);
+  transition: all 80ms ease-in-out;
+  z-index: 2;
+}
+
+.task-added-to-board span {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.display-none {
+  display: none !important;
+  transition: all 100ms ease-in-out;
+}
+
+.translate-y-110 {
+  transform: translate(45vw, 92vh);
+  transition: all 80ms ease-in-out;
+}
+
+
+/* Summary */
+/* -> summary.css */
+
+
+/* board */
+/* -> board.css */
+
+
+/* add Task */
+/* -> add_task.css */
+
+
+/* log-in-screen */
+/* -> login.css */

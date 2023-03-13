@@ -3,8 +3,7 @@
  * Call the contacts-page
  */
 function insertContacts() {
-  activeTab = "contacts";
-  markActiveNavElement(activeTab);
+  markActiveNavElement('contacts');
   removeHelp();
   insertContentHTML();
   addTaskFillSlideInMenu();
@@ -339,7 +338,6 @@ function showAddContact() {
         <div class="new-contact-cross">
             <img class="img-cross" src="./assets/img/theCross.svg" onclick="bgHideRemove()" alt="">
         </div>
-
         <div class="new-contact-header-info">
             <div>
                 <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
@@ -348,22 +346,18 @@ function showAddContact() {
             <div class="add-contact-text">
                 Tasks are better with a team!
             </div>
-
             <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
                 <form onsubmit="return validateForm(); addNewContact()">
-           
                     <div class="input-newContact-main">
                         <div class="input-contact">
                             <input required type="text" id="contactNewName" class="input-contact-name" placeholder="Name">
                                 <img src="./assets/img/signup-user.svg" alt="">
                                 </div>
-                
                                 <div class="input-contact">
                                     <input required="" type="email" id="contactNewEmail" class="input-contact-email" placeholder="Email">
                                         <img src="./assets/img/login-email.svg" alt="">
                                         </div>
-                
                                         <div class="input-contact">
                                             <input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                                 <img src="./assets/img/phone.svg" alt="">
@@ -375,17 +369,14 @@ function showAddContact() {
                                                     <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 </svg>
                                             </button>
-                
                                             <button class="button-create" onclick="addNewContact()">
                                                 Create contact
                                                 <img class="create-contact" src="./assets/img/akar-icons_check.svg" alt=""></button>
                                         </div>
                                 </div>
                         </div>
-             
-                </div>
-                </form>  
-             
+                    </div>
+                </form>   
         `;
   return newContactFadeIn;
 }

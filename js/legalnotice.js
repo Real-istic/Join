@@ -3,6 +3,7 @@
  * @param {string} contentDivId
  */
 function insertLegalNotice(){
+    markActiveNavElement('legalNotice')
     contentDiv.innerHTML = legalNoticeHTML();
     document.getElementById("help").classList.remove("help-none");
 }
@@ -10,7 +11,7 @@ function insertLegalNotice(){
 /**
  * 
  * show content of the legal notice page
- * @returns 
+ * @returns the html part
  */
 function legalNoticeHTML(){
     return /*html*/`
@@ -20,6 +21,6 @@ function legalNoticeHTML(){
         <p>Daniel Bergmann</p>
         <h2>Kontakt</h2>
         <p>Telefon: +49 151 546 940 58</p>
-        </div>
+    </div>
     `
 }
