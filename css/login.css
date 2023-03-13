@@ -261,7 +261,7 @@
   .remember-me-checkbox::before {
     width: 18px;
     height: 18px;
-    background-image: url(assets/img/subtaskunchecked.svg);
+    background-image: url("/assets/img/subtaskunchecked.svg");
     content: "";
     float: left;
     object-fit: cover;
@@ -270,7 +270,7 @@
   .remember-me-checkbox:checked::before {
     width: 18px;
     height: 18px;
-    background-image: url(assets/img/subtaskchecked.svg);
+    background-image: url("/assets/img/subtaskchecked.svg");
     content: "";
     float: left;
     object-fit: cover;

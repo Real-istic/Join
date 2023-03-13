@@ -189,6 +189,7 @@ function addTaskFillSlideInMenu() {
 function toggleAddTaskMenuOffScreen() {
     let slideInMenu = document.getElementById('addTaskSlideInMenu');
     slideInMenu.classList.toggle('transform-x-off-screen');
+    // slideInMenu.style.toggle('display: none;')
     let opacityDiv = document.getElementById('reduceOpacity');
     opacityDiv.classList.toggle('reduce-opacity');
 }
@@ -209,26 +210,27 @@ function insertTaskTolistHTML() {
         lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
         const task = taskList[i];
 
-        if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
+        if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
+
             lists.innerHTML += /*html*/ `
-        <div class="task-wrapper" id="${i}">
-            <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-                <div class="board-task-category-div">
-                    <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
-                </div>
-                <div class="board-task-title-and-description">
-                    <span class="board-task-title">${task.title}</span>
-                    <span class="board-task-description">${task.description}</span>
-                </div>
-                <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
-                    ${insertSubtaskProgress(i)}
-                </div>
-                <div class="board-task-assigned-contacts-and-prority">
-                    <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
-                    <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
+            <div class="task-wrapper" id="${i}">
+                <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
+                    <div class="board-task-category-div">
+                        <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+                    </div>
+                    <div class="board-task-title-and-description">
+                        <span class="board-task-title">${task.title}</span>
+                        <span class="board-task-description">${task.description}</span>
+                    </div>
+                    <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
+                        ${insertSubtaskProgress(i)}
+                    </div>
+                    <div class="board-task-assigned-contacts-and-prority">
+                        <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
+                        <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
+                    </div>
                 </div>
             </div>
-        </div>
             `;
         }
     }
@@ -281,7 +283,7 @@ function fillSubtaskStatusbar(i) {
 }
 
 /**
- * inserts the assigned contacts to the task
+ * inserts the assigned contacts to the task while considering the search-input
  * 
  */
 function insertAssignedContactsToTaskHTML() {
@@ -290,8 +292,8 @@ function insertAssignedContactsToTaskHTML() {
     for (let i = 0; i < taskList.length; i++) {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
         let task = taskList[i];
-        if (task.title.toLowerCase().includes(searchInput.toLowerCase())) {
 
+        if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
             if (!(taskList[i].firstNames.length > 2)) {
                 for (let j = 0; j < taskList[i].firstNames.length; j++) {
                     let firstNameTask = taskList[i].firstNames[j];
@@ -362,8 +364,21 @@ function toggleTaskBoardTask() {
 
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
-    opacityDiv.classList.toggle('reduce-opacity');
-    taskDiv.classList.toggle('board-task-translate-y');
+    if (taskDiv.classList.contains('display-none')) {
+        taskDiv.classList.toggle('display-none');
+        setTimeout(() => {
+            opacityDiv.classList.toggle('reduce-opacity');
+            taskDiv.classList.toggle('board-task-translate-y');
+        }, 100);
+    } else {
+        opacityDiv.classList.toggle('reduce-opacity');
+        taskDiv.classList.toggle('board-task-translate-y');
+        setTimeout(() => {
+            taskDiv.classList.toggle('display-none');
+        }, 100);
+    }
+
+
 }
 
 /**

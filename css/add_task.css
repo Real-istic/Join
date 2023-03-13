@@ -740,7 +740,7 @@
   .add-task-subtask-checkbox::before {
     width: 18px;
     height: 18px;
-    background-image: url("assets/img/subtaskunchecked.svg");
+    background-image: url("/assets/img/subtaskunchecked.svg");
     content: "";
     float: left;
     margin-top: 5px;
@@ -750,7 +750,7 @@
   .add-task-subtask-checkbox:checked::before {
     width: 18px;
     height: 18px;
-    background-image: url("assets/img/subtaskchecked.svg");
+    background-image: url("/assets/img/subtaskchecked.svg");
     content: "";
     float: left;
     margin-top: 5px;
