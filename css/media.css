@@ -1,7 +1,258 @@
-@media (max-width: 1500px) {
+/* Board-Page */
 
+@media (max-width: 1400px) {
 
+  .content {
+    padding: 0 20px;
+    left: 60px;
+    top: 0;
+  }
 
+  nav {
+    width: 60px;
+    padding: 30px 10px 20px 10px;
+  }
 
+  .nav-top {
+    width: 100%;
+  }
+
+  .nav-element {
+    justify-content: center;
+    height: 35px;
+    width: 35px;
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .nav-element span {
+    display: none;
+  }
+
+  .board-tasks {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 1000px) {
+
+    .board-task-slide-in-div {
+    left: 0;
+    }
+}
+
+@media (max-width: 620px) {
+
+.board-task-slide-in-div {
+    width: 350px;
     
 }
+
+.board-task-slide-in-title  {
+    font-size: 30px;
+}
+
+.board-task-slide-in-description,
+.board-task-slide-in-datevalue,
+.board-task-slide-in-contact-name {
+    font-size: 16px;
+}
+
+.board-task-slide-in-datename,
+.board-task-slide-in-priorityname,
+.board-task-slide-in-edit-task-subtask,
+.board-task-slide-in-assignedto {
+    font-size: 18px;
+}
+
+.board-task-slide-in-editbutton {
+    width: 37px;
+    min-height: 37px;
+    margin-right: -30px;
+}
+
+
+.add-task-slide-in-header {
+    padding: 20px 0 0 0;
+}
+
+.add-task-slide-in-menu {
+    width: 350px;
+    padding: 0 15px;
+}
+
+.add-task-slide-in-header span {
+    display: none;
+}
+
+.add-task-slide-in-header::before {
+    height: 50px;
+    width: 40px;
+    content: "";
+    background-image: url("/assets/img/favico.png");
+    background-size: 35px;
+    background-repeat: no-repeat;
+    margin-top: 10px;
+}
+
+.add-task-slide-in-header {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    height: 80px;
+    width: 350px;
+    margin-left: -30px;
+    padding: 10px 70px 10px 40px; 
+    z-index: 2;
+    margin-bottom: 20px;
+}
+
+.add-task-slide-in-create-task-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    height: 55px;
+}
+
+.add-task-slide-in-check-icon {
+    margin-bottom: 10px;
+}
+
+.add-task-slide-in-header > img {
+    left: 310px;
+}
+
+.add-task-priority-label {
+    font-size: 16px;
+}
+
+.add-task-priority-label input {
+    width: 105px;
+}
+
+}
+@media (max-width: 1200px) {
+
+  .board-tasks {
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    margin-top: 25px;
+  }
+
+  .to-do-tasks-container,
+  .in-progress-tasks-container,
+  .await-feedback-tasks-container,
+  .done-tasks-container {
+    height: fit-content;
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 440px) {
+
+  header {
+    height: 80px;
+  }
+
+  header span {
+    font-size: 16px;
+  }
+
+  .help {
+    display: none;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 80px;
+    padding: 15px 5px;
+    border-right: unset;
+    border-top: 1px solid #d1d1d1;
+    padding: 0;
+    z-index: 1;
+  }
+
+  .nav-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    width: 70px;
+    height: 100%;
+    padding: 10px 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .nav-element img {
+    display: flex;
+    height: 25px;
+    width: 25px;
+  }
+
+  .nav-element span {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+  }
+
+  .nav-top {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-bottom {
+    display: none;
+  }
+
+  .add-task-button {
+    display: none;
+  }
+
+  .task-form {
+    height: 40px;
+  }
+
+  .content {
+    left: 30px;
+    top: 0px;
+    bottom: 80px;
+  }
+
+  .to-do-header,
+  .in-progress-header,
+  .await-feedback-header,
+  .done-header {
+    height: 20px;
+    font-size: 20px;
+    width: 100%;
+  }
+
+  .board-add-task-plus-icon {
+    height: 27px;
+    width: 27px;
+  }
+
+  .to-do-tasks-container,
+  .in-progress-tasks-container,
+  .await-feedback-tasks-container,
+  .done-tasks-container {
+    padding: 20px 0;
+  }
+}
+
+/* Add Task Page */
+
