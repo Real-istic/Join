@@ -46,7 +46,7 @@
 
 .new-contact {
   width: 580px;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   background-color: white;
@@ -112,7 +112,7 @@
   letter-spacing: 0em;
   position: fixed;
   bottom: 6rem;
-  right: 7rem;
+  right: 8rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -265,18 +265,12 @@ element.style {
   position: relative;
   right: -300%;
   top: -6rem;
- /* position: relative;
-  min-width: 480px;
-  width: 100%;
-  max-width: 700px;
-  right: -100%;
-  bottom: 40px;*/
 }
 
 .show {
   position: relative;
   right: -27rem;
-  top: -6rem;
+  top: -4rem;
   transition: all 800ms ease-in-out;
 }
 
@@ -386,7 +380,7 @@ element.style {
   font-size: 27px;
   color: #ffffff;
   padding-top: 12px;
-  padding-bottom: 71px;
+  padding-bottom: 50px;
 }
 
 .contact-left-fadeIn-bg {
@@ -426,7 +420,7 @@ element.style {
 /*  edit Contact Section  */
 .edit-contact {
   width: 580px;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   background-color: white;
@@ -504,7 +498,7 @@ element.style {
   justify-content: center;
   width: 400px;
   flex-direction: column;
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
 }
 
 .input-contact {
