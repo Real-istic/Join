@@ -34,37 +34,10 @@
 
 }
 
-@media (max-width: 1165px) {
-.new-contact-button{
-    right: 1rem;
-  }
-
-.contact-right-side {
-    padding: 50px 32px 25px 0px;   
-}
-
-.contact-detail-big-letter {
-  min-width: 80px;
-  height: 80px;
-}
-
-.contact-detail-big-name {
-  font-size: 33px;
-}
-
-.contact-detail-info-main {
-  justify-content: center;
-  margin-right: 100px;
-}
-
 @media (max-width: 1000px) {
   .board-task-slide-in-div {
     left: 0;
   }
-}
-
-.contact-detail-edit {
-  padding-left: 60px;
 }
 
 @media (max-width: 620px) {
@@ -318,3 +291,36 @@
 
 }
 /* Add Task Page */
+
+
+
+/* Contact Page */
+
+@media (max-width: 1165px) {
+  .new-contact-button{
+      right: 1rem;
+    }
+  
+  .contact-right-side {
+      padding: 50px 32px 25px 0px;   
+  }
+  
+  .contact-detail-big-letter {
+    min-width: 80px;
+    height: 80px;
+  }
+  
+  .contact-detail-big-name {
+    font-size: 33px;
+  }
+  
+  .contact-detail-info-main {
+    justify-content: center;
+    margin-right: 100px;
+  }
+
+  @media (max-width: 1000px) {
+  .contact-detail-edit {
+    padding-left: 60px;
+  }
+}
