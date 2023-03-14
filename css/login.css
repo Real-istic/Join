@@ -276,4 +276,14 @@
     object-fit: cover;
     animation-duration: 200ms;
   }
+
+  .wrong-password-container{
+    display: flex;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 120%;
+    color: #FF8190;
+  }
   
