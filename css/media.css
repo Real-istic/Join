@@ -31,7 +31,6 @@
   .board-tasks {
     margin-top: 30px;
   }
-
 }
 
 @media (max-width: 1000px) {
@@ -115,7 +114,6 @@
     cursor: pointer;
   }
 
-
   .add-task-slide-in-create-task-button {
     display: flex;
     align-items: center;
@@ -131,7 +129,6 @@
   .add-task-slide-in-header > img {
     left: 310px;
   }
-
 
   .add-task-priority-label {
     font-size: 16px;
@@ -165,7 +162,7 @@
     height: fit-content;
     min-height: 260px;
   }
-  
+
   .add-task-select-contacts {
     font-size: 16px;
   }
@@ -184,7 +181,6 @@
     top: -10px;
     right: 10px;
   }
-
 }
 
 @media (max-width: 440px) {
@@ -287,57 +283,55 @@
   .done-tasks-container {
     padding: 20px 0;
   }
+}
 
-
+@media (max-width: 350px) {
+  .contact-main {
+    position: absolute;
+    top: 40px;
+    left: -25px;
+  }
 }
 /* Add Task Page */
-
-
 
 /* Contact Page */
 
 @media (max-width: 1165px) {
-.new-contact-button{
-     right: 1rem;
+  .new-contact-button {
+    right: 1rem;
   }
 
-.contact-detail-edit {
-     padding-left: 60px;
+  .contact-detail-edit {
+    padding-left: 60px;
   }
- 
+
   .contact-right-side {
-      padding: 50px 32px 25px 0px;   
+    padding: 50px 32px 25px 0px;
   }
-  
+
   .contact-detail-big-letter {
     min-width: 80px;
     height: 80px;
   }
-  
+
   .contact-detail-big-name {
     font-size: 33px;
   }
-  
+
   .contact-detail-info-main {
     justify-content: center;
     margin-right: 100px;
   }
 }
-  @media (max-width: 1000px) {
-    .edit-contact-arrow{
-      display: flex;
-      height: 24px;
-      position: absolute;
-      top: 40px;
-      right: 9rem;
-      cursor: pointer;
-    }
+@media (max-width: 1000px) {
+  .edit-contact-arrow {
+    display: flex;
+    height: 24px;
+    position: absolute;
+    top: 40px;
+    right: 9rem;
+    cursor: pointer;
+  }
 }
 
-@media (max-width: 350px) {
-.contact-main {
-  position: absolute;
-  top: 40px;
-  left: -25px;
-}
-}
+
