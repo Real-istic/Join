@@ -209,9 +209,9 @@ function insertTaskTolistHTML() {
     for (let i = 0; i < taskList.length; i++) {
         lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
         const task = taskList[i];
-
+        
         if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
-
+            
             lists.innerHTML += /*html*/ `
             <div class="task-wrapper" id="${i}">
                 <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">

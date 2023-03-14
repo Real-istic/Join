@@ -317,6 +317,7 @@ function validateForm() {
   const name = input.value.trim();
   if (name.value === "" || name.value.split(" ").length < 2) {
     input.setCustomValidity("Bitte geben Sie Ihren Vor- und Nachnamen ein.");
+    input.reportValidity();
     return false;
   }
   input.setCustomValidity("");
