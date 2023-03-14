@@ -38,13 +38,14 @@
             </div>
             <div class="log-in-input-container">
                 <div class="log-in-input-field">
-                    <input type="email" placeholder="Email">
+                    <input type="email" placeholder="Email" id="logInEmail">
                     <img src="./assets/img/login-email.svg">
                 </div>
                 <div class="log-in-input-field" >
                     <input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
                     <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
                 </div>
+                <div class="wrong-password-container" id="wrongPasswordContainer"></div>
             </div>
             <div class="log-in-remember-me-forgot-password-section">
                 <div class="log-in-remember-me-input-label">
@@ -54,7 +55,7 @@
                 <a onclick="">Forgot my password</a>
             </div>
             <div class="log-in-commit-guest-log-in-section">
-                <button class="log-in-commit-guest-log-in-section-button-log-in">Log in</button>
+                <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="logIn()">Log in</button>
                 <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
             </div>
         </div>

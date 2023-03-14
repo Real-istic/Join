@@ -4,6 +4,6 @@
  */
 function init(){
     initBackend();
-    setTimeout(createAnimation,300);
+    loadRegistrationPage();
 }
 
