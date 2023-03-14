@@ -30,7 +30,6 @@
     margin-top: 30px;
   }
 
-
   .task-right {
     left: 600px;
   }
@@ -303,8 +302,6 @@
   .task-added-to-board span {
     font-size: 18px;
   }
-
-
 }
 
 @media (max-width: 440px) {
@@ -420,8 +417,6 @@
   }
 }
 
-
-
 /* Contact Page */
 
 @media (max-width: 1165px) {
@@ -446,6 +441,8 @@
     justify-content: center;
     margin-right: 100px;
   }
+
+}
 
   @media (max-width: 1000px) {
   .contact-detail-edit {
