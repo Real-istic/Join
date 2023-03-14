@@ -128,6 +128,9 @@ function renderContactSideScroll(i) {
 
   ContactSideScrollHTML = /*html*/ `
     <div class="contact-right-side">
+      <div class="edit-contact-arrow" onclick="insertContacts()">
+        <img src="./assets/img/arrow-left.svg" alt="">
+      </div>
       <div class="show-contact">
         <div id="contactdetails">
           <div class="contact-detail-main-side" id="0">
@@ -146,7 +149,7 @@ function renderContactSideScroll(i) {
           </div>              
           <div>
             <p class="contact-detail-email-number">Email</p>
-            <a href="mailto:${userList[i].email}"><span>${userList[i].email}</span></a>
+            <a href="mailto:${userList[i].email}"><span class="contact-detail-email">${userList[i].email}</span></a>
           </div>
           <div>
             <p class="contact-detail-email-number">Mobile</p>

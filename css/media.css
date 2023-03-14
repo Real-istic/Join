@@ -297,10 +297,14 @@
 /* Contact Page */
 
 @media (max-width: 1165px) {
-  .new-contact-button{
-      right: 1rem;
-    }
-  
+.new-contact-button{
+     right: 1rem;
+  }
+
+.contact-detail-edit {
+     padding-left: 60px;
+  }
+ 
   .contact-right-side {
       padding: 50px 32px 25px 0px;   
   }
@@ -318,9 +322,22 @@
     justify-content: center;
     margin-right: 100px;
   }
-
+}
   @media (max-width: 1000px) {
-  .contact-detail-edit {
-    padding-left: 60px;
-  }
+    .edit-contact-arrow{
+      display: flex;
+      height: 24px;
+      position: absolute;
+      top: 40px;
+      right: 9rem;
+      cursor: pointer;
+    }
+}
+
+@media (max-width: 350px) {
+.contact-main {
+  position: absolute;
+  top: 40px;
+  left: -25px;
+}
 }
