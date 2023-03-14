@@ -404,7 +404,7 @@
     border: none;
     padding: 18px 0 18px 18px;
     width: 100%;
-    border-bottom: 1px solid #d1d1d1;
+    /* border-bottom: 1px solid #d1d1d1; */
     cursor: text !important;
   }
   
@@ -543,24 +543,32 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
     border-bottom: 2px solid transparent;
+    transition: all 100ms ease-in-out;
+
   }
   
   #addTaskPriorityLabelUrgent:hover {
     border-bottom: 2px solid #ff3d00;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
+    transition: all 100ms ease-in-out;
+
   }
   
   #addTaskPriorityLabelMedium:hover {
     border-bottom: 2px solid #ffa800;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
+    transition: all 100ms ease-in-out;
+
   }
   
   #addTaskPriorityLabelLow:hover {
     border-bottom: 2px solid #7ae229;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
     border-radius: 10px;
+    transition: all 100ms ease-in-out;
+
   }
   
   .add-task-priority-level {
@@ -735,6 +743,7 @@
     width: 95%;
     height: 100%;
     appearance: none;
+    cursor: pointer;
   }
   
   .add-task-subtask-checkbox::before {
