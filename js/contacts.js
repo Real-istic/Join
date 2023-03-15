@@ -142,7 +142,7 @@ function renderContactSideScroll(i) {
           </div>
           <div class="contact-detail-info-main">
             <p class="contact-detail-info">Contact Information</p>
-            <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""> Edit Contact</p>
+            <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""><span class="edit-contact-text"> Edit Contact</span></p>
           </div>              
           <div>
             <p class="contact-detail-email-number">Email</p>
