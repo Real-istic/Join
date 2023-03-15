@@ -511,11 +511,11 @@
 
 @media (max-width: 790px) {
   .contact-left {
-    padding-right: 12px;
+    padding-right: 18px;
   }
 
   .contact-main {
-    left: 16px;
+    left: 8px;
   }
 
   .contact-left {
@@ -562,7 +562,7 @@
     width: 100%;
     background: white;
     transition: all 1ms ease-in-out;
-   }
+  }
 
   .new-contact-button {
     display: none;
@@ -583,9 +583,34 @@
   }
 }
 
-@media (max-width: 440px) {
-  .contact-left {
-    top: 80px;
-    height: 690px;
+@media (max-width: 541px) {
+  .show {
+    right: 4rem;
+  }
+}
+
+@media (max-width: 490px) {
+  .contact-detail-big-letter {
+    min-width: 60px;
+    height: 60px;
+    font-size: 35px;
+  }
+
+  .contact-detail-big-name {
+    font-size: 25px;
+  }
+}
+
+
+
+@media (max-width: 400px) {
+  .show {
+    right: 7rem;
+  }
+}
+
+@media (max-width: 350px) {
+  .show {
+    right: 7rem;
   }
 }
