@@ -357,6 +357,7 @@ element.style {
   align-items: center;
   gap: 8px;
   cursor: pointer;
+  padding-left: 36px;
 }
 
 .icon-edit-contact {

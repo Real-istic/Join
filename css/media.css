@@ -73,7 +73,6 @@
     top: 100%;
     left: 365px;
   }
-
 }
 
 @media (max-width: 1000px) {
@@ -98,7 +97,7 @@
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 716px) {
   nav {
     display: flex;
     justify-content: center;
@@ -426,9 +425,9 @@
 
 /* Contact Page */
 
-@media (max-width: 1165px) {
+@media (max-width: 1212px) {
   .new-contact-button {
-    right: 1rem;
+    right: 6rem;
   }
 
   .contact-right-side {
@@ -445,7 +444,31 @@
   }
 
   .contact-detail-info-main {
-    justify-content: center;
+    justify-content: flex-start;
+    margin-right: 100px;
+  }
+}
+
+@media (max-width: 1190px) {
+  .new-contact-button {
+    right: 4rem;
+  }
+
+  .contact-right-side {
+    padding: 50px 32px 25px 0px;
+  }
+
+  .contact-detail-big-letter {
+    min-width: 80px;
+    height: 80px;
+  }
+
+  .contact-detail-big-name {
+    font-size: 33px;
+  }
+
+  .contact-detail-info-main {
+    justify-content: flex-start;
     margin-right: 100px;
   }
 }
@@ -453,5 +476,116 @@
 @media (max-width: 1000px) {
   .contact-detail-edit {
     padding-left: 60px;
+  }
+
+  .contact-main {
+    left: 16px;
+  }
+}
+
+@media (max-width: 934px) {
+  .edit-contact-text {
+    display: none;
+  }
+
+  .contact-detail-big-letter {
+    min-width: 61px;
+    height: 61px;
+    font-size: 34px;
+  }
+
+  .contact-detail-big-name {
+    font-size: 27px;
+  }
+}
+
+@media (max-width: 846px) {
+  .contact-detail-big-name {
+    font-size: 20px;
+  }
+
+  .contact-detail-info {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 790px) {
+  .contact-left {
+    padding-right: 12px;
+  }
+
+  .contact-main {
+    left: 16px;
+  }
+
+  .contact-left {
+    padding-right: 12px;
+  }
+
+  .show {
+    right: -22rem;
+  }
+
+  .contact-child-div {
+    padding-left: 7px;
+    width: 303px;
+  }
+}
+
+@media (max-width: 716px) {
+  .contact-left {
+    height: 670px;
+  }
+
+  .contact-child-div {
+    padding-left: 1px;
+  }
+
+  .contact-letter {
+    padding-left: 19px;
+  }
+
+  .contact-main {
+    left: 1px;
+  }
+  .contact-left-fadeIn {
+    left: -200%;
+  }
+}
+
+@media (max-width: 655px) {
+  .show {
+    right: 1rem;
+    padding-left: 8rem;
+    padding-top: 4rem;
+    height: 100vh;
+    width: 100%;
+    background: white;
+    transition: all 1ms ease-in-out;
+   }
+
+  .new-contact-button {
+    display: none;
+  }
+
+  .contact-detail-big-letter {
+    min-width: 80px;
+    height: 80px;
+  }
+
+  .contact-detail-big-name {
+    font-size: 33px;
+  }
+
+  .contact-detail-info-main {
+    justify-content: flex-start;
+    margin-right: 100px;
+  }
+}
+
+@media (max-width: 440px) {
+  .contact-left {
+    top: 80px;
+    height: 690px;
   }
 }
