@@ -13,16 +13,25 @@ function createAnimation(){
 }
 
 function changeBackgroundColor(){
-    document.getElementById('registrationContainer').style.backgroundColor= '#ffffff';
+    let backgroundColorLogin = document.getElementById('registrationContainer');
+    if (backgroundColorLogin.style.backgroundColor == 'rgb(255, 255, 255)' ) {
+        backgroundColorLogin.style.backgroundColor = 'rgb(69, 137, 255)';
+    }else if (backgroundColorLogin.style.backgroundColor == 'rgb(69, 137, 255)' || backgroundColorLogin.style.backgroundColor == '') {
+        backgroundColorLogin.style.backgroundColor= 'rgb(255, 255, 255)';
+    }
+   
 }
 
 function changeLogoColor(){
-// Get all path elements with the class join-logo-login-color
     let paths = document.querySelectorAll('.join-logo-login-color');
 
-// Loop through all the path elements and change the fill attribute
     for (let i = 0; i < paths.length; i++) {
-        paths[i].setAttribute('fill', '#4589ff');
+        if (paths[i].getAttribute('fill') == 'rgb(69, 137, 255)') {
+            paths[i].setAttribute('fill', 'rgb(255, 255, 255)');
+        }else{
+            paths[i].setAttribute('fill', 'rgb(69, 137, 255)');
+        }
+        paths[i].style.transition = 'fill 300ms ease-in-out';
     }
 }
 
@@ -31,7 +40,7 @@ function changeLogoPosition(){
 }
 
 function showLogInElements(){
-    document.getElementById('LogInContainer').style.opacity = '1';
+    document.getElementById('logInContainer').style.opacity = '1';
     document.getElementById('registrationUpperRightInnerContainer').style.opacity = '1';
 }
 
@@ -52,9 +61,10 @@ function chooseRightPasswordImgage(){
     let passwordToggle = document.getElementById("passwordToggle");
 
     if(passwordToggle.type === "password"){
-        passwordToggle.src = "./assets/img/passwordHide.svg";
-    }else{
         passwordToggle.src = "./assets/img/passwordShow.svg";
+    }
+    else if(passwordToggle.type === "text"){
+        passwordToggle.src = "./assets/img/passwordHide.svg";
     }
 }
 
@@ -65,11 +75,11 @@ function togglePasswordVisibility() {
         if (passwordInput.type === "password") {
             // Show the password
             passwordInput.type = "text";
-            passwordToggle.src = "./assets/img/passwordHide.svg";
+            passwordToggle.src = "./assets/img/passwordShow.svg";
           } else {
             // Hide the password
             passwordInput.type = "password";
-            passwordToggle.src = "./assets/img/passwordShow.svg";
+            passwordToggle.src = "./assets/img/passwordHide.svg";
           }
     }
   }
@@ -159,3 +169,139 @@ function setElementsFromLocalStorage(){
         document.getElementById('rememberMe').checked = false;
     }
 }
+
+//Sign Up
+
+function signUp(){
+    changeBackgroundColor();
+    changeLogoColor();
+    changeLogInInputHTML();
+    addReturnButtonHTML();
+}
+
+function changeLogInInputHTML(){
+    document.getElementById('logInContainerHeadline').innerHTML = `Sign up`;
+    document.getElementById('logInInputContainer').innerHTML = SignUpInputHTML(); 
+    document.getElementById('logInRememberMeForgotPasswordSection').innerHTML = ``;
+    document.getElementById('logInCommitGuestLogInSection').innerHTML = SignUpButtonHTML();  
+    document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
+    document.getElementById('registrationUpperRightInnerContainer').style.opacity = '0';
+    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
+    document.getElementById('logInRememberMeForgotPasswordSection').style.display ='none';
+    document.getElementById('logInInputContainer').style.height = '185px';
+}
+
+function SignUpInputHTML(){
+    return /*html*/ `
+    <div class="log-in-input-field">
+        <input type="text" placeholder="First and last name" id="logInName">
+        <img src="./assets/img/signup-user.svg">
+    </div>
+    <div class="log-in-input-field">
+        <input type="email" placeholder="Email" id="logInEmail">
+        <img src="./assets/img/login-email.svg">
+    </div>
+    <div class="log-in-input-field" >
+        <input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
+        <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
+    </div>
+    `;
+}
+
+function SignUpButtonHTML(){
+    return /*html*/ `
+    <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="signUpNewUser()">Sign Up</button>
+    `
+}
+
+function signUpNewUser() {
+    const newContactName = document.getElementById("logInName");
+    const newContactEmail = document.getElementById("logInEmail");
+    const newContactPassword = document.getElementById("passwordInput");
+  
+    // Verify that the first and last name have been entered.
+    if (newContactName.value === "" || newContactName.value.split(" ").length < 2) {
+        newContactName.setCustomValidity("Please enter your first and last name.");
+        newContactName.reportValidity();
+
+    } if (newContactEmail.value === "") {
+        newContactEmail.setCustomValidity("Please enter your email.");
+        newContactEmail.reportValidity();
+
+    } if (newContactPassword.value === "") {
+        newContactPassword.setCustomValidity("Please enter your password.");
+        newContactPassword.reportValidity();
+    }
+  
+    // Separate first and last names and make sure that the first letter is capitalized.
+    let nameParts = newContactName.value.split(" ");
+    let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+    let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
+  
+    let newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: newContactEmail.value,
+      password: newContactPassword.value,
+      backgroundColor: `${getRandomColor()}`,
+    };
+  
+    addUser(newUser);
+    returnToLoginPage();
+    showNewContactMessage();
+    insertContacts();
+    
+  }
+
+  function addReturnButtonHTML(){
+    return /*html*/ `
+    <button onclick="returnToLoginPage()" class="return-to-log-in-page-button"><img src="assets/img/arrow-left.svg" alt=""></button>
+    `
+  }
+
+  function returnToLoginPage(){
+    changeBackgroundColor();
+    changeLogoColor();
+    showLogInElements();
+    document.getElementById('logInContainer').innerHTML = createLogInElementsHTML();
+    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `space-between`;
+    document.getElementById('logInRememberMeForgotPasswordSection').style.display ='flex';
+    document.getElementById('logInInputContainer').style.height = '130px';
+  }
+
+  function createLogInElementsHTML(){
+    return /*html*/`
+    <div class="log-in-headline-container">
+        <div class="log-in-headline-and-border-container">
+            <span id="logInContainerHeadline">Log in</span>
+        </div>
+    </div>
+    <div class="log-in-input-container" id="logInInputContainer">
+        <div class="log-in-input-field">
+            <input type="email" placeholder="Email" id="logInEmail">
+            <img src="./assets/img/login-email.svg">
+        </div>
+        <div class="log-in-input-field" >
+            <input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
+            <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
+        </div>
+        <div class="wrong-password-container" id="wrongPasswordContainer"></div>
+    </div>
+    <div class="log-in-remember-me-forgot-password-section" id="logInRememberMeForgotPasswordSection">
+        <div class="log-in-remember-me-input-label">
+            <input type="checkbox" name="rememberMe" id="rememberMe" class="remember-me-checkbox">
+            <span>Remember me</span>
+        </div>
+        <a onclick="">Forgot my password</a>
+    </div>
+    <div class="log-in-commit-guest-log-in-section" id="logInCommitGuestLogInSection">
+        <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="logIn()">Log in</button>
+        <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
+    </div>
+    `
+    
+  }
+//Sign Up
+//logo weiß
+
+//Upper right menu display:"none";
