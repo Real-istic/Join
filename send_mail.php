@@ -1,27 +1,14 @@
 <?php
-
 ########### CONFIG ###############
 
-$recipient = 'Ziel@Mustermail.de';
-$redirect = 'success.html';
+$recipient = $_POST['recipient'];
+$redirect = 'http://gruppenarbeit-join-473.developerakademie.net/Join/index.html';
 
 ########### CONFIG END ###########
+?>
 
 
-
-########### Intruction ###########   
-#
-#   This script has been created to send an email to the $recipient
-#   
-#  1) Upload this file to your FTP Server
-#  2) Send a POST rewquest to this file, including
-#     [name] The name of the sender (Absender)
-#     [message] Message that should be send to you
-#
-##################################
-
-
-
+<?php
 ###############################
 #
 #        DON'T CHANGE ANYTHING FROM HERE!
@@ -42,11 +29,16 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $subject = "Contact From " . $_POST['name'];
         $headers = "From:  noreply@developerakademie.com";
 
-        mail($recipient, $subject, $_POST['message'], $headers);
-        header("Location: " . $redirect); 
+        $message .= "Hello!\n This is your new Password: ChangeItASAP" . $_POST['message'];
 
+        if (mail($recipient, $subject, $message, $headers)) {
+            echo "Check your mail for the new password";
+        } else {
+            echo "Timeout... try again later.";
+        }
         break;
     default: //Reject any non POST or OPTIONS requests.
         header("Allow: POST", true, 405);
         exit;
 }
+?>
