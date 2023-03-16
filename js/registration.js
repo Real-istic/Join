@@ -41,7 +41,7 @@ function changeLogoPosition(){
 
 function showLogInElements(){
     document.getElementById('logInContainer').style.opacity = '1';
-    document.getElementById('registrationUpperRightInnerContainer').style.opacity = '1';
+    document.getElementById('registrationUpperRightInnerContainer').style.display = 'flex';
 }
 
 //PASSWORD
@@ -185,7 +185,7 @@ function changeLogInInputHTML(){
     document.getElementById('logInRememberMeForgotPasswordSection').innerHTML = ``;
     document.getElementById('logInCommitGuestLogInSection').innerHTML = SignUpButtonHTML();  
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
-    document.getElementById('registrationUpperRightInnerContainer').style.opacity = '0';
+    document.getElementById('registrationUpperRightInnerContainer').style.display = 'none';
     document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
     document.getElementById('logInRememberMeForgotPasswordSection').style.display ='none';
     document.getElementById('logInInputContainer').style.height = '185px';
@@ -259,23 +259,31 @@ function signUpNewUser() {
     `
   }
 
+  //Return to Login page
+
   function returnToLoginPage(){
     changeBackgroundColor();
     changeLogoColor();
     showLogInElements();
+    document.getElementById('registrationUpperRightInnerContainer').style.display = 'flex';
     document.getElementById('logInContainer').innerHTML = createLogInElementsHTML();
     document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `space-between`;
     document.getElementById('logInRememberMeForgotPasswordSection').style.display ='flex';
     document.getElementById('logInInputContainer').style.height = '130px';
+    document.getElementById('logInContainer').style.width = '652px';
+    document.getElementById('forgotPasswordDescriptionContainer').style.display = 'none';
   }
 
   function createLogInElementsHTML(){
     return /*html*/`
-    <div class="log-in-headline-container">
+    <div class="log-in-headline-container" id="logInHeadlineContainer">
         <div class="log-in-headline-and-border-container">
             <span id="logInContainerHeadline">Log in</span>
         </div>
     </div>
+    <div class="forgot-password-description-container" id="forgotPasswordDescriptionContainer">
+                <span class="forgot-password-description" id="forgotPasswordDescription">Don't worry! We will send you an email with the instructions to reset your password.</span>
+            </div>
     <div class="log-in-input-container" id="logInInputContainer">
         <div class="log-in-input-field">
             <input type="email" placeholder="Email" id="logInEmail">
@@ -292,16 +300,110 @@ function signUpNewUser() {
             <input type="checkbox" name="rememberMe" id="rememberMe" class="remember-me-checkbox">
             <span>Remember me</span>
         </div>
-        <a onclick="">Forgot my password</a>
+        <a onclick="forgotPassword()">Forgot my password</a>
     </div>
     <div class="log-in-commit-guest-log-in-section" id="logInCommitGuestLogInSection">
         <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="logIn()">Log in</button>
         <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
     </div>
     `
-    
   }
-//Sign Up
-//logo weiß
 
-//Upper right menu display:"none";
+
+//Forgot Password
+
+function forgotPassword(){
+    changeBackgroundColor();
+    changeLogoColor();
+    createForgotPasswordHTML();
+}
+
+function createForgotPasswordHTML(){
+    document.getElementById('registrationUpperRightInnerContainer').style.display = 'none';
+    document.getElementById('logInContainerHeadline').innerHTML = `I forgot my password`;
+    document.getElementById('logInRememberMeForgotPasswordSection').style.display ='none';
+    document.getElementById('logInInputContainer').innerHTML = forgotPasswordInputHTML();
+    document.getElementById('logInInputContainer').style.height = '50px';
+    document.getElementById('logInCommitGuestLogInSection').innerHTML = forgotPasswordButtonHTML();
+    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`; 
+    document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
+    document.getElementById('logInContainer').style.width = '750px';
+    document.getElementById('forgotPasswordDescriptionContainer').style.display = 'flex';
+}
+
+function forgotPasswordInputHTML(){
+    return /*html*/`
+    <div class="log-in-input-field">
+        <input type="email" placeholder="Email" id="logInEmail">
+        <img src="./assets/img/login-email.svg">
+    </div>
+    `;
+}
+
+function forgotPasswordButtonHTML(){
+    return /*html*/ `
+    <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="sendLinktoEmail()" style="width:270px;">Send me the email</button>
+    `;
+}
+
+function addForgotPasswordHTML(){
+    return /*html*/ `
+    <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
+    `;
+}
+
+function sendLinktoEmail(){
+    let email = document.getElementById('logInEmail').value;
+    let subject = 'Reset your password';
+    let body = 'Hello,\n\nPlease click on the link to set your new password:\n\nC:\Users\Konrad\Documents\Developer Akademie\Join\change_password.html?email=' + encodeURIComponent(email) + '\n\nGreetings,\ngroup work - join - 473';
+    
+    window.location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+}
+
+//LOAD CHANGE PASSWORD PAGE
+
+function loadChangePasswordPage(){
+    setTimeout(createForgotPasswordAnimation,300);
+    createForgotPasswordNewURLHTML();
+}
+
+function createForgotPasswordAnimation(){
+    changeLogoPosition();
+    showLogInElements();
+}
+
+function createForgotPasswordNewURLHTML(){
+    document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
+    document.getElementById('forgotPasswordDescriptionContainer').style.display = 'flex';
+    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`; 
+    document.getElementById('logInContainer').style.height = '540px';
+    document.getElementById('logInContainer').style.width = '760px';
+    document.getElementById('logInContainer').style.justifyContent = 'space-between';
+}
+
+function commitChangePassword(){
+    checkForSameInput();
+}
+
+function checkForSameInput(){
+    let passwordInput = document.getElementById('passwordInput').value;
+    let passwordInputConfirm = document.getElementById('confirmPasswordInput').value;
+
+    if (passwordInput === passwordInputConfirm) {
+        updatePassword(passwordInput);
+    }else{
+        document.getElementById('wrongPasswordContainer').innerHTML = wrongPasswordHTML();
+    }
+}
+
+function updatePassword(passwordInput){
+    for (let i = 0; i < userList.length; i++) {
+        
+    }
+}
+
+function wrongPasswordHTML(){
+    return /*html*/ `
+    <span>Make sure the second password you typed matches the first.</span>
+    `;
+}
