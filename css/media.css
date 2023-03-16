@@ -601,16 +601,56 @@
   }
 }
 
+@media (max-width: 440px) {
+  .contact-left {
+    height: 690px;
+    top: 80px;
+  }
 
+  .show {
+    position: fixed;
+    top: 5rem;
+    left: -3rem;
+    height: 690px;
+  }
+}
 
 @media (max-width: 400px) {
   .show {
-    right: 7rem;
+    left: -4rem;
   }
+  .show-contact {
+    padding-left: 0rem;
+    z-index: 3;
+    position: fixed;
+    background-color: white;
+    height: 690px;
+    bottom: 5rem;
+    padding-top: 7rem;
+  }
+
+  .contact-right-side {
+    padding-left: 0rem;
+}
 }
 
 @media (max-width: 350px) {
   .show {
     right: 7rem;
   }
+
+  .show-contact {
+    padding-left: 0rem;
+    z-index: 3;
+    position: fixed;
+    background-color: white;
+    height: 690px;
+    bottom: 5rem;
+    padding-top: 7rem;
+    left: 2rem;
+  }
+
+  .contact-detail-big-name {
+    font-size: 21px;
+}
 }
