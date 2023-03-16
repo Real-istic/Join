@@ -56,7 +56,7 @@
 }
 
 .new-contact-head {
-  background-color: #005dff;
+  background-color: #4589FF;
   width: 580px;
   padding-bottom: 70px;
   border-radius: 0px 30px 0px 0px;
@@ -378,7 +378,7 @@ element.style {
 
 .add-contact-text {
   font-weight: 400;
-  font-size: 27px;
+  font-size: 21px;
   color: #ffffff;
   padding-top: 12px;
   padding-bottom: 50px;

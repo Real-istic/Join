@@ -437,6 +437,7 @@
   .contact-detail-big-letter {
     min-width: 80px;
     height: 80px;
+    font-size: 35px;
   }
 
   .contact-detail-big-name {
@@ -491,7 +492,7 @@
   .contact-detail-big-letter {
     min-width: 61px;
     height: 61px;
-    font-size: 34px;
+    font-size: 26px;
   }
 
   .contact-detail-big-name {
@@ -523,7 +524,7 @@
   }
 
   .show {
-    right: -22rem;
+    right: -24rem;
   }
 
   .contact-child-div {
@@ -534,7 +535,7 @@
 
 @media (max-width: 716px) {
   .contact-left {
-    height: 670px;
+    height: 605px;
   }
 
   .contact-child-div {
@@ -547,9 +548,6 @@
 
   .contact-main {
     left: 1px;
-  }
-  .contact-left-fadeIn {
-    left: -200%;
   }
 }
 
@@ -571,6 +569,7 @@
   .contact-detail-big-letter {
     min-width: 80px;
     height: 80px;
+    font-size: 34px;
   }
 
   .contact-detail-big-name {
@@ -583,6 +582,34 @@
   }
 }
 
+@media (max-width: 580px) {
+  .img-edit-contact {
+    display: none;
+  }
+  .new-contact-h {
+    padding-top: 68px;
+    font-family: Inter;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0px;
+    text-align: left;
+    color: white;
+  }
+
+  .add-contact-text{
+    font-size: 21px;
+  }
+
+  .new-contact-head {
+  height: 12rem;
+  }
+
+  .new-contact-main {
+    width: 580px;
+    height: 19rem;
+}
+}
 @media (max-width: 541px) {
   .show {
     right: 4rem;
@@ -593,7 +620,7 @@
   .contact-detail-big-letter {
     min-width: 60px;
     height: 60px;
-    font-size: 35px;
+    font-size: 26px;
   }
 
   .contact-detail-big-name {
@@ -603,7 +630,7 @@
 
 @media (max-width: 440px) {
   .contact-left {
-    height: 690px;
+    height: 624px;
     top: 80px;
   }
 
@@ -611,7 +638,8 @@
     position: fixed;
     top: 5rem;
     left: -3rem;
-    height: 690px;
+    height: 624px;
+    width: 27rem;
   }
 }
 
@@ -631,10 +659,10 @@
 
   .contact-right-side {
     padding-left: 0rem;
-}
+  }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 340px) {
   .show {
     right: 7rem;
   }
@@ -652,5 +680,5 @@
 
   .contact-detail-big-name {
     font-size: 21px;
-}
+  }
 }
