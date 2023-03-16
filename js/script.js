@@ -7,3 +7,8 @@ function init(){
     loadRegistrationPage();
 }
 
+function initChangePassword(){
+    initBackend();
+    loadChangePasswordPage();
+}
+

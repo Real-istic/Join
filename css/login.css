@@ -102,7 +102,7 @@
   .return-to-log-in-page-button{
     position: absolute;
     display: flex;
-    top: 40px;
+    top: 53px;
     left: 37px;
     align-items: center;
     background: none;
@@ -140,7 +140,22 @@
     font-size: 48px;
     line-height: 58px;
     text-align: center;
-    width: 180px;
+    width: 550px;
+  }
+
+  .forgot-password-description-container{
+    display: none;
+    justify-content: center;
+    width: 590px;
+  }
+
+  .forgot-password-description-container span{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 23px;
+    line-height: 28px;
+    text-align: center;
   }
   
   .log-in-input-container {
