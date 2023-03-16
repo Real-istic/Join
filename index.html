@@ -32,15 +32,15 @@
         </svg>
         <div class="registration-upper-right-inner-container" id="registrationUpperRightInnerContainer">
             <span>Not a Join user?</span>
-            <button>Sign up</button>
+            <button onclick="signUp()">Sign up</button>
         </div>
-        <div class="log-in-container" id="LogInContainer">
+        <div class="log-in-container" id="logInContainer">
             <div class="log-in-headline-container">
                 <div class="log-in-headline-and-border-container">
-                    <span>Log in</span>
+                    <span id="logInContainerHeadline">Log in</span>
                 </div>
             </div>
-            <div class="log-in-input-container">
+            <div class="log-in-input-container" id="logInInputContainer">
                 <div class="log-in-input-field">
                     <input type="email" placeholder="Email" id="logInEmail">
                     <img src="./assets/img/login-email.svg">
@@ -51,14 +51,14 @@
                 </div>
                 <div class="wrong-password-container" id="wrongPasswordContainer"></div>
             </div>
-            <div class="log-in-remember-me-forgot-password-section">
+            <div class="log-in-remember-me-forgot-password-section" id="logInRememberMeForgotPasswordSection">
                 <div class="log-in-remember-me-input-label">
                     <input type="checkbox" name="rememberMe" id="rememberMe" class="remember-me-checkbox">
                     <span>Remember me</span>
                 </div>
                 <a onclick="">Forgot my password</a>
             </div>
-            <div class="log-in-commit-guest-log-in-section">
+            <div class="log-in-commit-guest-log-in-section" id="logInCommitGuestLogInSection">
                 <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="logIn()">Log in</button>
                 <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
             </div>

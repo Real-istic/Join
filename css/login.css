@@ -31,9 +31,10 @@
     transform: translateX(0);
   }
   
-  /* .join-logo-login-color{
-    fill:white;
-  } */
+  .join-logo-login-color{
+    fill:'rgb(225, 225, 255)';
+    transition: 1000ms ease-in-out;
+  }
   
   .registration-upper-right-inner-container {
     position: absolute;
@@ -82,6 +83,7 @@
   }
   
   .log-in-container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,6 +97,20 @@
   
     opacity: 0;
     transition: 300ms ease-in-out;
+  }
+
+  .return-to-log-in-page-button{
+    position: absolute;
+    display: flex;
+    top: 40px;
+    left: 37px;
+    align-items: center;
+    background: none;
+    border: none;
+  }
+
+  .return-to-log-in-page-button:hover{
+    cursor: pointer;
   }
   
   .log-in-headline-container {
@@ -124,6 +140,7 @@
     font-size: 48px;
     line-height: 58px;
     text-align: center;
+    width: 180px;
   }
   
   .log-in-input-container {
