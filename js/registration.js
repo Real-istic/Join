@@ -1,69 +1,69 @@
 function loadRegistrationPage() {
-    setTimeout(createAnimation,300);
+    setTimeout(createAnimation, 300);
     setElementsFromLocalStorage();
 }
 
 //STARTING ANIMATION
 
-function createAnimation(){
+function createAnimation() {
     changeBackgroundColor();
     changeLogoColor();
     changeLogoPosition();
     showLogInElements();
 }
 
-function changeBackgroundColor(){
+function changeBackgroundColor() {
     let backgroundColorLogin = document.getElementById('registrationContainer');
-    if (backgroundColorLogin.style.backgroundColor == 'rgb(255, 255, 255)' ) {
+    if (backgroundColorLogin.style.backgroundColor == 'rgb(255, 255, 255)') {
         backgroundColorLogin.style.backgroundColor = 'rgb(69, 137, 255)';
-    }else if (backgroundColorLogin.style.backgroundColor == 'rgb(69, 137, 255)' || backgroundColorLogin.style.backgroundColor == '') {
-        backgroundColorLogin.style.backgroundColor= 'rgb(255, 255, 255)';
+    } else if (backgroundColorLogin.style.backgroundColor == 'rgb(69, 137, 255)' || backgroundColorLogin.style.backgroundColor == '') {
+        backgroundColorLogin.style.backgroundColor = 'rgb(255, 255, 255)';
     }
-   
+
 }
 
-function changeLogoColor(){
+function changeLogoColor() {
     let paths = document.querySelectorAll('.join-logo-login-color');
 
     for (let i = 0; i < paths.length; i++) {
         if (paths[i].getAttribute('fill') == 'rgb(69, 137, 255)') {
             paths[i].setAttribute('fill', 'rgb(255, 255, 255)');
-        }else{
+        } else {
             paths[i].setAttribute('fill', 'rgb(69, 137, 255)');
         }
         paths[i].style.transition = 'fill 300ms ease-in-out';
     }
 }
 
-function changeLogoPosition(){
+function changeLogoPosition() {
     document.getElementById('joinLogoLogin').classList.add('join-logo-login-new-position');
 }
 
-function showLogInElements(){
+function showLogInElements() {
     document.getElementById('logInContainer').style.opacity = '1';
     document.getElementById('registrationUpperRightInnerContainer').style.display = 'flex';
 }
 
 //PASSWORD
 
-function checkNumberOfLetters(){
+function checkNumberOfLetters() {
     let passwordInput = document.getElementById('passwordInput');
     let passwordToggle = document.getElementById("passwordToggle");
 
-    if(passwordInput.value == 0){
+    if (passwordInput.value == 0) {
         passwordToggle.src = "./assets/img/password-icon.svg";
-    }else{
+    } else {
         chooseRightPasswordImgage();
     }
 }
 
-function chooseRightPasswordImgage(){
+function chooseRightPasswordImgage() {
     let passwordToggle = document.getElementById("passwordToggle");
 
-    if(passwordToggle.type === "password"){
+    if (passwordToggle.type === "password") {
         passwordToggle.src = "./assets/img/passwordShow.svg";
     }
-    else if(passwordToggle.type === "text"){
+    else if (passwordToggle.type === "text") {
         passwordToggle.src = "./assets/img/passwordHide.svg";
     }
 }
@@ -71,22 +71,22 @@ function chooseRightPasswordImgage(){
 function togglePasswordVisibility() {
     let passwordInput = document.getElementById("passwordInput");
     let passwordToggle = document.getElementById("passwordToggle");
-    if(passwordInput.value.length > 0){
+    if (passwordInput.value.length > 0) {
         if (passwordInput.type === "password") {
             // Show the password
             passwordInput.type = "text";
             passwordToggle.src = "./assets/img/passwordShow.svg";
-          } else {
+        } else {
             // Hide the password
             passwordInput.type = "password";
             passwordToggle.src = "./assets/img/passwordHide.svg";
-          }
+        }
     }
-  }
+}
 
 // GUEST LOGIN
 
-function guestLogIn(){
+function guestLogIn() {
     document.getElementById('registrationContainer').style.display = 'none';
     currentUser = 'guest';
     insertSummary();
@@ -94,7 +94,7 @@ function guestLogIn(){
 
 //LOG IN
 
-function logIn(){
+function logIn() {
     let inputElementPassword = document.getElementById('passwordInput');
     let emailFromInput = document.getElementById('logInEmail').value;
 
@@ -105,11 +105,11 @@ function logIn(){
             document.getElementById('registrationContainer').style.display = 'none';
             insertSummary();
         }
-        else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Password`){
+        else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Password`) {
             toggleWrongPasswordAlert();
             togglePasswordPlaceholder();
         }
-        else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Ups! Try again`){
+        else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Ups! Try again`) {
             inputElementPassword.value = ``;
         }
     }
@@ -117,9 +117,9 @@ function logIn(){
 }
 
 
-function toggleWrongPasswordAlert(){
+function toggleWrongPasswordAlert() {
     const divElement = document.getElementById('wrongPasswordContainer');
-    
+
     if (divElement.innerHTML.trim() === '') {
         divElement.innerHTML = `Wrong password or email`;
     } else {
@@ -127,9 +127,9 @@ function toggleWrongPasswordAlert(){
     }
 }
 
-function togglePasswordPlaceholder(){
+function togglePasswordPlaceholder() {
     const inputElement = document.getElementById('passwordInput');
-    
+
     if (inputElement.placeholder.trim() === 'Password') {
         inputElement.value = ``;
         inputElement.placeholder = `Ups! Try again`;
@@ -140,58 +140,58 @@ function togglePasswordPlaceholder(){
 
 //REMEMBER ME
 
-function rememberMe(){
+function rememberMe() {
     let emailFromInput = document.getElementById('logInEmail').value
 
     if (document.getElementById('rememberMe').checked) {
         localStorage.setItem('rememberCheckbox', 'true');
         localStorage.setItem('rememberEmail', emailFromInput);
-    }else{
+    } else {
         localStorage.setItem('rememberCheckbox', '');
         localStorage.setItem('rememberEmail', '');
     }
 }
 
-function setElementsFromLocalStorage(){
+function setElementsFromLocalStorage() {
     let checkboxStatus = localStorage.getItem('rememberCheckbox');
     let emailFromLocalStorage = localStorage.getItem('rememberEmail');
     let emailFromInput = document.getElementById('logInEmail');
 
     if (!emailFromLocalStorage || emailFromLocalStorage === '') {
         emailFromInput.value = ``;
-    }else{
+    } else {
         emailFromInput.value = localStorage.getItem('rememberEmail');
     }
 
-    if(checkboxStatus == 'true'){
+    if (checkboxStatus == 'true') {
         document.getElementById('rememberMe').checked = true;
-    }else{
+    } else {
         document.getElementById('rememberMe').checked = false;
     }
 }
 
 //Sign Up
 
-function signUp(){
+function signUp() {
     changeBackgroundColor();
     changeLogoColor();
     changeLogInInputHTML();
     addReturnButtonHTML();
 }
 
-function changeLogInInputHTML(){
+function changeLogInInputHTML() {
     document.getElementById('logInContainerHeadline').innerHTML = `Sign up`;
-    document.getElementById('logInInputContainer').innerHTML = SignUpInputHTML(); 
+    document.getElementById('logInInputContainer').innerHTML = SignUpInputHTML();
     document.getElementById('logInRememberMeForgotPasswordSection').innerHTML = ``;
-    document.getElementById('logInCommitGuestLogInSection').innerHTML = SignUpButtonHTML();  
+    document.getElementById('logInCommitGuestLogInSection').innerHTML = SignUpButtonHTML();
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('registrationUpperRightInnerContainer').style.display = 'none';
     document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
-    document.getElementById('logInRememberMeForgotPasswordSection').style.display ='none';
+    document.getElementById('logInRememberMeForgotPasswordSection').style.display = 'none';
     document.getElementById('logInInputContainer').style.height = '185px';
 }
 
-function SignUpInputHTML(){
+function SignUpInputHTML() {
     return /*html*/ `
     <div class="log-in-input-field">
         <input type="text" placeholder="First and last name" id="logInName">
@@ -208,7 +208,7 @@ function SignUpInputHTML(){
     `;
 }
 
-function SignUpButtonHTML(){
+function SignUpButtonHTML() {
     return /*html*/ `
     <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="signUpNewUser()">Sign Up</button>
     `
@@ -218,7 +218,7 @@ function signUpNewUser() {
     const newContactName = document.getElementById("logInName");
     const newContactEmail = document.getElementById("logInEmail");
     const newContactPassword = document.getElementById("passwordInput");
-  
+
     // Verify that the first and last name have been entered.
     if (newContactName.value === "" || newContactName.value.split(" ").length < 2) {
         newContactName.setCustomValidity("Please enter your first and last name.");
@@ -232,49 +232,49 @@ function signUpNewUser() {
         newContactPassword.setCustomValidity("Please enter your password.");
         newContactPassword.reportValidity();
     }
-  
+
     // Separate first and last names and make sure that the first letter is capitalized.
     let nameParts = newContactName.value.split(" ");
     let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
     let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
-  
+
     let newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: newContactEmail.value,
-      password: newContactPassword.value,
-      backgroundColor: `${getRandomColor()}`,
+        firstName: firstName,
+        lastName: lastName,
+        email: newContactEmail.value,
+        password: newContactPassword.value,
+        backgroundColor: `${getRandomColor()}`,
     };
-  
+
     addUser(newUser);
     returnToLoginPage();
     showNewContactMessage();
     insertContacts();
-    
-  }
 
-  function addReturnButtonHTML(){
+}
+
+function addReturnButtonHTML() {
     return /*html*/ `
     <button onclick="returnToLoginPage()" class="return-to-log-in-page-button"><img src="assets/img/arrow-left.svg" alt=""></button>
     `
-  }
+}
 
-  //Return to Login page
+//Return to Login page
 
-  function returnToLoginPage(){
+function returnToLoginPage() {
     changeBackgroundColor();
     changeLogoColor();
     showLogInElements();
     document.getElementById('registrationUpperRightInnerContainer').style.display = 'flex';
     document.getElementById('logInContainer').innerHTML = createLogInElementsHTML();
     document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `space-between`;
-    document.getElementById('logInRememberMeForgotPasswordSection').style.display ='flex';
+    document.getElementById('logInRememberMeForgotPasswordSection').style.display = 'flex';
     document.getElementById('logInInputContainer').style.height = '130px';
     document.getElementById('logInContainer').style.width = '652px';
     document.getElementById('forgotPasswordDescriptionContainer').style.display = 'none';
-  }
+}
 
-  function createLogInElementsHTML(){
+function createLogInElementsHTML() {
     return /*html*/`
     <div class="log-in-headline-container" id="logInHeadlineContainer">
         <div class="log-in-headline-and-border-container">
@@ -307,102 +307,106 @@ function signUpNewUser() {
         <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
     </div>
     `
-  }
+}
 
 
 //Forgot Password
 
-function forgotPassword(){
+function forgotPassword() {
     changeBackgroundColor();
     changeLogoColor();
     createForgotPasswordHTML();
 }
 
-function createForgotPasswordHTML(){
+function createForgotPasswordHTML() {
     document.getElementById('registrationUpperRightInnerContainer').style.display = 'none';
     document.getElementById('logInContainerHeadline').innerHTML = `I forgot my password`;
-    document.getElementById('logInRememberMeForgotPasswordSection').style.display ='none';
+    document.getElementById('logInRememberMeForgotPasswordSection').style.display = 'none';
     document.getElementById('logInInputContainer').innerHTML = forgotPasswordInputHTML();
     document.getElementById('logInInputContainer').style.height = '50px';
-    document.getElementById('logInCommitGuestLogInSection').innerHTML = forgotPasswordButtonHTML();
-    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`; 
+    document.getElementById('logInCommitGuestLogInSection').innerHTML = ``;
+    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('logInContainer').style.width = '750px';
     document.getElementById('forgotPasswordDescriptionContainer').style.display = 'flex';
 }
 
-function forgotPasswordInputHTML(){
+function forgotPasswordInputHTML() {
+var recipient = ``;
+
     return /*html*/`
-    <div class="log-in-input-field">
-        <input type="email" placeholder="Email" id="logInEmail">
-        <img src="./assets/img/login-email.svg">
-    </div>
-    `;
+        <div class="log-in-input-field">
+            <form class="log-in-input-field" action="http://gruppenarbeit-join-473.developerakademie.net/Join/send_mail.php" method="POST">
+                <input type="email" placeholder="Email" required id="logInEmail" name="recipient" value="${recipient}">
+                <img src="./assets/img/login-email.svg">
+            </form>
+        </div>
+    `; 
 }
 
-function forgotPasswordButtonHTML(){
+function forgotPasswordButtonHTML() {
     return /*html*/ `
-    <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="sendLinktoEmail()" style="width:270px;">Send me the email</button>
+    <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" style="width:270px;">Send me the email</button>
     `;
 }
 
-function addForgotPasswordHTML(){
+function addForgotPasswordHTML() {
     return /*html*/ `
     <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
     `;
 }
 
-function sendLinktoEmail(){
+function sendLinktoEmail() {
     let email = document.getElementById('logInEmail').value;
     let subject = 'Reset your password';
     let body = 'Hello,\n\nPlease click on the link to set your new password:\n\nC:\Users\Konrad\Documents\Developer Akademie\Join\change_password.html?email=' + encodeURIComponent(email) + '\n\nGreetings,\ngroup work - join - 473';
-    
+
     window.location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 }
 
 //LOAD CHANGE PASSWORD PAGE
 
-function loadChangePasswordPage(){
-    setTimeout(createForgotPasswordAnimation,300);
+function loadChangePasswordPage() {
+    setTimeout(createForgotPasswordAnimation, 300);
     createForgotPasswordNewURLHTML();
 }
 
-function createForgotPasswordAnimation(){
+function createForgotPasswordAnimation() {
     changeLogoPosition();
     showLogInElements();
 }
 
-function createForgotPasswordNewURLHTML(){
+function createForgotPasswordNewURLHTML() {
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('forgotPasswordDescriptionContainer').style.display = 'flex';
-    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`; 
+    document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
     document.getElementById('logInContainer').style.height = '540px';
     document.getElementById('logInContainer').style.width = '760px';
     document.getElementById('logInContainer').style.justifyContent = 'space-between';
 }
 
-function commitChangePassword(){
+function commitChangePassword() {
     checkForSameInput();
 }
 
-function checkForSameInput(){
+function checkForSameInput() {
     let passwordInput = document.getElementById('passwordInput').value;
     let passwordInputConfirm = document.getElementById('confirmPasswordInput').value;
 
     if (passwordInput === passwordInputConfirm) {
         updatePassword(passwordInput);
-    }else{
+    } else {
         document.getElementById('wrongPasswordContainer').innerHTML = wrongPasswordHTML();
     }
 }
 
-function updatePassword(passwordInput){
+function updatePassword(passwordInput) {
     for (let i = 0; i < userList.length; i++) {
-        
+
     }
 }
 
-function wrongPasswordHTML(){
+function wrongPasswordHTML() {
     return /*html*/ `
     <span>Make sure the second password you typed matches the first.</span>
     `;
