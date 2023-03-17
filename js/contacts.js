@@ -198,7 +198,8 @@ function showEditContactsHTML(i) {
 
       <div class="edit-contact-header-info">
         <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
-          <div class="edit-contact-h">Edit contact</div>                   
+          <div class="edit-contact-h">Edit contact</div>
+          <div class="edit-contact-text-edit">Tasks are better with a team!</div>                   
         </div>
       </div>
       <div class="edit-contact-main">
