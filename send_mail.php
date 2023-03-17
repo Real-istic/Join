@@ -29,7 +29,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $subject = "Contact From " . $_POST['name'];
         $headers = "From:  noreply@developerakademie.com";
 
-        $message .= "Hello!\n This is your new Password: ChangeItASAP" . $_POST['message'];
+        $message .= "Hello!\n This is your new Password: ChangeItASAP \n 
+        https://gruppenarbeit-join-473.developerakademie.net/Join/index.html?${recipient}" . $_POST['message'];
 
         if (mail($recipient, $subject, $message, $headers)) {
             echo "Check your mail for the new password";
