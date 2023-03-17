@@ -8,7 +8,7 @@
   height: 74px;
   width: 326px;
   top: 63rem;
-  left: 63rem;
+  left: 48rem;
   border-radius: 20px;
   z-index: 3;
 }
@@ -46,7 +46,7 @@
 
 .new-contact {
   width: 580px;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   top: 0;
   background-color: white;
@@ -73,6 +73,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 54rem;
 }
 
 .new-contact-h {
@@ -88,14 +89,14 @@
 
 .new-contact-main {
   width: 580px;
+  height: 100vh;
   background-color: #ffffff;
   border-radius: 0px 0px 30px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 43px;
-  padding-bottom: 20px;
+  padding-bottom: 38px;
 }
 
 .new-contact-button {
@@ -138,6 +139,20 @@
 }
 
 /* Contacts */
+
+.contact-big-letter{
+  min-width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  border: 3px solid #ffffff;
+  color: #ffffff;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
+  font-size: 47px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 element.style {
   width: 50vh;
@@ -187,9 +202,11 @@ element.style {
 .contact-name {
   font-size: 19px;
   font-weight: 400;
-  margin-top: 2.5px;
+  margin-top: 26.5px;
   margin-bottom: 2.5px;
   margin-left: 16px;
+  height: 51px;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .contact-email {
@@ -254,11 +271,6 @@ element.style {
   background-color: #4589ff;
   color: #ffffff !important;
   border-radius: 10px;
-}
-
-.contact-name {
-  height: 51px;
-  border-bottom: 1px solid #d1d1d1;
 }
 
 .contact-right {
@@ -419,6 +431,10 @@ element.style {
 }
 
 /*  edit Contact Section  */
+
+.icon-edit-img-contact {
+ display: none;
+}
 .edit-contact {
   width: 580px;
   height: 100%;

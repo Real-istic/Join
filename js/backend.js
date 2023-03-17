@@ -110,7 +110,7 @@ async function restoreBackend() {
         {
             "firstName": "Hannah",
             "lastName": "Wagner",
-            "email": "hannah.wagner@example.com",
+            "email": "hannah.wagner@exam.com",
             "phoneNumber": "0123456792",
             "password": "securepassword",
             "backgroundColor": "#FFC300"
@@ -142,7 +142,7 @@ async function restoreBackend() {
         {
             "firstName": "Markus",
             "lastName": "Schmidt",
-            "email": "markus.schmidt@example.com",
+            "email": "markus.schmidt@malibu.com",
             "phoneNumber": "0123456791",
             "password": "password123",
             "backgroundColor": "#FFC300"
@@ -165,8 +165,8 @@ async function restoreBackend() {
         },
         {
             "firstName": "Sophie",
-            "lastName": "Hartmann",
-            "email": "sophie.hartmann@example.com",
+            "lastName": "Hart",
+            "email": "sophie.hart@example.com",
             "phoneNumber": "0123456798",
             "password": "abcdefg",
             "backgroundColor": "#C70039"

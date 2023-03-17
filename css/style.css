@@ -110,7 +110,7 @@ header span {
 .help-arrow {
   position: absolute;
   right: 200px;
-  top: 114px;
+  top: 1rem;
   cursor: pointer;
 }
 
