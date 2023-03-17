@@ -133,7 +133,7 @@ function renderContactSideScroll(i) {
           <div class="contact-detail-main-side" id="0">
           </div>        
           <div class="contact-detail-head">
-            <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">${contactNameLetter}</div>
+            <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-big-letter">${contactNameLetter}</div>
               <div class="contact-detail-name-task">
                 <p class="contact-detail-big-name">${contactName}</p>
                 <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
@@ -143,6 +143,7 @@ function renderContactSideScroll(i) {
           <div class="contact-detail-info-main">
             <p class="contact-detail-info">Contact Information</p>
             <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""><span class="edit-contact-text"> Edit Contact</span></p>
+            <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-img-contact" src="./assets/img/pen.svg" alt=""></p>
           </div>              
           <div>
             <p class="contact-detail-email-number">Email</p>
