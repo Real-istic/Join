@@ -19,21 +19,20 @@
 }
 
 @keyframes fadeInFromTop {
-    from {
-      opacity: 0;
-      transform: translateY(+100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(+100%);
   }
-  
-  .showNewContactFadeIn {
-    animation: fadeInFromTop 0.5s ease-in-out;
-    top: 0;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+.showNewContactFadeIn {
+  animation: fadeInFromTop 0.5s ease-in-out;
+  top: 0;
+}
 
 .display-none {
   display: none;
@@ -56,7 +55,7 @@
 }
 
 .new-contact-head {
-  background-color: #4589FF;
+  background-color: #4589ff;
   width: 580px;
   padding-bottom: 70px;
   border-radius: 0px 30px 0px 0px;
@@ -140,7 +139,7 @@
 
 /* Contacts */
 
-.contact-big-letter{
+.contact-big-letter {
   min-width: 120px;
   height: 120px;
   border-radius: 100%;
@@ -395,6 +394,13 @@ element.style {
   padding-top: 12px;
   padding-bottom: 50px;
 }
+.edit-contact-text-edit {
+  font-weight: 400;
+  font-size: 21px;
+  color: #ffffff;
+  padding-top: 12px;
+  padding-bottom: 50px;
+}
 
 .contact-left-fadeIn-bg {
   width: 100%;
@@ -433,7 +439,7 @@ element.style {
 /*  edit Contact Section  */
 
 .icon-edit-img-contact {
- display: none;
+  display: none;
 }
 .edit-contact {
   width: 580px;

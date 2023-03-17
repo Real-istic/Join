@@ -440,21 +440,12 @@
   .new-contact-button {
     right: 6rem;
   }
-
   .contact-right-side {
     padding: 50px 32px 25px 0px;
   }
-
-  .contact-detail-big-letter {
-    min-width: 80px;
-    height: 80px;
-    font-size: 35px;
-  }
-
   .contact-detail-big-name {
     font-size: 33px;
   }
-
   .contact-detail-info-main {
     justify-content: flex-start;
     margin-right: 100px;
@@ -469,21 +460,13 @@
   .contact-right-side {
     padding: 50px 32px 25px 0px;
   }
-
-  .contact-detail-big-letter {
-    min-width: 80px;
-    height: 80px;
-  }
-
   .contact-detail-big-name {
     font-size: 33px;
   }
-
   .contact-detail-info-main {
     justify-content: flex-start;
     margin-right: 100px;
   }
-
   .newContactCreated {
     left: 38rem;
   }
@@ -511,17 +494,9 @@
   .edit-contact-text {
     display: none;
   }
-
-  .contact-detail-big-letter {
-    min-width: 61px;
-    height: 61px;
-    font-size: 26px;
-  }
-
   .contact-detail-big-name {
     font-size: 27px;
   }
-
   .icon-edit-contact {
     display: none;
   }
@@ -529,7 +504,6 @@
     width: 30px;
     display: block;
   }
-
   .contact-detail-edit {
     padding-left: 40px;
   }
@@ -615,9 +589,30 @@
 }
 
 @media (max-width: 655px) {
+  .add-task-slide-in-menu {
+    z-index: 2;
+  }
   .contact-left {
     height: 670px;
     padding-top: 5rem;
+  }
+  .edit-contact {
+    width: 580px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    border-radius: 0px 30px 30px 30px;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
+    overflow: hidden;
+    z-index: 2;
+  }
+  .contact-right-side {
+    padding: 50px 32px 25px 0px;
+    z-index: 1;
+  }
+  .contact-left-fadeIn-bg {
+    z-index: 2;
   }
 
   .contact-name {
@@ -632,7 +627,6 @@
   .newContactCreated {
     left: 11rem;
   }
-
   .show {
     right: 1rem;
     padding-left: 10rem;
@@ -643,25 +637,60 @@
     transition: all 1ms ease-in-out;
     z-index: 1;
   }
-
   .new-contact-button {
     top: 8rem;
     right: 21rem;
   }
-
-  .contact-detail-big-letter {
-    min-width: 80px;
-    height: 80px;
-    font-size: 34px;
-  }
-
   .contact-detail-big-name {
     font-size: 33px;
   }
-
   .contact-detail-info-main {
     justify-content: flex-start;
     margin-right: 100px;
+  }
+}
+
+@media (max-width: 590px) {
+  .edit-contact-main {
+    width: 350px;
+  }
+  .edit-contact {
+    width: 350px;
+  }
+  .contact-left-fadeIn {
+    border-radius: 0px 30px 30px 30px;
+    width: 350px;
+  }
+  .img-edit-contact {
+    display: none;
+  }
+  .edit-contact-h {
+    color: white;
+    padding-top: 12px;
+    font-family: Inter;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 56px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .edit-contact-head {
+    background-color: #005dff;
+    width: 350px;
+    padding-bottom: 70px;
+    border-radius: 0px 30px 0px 0px;
+}
+  .input-contact-main {
+    width: 300px;
+  }
+  .edit-contact-text-edit {
+    font-weight: 400;
+    font-size: 21px;
+    color: #ffffff;
+    display: flex;
+    position: fixed;
+    left: 2rem;
+    top: 9rem;
   }
 }
 
@@ -679,52 +708,16 @@
     text-align: left;
     color: white;
   }
-
   .add-contact-text {
     font-size: 21px;
   }
-
   .new-contact-head {
     height: 12rem;
   }
-
   .new-contact-main {
     width: 580px;
     height: 19rem;
   }
-}
-
-@media (max-width: 590px) {
-  .show-left {
-    left: 0%;
-    width: 350px;
-  }
-  .edit-contact {
-    width: 350px;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    background-color: white;
-    border-radius: 0px 30px 30px 30px;
-    box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
-    overflow: hidden;
-  }
-  .img-edit-contact {
-    display: none;
-  }
-
-  .edit-contact-h {
-    color: white;
-    padding-top: 12px;
-    font-family: Inter;
-    font-size: 47px;
-    font-weight: 700;
-    line-height: 56px;
-    letter-spacing: 0em;
-    text-align: left;
-    padding-right: 14rem;
-  }
-
 }
 
 @media (max-width: 541px) {
@@ -741,7 +734,7 @@
 
 @media (max-width: 490px) {
   .contact-detail-big-name {
-    font-size: 25px;
+    font-size: 23px;
   }
   .help-arrow {
     position: absolute;
@@ -785,6 +778,11 @@
   .contact-right-side {
     padding-left: 0rem;
   }
+  .contact-big-letter {
+    min-width: 70px;
+    height: 70px;
+    font-size: 30px;
+}
 }
 
 @media (max-width: 340px) {
