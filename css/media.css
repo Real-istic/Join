@@ -693,7 +693,7 @@
     text-align: left;
   }
   .edit-contact-head {
-    background-color: #005dff;
+    background-color: #4589ff;
     width: 350px;
     padding-bottom: 70px;
     border-radius: 0px 30px 0px 0px;
@@ -725,32 +725,6 @@
   }
   .button-cancel {
     display: none;
-  }
-}
-
-@media (max-width: 580px) {
-  .img-edit-contact {
-    display: none;
-  }
-  .new-contact-h {
-    padding-top: 68px;
-    font-family: Inter;
-    font-size: 48px;
-    font-weight: 700;
-    line-height: 120%;
-    letter-spacing: 0px;
-    text-align: left;
-    color: white;
-  }
-  .add-contact-text {
-    font-size: 21px;
-  }
-  .new-contact-head {
-    height: 12rem;
-  }
-  .new-contact-main {
-    width: 580px;
-    height: 19rem;
   }
 }
 
