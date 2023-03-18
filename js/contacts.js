@@ -397,15 +397,15 @@ function addNewContact() {
   if (contactEditName.value === "" || contactEditName.value.split(" ").length < 2) {
     contactEditName.setCustomValidity("Please enter your first and last name.");
     contactEditName.reportValidity();
-    return;
+    /*return;*/
   } if (contactEditEmail.value === "") {
     contactEditEmail.setCustomValidity("Please enter your email.");
     contactEditEmail.reportValidity();
-    return;
+    /*return;*/
   } if (contactEditNumber.value === "") {
     contactEditNumber.setCustomValidity("Please enter your phone number.");
     contactEditNumber.reportValidity();
-    return;
+    /*return;*/
   }
 
   // Separate first and last names and make sure that the first letter is capitalized.
