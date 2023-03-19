@@ -342,7 +342,7 @@
   }
 
   .email-send-message{
-    display: flex;
+    display: none;
     position: absolute;
     align-items: center;
     justify-content: center;

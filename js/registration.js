@@ -1,7 +1,6 @@
 function loadRegistrationPage() {
     setTimeout(createAnimation, 300);
     setElementsFromLocalStorage();
-    //check URL for ? and @
 }
 
 //STARTING ANIMATION
@@ -337,7 +336,6 @@ function createForgotPasswordHTML() {
     document.getElementById('logInInputContainer').innerHTML = forgotPasswordInputHTML();
     document.getElementById('logInInputContainer').style.height = '50px';
     document.getElementById('logInCommitGuestLogInSection').innerHTML = ``;
-    //document.getElementById('logInCommitGuestLogInSection').innerHTML = forgotPasswordButtonHTML();
     document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('logInContainer').style.width = '750px';
@@ -394,6 +392,7 @@ function checkForExistingEmail(emailFromInput){
 
 function sendEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'flex';
+    document.getElementById('emailSendMessage').style.display = 'flex';
     document.getElementById('emailSendMessage').style.opacity = '1';
     document.getElementById('emailSendMessage').style.bottom = '50%';
     setTimeout(removeEmailAnimation, 1500);
@@ -403,6 +402,7 @@ function removeEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'none';
     document.getElementById('emailSendMessage').style.opacity = '0';
     document.getElementById('emailSendMessage').style.bottom = '100px';   
+    document.getElementById('emailSendMessage').style.display = 'none';
 }
 
 function removeWrongEmailAlert(){
