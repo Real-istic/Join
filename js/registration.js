@@ -283,6 +283,7 @@ function returnToLoginPageCSSHTML(){
     document.getElementById('logInInputContainer').style.height = '130px';
     document.getElementById('logInContainer').style.width = '652px';
     document.getElementById('forgotPasswordDescriptionContainer').style.display = 'none';
+    document.getElementById('logInCommitGuestLogInSection').style.display = 'flex';
 }
 
 function createLogInElementsHTML() {
@@ -341,27 +342,30 @@ function createForgotPasswordHTML() {
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('logInContainer').style.width = '750px';
     document.getElementById('forgotPasswordDescriptionContainer').style.display = 'flex';
+    document.getElementById('logInCommitGuestLogInSection').style.display = 'none';
 }
 
 function forgotPasswordInputHTML() {
 var recipient = ``;
 
     return /*html*/`
-        <div class="log-in-input-field">
-            <form class="log-in-input-field" action="http://gruppenarbeit-join-473.developerakademie.net/Join/send_mail.php" method="POST">
+        <div >
+            <form action="http://gruppenarbeit-join-473.developerakademie.net/Join/send_mail.php" method="POST">
+            <div class="log-in-input-field"> 
                 <input type="email" placeholder="Email" required id="logInEmail" name="recipient" value="${recipient}">
                 <img src="./assets/img/login-email.svg">
+            </div>
                 <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
             </form>
         </div>
     `; 
 }
 
-function forgotPasswordButtonHTML() {
-    return /*html*/ `
-    <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
-    `;
-}
+// function forgotPasswordButtonHTML() {
+//     return /*html*/ `
+//     <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
+//     `;
+// }
 
 function addForgotPasswordHTML() {
     return /*html*/ `
@@ -371,11 +375,12 @@ function addForgotPasswordHTML() {
 
 function sendEmail(){
     sendEmailAnimation();
+    
 }
 
 function sendEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'flex';
-    document.getElementById('emailSendMessage').style.opacity = '1';
+    document.getElementById('emailSendMessage').style.opacity = '1 !important';
     setTimeout(removeEmailAnimation, 1500);
 }
 
