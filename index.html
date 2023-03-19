@@ -67,12 +67,18 @@
             </div>
         </div>
     </div>
+    <div class="email-send-message-background" id="emailSendMessageBackground">
+        <div class="email-send-message" id="emailSendMessage"><img src="assets/img/SendCheck.svg" alt="">An E-mail has been sent to you</div>
+    </div>
+    <div class="log-out-background" id="logOutBackground" onclick="closeLogout()">
+        <button class="log-out-button" onclick="logOut()">Log out</button>
+    </div>
     <header>
         <img class="header-left" src="assets/img/headerjoinlogo.svg" alt="">
         <div class="header-right">
             <span>Kanban Project Management Tool</span>
             <div id="help" class="help" onclick="help()"><img src="assets/img/question.svg" alt=""></div>
-            <img src="assets/img/headeruserimage.png" alt="">
+            <img onclick="openLogOutButton()" src="assets/img/headeruserimage.png" alt="">
         </div>
     </header>
     <div class="nav-and-content">

@@ -1,6 +1,7 @@
 function loadRegistrationPage() {
     setTimeout(createAnimation, 300);
     setElementsFromLocalStorage();
+    //check URL for ? and @
 }
 
 //STARTING ANIMATION
@@ -41,7 +42,9 @@ function changeLogoPosition() {
 
 function showLogInElements() {
     document.getElementById('logInContainer').style.opacity = '1';
-    document.getElementById('registrationUpperRightInnerContainer').style.display = 'flex';
+    if (document.getElementById('registrationUpperRightInnerContainer')) {
+        document.getElementById('registrationUpperRightInnerContainer').style.display = 'flex';
+    }
 }
 
 //PASSWORD
@@ -262,6 +265,14 @@ function addReturnButtonHTML() {
 //Return to Login page
 
 function returnToLoginPage() {
+    if (window.location.href.includes('change_password.html')) {
+        window.location.href = 'index.html';
+      } else if (window.location.href.includes('index.html')) {
+        returnToLoginPageCSSHTML();
+      }
+}
+
+function returnToLoginPageCSSHTML(){
     changeBackgroundColor();
     changeLogoColor();
     showLogInElements();
@@ -325,6 +336,7 @@ function createForgotPasswordHTML() {
     document.getElementById('logInInputContainer').innerHTML = forgotPasswordInputHTML();
     document.getElementById('logInInputContainer').style.height = '50px';
     document.getElementById('logInCommitGuestLogInSection').innerHTML = ``;
+    //document.getElementById('logInCommitGuestLogInSection').innerHTML = forgotPasswordButtonHTML();
     document.getElementById('logInCommitGuestLogInSection').style.justifyContent = `center`;
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('logInContainer').style.width = '750px';
@@ -339,6 +351,7 @@ var recipient = ``;
             <form class="log-in-input-field" action="http://gruppenarbeit-join-473.developerakademie.net/Join/send_mail.php" method="POST">
                 <input type="email" placeholder="Email" required id="logInEmail" name="recipient" value="${recipient}">
                 <img src="./assets/img/login-email.svg">
+                <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
             </form>
         </div>
     `; 
@@ -346,7 +359,7 @@ var recipient = ``;
 
 function forgotPasswordButtonHTML() {
     return /*html*/ `
-    <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" style="width:270px;">Send me the email</button>
+    <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
     `;
 }
 
@@ -356,13 +369,28 @@ function addForgotPasswordHTML() {
     `;
 }
 
-function sendLinktoEmail() {
-    let email = document.getElementById('logInEmail').value;
-    let subject = 'Reset your password';
-    let body = 'Hello,\n\nPlease click on the link to set your new password:\n\nC:\Users\Konrad\Documents\Developer Akademie\Join\change_password.html?email=' + encodeURIComponent(email) + '\n\nGreetings,\ngroup work - join - 473';
-
-    window.location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+function sendEmail(){
+    sendEmailAnimation();
 }
+
+function sendEmailAnimation(){
+    document.getElementById('emailSendMessageBackground').style.display = 'flex';
+    document.getElementById('emailSendMessage').style.opacity = '1';
+    setTimeout(removeEmailAnimation, 1500);
+}
+
+function removeEmailAnimation(){
+    document.getElementById('emailSendMessageBackground').style.display = 'none';
+    document.getElementById('emailSendMessage').style.opacity = '0';    
+}
+
+// function sendLinktoEmail() {
+//     let email = document.getElementById('logInEmail').value;
+//     let subject = 'Reset your password';
+//     let body = 'Hello,\n\nPlease click on the link to set your new password:\n\nC:\Users\Konrad\Documents\Developer Akademie\Join\change_password.html?email=' + encodeURIComponent(email) + '\n\nGreetings,\ngroup work - join - 473';
+
+//     window.location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+// }
 
 //LOAD CHANGE PASSWORD PAGE
 
@@ -410,4 +438,19 @@ function wrongPasswordHTML() {
     return /*html*/ `
     <span>Make sure the second password you typed matches the first.</span>
     `;
+}
+
+//LOGOUT
+
+function openLogOutButton(){
+    document.getElementById('logOutBackground').style.display = 'flex';
+}
+
+function logOut(){
+    currentUser = '';
+    location.reload()
+}
+
+function closeLogout(){
+    document.getElementById('logOutBackground').style.display = 'none';
 }
