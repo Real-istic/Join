@@ -1,3 +1,6 @@
+/**
+ * loading the Log In / Registration Page
+ */
 function loadRegistrationPage() {
     setTimeout(createAnimation, 300);
     setElementsFromLocalStorage();
@@ -5,6 +8,9 @@ function loadRegistrationPage() {
 
 //STARTING ANIMATION
 
+/**
+ * create the JOIN logo animation and create all elemets
+ */
 function createAnimation() {
     changeBackgroundColor();
     changeLogoColor();
@@ -12,6 +18,9 @@ function createAnimation() {
     showLogInElements();
 }
 
+/**
+ * change background color between white and blue
+ */
 function changeBackgroundColor() {
     let backgroundColorLogin = document.getElementById('registrationContainer');
     if (backgroundColorLogin.style.backgroundColor == 'rgb(255, 255, 255)') {
@@ -19,9 +28,11 @@ function changeBackgroundColor() {
     } else if (backgroundColorLogin.style.backgroundColor == 'rgb(69, 137, 255)' || backgroundColorLogin.style.backgroundColor == '') {
         backgroundColorLogin.style.backgroundColor = 'rgb(255, 255, 255)';
     }
-
 }
 
+/**
+ * change logo color bwtween white and blue
+ */
 function changeLogoColor() {
     let paths = document.querySelectorAll('.join-logo-login-color');
 
@@ -35,10 +46,16 @@ function changeLogoColor() {
     }
 }
 
+/**
+ * change JOIN logo position
+ */
 function changeLogoPosition() {
     document.getElementById('joinLogoLogin').classList.add('join-logo-login-new-position');
 }
 
+/**
+ * make log in elemets visible
+ */
 function showLogInElements() {
     document.getElementById('logInContainer').style.opacity = '1';
     if (document.getElementById('registrationUpperRightInnerContainer')) {
@@ -48,6 +65,9 @@ function showLogInElements() {
 
 //PASSWORD
 
+/**
+ * check the number of letters in input field for chosing the right password icon
+ */
 function checkNumberOfLetters() {
     let passwordInput = document.getElementById('passwordInput');
     let passwordToggle = document.getElementById("passwordToggle");
@@ -59,6 +79,9 @@ function checkNumberOfLetters() {
     }
 }
 
+/**
+ * chose right icon for the password input field
+ */
 function chooseRightPasswordImgage() {
     let passwordToggle = document.getElementById("passwordToggle");
 
@@ -70,6 +93,10 @@ function chooseRightPasswordImgage() {
     }
 }
 
+/**
+ * switch between visible and hidden password
+ * change input type between text/password
+ */
 function togglePasswordVisibility() {
     let passwordInput = document.getElementById("passwordInput");
     let passwordToggle = document.getElementById("passwordToggle");
@@ -88,6 +115,10 @@ function togglePasswordVisibility() {
 
 // GUEST LOGIN
 
+
+/**
+ * hide login screen and continue as guest
+ */
 function guestLogIn() {
     document.getElementById('registrationContainer').style.display = 'none';
     currentUser = 'guest';
@@ -96,6 +127,9 @@ function guestLogIn() {
 
 //LOG IN
 
+/**
+ * check for correct inputs and continue as user
+ */
 function logIn() {
     let inputElementPassword = document.getElementById('passwordInput');
     let emailFromInput = document.getElementById('logInEmail').value;
@@ -118,7 +152,9 @@ function logIn() {
     setElementsFromLocalStorage();
 }
 
-
+/**
+ * alert if password doesnt match to email adress
+ */
 function toggleWrongPasswordAlert() {
     const divElement = document.getElementById('wrongPasswordContainer');
 
@@ -129,6 +165,9 @@ function toggleWrongPasswordAlert() {
     }
 }
 
+/**
+ * toggle password input placeholder if password was entered wrong
+ */
 function togglePasswordPlaceholder() {
     const inputElement = document.getElementById('passwordInput');
 
@@ -142,6 +181,9 @@ function togglePasswordPlaceholder() {
 
 //REMEMBER ME
 
+/**
+ * save login date in local storage if remember me box is checked
+ */
 function rememberMe() {
     let emailFromInput = document.getElementById('logInEmail').value
 
@@ -154,6 +196,9 @@ function rememberMe() {
     }
 }
 
+/**
+ * set input fields if remember me checkbox was checked
+ */
 function setElementsFromLocalStorage() {
     let checkboxStatus = localStorage.getItem('rememberCheckbox');
     let emailFromLocalStorage = localStorage.getItem('rememberEmail');
@@ -174,6 +219,9 @@ function setElementsFromLocalStorage() {
 
 //Sign Up
 
+/**
+ * continue to Sign Up section
+ */
 function signUp() {
     changeBackgroundColor();
     changeLogoColor();
@@ -181,6 +229,9 @@ function signUp() {
     addReturnButtonHTML();
 }
 
+/**
+ * change all nessessary html elements
+ */
 function changeLogInInputHTML() {
     document.getElementById('logInContainerHeadline').innerHTML = `Sign up`;
     document.getElementById('logInInputContainer').innerHTML = SignUpInputHTML();
@@ -193,6 +244,10 @@ function changeLogInInputHTML() {
     document.getElementById('logInInputContainer').style.height = '185px';
 }
 
+/**
+ * create html parts for sign up page
+ * @returns the html part of input fields
+ */
 function SignUpInputHTML() {
     return /*html*/ `
     <div class="log-in-input-field">
@@ -210,12 +265,19 @@ function SignUpInputHTML() {
     `;
 }
 
+/**
+ * create html for sign up section
+ * @returns the html part of sign up button
+ */
 function SignUpButtonHTML() {
     return /*html*/ `
     <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="signUpNewUser()">Sign Up</button>
     `
 }
 
+/**
+ * create new user and set some values in userList for the new user
+ */
 function signUpNewUser() {
     const newContactName = document.getElementById("logInName");
     const newContactEmail = document.getElementById("logInEmail");
@@ -255,6 +317,10 @@ function signUpNewUser() {
 
 }
 
+/**
+ * create button who returns to log in page
+ * @returns the html part of return to log in page button
+ */
 function addReturnButtonHTML() {
     return /*html*/ `
     <button onclick="returnToLoginPage()" class="return-to-log-in-page-button"><img src="assets/img/arrow-left.svg" alt=""></button>
@@ -263,6 +329,9 @@ function addReturnButtonHTML() {
 
 //Return to Login page
 
+/**
+ * return to log in page from same and different URL 
+ */
 function returnToLoginPage() {
     if (window.location.href.includes('change_password.html')) {
         window.location.href = 'index.html';
@@ -271,6 +340,9 @@ function returnToLoginPage() {
       }
 }
 
+/**
+ * create and change all html elemts wich are needed for returning back to log in page
+ */
 function returnToLoginPageCSSHTML(){
     changeBackgroundColor();
     changeLogoColor();
@@ -285,6 +357,9 @@ function returnToLoginPageCSSHTML(){
     document.getElementById('logInCommitGuestLogInSection').style.display = 'flex';
 }
 
+/**
+ * create html log in elements
+ */
 function createLogInElementsHTML() {
     return /*html*/`
     <div class="log-in-headline-container" id="logInHeadlineContainer">
@@ -323,12 +398,18 @@ function createLogInElementsHTML() {
 
 //Forgot Password
 
+/**
+ * create forgot password section
+ */
 function forgotPassword() {
     changeBackgroundColor();
     changeLogoColor();
     createForgotPasswordHTML();
 }
 
+/**
+ * create and change all the elements wich are needed for creating the forgot password section
+ */
 function createForgotPasswordHTML() {
     document.getElementById('registrationUpperRightInnerContainer').style.display = 'none';
     document.getElementById('logInContainerHeadline').innerHTML = `I forgot my password`;
@@ -343,6 +424,9 @@ function createForgotPasswordHTML() {
     document.getElementById('logInCommitGuestLogInSection').style.display = 'none';
 }
 
+/**
+ * create the html part for the form element in the forgot password section
+ */
 function forgotPasswordInputHTML() {
 var recipient = ``;
 
@@ -360,12 +444,21 @@ var recipient = ``;
     `; 
 }
 
+/**
+ * create html text element
+ * @returns textelemt
+ */
 function addForgotPasswordHTML() {
     return /*html*/ `
     <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
     `;
 }
 
+/**
+ * check if email is valid/set to a user in the userList
+ * send email for changing password
+ * add animation that e mail was send
+ */
 function sendEmail(){
     let emailFromInput = document.getElementById('logInEmail').value;
     let emailExists = checkForExistingEmail(emailFromInput);
@@ -380,6 +473,10 @@ function sendEmail(){
     }
 }
 
+/**
+ * check if email is set to a user in userList
+ * @returns true or false depending on existing email
+ */
 function checkForExistingEmail(emailFromInput){
     for (let i = 0; i < userList.length; i++) {
         if (userList[i].email == emailFromInput) {
@@ -390,6 +487,9 @@ function checkForExistingEmail(emailFromInput){
     }
 }
 
+/**
+ * create animation that shows that an email was send
+ */
 function sendEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'flex';
     document.getElementById('emailSendMessage').style.display = 'flex';
@@ -398,6 +498,9 @@ function sendEmailAnimation(){
     setTimeout(removeEmailAnimation, 1500);
 }
 
+/**
+ * remove animation that shows that an email was send
+ */
 function removeEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'none';
     document.getElementById('emailSendMessage').style.opacity = '0';
@@ -405,22 +508,34 @@ function removeEmailAnimation(){
     document.getElementById('emailSendMessage').style.display = 'none';
 }
 
+/**
+ * remove the alert if an email can not be found 
+ */
 function removeWrongEmailAlert(){
     document.getElementById('wrongEmailAlert').innerHTML = ``;
 }
 
 //LOAD CHANGE PASSWORD PAGE
 
+/**
+ * create set new password section
+ */
 function loadChangePasswordPage() {
     setTimeout(createForgotPasswordAnimation, 300);
     createForgotPasswordNewURLHTML();
 }
 
+/**
+ * create JOIN logo animation
+ */
 function createForgotPasswordAnimation() {
     changeLogoPosition();
     showLogInElements();
 }
 
+/**
+ * create and change html elements for set new password section
+ */
 function createForgotPasswordNewURLHTML() {
     document.getElementById('logInContainer').innerHTML += addReturnButtonHTML();
     document.getElementById('forgotPasswordDescriptionContainer').style.display = 'flex';
@@ -430,27 +545,40 @@ function createForgotPasswordNewURLHTML() {
     document.getElementById('logInContainer').style.justifyContent = 'space-between';
 }
 
+/**
+ * commits the input of both input fields
+ */
 function commitChangePassword() {
     checkForSameInput();
 }
 
+/**
+ * check if both input fields have the same password set
+ */
 function checkForSameInput() {
     let passwordInput = document.getElementById('passwordInput').value;
     let passwordInputConfirm = document.getElementById('confirmPasswordInput').value;
 
-    if (passwordInput === passwordInputConfirm) {
+    if (passwordInput === passwordInputConfirm && passwordInput.length > 1) {
         updatePassword(passwordInput);
     } else {
         document.getElementById('wrongPasswordContainer').innerHTML = wrongPasswordHTML();
     }
 }
 
+/**
+ * alert that both passwords entered are different
+ * @returns text field 
+ */
 function wrongPasswordHTML() {
     return /*html*/ `
     <span>Make sure the second password you typed matches the first.</span>
     `;
 }
 
+/**
+ * update the password in userList
+ */
 function updatePassword(password){
     let emailFromURL = window.location.search.substring(1);
     
@@ -463,15 +591,24 @@ function updatePassword(password){
 
 //LOGOUT
 
+/**
+ * create clickable background when log out button is shown
+ */
 function openLogOutButton(){
     document.getElementById('logOutBackground').style.display = 'flex';
 }
 
+/**
+ * reload main mage and reset current user 
+ */
 function logOut(){
     currentUser = '';
     location.reload()
 }
 
+/**
+ * close log out button
+ */
 function closeLogout(){
     document.getElementById('logOutBackground').style.display = 'none';
 }
