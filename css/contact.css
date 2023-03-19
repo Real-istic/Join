@@ -432,6 +432,12 @@ element.style {
 }
 
 /*  edit Contact Section  */
+.help-arrow-edit {
+  display: none;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 20px;
+}
 
 .icon-edit-img-contact {
   display: none;

@@ -129,6 +129,9 @@ function renderContactSideScroll(i) {
   ContactSideScrollHTML = /*html*/ `
     <div class="contact-right-side">
       <div class="show-contact">
+        <div onclick="insertContacts()">
+          <img class="help-arrow-edit" src="assets/img/help-arrow.svg" alt="">
+        </div>
         <div id="contactdetails">
           <div class="contact-detail-main-side" id="0">
           </div>        
@@ -217,7 +220,7 @@ function showEditContactsHTML(i) {
                 <img src="./assets/img/login-email.svg" alt="">
             </div>
             <div class="input-contact">
-              <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+              <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
                 <img src="./assets/img/phone.svg" alt="">
             </div>          
           </div>
@@ -354,7 +357,7 @@ function showAddContact() {
                 <form onsubmit="return validateForm(); addNewContact()">
                     <div class="input-newContact-main">
                         <div class="input-contact">
-                            <input required type="text" id="contactNewName" class="input-contact-name" placeholder="Name">
+                            <input required type="text" pattern="[A-Za-z]+" id="contactNewName" class="input-contact-name" placeholder="Name">
                                 <img src="./assets/img/signup-user.svg" alt="">
                                 </div>
                                 <div class="input-contact">
@@ -362,7 +365,7 @@ function showAddContact() {
                                         <img src="./assets/img/login-email.svg" alt="">
                                         </div>
                                         <div class="input-contact">
-                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
+                                            <input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                                 <img src="./assets/img/phone.svg" alt="">
                                                 </div>
                                         </div>
@@ -439,7 +442,6 @@ function showNewContactMessage() {
   }, 3000);
 }  
  
-
 /**
  *
  * Load the editContact content
