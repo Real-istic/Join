@@ -33,6 +33,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         https://gruppenarbeit-join-473.developerakademie.net/Join/change_password.html?${recipient}" . $_POST['message'];
 
         if (mail($recipient, $subject, $message, $headers)) {
+            sleep(1);
             echo "Check your mail for the new password";
         } else {
             echo "Timeout... try again later.";
