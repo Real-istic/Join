@@ -350,22 +350,17 @@ var recipient = ``;
 
     return /*html*/`
         <div >
-            <form action="http://gruppenarbeit-join-473.developerakademie.net/Join/send_mail.php" method="POST">
+            <form action="http://gruppenarbeit-join-473.developerakademie.net/Join/send_mail.php" method="POST" id="resetPassword">
             <div class="log-in-input-field"> 
                 <input type="email" placeholder="Email" required id="logInEmail" name="recipient" value="${recipient}">
                 <img src="./assets/img/login-email.svg">
             </div>
-                <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
+            <div class="wrong-password-container" id="wrongEmailAlert"></div>
+                <button class="log-in-commit-guest-log-in-section-button-log-in" id="sendEmailButton" type="button" onclick="sendEmail()" style="width:270px; margin-top:40px;">Send me the email</button>
             </form>
         </div>
     `; 
 }
-
-// function forgotPasswordButtonHTML() {
-//     return /*html*/ `
-//     <button class="log-in-commit-guest-log-in-section-button-log-in" type="submit" onsubmit="sendEmail()" style="width:270px;">Send me the email</button>
-//     `;
-// }
 
 function addForgotPasswordHTML() {
     return /*html*/ `
@@ -374,28 +369,47 @@ function addForgotPasswordHTML() {
 }
 
 function sendEmail(){
-    sendEmailAnimation();
-    
+    let emailFromInput = document.getElementById('logInEmail').value;
+    let emailExists = checkForExistingEmail(emailFromInput);
+    let form = document.getElementById('resetPassword');
+
+    if (emailExists == true) {   
+        form.submit();
+        sendEmailAnimation();
+    }else{
+        document.getElementById('wrongEmailAlert').innerHTML = `This email is not known, please try another one`;
+        //document.getElementById('sendEmailButton').style.marginTop = `24px`;
+        setTimeout(removeWrongEmailAlert, 2000);
+    }
+}
+
+function checkForExistingEmail(emailFromInput){
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].email == emailFromInput) {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 function sendEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'flex';
-    document.getElementById('emailSendMessage').style.opacity = '1 !important';
+    document.getElementById('emailSendMessage').style.opacity = '1';
+    document.getElementById('emailSendMessage').style.bottom = '50%';
     setTimeout(removeEmailAnimation, 1500);
 }
 
 function removeEmailAnimation(){
     document.getElementById('emailSendMessageBackground').style.display = 'none';
-    document.getElementById('emailSendMessage').style.opacity = '0';    
+    document.getElementById('emailSendMessage').style.opacity = '0';
+    document.getElementById('emailSendMessage').style.bottom = '100px';   
 }
 
-// function sendLinktoEmail() {
-//     let email = document.getElementById('logInEmail').value;
-//     let subject = 'Reset your password';
-//     let body = 'Hello,\n\nPlease click on the link to set your new password:\n\nC:\Users\Konrad\Documents\Developer Akademie\Join\change_password.html?email=' + encodeURIComponent(email) + '\n\nGreetings,\ngroup work - join - 473';
-
-//     window.location.href = 'mailto:' + encodeURIComponent(email) + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-// }
+function removeWrongEmailAlert(){
+    document.getElementById('wrongEmailAlert').innerHTML = ``;
+   // document.getElementById('sendEmailButton').style.marginTop = `40px`;
+}
 
 //LOAD CHANGE PASSWORD PAGE
 
@@ -427,7 +441,8 @@ function checkForSameInput() {
     let passwordInputConfirm = document.getElementById('confirmPasswordInput').value;
 
     if (passwordInput === passwordInputConfirm) {
-        updatePassword(passwordInput);
+        getEmailFromURL(passwordInput);
+        //updatePassword(passwordInput);
     } else {
         document.getElementById('wrongPasswordContainer').innerHTML = wrongPasswordHTML();
     }
@@ -445,6 +460,19 @@ function wrongPasswordHTML() {
     `;
 }
 
+function getEmailFromURL(password){
+    let emailFromURL = window.location.search.substring(1);
+    
+    for (let i = 0; i < userList.length; i++) {
+        if (userList[i].email == emailFromURL) {
+            userList[i].password = password;
+        }else{
+
+        }
+        
+    }
+}
+
 //LOGOUT
 
 function openLogOutButton(){
@@ -459,3 +487,4 @@ function logOut(){
 function closeLogout(){
     document.getElementById('logOutBackground').style.display = 'none';
 }
+
