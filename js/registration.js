@@ -378,7 +378,6 @@ function sendEmail(){
         sendEmailAnimation();
     }else{
         document.getElementById('wrongEmailAlert').innerHTML = `This email is not known, please try another one`;
-        //document.getElementById('sendEmailButton').style.marginTop = `24px`;
         setTimeout(removeWrongEmailAlert, 2000);
     }
 }
@@ -408,7 +407,6 @@ function removeEmailAnimation(){
 
 function removeWrongEmailAlert(){
     document.getElementById('wrongEmailAlert').innerHTML = ``;
-   // document.getElementById('sendEmailButton').style.marginTop = `40px`;
 }
 
 //LOAD CHANGE PASSWORD PAGE
@@ -441,16 +439,9 @@ function checkForSameInput() {
     let passwordInputConfirm = document.getElementById('confirmPasswordInput').value;
 
     if (passwordInput === passwordInputConfirm) {
-        getEmailFromURL(passwordInput);
-        //updatePassword(passwordInput);
+        updatePassword(passwordInput);
     } else {
         document.getElementById('wrongPasswordContainer').innerHTML = wrongPasswordHTML();
-    }
-}
-
-function updatePassword(passwordInput) {
-    for (let i = 0; i < userList.length; i++) {
-
     }
 }
 
@@ -460,16 +451,13 @@ function wrongPasswordHTML() {
     `;
 }
 
-function getEmailFromURL(password){
+function updatePassword(password){
     let emailFromURL = window.location.search.substring(1);
     
     for (let i = 0; i < userList.length; i++) {
         if (userList[i].email == emailFromURL) {
             userList[i].password = password;
-        }else{
-
         }
-        
     }
 }
 
