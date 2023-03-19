@@ -108,6 +108,14 @@ async function restoreBackend() {
             "backgroundColor": "#FF5733"
         },
         {
+            "firstName": "Falk",
+            "lastName": "Müller",
+            "email": "falk.müller@example.com",
+            "phoneNumber": "0123454799",
+            "password": "trustno1",
+            "backgroundColor": "#FFA723"
+        },
+        {
             "firstName": "Hannah",
             "lastName": "Wagner",
             "email": "hannah.wagner@exam.com",
