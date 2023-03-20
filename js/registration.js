@@ -137,11 +137,11 @@ function guestLogIn() {
  */
 function showWelcomeUserMessage() {
   const userMessageEarly = document.getElementById("summary-top");
-    if (userMessageEarly) {
+  if (userMessageEarly) {
     userMessageEarly.classList.add("welcome-user-message");
     setTimeout(() => {
       userMessageEarly.classList.remove("welcome-user-message");
-      }, 1500);
+    }, 1500);
   }
 }
 
@@ -149,19 +149,15 @@ function showWelcomeUserMessage() {
  * set the Fade in animation for the welcome message User later
  *
  */
- function summaryTopLater() {
-    const userMessageLater = document.getElementById("summary-top-later");
-    const userMessageEarly = document.getElementById("summary-top");
-    if (userMessageLater) {
-      userMessageLater.classList.add("summary-top-later");
-      setTimeout(() => {
-        userMessageLater.classList.remove("summary-top-later");
-        userMessageEarly.classList.remove("summary-top");
-      }, 1);
-    }
+function summaryTopLater() {
+  const userMessageLater = document.getElementById("summary-top-later");
+  if (userMessageLater) {
+    userMessageLater.classList.add("summary-top-later");
+    setTimeout(() => {
+      userMessageLater.classList.remove("summary-top-later");
+    }, 1);
   }
-
-
+}
 
 /**
  * check for correct inputs and continue as user
@@ -178,7 +174,7 @@ function logIn() {
     ) {
       currentUser = userList[i].firstName;
       document.getElementById("registrationContainer").style.display = "none";
-      insertSummary();
+      insertSummaryAfterLogin() // old: insertSummary();
     } else if (
       userList[i].password !== inputElementPassword.value &&
       inputElementPassword.placeholder == `Password`

@@ -12,7 +12,24 @@ function insertSummary() {
     removeHelp();
     
 }
+/**
+ * 
+ * calls the summary-page on nav bar after login
+ */
+function insertSummaryAfterLogin() {
+    markActiveNavElement('summary');
+    contentDiv.innerHTML = summaryHTML();
+    summaryAfterLogin();
+    getDeadlineAndAmountOfUrgetTasks();
+    getAmountofTasks();
+    removeHelp();
+    
+}
 
+function summaryAfterLogin() {
+const afterLogin = document.getElementById("summary-top");
+afterLogin.classList.add("summary-top-early");
+}
 /**
  * 
  * display right amount of urgent tasks and show nearest upcoming deadline
