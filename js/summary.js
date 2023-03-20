@@ -6,9 +6,11 @@
 function insertSummary() {
     markActiveNavElement('summary');
     contentDiv.innerHTML = summaryHTML();
+    summaryTopLater();
     getDeadlineAndAmountOfUrgetTasks();
     getAmountofTasks();
-    document.getElementById("help").classList.remove("help-none");
+    removeHelp();
+    
 }
 
 /**
@@ -94,10 +96,10 @@ function getAmountofTasksInStatus(taskStatusName){
 function summaryHTML() {
     return /*html*/ `
     <div class="summary-div">
-        <div class="summary-top">
+        <div class="summary-top" id="summary-top">
             ${summaryTopHTML()}
         </div>
-        <div class="summary-bottom">
+        <div class="summary-bottom" id="summary-bottom">
             ${summaryBottomHTML()}
         </div>
     </div>
