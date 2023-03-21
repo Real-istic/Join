@@ -862,9 +862,54 @@
 }
 
 /* Summary Page */
-@media (max-width: 1800px) {
-
+@media (max-width: 1000px) {
+  .summary-div {
+    padding-bottom: 80px;
+    padding-top: 5rem;
+  }
 }
-
-
-
+@media (max-width: 774px) {
+  .summary-div {
+    padding-bottom: 80px;
+    padding-top: 5rem;
+  }
+}
+@media (max-width: 716px) {
+  .summary-top {
+    font-size: 40px;
+  }
+  .summary-top span {
+    font-size: 51px;
+  }
+  .task-box-deadline {
+    width: 566px;
+  }
+/*  .summary-div {
+    padding-top: 9rem;
+  }*/
+  .task-box {
+    width: 166px;
+    height: 166px;
+  }
+  .task-box-to-do {
+    width: 166px;
+    height: 166px;
+  }
+  .date-and-upcoming-deadline span {
+    font-size: 27px !important;
+  }
+  .summary-bottom span {
+    font-size: 19px;
+}
+}
+@media (max-width: 657px) {
+  .summary-div {
+    padding-bottom: 80px;
+    padding-top: 5rem;
+  }
+  .task-box-deadline {
+    width: 453px;
+    margin-top: 7rem;
+    height: 150px;
+}
+}
