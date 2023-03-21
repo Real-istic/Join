@@ -965,7 +965,9 @@
   .task-box {
     width: 144px;
     height: 134px;
-    margin: 9.5px;
+    margin: 17.5px;
+    margin-left: 18px;
+    margin-right: 18px;
   }
 }
 @media (max-width: 440px) {
@@ -978,9 +980,11 @@
     height: 142px;
   }
   .task-box {
-    width: 160px;
-    height: 147px;
-    margin: 7.5px;
+    width: 144px;
+    height: 134px;
+    margin: 17.5px;
+    margin-left: 18px;
+    margin-right: 18px;
   }
 }
 @media (max-width: 429px) {
