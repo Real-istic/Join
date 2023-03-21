@@ -168,7 +168,7 @@ function summaryBottomHTML() {
             <span class="task-number" id="toDoAmount"></span>
         </div>
         <span>
-            Tasks To-do
+            Tasks <br> To-do
         </span>
     </div>
     <div class="task-box" id="taskBoxTaskInBoard">
@@ -186,7 +186,7 @@ function summaryBottomHTML() {
             <span class="task-number" id="inProgressAmount"></span>
         </div>
         <span>
-            Tasks in Progress
+            Tasks in <br> Progress
         </span>
     </div>
     <div class="task-box" id="TaskBoxAwaitingFeedback">
@@ -195,7 +195,7 @@ function summaryBottomHTML() {
             <span class="task-number" id="awaitFeedbackAmount"></span>
         </div>
         <span>
-            Awaiting Feedback
+            Awaiting <br> Feedback
         </span>
     </div>
     <div class="task-box" id="TaskBoxTaskDone">
