@@ -167,7 +167,7 @@ function summaryBottomHTML() {
             <img src="assets/img/taskstodo.svg" alt="">
             <span class="task-number" id="toDoAmount"></span>
         </div>
-        <span>
+        <span class="biggerTask">
             Tasks <br> To-do
         </span>
     </div>
