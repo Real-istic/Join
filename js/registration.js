@@ -174,7 +174,7 @@ function logIn() {
     ) {
       currentUser = userList[i].firstName;
       document.getElementById("registrationContainer").style.display = "none";
-      insertSummaryAfterLogin(); // old: insertSummary();
+      insertSummary();
     } else if (
       userList[i].password !== inputElementPassword.value &&
       inputElementPassword.placeholder == `Password`
