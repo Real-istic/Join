@@ -16,7 +16,7 @@ function help() {
  */ 
 function helpHTML() {
     return /*html*/`
-     <div onclick="insertSummaryAfterLogin()"><img class="help-arrow" src="assets/img/help-arrow.svg" alt=""></div>
+     <div onclick="insertSummary()"><img class="help-arrow" src="assets/img/help-arrow.svg" alt=""></div>
             <h1>HELP</h1>
             <h2>What is Join?</h2>
             <p class="help-p">Join is your project management tool of choice. It is a typical Kanban board for you and your team. Kanban boards visually depict work at various stages of a process using cards to represent work items and columns to represent each stage of the process. Cards are moved from left to right to show progress and to help coordinate teams performing the work.
