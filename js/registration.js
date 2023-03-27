@@ -272,24 +272,15 @@ function signUp() {
  * change all nessessary html elements
  */
 function changeLogInInputHTML() {
-  document.getElementById("logInContainerHeadline").innerHTML = `Sign up`;
+  document.getElementById("logInContainerHeadline").innerHTML = `Sign in`;
   document.getElementById("logInInputContainer").innerHTML = SignUpInputHTML();
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).innerHTML = ``;
-  document.getElementById("logInCommitGuestLogInSection").innerHTML =
-    SignUpButtonHTML();
+  document.getElementById("logInRememberMeForgotPasswordSection").innerHTML = ``;
+  document.getElementById("logInCommitGuestLogInSection").innerHTML = SignUpButtonHTML();
   document.getElementById("logInContainer").innerHTML += addReturnButtonHTML();
-  document.getElementById(
-    "registrationUpperRightInnerContainer"
-  ).style.display = "none";
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `center`;
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).style.display = "none";
-  document.getElementById("logInInputContainer").style.height = "185px";
+  document.getElementById("registrationUpperRightInnerContainer").style.display = "none";
+  document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `center`;
+  document.getElementById("logInRememberMeForgotPasswordSection").style.display = "none";
+  //document.getElementById("logInInputContainer").style.height = "185px";
 }
 
 /**
@@ -397,23 +388,16 @@ function returnToLoginPageCSSHTML() {
   changeBackgroundColor();
   changeLogoColor();
   showLogInElements();
-  document.getElementById(
-    "registrationUpperRightInnerContainer"
-  ).style.display = "flex";
-  document.getElementById("logInContainer").innerHTML =
-    createLogInElementsHTML();
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `space-between`;
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).style.display = "flex";
-  document.getElementById("logInInputContainer").style.height = "130px";
-  document.getElementById("logInContainer").style.width = "652px";
-  document.getElementById("forgotPasswordDescriptionContainer").style.display =
-    "none";
-  document.getElementById("logInCommitGuestLogInSection").style.display =
-    "flex";
+  document.getElementById("registrationUpperRightInnerContainer").style.display = "flex";
+  document.getElementById("logInContainer").innerHTML = createLogInElementsHTML();
+  document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `space-between`;
+  document.getElementById("logInRememberMeForgotPasswordSection").style.display = "flex";
+  document.getElementById("forgotPasswordDescriptionContainer").style.display = "none";
+  document.getElementById("logInCommitGuestLogInSection").style.display = "flex";
+  if (!window.matchMedia('(max-width: 650px)').matches) {
+    document.getElementById("logInContainer").style.width = "652px";
+    document.getElementById("logInInputContainer").style.height = "130px";
+  }
 }
 
 /**
@@ -423,7 +407,7 @@ function createLogInElementsHTML() {
   return /*html*/ `
     <div class="log-in-headline-container" id="logInHeadlineContainer">
         <div class="log-in-headline-and-border-container">
-            <span id="logInContainerHeadline">Log in</span>
+            <span id="logInContainerHeadline" class="log-in-container-headline">Log in</span>
         </div>
     </div>
     <div class="forgot-password-description-container" id="forgotPasswordDescriptionContainer">
@@ -469,28 +453,17 @@ function forgotPassword() {
  * create and change all the elements wich are needed for creating the forgot password section
  */
 function createForgotPasswordHTML() {
-  document.getElementById(
-    "registrationUpperRightInnerContainer"
-  ).style.display = "none";
-  document.getElementById(
-    "logInContainerHeadline"
-  ).innerHTML = `I forgot my password`;
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).style.display = "none";
-  document.getElementById("logInInputContainer").innerHTML =
-    forgotPasswordInputHTML();
-  document.getElementById("logInInputContainer").style.height = "50px";
-  document.getElementById("logInCommitGuestLogInSection").innerHTML = ``;
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `center`;
+  document.getElementById("registrationUpperRightInnerContainer").style.display = "none";
+  document.getElementById("logInContainerHeadline").innerHTML = `I forgot my password`;
+  document.getElementById("logInRememberMeForgotPasswordSection").style.display = "none";
+  document.getElementById("logInInputContainer").innerHTML = forgotPasswordInputHTML();
   document.getElementById("logInContainer").innerHTML += addReturnButtonHTML();
-  document.getElementById("logInContainer").style.width = "750px";
-  document.getElementById("forgotPasswordDescriptionContainer").style.display =
-    "flex";
-  document.getElementById("logInCommitGuestLogInSection").style.display =
-    "none";
+  document.getElementById("forgotPasswordDescriptionContainer").style.display = "flex";
+  document.getElementById("logInCommitGuestLogInSection").style.display = "none";
+  if (!window.matchMedia('(max-width: 650px)').matches) {
+    document.getElementById("logInContainer").style.width = "750px";
+    document.getElementById("logInInputContainer").style.height = "50px";
+  }
 }
 
 /**
@@ -543,6 +516,19 @@ function sendEmail() {
     setTimeout(removeWrongEmailAlert, 2000);
   }
 }
+
+/**
+ * changes default function from enter-button to sendEmail() function
+ */
+document.addEventListener("DOMContentLoaded", function() {
+
+  document.getElementById("resetPassword").addEventListener("keydown", function(event) {
+    if (event.key === 'Enter') { 
+      event.preventDefault(); 
+      sendEmail(); 
+    }
+  });
+});
 
 /**
  * check if email is set to a user in userList
@@ -609,15 +595,13 @@ function createForgotPasswordAnimation() {
  */
 function createForgotPasswordNewURLHTML() {
   document.getElementById("logInContainer").innerHTML += addReturnButtonHTML();
-  document.getElementById("forgotPasswordDescriptionContainer").style.display =
-    "flex";
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `center`;
-  document.getElementById("logInContainer").style.height = "540px";
-  document.getElementById("logInContainer").style.width = "760px";
-  document.getElementById("logInContainer").style.justifyContent =
-    "space-between";
+  document.getElementById("forgotPasswordDescriptionContainer").style.display ="flex";
+  document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `center`;
+  document.getElementById("logInContainer").style.justifyContent = "space-between";
+  if (!window.matchMedia('(max-width: 650px)').matches) {
+    document.getElementById("logInContainer").style.height = "540px";
+    document.getElementById("logInContainer").style.width = "760px";
+  }
 }
 
 /**
