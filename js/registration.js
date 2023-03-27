@@ -75,22 +75,22 @@ function showLogInElements() {
 /**
  * check the number of letters in input field for chosing the right password icon
  */
-function checkNumberOfLetters() {
-  let passwordInput = document.getElementById("passwordInput");
-  let passwordToggle = document.getElementById("passwordToggle");
+function checkNumberOfLetters(idNumber) {
+  let passwordInput = document.getElementById("passwordInput" + idNumber);
+  let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
   if (passwordInput.value == 0) {
     passwordToggle.src = "./assets/img/password-icon.svg";
   } else {
-    chooseRightPasswordImgage();
+    chooseRightPasswordImgage(idNumber);
   }
 }
 
 /**
  * chose right icon for the password input field
  */
-function chooseRightPasswordImgage() {
-  let passwordToggle = document.getElementById("passwordToggle");
+function chooseRightPasswordImgage(idNumber) {
+  let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
   if (passwordToggle.type === "password") {
     passwordToggle.src = "./assets/img/passwordShow.svg";
@@ -103,9 +103,9 @@ function chooseRightPasswordImgage() {
  * switch between visible and hidden password
  * change input type between text/password
  */
-function togglePasswordVisibility() {
-  let passwordInput = document.getElementById("passwordInput");
-  let passwordToggle = document.getElementById("passwordToggle");
+function togglePasswordVisibility(idCount) {
+  let passwordInput = document.getElementById("passwordInput" + idCount);
+  let passwordToggle = document.getElementById("passwordToggle"+ idCount);
   if (passwordInput.value.length > 0) {
     if (passwordInput.type === "password") {
       // Show the password
@@ -518,19 +518,6 @@ function sendEmail() {
 }
 
 /**
- * changes default function from enter-button to sendEmail() function
- */
-document.addEventListener("DOMContentLoaded", function() {
-
-  document.getElementById("resetPassword").addEventListener("keydown", function(event) {
-    if (event.key === 'Enter') { 
-      event.preventDefault(); 
-      sendEmail(); 
-    }
-  });
-});
-
-/**
  * check if email is set to a user in userList
  * @returns true or false depending on existing email
  */
@@ -615,16 +602,13 @@ function commitChangePassword() {
  * check if both input fields have the same password set
  */
 function checkForSameInput() {
-  let passwordInput = document.getElementById("passwordInput").value;
-  let passwordInputConfirm = document.getElementById(
-    "confirmPasswordInput"
-  ).value;
+  let passwordInput = document.getElementById("passwordInputOne").value;
+  let passwordInputConfirm = document.getElementById("passwordInputTwo").value;
 
   if (passwordInput === passwordInputConfirm && passwordInput.length > 1) {
     updatePassword(passwordInput);
   } else {
-    document.getElementById("wrongPasswordContainer").innerHTML =
-      wrongPasswordHTML();
+    document.getElementById("wrongPasswordContainer").innerHTML = wrongPasswordHTML();
   }
 }
 
@@ -634,7 +618,7 @@ function checkForSameInput() {
  */
 function wrongPasswordHTML() {
   return /*html*/ `
-    <span>Make sure the second password you typed matches the first.</span>
+    <span>Make sure the second password you typed matches the first and has more than one character.</span>
     `;
 }
 
@@ -647,6 +631,9 @@ function updatePassword(password) {
   for (let i = 0; i < userList.length; i++) {
     if (userList[i].email == emailFromURL) {
       userList[i].password = password;
+    }
+    else{
+      document.getElementById('wrongPasswordContainer').innerHTML = '<span>User not found!<span>';
     }
   }
 }
