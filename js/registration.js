@@ -280,6 +280,7 @@ function changeLogInInputHTML() {
   document.getElementById("registrationUpperRightInnerContainer").style.display = "none";
   document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `center`;
   document.getElementById("logInRememberMeForgotPasswordSection").style.display = "none";
+  document.getElementById("logInHeadlineContainer").style.height = "90px";
   //document.getElementById("logInInputContainer").style.height = "185px";
 }
 

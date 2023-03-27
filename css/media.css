@@ -1048,7 +1048,9 @@
 
   .log-in-container{
     height: 580px;
+    padding-top: 45px;
   }
+
   .join-logo-login-new-position{
     top: 35px;
     left: 35px;
@@ -1095,7 +1097,7 @@
   }
 
   .log-in-headline-container{
-    height: 136px !important;
+    height: 136px;
   }
 
   .log-in-container-headline{
