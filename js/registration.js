@@ -80,7 +80,7 @@ function checkNumberOfLetters(idNumber) {
   let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
   if (passwordInput.value == 0) {
-    passwordToggle.src = "./assets/img/password-icon.svg";
+    passwordToggle.src = "../assets/img/password-icon.svg";
   } else {
     chooseRightPasswordImgage(idNumber);
   }
@@ -214,30 +214,23 @@ function summaryTopLater() {
  * check for correct inputs and continue as user
  */
 function logIn() {
-  let inputElementPassword = document.getElementById("passwordInput");
+  let inputElementPassword = document.getElementById("passwordInputZero");
   let emailFromInput = document.getElementById("logInEmail").value;
 
   rememberMe();
   for (let i = 0; i < userList.length; i++) {
     if (userList[i].password == inputElementPassword.value && userList[i].email == emailFromInput) {
       currentUser = userList[i].firstName;
-      document.getElementById("registrationContainer").style.display = "none";
+      //document.getElementById("registrationContainer").style.display = "none";
       document.body.innerHTML = loadContentHTML();
       contentDiv = document.getElementById('content');
       insertSummary();
-    } else if (
-      userList[i].password !== inputElementPassword.value &&
-      inputElementPassword.placeholder == `Password`
-    ) {
+    } else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Password`) {
       toggleWrongPasswordAlert();
       togglePasswordPlaceholder();
-    } else if (
-      userList[i].password !== inputElementPassword.value &&
-      inputElementPassword.placeholder == `Ups! Try again`
-    ) {
-      inputElementPassword.value = ``;
-    }
+    } 
   }
+  inputElementPassword.value = ``;
   setElementsFromLocalStorage();
 }
 
@@ -258,10 +251,10 @@ function toggleWrongPasswordAlert() {
  * toggle password input placeholder if password was entered wrong
  */
 function togglePasswordPlaceholder() {
-  const inputElement = document.getElementById("passwordInput");
+  const inputElement = document.getElementById("passwordInputZero");
 
   if (inputElement.placeholder.trim() === "Password") {
-    inputElement.value = ``;
+    //inputElement.value = ``;
     inputElement.placeholder = `Ups! Try again`;
   } else {
     inputElement.placeholder = `Password`;
@@ -331,7 +324,6 @@ function changeLogInInputHTML() {
   document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `center`;
   document.getElementById("logInRememberMeForgotPasswordSection").style.display = "none";
   document.getElementById("logInHeadlineContainer").style.height = "90px";
-  //document.getElementById("logInInputContainer").style.height = "185px";
 }
 
 /**
@@ -349,7 +341,7 @@ function SignUpInputHTML() {
         <img src="./assets/img/login-email.svg">
     </div>
     <div class="log-in-input-field" >
-        <input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
+        <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters()">
         <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
     </div>
     `;
@@ -371,7 +363,7 @@ function SignUpButtonHTML() {
 function signUpNewUser() {
   const newContactName = document.getElementById("logInName");
   const newContactEmail = document.getElementById("logInEmail");
-  const newContactPassword = document.getElementById("passwordInput");
+  const newContactPassword = document.getElementById("passwordInputZero");
 
   // Verify that the first and last name have been entered.
   if (
@@ -470,8 +462,8 @@ function createLogInElementsHTML() {
             <img src="./assets/img/login-email.svg">
         </div>
         <div class="log-in-input-field" >
-            <input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
-            <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
+            <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
+            <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility('Zero')">
         </div>
         <div class="wrong-password-container" id="wrongPasswordContainer"></div>
     </div>
@@ -682,6 +674,7 @@ function updatePassword(password) {
   for (let i = 0; i < userList.length; i++) {
     if (userList[i].email == emailFromURL) {
       userList[i].password = password;
+      sendEmailAnimation();
     }
     else{
       document.getElementById('wrongPasswordContainer').innerHTML = '<span>User not found!<span>';

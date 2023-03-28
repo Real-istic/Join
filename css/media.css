@@ -1042,8 +1042,7 @@
     right: 50%;
     transform: translateX(50%);
     width: 315px;
-    flex-direction: column;
-    top: 83%;
+    top: 90%;
   }
 
   .log-in-container{
