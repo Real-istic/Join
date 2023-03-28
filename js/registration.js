@@ -225,17 +225,16 @@ function logIn() {
   for (let i = 0; i < userList.length; i++) {
     if (userList[i].password == inputElementPassword.value && userList[i].email == emailFromInput) {
       currentUser = userList[i].firstName;
-      //document.getElementById("registrationContainer").style.display = "none";
       document.body.innerHTML = loadContentHTML();
       contentDiv = document.getElementById('content');
       insertSummary();
     } else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Password`) {
       toggleWrongPasswordAlert();
       togglePasswordPlaceholder();
+      setElementsFromLocalStorage();
     } 
   }
   inputElementPassword.value = ``;
-  setElementsFromLocalStorage();
 }
 
 /**
@@ -679,6 +678,8 @@ function updatePassword(password) {
     if (userList[i].email == emailFromURL) {
       userList[i].password = password;
       passwordUpdated = true;
+      saveEditContact();
+      initBackend();
       sendEmailAnimation();
     }
   }
