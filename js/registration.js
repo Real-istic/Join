@@ -673,14 +673,20 @@ function wrongPasswordHTML() {
  */
 function updatePassword(password) {
   let emailFromURL = window.location.search.substring(1);
+  let passwordUpdated;
 
   for (let i = 0; i < userList.length; i++) {
     if (userList[i].email == emailFromURL) {
       userList[i].password = password;
+      passwordUpdated = true;
       sendEmailAnimation();
     }
   }
-  document.getElementById('wrongPasswordContainer').innerHTML = '<span>User not found!<span>';
+
+  if (!passwordUpdated == true) {
+    document.getElementById('wrongPasswordContainer').innerHTML = '<span>User not found!<span>';
+  }
+  
 }
 
 //LOGOUT
