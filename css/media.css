@@ -214,7 +214,7 @@
     height: 50px;
     width: 40px;
     content: "";
-    background-image: url("/assets/img/favico.png");
+    background-image: url("../assets/img/favico.png");
     background-size: 35px;
     background-repeat: no-repeat;
     margin-top: 10px;
