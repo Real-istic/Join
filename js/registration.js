@@ -79,7 +79,7 @@ function checkNumberOfLetters(idNumber) {
   let passwordInput = document.getElementById("passwordInput" + idNumber);
   let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
-  if (passwordInput.value == 0) {
+  if (passwordInput.value.length == 0) {
     passwordToggle.src = "./assets/img/password-icon.svg";
   } else {
     chooseRightPasswordImgage(idNumber);
@@ -345,8 +345,8 @@ function SignUpInputHTML() {
         <img src="./assets/img/login-email.svg">
     </div>
     <div class="log-in-input-field" >
-        <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters()">
-        <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
+        <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
+        <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility()">
     </div>
     `;
 }
@@ -467,7 +467,7 @@ function createLogInElementsHTML() {
         </div>
         <div class="log-in-input-field" >
             <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
-            <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility('Zero')">
+            <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility('Zero')">
         </div>
         <div class="wrong-password-container" id="wrongPasswordContainer"></div>
     </div>
