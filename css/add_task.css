@@ -215,7 +215,7 @@
   .add-task-contact-checkbox + .add-task-checkbox-container::after {
     width: 15px;
     height: 15px;
-    background-image: url("/assets/img/rectangle.svg");
+    background-image: url("../assets/img/rectangle.svg");
     content: "";
     float: right;
     margin-left: 5px;
@@ -223,7 +223,7 @@
   }
   
   .add-task-contact-checkbox:checked + .add-task-checkbox-container::after {
-    background-image: url("/assets/img/checkbutton.svg");
+    background-image: url("../assets/img/checkbutton.svg");
   }
   
   .add-task-checkbox-container {
@@ -328,7 +328,7 @@
   
   .add-task-input-date::-webkit-calendar-picker-indicator {
     color: rgba(0, 0, 0, 0);
-    background: url("/assets/img/calendariconl.svg");
+    background: url("../assets/img/calendariconl.svg");
     width: 25px;
     height: 25px;
     cursor: pointer;
@@ -749,7 +749,7 @@
   .add-task-subtask-checkbox::before {
     width: 18px;
     height: 18px;
-    background-image: url("/assets/img/subtaskunchecked.svg");
+    background-image: url("../assets/img/subtaskunchecked.svg");
     content: "";
     float: left;
     margin-top: 5px;
@@ -759,7 +759,7 @@
   .add-task-subtask-checkbox:checked::before {
     width: 18px;
     height: 18px;
-    background-image: url("/assets/img/subtaskchecked.svg");
+    background-image: url("../assets/img/subtaskchecked.svg");
     content: "";
     float: left;
     margin-top: 5px;
