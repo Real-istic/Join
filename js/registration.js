@@ -71,6 +71,7 @@ function showLogInElements() {
 
 /**
  * check the number of letters in input field for chosing the right password icon
+ * @param idNumber - the addon for identify the right ID
  */
 function checkNumberOfLetters(idNumber) {
   let passwordInput = document.getElementById("passwordInput" + idNumber);
@@ -85,6 +86,7 @@ function checkNumberOfLetters(idNumber) {
 
 /**
  * chose right icon for the password input field
+ * @param idNumber - the addon for identify the right ID
  */
 function chooseRightPasswordImgage(idNumber) {
   let passwordInput = document.getElementById("passwordInput" + idNumber);
@@ -100,6 +102,7 @@ function chooseRightPasswordImgage(idNumber) {
 /**
  * switch between visible and hidden password
  * change input type between text/password
+ * @param idCount - the addon for identify the right ID
  */
 function togglePasswordVisibility(idCount) {
   let passwordInput = document.getElementById("passwordInput" + idCount);
