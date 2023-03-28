@@ -133,6 +133,10 @@ function guestLogIn() {
   showWelcomeUserMessage();
 }
 
+/**
+ * inset the content - HTML part into the <body>
+ * @returns content html
+ */
 function loadContentHTML(){
   return /*html*/ `
     <header>

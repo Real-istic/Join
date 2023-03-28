@@ -8,11 +8,20 @@ function init(){
     loadRegistrationPage();
 }
 
+/**
+ * initial function (onPageLoad)
+ * 
+ */
 function initChangePassword(){
     initBackend();
     loadChangePasswordPage();
 }
 
+
+/**
+ * load login page
+ * 
+ */
 function initRegistrationPageHTML(){
     document.body.innerHTML = /*html*/`
         <div class="registration-container" id="registrationContainer">
