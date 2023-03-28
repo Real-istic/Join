@@ -518,7 +518,7 @@ function createForgotPasswordHTML() {
  * create the html part for the form element in the forgot password section
  */
 function forgotPasswordInputHTML() {
-  var recipient = ``;
+  let recipient = ``;
 
   return /*html*/ `
         <div >
