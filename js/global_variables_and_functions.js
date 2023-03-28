@@ -1,7 +1,7 @@
 /**
  * the main render container
  */
-let contentDiv = document.getElementById('content');
+let contentDiv;
 
 /**
  * the current user
