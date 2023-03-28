@@ -228,6 +228,7 @@ function logIn() {
       document.body.innerHTML = loadContentHTML();
       contentDiv = document.getElementById('content');
       insertSummary();
+      showWelcomeUserMessage();
     } else if (userList[i].password !== inputElementPassword.value && inputElementPassword.placeholder == `Password`) {
       toggleWrongPasswordAlert();
       togglePasswordPlaceholder();
