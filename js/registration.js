@@ -90,12 +90,13 @@ function checkNumberOfLetters(idNumber) {
  * chose right icon for the password input field
  */
 function chooseRightPasswordImgage(idNumber) {
+  let passwordInput = document.getElementById("passwordInput" + idNumber);
   let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
-  if (passwordToggle.type === "password") {
-    passwordToggle.src = "./assets/img/passwordShow.svg";
-  } else if (passwordToggle.type === "text") {
+  if (passwordInput.type === "password") {
     passwordToggle.src = "./assets/img/passwordHide.svg";
+  } else if (passwordInput.type === "text") {
+    passwordToggle.src = "./assets/img/passwordShow.svg";
   }
 }
 
@@ -258,7 +259,6 @@ function togglePasswordPlaceholder() {
   const inputElement = document.getElementById("passwordInputZero");
 
   if (inputElement.placeholder.trim() === "Password") {
-    //inputElement.value = ``;
     inputElement.placeholder = `Ups! Try again`;
   } else {
     inputElement.placeholder = `Password`;
