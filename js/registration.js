@@ -25,10 +25,7 @@ function changeBackgroundColor() {
   let backgroundColorLogin = document.getElementById("registrationContainer");
   if (backgroundColorLogin.style.backgroundColor == "rgb(255, 255, 255)") {
     backgroundColorLogin.style.backgroundColor = "rgb(69, 137, 255)";
-  } else if (
-    backgroundColorLogin.style.backgroundColor == "rgb(69, 137, 255)" ||
-    backgroundColorLogin.style.backgroundColor == ""
-  ) {
+  } else if (backgroundColorLogin.style.backgroundColor == "rgb(69, 137, 255)" || backgroundColorLogin.style.backgroundColor == "") {
     backgroundColorLogin.style.backgroundColor = "rgb(255, 255, 255)";
   }
 }
