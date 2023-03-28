@@ -572,10 +572,9 @@ function checkForExistingEmail(emailFromInput) {
   for (let i = 0; i < userList.length; i++) {
     if (userList[i].email == emailFromInput) {
       return true;
-    } else {
-      return false;
-    }
+    } 
   }
+  return false;
 }
 
 /**
@@ -680,10 +679,8 @@ function updatePassword(password) {
       userList[i].password = password;
       sendEmailAnimation();
     }
-    else{
-      document.getElementById('wrongPasswordContainer').innerHTML = '<span>User not found!<span>';
-    }
   }
+  document.getElementById('wrongPasswordContainer').innerHTML = '<span>User not found!<span>';
 }
 
 //LOGOUT
