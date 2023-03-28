@@ -80,7 +80,7 @@ function checkNumberOfLetters(idNumber) {
   let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
   if (passwordInput.value == 0) {
-    passwordToggle.src = "../assets/img/password-icon.svg";
+    passwordToggle.src = "./assets/img/password-icon.svg";
   } else {
     chooseRightPasswordImgage(idNumber);
   }
