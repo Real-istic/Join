@@ -126,9 +126,60 @@ function togglePasswordVisibility(idCount) {
  */
 function guestLogIn() {
   document.getElementById("registrationContainer").style.display = "none";
+  document.body.innerHTML = loadContentHTML();
+  contentDiv = document.getElementById('content');
   currentUser = "guest";
   insertSummary();
   showWelcomeUserMessage();
+}
+
+function loadContentHTML(){
+  return /*html*/ `
+    <header>
+        <img class="header-left" src="assets/img/headerjoinlogo.svg" alt="">
+        <div class="header-right">
+            <span>Kanban Project Management Tool</span>
+            <div id="help" class="help" onclick="help()"><img src="assets/img/question.svg" alt=""></div>
+            <img onclick="openLogOutButton()" src="assets/img/headeruserimage.png" alt="">
+        </div>
+    </header>
+    <div class="nav-and-content">
+        <nav>
+            <div class="nav-top">
+                <div onclick="insertSummary();" class="nav-element" id="summaryNavElement"><img
+                        src="assets/img/summaryicon.svg" alt=""><span>Summary</span></div>
+                <div onclick="insertBoard()" class="nav-element" id="boardNavElement"><img
+                        src="assets/img/boardicon.svg" alt=""><span>Board</span></div>
+                <div onclick="insertAddTask()" class="nav-element" id="addTaskNavElement"><img
+                        src="assets/img/addtaskicon.svg" alt=""><span>Add
+                        Task</span></div>
+                <div onclick="insertContacts()" class="nav-element" id="contactsNavElement"><img
+                        src="assets/img/contacticon.svg" alt=""><span>Contacts</span></div>
+            </div>
+            <div class="nav-bottom">
+                <div onclick="insertLegalNotice()" class="nav-element" id="legalNoticeNavElement">
+                    <img src="assets/img/infoicon.svg" alt="">
+                    <span class="notice-link">Legal notice</span>
+                </div>
+                <div onclick="insertPrivacy()" class="nav-element" id="privacyNavElement">
+                    <img src="assets/img/privacyicon.svg" alt="">
+                    <span class="privacy-link">privacy</span>
+                </div>
+            </div>
+        </nav>
+        <!-- Content -->
+        <div class="content scrollbar1" id="content"></div>
+    </div>
+    <div class="task-added-to-board translate-y-110 display-none" id="taskAddedToBoard">
+        <span>Task added to board</span>
+        <img src="assets/img/taskaddedtoboard.svg" alt="">
+    </div>
+    <div onclick="toggleAddTaskMenuOffScreen()" class="" id="reduceOpacity"></div>
+    <div class="board-task-slide-in-div board-task-translate-y display-none" id="boardTaskSlideInDiv"></div>
+    <div onclick="toggleTaskBoardTask()" class="" id="reduceOpacityBehindTask"></div>
+    <div class="log-out-background" id="logOutBackground" onclick="closeLogout()">
+    <button class="log-out-button" onclick="logOut()">Log out</button>
+  `;
 }
 
 /**
@@ -168,12 +219,11 @@ function logIn() {
 
   rememberMe();
   for (let i = 0; i < userList.length; i++) {
-    if (
-      userList[i].password == inputElementPassword.value &&
-      userList[i].email == emailFromInput
-    ) {
+    if (userList[i].password == inputElementPassword.value && userList[i].email == emailFromInput) {
       currentUser = userList[i].firstName;
       document.getElementById("registrationContainer").style.display = "none";
+      document.body.innerHTML = loadContentHTML();
+      contentDiv = document.getElementById('content');
       insertSummary();
     } else if (
       userList[i].password !== inputElementPassword.value &&
