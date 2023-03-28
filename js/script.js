@@ -23,7 +23,12 @@ function initChangePassword(){
  * 
  */
 function initRegistrationPageHTML(){
-    document.body.innerHTML = /*html*/`
+    document.body.innerHTML = returnRegistrationPageHTML();
+    document.getElementById("logInContainer").innerHTML = createLogInElementsHTML();
+}
+
+function returnRegistrationPageHTML(){
+    return /*html*/`
         <div class="registration-container" id="registrationContainer">
             <svg class="join-logo-login" id="joinLogoLogin" viewBox="0 0 47 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path class="join-logo-login-color" d="M33.6743 0H23.2637V11.9773H33.6743V0Z" fill="white"/>
@@ -37,38 +42,7 @@ function initRegistrationPageHTML(){
                 <span>Not a Join user?</span>
                 <button onclick="signUp()">Sign up</button>
             </div>
-            <div class="log-in-container" id="logInContainer">
-                <div class="log-in-headline-container" id="logInHeadlineContainer">
-                    <div class="log-in-headline-and-border-container">
-                        <span id="logInContainerHeadline" class="log-in-container-headline">Log in</span>
-                    </div>
-                </div>
-                <div class="forgot-password-description-container" id="forgotPasswordDescriptionContainer">
-                    <span class="forgot-password-description" id="forgotPasswordDescription">Don't worry! We will send you an email with the instructions to reset your password.</span>
-                </div>
-                <div class="log-in-input-container" id="logInInputContainer">
-                    <div class="log-in-input-field">
-                        <input type="email" placeholder="Email" id="logInEmail">
-                        <img src="./assets/img/login-email.svg">
-                    </div>
-                    <div class="log-in-input-field" >
-                        <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
-                        <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility('Zero')">
-                    </div>
-                    <div class="wrong-password-container" id="wrongPasswordContainer"></div>
-                </div>
-                <div class="log-in-remember-me-forgot-password-section" id="logInRememberMeForgotPasswordSection">
-                    <div class="log-in-remember-me-input-label">
-                        <input type="checkbox" name="rememberMe" id="rememberMe" class="remember-me-checkbox">
-                        <span>Remember me</span>
-                    </div>
-                    <a onclick="forgotPassword()">Forgot my password</a>
-                </div>
-                <div class="log-in-commit-guest-log-in-section" id="logInCommitGuestLogInSection">
-                    <button class="log-in-commit-guest-log-in-section-button-log-in" onclick="logIn()">Log in</button>
-                    <button class="log-in-commit-guest-log-in-section-button-guest" onclick="guestLogIn()">Guest log in</button>
-                </div>
-            </div>
+            <div class="log-in-container" id="logInContainer"></div>
         </div>
         <div class="email-send-message-background" id="emailSendMessageBackground"></div>
         <div class="email-send-message" id="emailSendMessage"><img src="assets/img/SendCheck.svg" alt="">An E-mail has been sent to you</div>
