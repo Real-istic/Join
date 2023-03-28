@@ -425,6 +425,7 @@ function returnToLoginPage() {
     window.location.href = "index.html";
   } else if (window.location.href.includes("index.html")) {
     returnToLoginPageCSSHTML();
+    setElementsFromLocalStorage();
   }
 }
 
