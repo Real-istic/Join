@@ -370,10 +370,7 @@ function signUpNewUser() {
   const newContactPassword = document.getElementById("passwordInputZero");
 
   // Verify that the first and last name have been entered.
-  if (
-    newContactName.value === "" ||
-    newContactName.value.split(" ").length < 2
-  ) {
+  if (newContactName.value === "" || newContactName.value.split(" ").length < 2) {
     newContactName.setCustomValidity("Please enter your first and last name.");
     newContactName.reportValidity();
   }
@@ -402,7 +399,6 @@ function signUpNewUser() {
   addUser(newUser);
   returnToLoginPage();
   showNewContactMessage();
-  insertContacts();
 }
 
 /**
