@@ -436,10 +436,13 @@ function addNewContact() {
  */
 function showNewContactMessage() {
   const newContactMessage = document.getElementById("newContactCreated");
-  newContactMessage.classList.add("showNewContactFadeIn");
-  setTimeout(() => {
-    newContactMessage.classList.remove("showNewContactFadeIn");
-  }, 3000);
+  if (newContactMessage) {
+    newContactMessage.classList.add("showNewContactFadeIn");
+    setTimeout(() => {
+      newContactMessage.classList.remove("showNewContactFadeIn");
+    }, 3000);
+  }
+  
 }  
  
 /**
