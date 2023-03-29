@@ -220,7 +220,7 @@ function summaryTopLater() {
  */
 function logIn() {
   let inputElementPassword = document.getElementById("passwordInputZero");
-  let emailFromInput = document.getElementById("logInEmail").value;
+  let emailFromInput = document.getElementById("logInEmail").value.toLowerCase();
 
   rememberMe();
   for (let i = 0; i < userList.length; i++) {
@@ -394,7 +394,7 @@ function signUpNewUser() {
   let newUser = {
     firstName: firstName,
     lastName: lastName,
-    email: newContactEmail.value,
+    email: newContactEmail.value.toLowerCase(),
     password: newContactPassword.value,
     backgroundColor: `${getRandomColor()}`,
   };
