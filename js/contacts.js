@@ -435,8 +435,10 @@ function addNewContact() {
  * 
  */
 function showNewContactMessage() {
-  const newContactMessage = document.getElementById("newContactCreated");
-  if (newContactMessage) {
+  
+  if (document.getElementById("newContactCreated")) {
+    const newContactMessage = document.getElementById("newContactCreated");
+    
     newContactMessage.classList.add("showNewContactFadeIn");
     setTimeout(() => {
       newContactMessage.classList.remove("showNewContactFadeIn");
