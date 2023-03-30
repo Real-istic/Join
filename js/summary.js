@@ -113,9 +113,9 @@ function summaryHTML() {
  */
 function summaryTopHTML() {
     if (currentUser === 'guest') {
-        return /*html*/ `Good morning,` + `<span> &nbsp; guest</span>`;
+        return /*html*/ `Good morning,` + `<span> &nbsp; guest &nbsp;</span>`;
     } else {
-        return /*html*/ `Good morning,` + `<div><span>&nbsp;${currentUser}</span></div>`;
+        return /*html*/ `Good morning,` + `<div><span>&nbsp;${currentUser}&nbsp;</span></div>`;
     }
 }
 

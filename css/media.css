@@ -884,9 +884,6 @@
   .task-box-deadline {
     width: 566px;
   }
-  /*  .summary-div {
-    padding-top: 9rem;
-  }*/
   .task-box {
     width: 166px;
     height: 166px;
@@ -903,12 +900,8 @@
   }
 }
 @media (max-width: 657px) {
-  .summary-div {
-    padding-bottom: 15rem;
-  }
   .task-box-deadline {
     width: 453px;
-    margin-top: 7rem;
     height: 150px;
   }
   .task-box-to-do {
@@ -938,9 +931,7 @@
 }
 
 @media (max-width: 516px) {
-  .summary-div {
-    padding-bottom: 19rem;
-  }
+
   .welcome-user-message {
     padding-bottom: 92rem;
     padding-top: 120rem;
@@ -955,7 +946,6 @@
   }
   .task-box-deadline {
     width: 398px;
-    margin-top: 7rem;
     height: 150px;
   }
   .task-box-to-do {
@@ -971,12 +961,8 @@
   }
 }
 @media (max-width: 440px) {
-  .summary-div {
-    padding-bottom: 20rem;
-  }
   .task-box-deadline {
     width: 398px;
-    margin-top: 7rem;
     height: 142px;
   }
   .task-box {
@@ -988,9 +974,6 @@
   }
 }
 @media (max-width: 429px) {
-  .summary-div {
-    padding-bottom: 16rem;
-  }
   .task-box {
     width: 142px;
     height: 131px;
@@ -1002,7 +985,6 @@
   }
   .task-box-deadline {
     width: 313px;
-    margin-top: 3rem;
   }
   .date-and-upcoming-deadline span {
     font-size: 17px !important;
@@ -1015,11 +997,6 @@
   }
   .task-picture-and-count {
     margin-left: 5px;
-  }
-}
-@media (max-width: 350px) {
-  .summary-div {
-    padding-bottom: 20rem;
   }
 }
 
