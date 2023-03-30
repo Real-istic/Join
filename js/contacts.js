@@ -487,10 +487,9 @@ function doNotClose() {
  * @returns a string representing a hex color code
  */
 function getRandomColor() {
-  let color = "";
-  do {
-    color = Math.floor(Math.random() * 16777215).toString(16);
-  } while (color === "ffffff");
-  return `#${color}`;
+  const colors = ["#F8D030", "#78C850", "#3899E6", "#E0306A", "#007030", "#1C6BA0", "#64C8F0", "#FF9BCB"];
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
 }
+
 
