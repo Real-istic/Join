@@ -53,10 +53,7 @@ function changeBackgroundColor() {
   let backgroundColorLogin = document.getElementById("registrationContainer");
   if (backgroundColorLogin.style.backgroundColor == "rgb(255, 255, 255)") {
     backgroundColorLogin.style.backgroundColor = "rgb(69, 137, 255)";
-  } else if (
-    backgroundColorLogin.style.backgroundColor == "rgb(69, 137, 255)" ||
-    backgroundColorLogin.style.backgroundColor == ""
-  ) {
+  } else if (backgroundColorLogin.style.backgroundColor == "rgb(69, 137, 255)" || backgroundColorLogin.style.backgroundColor == "") {
     backgroundColorLogin.style.backgroundColor = "rgb(255, 255, 255)";
   }
 }
@@ -102,38 +99,42 @@ function showLogInElements() {
 
 /**
  * check the number of letters in input field for chosing the right password icon
+ * @param idNumber - the addon for identify the right ID
  */
-function checkNumberOfLetters() {
-  let passwordInput = document.getElementById("passwordInput");
-  let passwordToggle = document.getElementById("passwordToggle");
+function checkNumberOfLetters(idNumber) {
+  let passwordInput = document.getElementById("passwordInput" + idNumber);
+  let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
-  if (passwordInput.value == 0) {
+  if (passwordInput.value.length == 0) {
     passwordToggle.src = "./assets/img/password-icon.svg";
   } else {
-    chooseRightPasswordImgage();
+    chooseRightPasswordImgage(idNumber);
   }
 }
 
 /**
  * chose right icon for the password input field
+ * @param idNumber - the addon for identify the right ID
  */
-function chooseRightPasswordImgage() {
-  let passwordToggle = document.getElementById("passwordToggle");
+function chooseRightPasswordImgage(idNumber) {
+  let passwordInput = document.getElementById("passwordInput" + idNumber);
+  let passwordToggle = document.getElementById("passwordToggle" + idNumber);
 
-  if (passwordToggle.type === "password") {
-    passwordToggle.src = "./assets/img/passwordShow.svg";
-  } else if (passwordToggle.type === "text") {
+  if (passwordInput.type === "password") {
     passwordToggle.src = "./assets/img/passwordHide.svg";
+  } else if (passwordInput.type === "text") {
+    passwordToggle.src = "./assets/img/passwordShow.svg";
   }
 }
 
 /**
  * switch between visible and hidden password
  * change input type between text/password
+ * @param idCount - the addon for identify the right ID
  */
-function togglePasswordVisibility() {
-  let passwordInput = document.getElementById("passwordInput");
-  let passwordToggle = document.getElementById("passwordToggle");
+function togglePasswordVisibility(idCount) {
+  let passwordInput = document.getElementById("passwordInput" + idCount);
+  let passwordToggle = document.getElementById("passwordToggle"+ idCount);
   if (passwordInput.value.length > 0) {
     if (passwordInput.type === "password") {
       // Show the password
@@ -154,9 +155,64 @@ function togglePasswordVisibility() {
  */
 function guestLogIn() {
   document.getElementById("registrationContainer").style.display = "none";
+  document.body.innerHTML = loadContentHTML();
+  contentDiv = document.getElementById('content');
   currentUser = "guest";
   insertSummary();
   showWelcomeUserMessage();
+}
+
+/**
+ * inset the content - HTML part into the &lt;body>
+ * @returns content html
+ */
+function loadContentHTML(){
+  return /*html*/ `
+    &lt;header>
+        &lt;img class="header-left" src="assets/img/headerjoinlogo.svg" alt="">
+        &lt;div class="header-right">
+            &lt;span>Kanban Project Management Tool&lt;/span>
+            &lt;div id="help" class="help" onclick="help()">&lt;img src="assets/img/question.svg" alt="">&lt;/div>
+            &lt;img onclick="openLogOutButton()" src="assets/img/headeruserimage.png" alt="">
+        &lt;/div>
+    &lt;/header>
+    &lt;div class="nav-and-content">
+        &lt;nav>
+            &lt;div class="nav-top">
+                &lt;div onclick="insertSummary();" class="nav-element" id="summaryNavElement">&lt;img
+                        src="assets/img/summaryicon.svg" alt="">&lt;span>Summary&lt;/span>&lt;/div>
+                &lt;div onclick="insertBoard()" class="nav-element" id="boardNavElement">&lt;img
+                        src="assets/img/boardicon.svg" alt="">&lt;span>Board&lt;/span>&lt;/div>
+                &lt;div onclick="insertAddTask()" class="nav-element" id="addTaskNavElement">&lt;img
+                        src="assets/img/addtaskicon.svg" alt="">&lt;span>Add
+                        Task&lt;/span>&lt;/div>
+                &lt;div onclick="insertContacts()" class="nav-element" id="contactsNavElement">&lt;img
+                        src="assets/img/contacticon.svg" alt="">&lt;span>Contacts&lt;/span>&lt;/div>
+            &lt;/div>
+            &lt;div class="nav-bottom">
+                &lt;div onclick="insertLegalNotice()" class="nav-element" id="legalNoticeNavElement">
+                    &lt;img src="assets/img/infoicon.svg" alt="">
+                    &lt;span class="notice-link">Legal notice&lt;/span>
+                &lt;/div>
+                &lt;div onclick="insertPrivacy()" class="nav-element" id="privacyNavElement">
+                    &lt;img src="assets/img/privacyicon.svg" alt="">
+                    &lt;span class="privacy-link">privacy&lt;/span>
+                &lt;/div>
+            &lt;/div>
+        &lt;/nav>
+        &lt;!-- Content -->
+        &lt;div class="content scrollbar1" id="content">&lt;/div>
+    &lt;/div>
+    &lt;div class="task-added-to-board translate-y-110 display-none" id="taskAddedToBoard">
+        &lt;span>Task added to board&lt;/span>
+        &lt;img src="assets/img/taskaddedtoboard.svg" alt="">
+    &lt;/div>
+    &lt;div onclick="toggleAddTaskMenuOffScreen()" class="" id="reduceOpacity">&lt;/div>
+    &lt;div class="board-task-slide-in-div board-task-translate-y display-none" id="boardTaskSlideInDiv">&lt;/div>
+    &lt;div onclick="toggleTaskBoardTask()" class="" id="reduceOpacityBehindTask">&lt;/div>
+    &lt;div class="log-out-background" id="logOutBackground" onclick="closeLogout()">
+    &lt;button class="log-out-button" onclick="logOut()">Log out&lt;/button>
+  `;
 }
 
 /**
@@ -191,32 +247,24 @@ function summaryTopLater() {
  * check for correct inputs and continue as user
  */
 function logIn() {
-  let inputElementPassword = document.getElementById("passwordInput");
-  let emailFromInput = document.getElementById("logInEmail").value;
+  let inputElementPassword = document.getElementById("passwordInputZero");
+  let emailFromInput = document.getElementById("logInEmail").value.toLowerCase();
 
   rememberMe();
   for (let i = 0; i &lt; userList.length; i++) {
-    if (
-      userList[i].password == inputElementPassword.value &amp;&amp;
-      userList[i].email == emailFromInput
-    ) {
+    if (userList[i].password == inputElementPassword.value &amp;&amp; userList[i].email == emailFromInput) {
       currentUser = userList[i].firstName;
-      document.getElementById("registrationContainer").style.display = "none";
+      document.body.innerHTML = loadContentHTML();
+      contentDiv = document.getElementById('content');
       insertSummary();
-    } else if (
-      userList[i].password !== inputElementPassword.value &amp;&amp;
-      inputElementPassword.placeholder == `Password`
-    ) {
+      showWelcomeUserMessage();
+    } else if (userList[i].password !== inputElementPassword.value &amp;&amp; inputElementPassword.placeholder == `Password`) {
       toggleWrongPasswordAlert();
       togglePasswordPlaceholder();
-    } else if (
-      userList[i].password !== inputElementPassword.value &amp;&amp;
-      inputElementPassword.placeholder == `Ups! Try again`
-    ) {
-      inputElementPassword.value = ``;
-    }
+      setElementsFromLocalStorage();
+    } 
   }
-  setElementsFromLocalStorage();
+  inputElementPassword.value = ``;
 }
 
 /**
@@ -236,10 +284,9 @@ function toggleWrongPasswordAlert() {
  * toggle password input placeholder if password was entered wrong
  */
 function togglePasswordPlaceholder() {
-  const inputElement = document.getElementById("passwordInput");
+  const inputElement = document.getElementById("passwordInputZero");
 
   if (inputElement.placeholder.trim() === "Password") {
-    inputElement.value = ``;
     inputElement.placeholder = `Ups! Try again`;
   } else {
     inputElement.placeholder = `Password`;
@@ -300,24 +347,15 @@ function signUp() {
  * change all nessessary html elements
  */
 function changeLogInInputHTML() {
-  document.getElementById("logInContainerHeadline").innerHTML = `Sign up`;
+  document.getElementById("logInContainerHeadline").innerHTML = `Sign in`;
   document.getElementById("logInInputContainer").innerHTML = SignUpInputHTML();
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).innerHTML = ``;
-  document.getElementById("logInCommitGuestLogInSection").innerHTML =
-    SignUpButtonHTML();
+  document.getElementById("logInRememberMeForgotPasswordSection").innerHTML = ``;
+  document.getElementById("logInCommitGuestLogInSection").innerHTML = SignUpButtonHTML();
   document.getElementById("logInContainer").innerHTML += addReturnButtonHTML();
-  document.getElementById(
-    "registrationUpperRightInnerContainer"
-  ).style.display = "none";
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `center`;
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).style.display = "none";
-  document.getElementById("logInInputContainer").style.height = "185px";
+  document.getElementById("registrationUpperRightInnerContainer").style.display = "none";
+  document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `center`;
+  document.getElementById("logInRememberMeForgotPasswordSection").style.display = "none";
+  document.getElementById("logInHeadlineContainer").style.height = "90px";
 }
 
 /**
@@ -335,8 +373,8 @@ function SignUpInputHTML() {
         &lt;img src="./assets/img/login-email.svg">
     &lt;/div>
     &lt;div class="log-in-input-field" >
-        &lt;input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
-        &lt;img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
+        &lt;input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
+        &lt;img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility()">
     &lt;/div>
     `;
 }
@@ -357,13 +395,10 @@ function SignUpButtonHTML() {
 function signUpNewUser() {
   const newContactName = document.getElementById("logInName");
   const newContactEmail = document.getElementById("logInEmail");
-  const newContactPassword = document.getElementById("passwordInput");
+  const newContactPassword = document.getElementById("passwordInputZero");
 
   // Verify that the first and last name have been entered.
-  if (
-    newContactName.value === "" ||
-    newContactName.value.split(" ").length &lt; 2
-  ) {
+  if (newContactName.value === "" || newContactName.value.split(" ").length &lt; 2) {
     newContactName.setCustomValidity("Please enter your first and last name.");
     newContactName.reportValidity();
   }
@@ -384,7 +419,7 @@ function signUpNewUser() {
   let newUser = {
     firstName: firstName,
     lastName: lastName,
-    email: newContactEmail.value,
+    email: newContactEmail.value.toLowerCase(),
     password: newContactPassword.value,
     backgroundColor: `${getRandomColor()}`,
   };
@@ -392,7 +427,6 @@ function signUpNewUser() {
   addUser(newUser);
   returnToLoginPage();
   showNewContactMessage();
-  insertContacts();
 }
 
 /**
@@ -415,6 +449,7 @@ function returnToLoginPage() {
     window.location.href = "index.html";
   } else if (window.location.href.includes("index.html")) {
     returnToLoginPageCSSHTML();
+    setElementsFromLocalStorage();
   }
 }
 
@@ -425,23 +460,16 @@ function returnToLoginPageCSSHTML() {
   changeBackgroundColor();
   changeLogoColor();
   showLogInElements();
-  document.getElementById(
-    "registrationUpperRightInnerContainer"
-  ).style.display = "flex";
-  document.getElementById("logInContainer").innerHTML =
-    createLogInElementsHTML();
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `space-between`;
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).style.display = "flex";
-  document.getElementById("logInInputContainer").style.height = "130px";
-  document.getElementById("logInContainer").style.width = "652px";
-  document.getElementById("forgotPasswordDescriptionContainer").style.display =
-    "none";
-  document.getElementById("logInCommitGuestLogInSection").style.display =
-    "flex";
+  document.getElementById("registrationUpperRightInnerContainer").style.display = "flex";
+  document.getElementById("logInContainer").innerHTML = createLogInElementsHTML();
+  document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `space-between`;
+  document.getElementById("logInRememberMeForgotPasswordSection").style.display = "flex";
+  document.getElementById("forgotPasswordDescriptionContainer").style.display = "none";
+  document.getElementById("logInCommitGuestLogInSection").style.display = "flex";
+  if (!window.matchMedia('(max-width: 650px)').matches) {
+    document.getElementById("logInContainer").style.width = "652px";
+    document.getElementById("logInInputContainer").style.height = "130px";
+  }
 }
 
 /**
@@ -451,7 +479,7 @@ function createLogInElementsHTML() {
   return /*html*/ `
     &lt;div class="log-in-headline-container" id="logInHeadlineContainer">
         &lt;div class="log-in-headline-and-border-container">
-            &lt;span id="logInContainerHeadline">Log in&lt;/span>
+            &lt;span id="logInContainerHeadline" class="log-in-container-headline">Log in&lt;/span>
         &lt;/div>
     &lt;/div>
     &lt;div class="forgot-password-description-container" id="forgotPasswordDescriptionContainer">
@@ -463,8 +491,8 @@ function createLogInElementsHTML() {
             &lt;img src="./assets/img/login-email.svg">
         &lt;/div>
         &lt;div class="log-in-input-field" >
-            &lt;input type="password" placeholder="Password" id="passwordInput" onkeyup="checkNumberOfLetters()">
-            &lt;img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggle" onclick="togglePasswordVisibility()">
+            &lt;input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
+            &lt;img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility('Zero')">
         &lt;/div>
         &lt;div class="wrong-password-container" id="wrongPasswordContainer">&lt;/div>
     &lt;/div>
@@ -497,35 +525,24 @@ function forgotPassword() {
  * create and change all the elements wich are needed for creating the forgot password section
  */
 function createForgotPasswordHTML() {
-  document.getElementById(
-    "registrationUpperRightInnerContainer"
-  ).style.display = "none";
-  document.getElementById(
-    "logInContainerHeadline"
-  ).innerHTML = `I forgot my password`;
-  document.getElementById(
-    "logInRememberMeForgotPasswordSection"
-  ).style.display = "none";
-  document.getElementById("logInInputContainer").innerHTML =
-    forgotPasswordInputHTML();
-  document.getElementById("logInInputContainer").style.height = "50px";
-  document.getElementById("logInCommitGuestLogInSection").innerHTML = ``;
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `center`;
+  document.getElementById("registrationUpperRightInnerContainer").style.display = "none";
+  document.getElementById("logInContainerHeadline").innerHTML = `I forgot my password`;
+  document.getElementById("logInRememberMeForgotPasswordSection").style.display = "none";
+  document.getElementById("logInInputContainer").innerHTML = forgotPasswordInputHTML();
   document.getElementById("logInContainer").innerHTML += addReturnButtonHTML();
-  document.getElementById("logInContainer").style.width = "750px";
-  document.getElementById("forgotPasswordDescriptionContainer").style.display =
-    "flex";
-  document.getElementById("logInCommitGuestLogInSection").style.display =
-    "none";
+  document.getElementById("forgotPasswordDescriptionContainer").style.display = "flex";
+  document.getElementById("logInCommitGuestLogInSection").style.display = "none";
+  if (!window.matchMedia('(max-width: 650px)').matches) {
+    document.getElementById("logInContainer").style.width = "750px";
+    document.getElementById("logInInputContainer").style.height = "50px";
+  }
 }
 
 /**
  * create the html part for the form element in the forgot password section
  */
 function forgotPasswordInputHTML() {
-  var recipient = ``;
+  let recipient = ``;
 
   return /*html*/ `
         &lt;div >
@@ -580,10 +597,9 @@ function checkForExistingEmail(emailFromInput) {
   for (let i = 0; i &lt; userList.length; i++) {
     if (userList[i].email == emailFromInput) {
       return true;
-    } else {
-      return false;
-    }
+    } 
   }
+  return false;
 }
 
 /**
@@ -637,15 +653,13 @@ function createForgotPasswordAnimation() {
  */
 function createForgotPasswordNewURLHTML() {
   document.getElementById("logInContainer").innerHTML += addReturnButtonHTML();
-  document.getElementById("forgotPasswordDescriptionContainer").style.display =
-    "flex";
-  document.getElementById(
-    "logInCommitGuestLogInSection"
-  ).style.justifyContent = `center`;
-  document.getElementById("logInContainer").style.height = "540px";
-  document.getElementById("logInContainer").style.width = "760px";
-  document.getElementById("logInContainer").style.justifyContent =
-    "space-between";
+  document.getElementById("forgotPasswordDescriptionContainer").style.display ="flex";
+  document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `center`;
+  document.getElementById("logInContainer").style.justifyContent = "space-between";
+  if (!window.matchMedia('(max-width: 650px)').matches) {
+    document.getElementById("logInContainer").style.height = "540px";
+    document.getElementById("logInContainer").style.width = "760px";
+  }
 }
 
 /**
@@ -659,16 +673,13 @@ function commitChangePassword() {
  * check if both input fields have the same password set
  */
 function checkForSameInput() {
-  let passwordInput = document.getElementById("passwordInput").value;
-  let passwordInputConfirm = document.getElementById(
-    "confirmPasswordInput"
-  ).value;
+  let passwordInput = document.getElementById("passwordInputOne").value;
+  let passwordInputConfirm = document.getElementById("passwordInputTwo").value;
 
   if (passwordInput === passwordInputConfirm &amp;&amp; passwordInput.length > 1) {
     updatePassword(passwordInput);
   } else {
-    document.getElementById("wrongPasswordContainer").innerHTML =
-      wrongPasswordHTML();
+    document.getElementById("wrongPasswordContainer").innerHTML = wrongPasswordHTML();
   }
 }
 
@@ -678,7 +689,7 @@ function checkForSameInput() {
  */
 function wrongPasswordHTML() {
   return /*html*/ `
-    &lt;span>Make sure the second password you typed matches the first.&lt;/span>
+    &lt;span>Make sure the second password you typed matches the first and has more than one character.&lt;/span>
     `;
 }
 
@@ -687,12 +698,22 @@ function wrongPasswordHTML() {
  */
 function updatePassword(password) {
   let emailFromURL = window.location.search.substring(1);
+  let passwordUpdated;
 
   for (let i = 0; i &lt; userList.length; i++) {
     if (userList[i].email == emailFromURL) {
       userList[i].password = password;
+      passwordUpdated = true;
+      saveEditContact();
+      initBackend();
+      sendEmailAnimation();
     }
   }
+
+  if (!passwordUpdated == true) {
+    document.getElementById('wrongPasswordContainer').innerHTML = '&lt;span>User not found!&lt;span>';
+  }
+  
 }
 
 //LOGOUT
@@ -728,13 +749,13 @@ function closeLogout() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#SignUpButtonHTML">SignUpButtonHTML</a></li><li><a href="global.html#SignUpInputHTML">SignUpInputHTML</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addCategoryToClipboard">addCategoryToClipboard</a></li><li><a href="global.html#addCategoryToClipboardHTML">addCategoryToClipboardHTML</a></li><li><a href="global.html#addContactToTask">addContactToTask</a></li><li><a href="global.html#addForgotPasswordHTML">addForgotPasswordHTML</a></li><li><a href="global.html#addReturnButtonHTML">addReturnButtonHTML</a></li><li><a href="global.html#addSubtaskToClipboard">addSubtaskToClipboard</a></li><li><a href="global.html#addTaskCreateNewCategoryColorSelector">addTaskCreateNewCategoryColorSelector</a></li><li><a href="global.html#addTaskFillSlideInMenu">addTaskFillSlideInMenu</a></li><li><a href="global.html#addTaskOffScreenMenu">addTaskOffScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#boardTaskEditSlideInInsertDescription">boardTaskEditSlideInInsertDescription</a></li><li><a href="global.html#boardTaskEditSlideInInsertDueDate">boardTaskEditSlideInInsertDueDate</a></li><li><a href="global.html#boardTaskEditSlideInInsertPriority">boardTaskEditSlideInInsertPriority</a></li><li><a href="global.html#boardTaskEditSlideInInsertTitle">boardTaskEditSlideInInsertTitle</a></li><li><a href="global.html#boardTaskEditSlideInInsertValues">boardTaskEditSlideInInsertValues</a></li><li><a href="global.html#boardTaskSaveEditTaskTolist">boardTaskSaveEditTaskTolist</a></li><li><a href="global.html#boardTaskSlideInAssignedToHeaderHTML">boardTaskSlideInAssignedToHeaderHTML</a></li><li><a href="global.html#boardTaskSlideInEditTask">boardTaskSlideInEditTask</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasks">boardTaskSlideInInsertSubtasks</a></li><li><a href="global.html#boardTaskSlideInOkButton">boardTaskSlideInOkButton</a></li><li><a href="global.html#boardTaskSlideInSubtaskHeaderHTML">boardTaskSlideInSubtaskHeaderHTML</a></li><li><a href="global.html#boardTaskStatus">boardTaskStatus</a></li><li><a href="global.html#changeBackgroundColor">changeBackgroundColor</a></li><li><a href="global.html#changeLogInInputHTML">changeLogInInputHTML</a></li><li><a href="global.html#changeLogoColor">changeLogoColor</a></li><li><a href="global.html#changeLogoPosition">changeLogoPosition</a></li><li><a href="global.html#checkCheckboxes">checkCheckboxes</a></li><li><a href="global.html#checkForContactInClipboard">checkForContactInClipboard</a></li><li><a href="global.html#checkForExistingEmail">checkForExistingEmail</a></li><li><a href="global.html#checkForExpandedContactList">checkForExpandedContactList</a></li><li><a href="global.html#checkForSameInput">checkForSameInput</a></li><li><a href="global.html#checkNumberOfLetters">checkNumberOfLetters</a></li><li><a href="global.html#chooseRightPasswordImgage">chooseRightPasswordImgage</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskClipboard">clearTaskClipboard</a></li><li><a href="global.html#closeLogout">closeLogout</a></li><li><a href="global.html#commitChangePassword">commitChangePassword</a></li><li><a href="global.html#compareDates">compareDates</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#confirmCreateNewCategory">confirmCreateNewCategory</a></li><li><a href="global.html#containers">containers</a></li><li><a href="global.html#contentDiv">contentDiv</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#createCategoryInputHTML">createCategoryInputHTML</a></li><li><a href="global.html#createCategoryListHTML">createCategoryListHTML</a></li><li><a href="global.html#createContactAddTaskHTML">createContactAddTaskHTML</a></li><li><a href="global.html#createForgotPasswordAnimation">createForgotPasswordAnimation</a></li><li><a href="global.html#createForgotPasswordHTML">createForgotPasswordHTML</a></li><li><a href="global.html#createForgotPasswordNewURLHTML">createForgotPasswordNewURLHTML</a></li><li><a href="global.html#createLogInElementsHTML">createLogInElementsHTML</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createNewCategoryColorSelectorHTML">createNewCategoryColorSelectorHTML</a></li><li><a href="global.html#createNewCategoryColorSelectorRadioButtonHTML">createNewCategoryColorSelectorRadioButtonHTML</a></li><li><a href="global.html#createNewCategoryHTML">createNewCategoryHTML</a></li><li><a href="global.html#createSelectedContactIcons">createSelectedContactIcons</a></li><li><a href="global.html#createSelectedContactIconsDivHTML">createSelectedContactIconsDivHTML</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTaskAddTaskSite">createTaskAddTaskSite</a></li><li><a href="global.html#createTaskBoardSite">createTaskBoardSite</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteTasksFromBackend">deleteTasksFromBackend</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#expandContactList">expandContactList</a></li><li><a href="global.html#fillSubtaskStatusbar">fillSubtaskStatusbar</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#forgotPasswordInputHTML">forgotPasswordInputHTML</a></li><li><a href="global.html#getAmountofTasks">getAmountofTasks</a></li><li><a href="global.html#getAmountofTasksInStatus">getAmountofTasksInStatus</a></li><li><a href="global.html#getDeadlineAndAmountOfUrgetTasks">getDeadlineAndAmountOfUrgetTasks</a></li><li><a href="global.html#getNewCategoryColor">getNewCategoryColor</a></li><li><a href="global.html#guestLogIn">guestLogIn</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#helpHTML">helpHTML</a></li><li><a href="global.html#hideContactList">hideContactList</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#insertAddTask">insertAddTask</a></li><li><a href="global.html#insertAssignedContactsToTaskHTML">insertAssignedContactsToTaskHTML</a></li><li><a href="global.html#insertAwaitFeedbackTasksHeaderHTML">insertAwaitFeedbackTasksHeaderHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHTML">insertBoardHTML</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTaskSlideInAssigned">insertBoardTaskSlideInAssigned</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIteration">insertBoardTaskSlideInAssignedContactsIteration</a></li><li><a href="global.html#insertBoardTaskSlideInCategoryHTML">insertBoardTaskSlideInCategoryHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDescriptionHTML">insertBoardTaskSlideInDescriptionHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDueDateHTML">insertBoardTaskSlideInDueDateHTML</a></li><li><a href="global.html#insertBoardTaskSlideInPriorityHTML">insertBoardTaskSlideInPriorityHTML</a></li><li><a href="global.html#insertBoardTaskSlideInTitleHTML">insertBoardTaskSlideInTitleHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorFromInterruptHTML">insertCategorySelectorFromInterruptHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHeaderHTML">insertDoneTasksHeaderHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHeaderHTML">insertInProgressTasksHeaderHTML</a></li><li><a href="global.html#insertLegalNotice">insertLegalNotice</a></li><li><a href="global.html#insertOpenTaskSlideInHTML">insertOpenTaskSlideInHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertPrivacy">insertPrivacy</a></li><li><a href="global.html#insertSubtaskProgress">insertSubtaskProgress</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTaskTolistHTML">insertTaskTolistHTML</a></li><li><a href="global.html#insertTodoTasksHeaderHTML">insertTodoTasksHeaderHTML</a></li><li><a href="global.html#interruptCreateNewCategory">interruptCreateNewCategory</a></li><li><a href="global.html#legalNoticeHTML">legalNoticeHTML</a></li><li><a href="global.html#loadCategorylist">loadCategorylist</a></li><li><a href="global.html#loadChangePasswordPage">loadChangePasswordPage</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadDragAndDrop">loadDragAndDrop</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#loadRegistrationPage">loadRegistrationPage</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#markActiveNavElement">markActiveNavElement</a></li><li><a href="global.html#openAndCloseContactList">openAndCloseContactList</a></li><li><a href="global.html#openLogOutButton">openLogOutButton</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#privacyHTML">privacyHTML</a></li><li><a href="global.html#pushBoardTaskToClipboard">pushBoardTaskToClipboard</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushEditedTaskTolist">pushEditedTaskTolist</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTaskToBackend">pushTaskToBackend</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeContactFromTask">removeContactFromTask</a></li><li><a href="global.html#removeEmailAnimation">removeEmailAnimation</a></li><li><a href="global.html#removeWrongEmailAlert">removeWrongEmailAlert</a></li><li><a href="global.html#restoreBackend">restoreBackend</a></li><li><a href="global.html#returnToLoginPage">returnToLoginPage</a></li><li><a href="global.html#returnToLoginPageCSSHTML">returnToLoginPageCSSHTML</a></li><li><a href="global.html#saveEditContact">saveEditContact</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendEmailAnimation">sendEmailAnimation</a></li><li><a href="global.html#setElementsFromLocalStorage">setElementsFromLocalStorage</a></li><li><a href="global.html#showLogInElements">showLogInElements</a></li><li><a href="global.html#showWelcomeUserMessage">showWelcomeUserMessage</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#signUpNewUser">signUpNewUser</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#summaryTopLater">summaryTopLater</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li><li><a href="global.html#toggleContactTask">toggleContactTask</a></li><li><a href="global.html#togglePasswordPlaceholder">togglePasswordPlaceholder</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#toggleSubtaskInlist">toggleSubtaskInlist</a></li><li><a href="global.html#toggleTaskBoardTask">toggleTaskBoardTask</a></li><li><a href="global.html#toggleWrongPasswordAlert">toggleWrongPasswordAlert</a></li><li><a href="global.html#updatePassword">updatePassword</a></li><li><a href="global.html#userList">userList</a></li><li><a href="global.html#wrongPasswordHTML">wrongPasswordHTML</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#SignUpButtonHTML">SignUpButtonHTML</a></li><li><a href="global.html#SignUpInputHTML">SignUpInputHTML</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addCategoryToClipboard">addCategoryToClipboard</a></li><li><a href="global.html#addCategoryToClipboardHTML">addCategoryToClipboardHTML</a></li><li><a href="global.html#addContactToTask">addContactToTask</a></li><li><a href="global.html#addForgotPasswordHTML">addForgotPasswordHTML</a></li><li><a href="global.html#addReturnButtonHTML">addReturnButtonHTML</a></li><li><a href="global.html#addSubtaskToClipboard">addSubtaskToClipboard</a></li><li><a href="global.html#addTaskCreateNewCategoryColorSelector">addTaskCreateNewCategoryColorSelector</a></li><li><a href="global.html#addTaskFillSlideInMenu">addTaskFillSlideInMenu</a></li><li><a href="global.html#addTaskOffScreenMenu">addTaskOffScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#boardTaskEditSlideInInsertDescription">boardTaskEditSlideInInsertDescription</a></li><li><a href="global.html#boardTaskEditSlideInInsertDueDate">boardTaskEditSlideInInsertDueDate</a></li><li><a href="global.html#boardTaskEditSlideInInsertPriority">boardTaskEditSlideInInsertPriority</a></li><li><a href="global.html#boardTaskEditSlideInInsertTitle">boardTaskEditSlideInInsertTitle</a></li><li><a href="global.html#boardTaskEditSlideInInsertValues">boardTaskEditSlideInInsertValues</a></li><li><a href="global.html#boardTaskSaveEditTaskTolist">boardTaskSaveEditTaskTolist</a></li><li><a href="global.html#boardTaskSlideInAssignedToHeaderHTML">boardTaskSlideInAssignedToHeaderHTML</a></li><li><a href="global.html#boardTaskSlideInEditTask">boardTaskSlideInEditTask</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasks">boardTaskSlideInInsertSubtasks</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasksChecked">boardTaskSlideInInsertSubtasksChecked</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasksUnChecked">boardTaskSlideInInsertSubtasksUnChecked</a></li><li><a href="global.html#boardTaskSlideInOkButton">boardTaskSlideInOkButton</a></li><li><a href="global.html#boardTaskSlideInSubtaskHeaderHTML">boardTaskSlideInSubtaskHeaderHTML</a></li><li><a href="global.html#boardTaskStatus">boardTaskStatus</a></li><li><a href="global.html#changeBackgroundColor">changeBackgroundColor</a></li><li><a href="global.html#changeLogInInputHTML">changeLogInInputHTML</a></li><li><a href="global.html#changeLogoColor">changeLogoColor</a></li><li><a href="global.html#changeLogoPosition">changeLogoPosition</a></li><li><a href="global.html#checkCheckboxes">checkCheckboxes</a></li><li><a href="global.html#checkForContactInClipboard">checkForContactInClipboard</a></li><li><a href="global.html#checkForExistingEmail">checkForExistingEmail</a></li><li><a href="global.html#checkForExpandedContactList">checkForExpandedContactList</a></li><li><a href="global.html#checkForSameInput">checkForSameInput</a></li><li><a href="global.html#checkNumberOfLetters">checkNumberOfLetters</a></li><li><a href="global.html#chooseRightPasswordImgage">chooseRightPasswordImgage</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskClipboard">clearTaskClipboard</a></li><li><a href="global.html#closeLogout">closeLogout</a></li><li><a href="global.html#commitChangePassword">commitChangePassword</a></li><li><a href="global.html#compareDates">compareDates</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#confirmCreateNewCategory">confirmCreateNewCategory</a></li><li><a href="global.html#containers">containers</a></li><li><a href="global.html#contentDiv">contentDiv</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#createCategoryInputHTML">createCategoryInputHTML</a></li><li><a href="global.html#createCategoryListHTML">createCategoryListHTML</a></li><li><a href="global.html#createContactAddTaskHTML">createContactAddTaskHTML</a></li><li><a href="global.html#createForgotPasswordAnimation">createForgotPasswordAnimation</a></li><li><a href="global.html#createForgotPasswordHTML">createForgotPasswordHTML</a></li><li><a href="global.html#createForgotPasswordNewURLHTML">createForgotPasswordNewURLHTML</a></li><li><a href="global.html#createLogInElementsHTML">createLogInElementsHTML</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createNewCategoryColorSelectorHTML">createNewCategoryColorSelectorHTML</a></li><li><a href="global.html#createNewCategoryColorSelectorRadioButtonHTML">createNewCategoryColorSelectorRadioButtonHTML</a></li><li><a href="global.html#createNewCategoryHTML">createNewCategoryHTML</a></li><li><a href="global.html#createSelectedContactIcons">createSelectedContactIcons</a></li><li><a href="global.html#createSelectedContactIconsDivHTML">createSelectedContactIconsDivHTML</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createSubtaskHTML">createSubtaskHTML</a></li><li><a href="global.html#createTaskAddTaskSite">createTaskAddTaskSite</a></li><li><a href="global.html#createTaskBoardSite">createTaskBoardSite</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteTasksFromBackend">deleteTasksFromBackend</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#expandContactList">expandContactList</a></li><li><a href="global.html#fillSubtaskStatusbar">fillSubtaskStatusbar</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#forgotPasswordInputHTML">forgotPasswordInputHTML</a></li><li><a href="global.html#getAmountofTasks">getAmountofTasks</a></li><li><a href="global.html#getAmountofTasksInStatus">getAmountofTasksInStatus</a></li><li><a href="global.html#getDeadlineAndAmountOfUrgetTasks">getDeadlineAndAmountOfUrgetTasks</a></li><li><a href="global.html#getNewCategoryColor">getNewCategoryColor</a></li><li><a href="global.html#guestLogIn">guestLogIn</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#helpHTML">helpHTML</a></li><li><a href="global.html#hideContactList">hideContactList</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#initChangePassword">initChangePassword</a></li><li><a href="global.html#initRegistrationPageHTML">initRegistrationPageHTML</a></li><li><a href="global.html#insertAddTask">insertAddTask</a></li><li><a href="global.html#insertAssignedContactsToTaskGreaterThanTwoHTML">insertAssignedContactsToTaskGreaterThanTwoHTML</a></li><li><a href="global.html#insertAssignedContactsToTaskHTML">insertAssignedContactsToTaskHTML</a></li><li><a href="global.html#insertAssignedContactsToTaskLowerThanTwoHTML">insertAssignedContactsToTaskLowerThanTwoHTML</a></li><li><a href="global.html#insertAwaitFeedbackTasksHeaderHTML">insertAwaitFeedbackTasksHeaderHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHTML">insertBoardHTML</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTaskSlideInAssigned">insertBoardTaskSlideInAssigned</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIteration">insertBoardTaskSlideInAssignedContactsIteration</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIterationHTML">insertBoardTaskSlideInAssignedContactsIterationHTML</a></li><li><a href="global.html#insertBoardTaskSlideInCategoryHTML">insertBoardTaskSlideInCategoryHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDescriptionHTML">insertBoardTaskSlideInDescriptionHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDueDateHTML">insertBoardTaskSlideInDueDateHTML</a></li><li><a href="global.html#insertBoardTaskSlideInPriorityHTML">insertBoardTaskSlideInPriorityHTML</a></li><li><a href="global.html#insertBoardTaskSlideInTitleHTML">insertBoardTaskSlideInTitleHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorFromInterruptHTML">insertCategorySelectorFromInterruptHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHeaderHTML">insertDoneTasksHeaderHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHeaderHTML">insertInProgressTasksHeaderHTML</a></li><li><a href="global.html#insertLegalNotice">insertLegalNotice</a></li><li><a href="global.html#insertOpenTaskSlideInHTML">insertOpenTaskSlideInHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertPrivacy">insertPrivacy</a></li><li><a href="global.html#insertSubtaskProgress">insertSubtaskProgress</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTaskTolistHTML">insertTaskTolistHTML</a></li><li><a href="global.html#insertTodoTasksHeaderHTML">insertTodoTasksHeaderHTML</a></li><li><a href="global.html#interruptCreateNewCategory">interruptCreateNewCategory</a></li><li><a href="global.html#legalNoticeHTML">legalNoticeHTML</a></li><li><a href="global.html#loadCategorylist">loadCategorylist</a></li><li><a href="global.html#loadChangePasswordPage">loadChangePasswordPage</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadContentHTML">loadContentHTML</a></li><li><a href="global.html#loadDragAndDrop">loadDragAndDrop</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#loadRegistrationPage">loadRegistrationPage</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#markActiveNavElement">markActiveNavElement</a></li><li><a href="global.html#openAndCloseContactList">openAndCloseContactList</a></li><li><a href="global.html#openLogOutButton">openLogOutButton</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#privacyHTML">privacyHTML</a></li><li><a href="global.html#pushBoardTaskToClipboard">pushBoardTaskToClipboard</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushEditedTaskTolist">pushEditedTaskTolist</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTaskToBackend">pushTaskToBackend</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeContactFromTask">removeContactFromTask</a></li><li><a href="global.html#removeEmailAnimation">removeEmailAnimation</a></li><li><a href="global.html#removeWrongEmailAlert">removeWrongEmailAlert</a></li><li><a href="global.html#restoreBackend">restoreBackend</a></li><li><a href="global.html#returnToLoginPage">returnToLoginPage</a></li><li><a href="global.html#returnToLoginPageCSSHTML">returnToLoginPageCSSHTML</a></li><li><a href="global.html#saveEditContact">saveEditContact</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendEmailAnimation">sendEmailAnimation</a></li><li><a href="global.html#setElementsFromLocalStorage">setElementsFromLocalStorage</a></li><li><a href="global.html#showLogInElements">showLogInElements</a></li><li><a href="global.html#showWelcomeUserMessage">showWelcomeUserMessage</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#signUpNewUser">signUpNewUser</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#summaryTopLater">summaryTopLater</a></li><li><a href="global.html#taskToListHTML">taskToListHTML</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li><li><a href="global.html#toggleContactTask">toggleContactTask</a></li><li><a href="global.html#togglePasswordPlaceholder">togglePasswordPlaceholder</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#toggleSubtaskInlist">toggleSubtaskInlist</a></li><li><a href="global.html#toggleTaskBoardTask">toggleTaskBoardTask</a></li><li><a href="global.html#toggleWrongPasswordAlert">toggleWrongPasswordAlert</a></li><li><a href="global.html#updatePassword">updatePassword</a></li><li><a href="global.html#userList">userList</a></li><li><a href="global.html#wrongPasswordHTML">wrongPasswordHTML</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Mar 26 2023 14:08:07 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 12:52:35 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

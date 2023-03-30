@@ -195,7 +195,7 @@ function toggleAddTaskMenuOffScreen() {
 }
 
 /**
- * creates a task at the board
+ * creates a task at the board while considering the searchinput
  * 
  */
 function insertTaskTolistHTML() {
@@ -209,35 +209,43 @@ function insertTaskTolistHTML() {
     for (let i = 0; i < taskList.length; i++) {
         lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
         const task = taskList[i];
-        
+
         if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
-            
-            lists.innerHTML += /*html*/ `
-            <div class="task-wrapper" id="${i}">
-                <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
-                    <div class="board-task-category-div">
-                        <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
-                    </div>
-                    <div class="board-task-title-and-description">
-                        <span class="board-task-title">${task.title}</span>
-                        <span class="board-task-description">${task.description}</span>
-                    </div>
-                    <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
-                        ${insertSubtaskProgress(i)}
-                    </div>
-                    <div class="board-task-assigned-contacts-and-prority">
-                        <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
-                        <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
-                    </div>
-                </div>
-            </div>
-            `;
+            lists.innerHTML += taskToListHTML(i, task);
         }
     }
     insertAssignedContactsToTaskHTML()
 }
 
-
+/**
+ * inserts the html part of a task
+ * 
+ * @param {*} i for the specific task
+ * @param {*} task for the task values
+ * @returns the html part
+ */
+function taskToListHTML(i, task) {
+    return /*html*/ `
+    <div class="task-wrapper" id="${i}">
+        <div onclick="openTask(${i})" class="board-task" id="boardTask${i}">
+            <div class="board-task-category-div">
+                <span style="background: ${task.categoryColor};" class="board-task-category">${task.category}</span>
+            </div>
+            <div class="board-task-title-and-description">
+                <span class="board-task-title">${task.title}</span>
+                <span class="board-task-description">${task.description}</span>
+            </div>
+            <div class="board-task-subtask-status" id="boardTaskSubtaskStatus${i}">
+                ${insertSubtaskProgress(i)}
+            </div>
+            <div class="board-task-assigned-contacts-and-prority">
+                <div class="board-task-assigned-contacts" id="boardTaskAssignedContacts${task.title}"></div>
+                <img src="assets/img/priority${task.priority.toLowerCase()}.svg">
+            </div>
+        </div>
+    </div>
+    `;
+}
 
 /**
  * checks if subtasks exist, if the exist, the subtaskstatus gets implemented
@@ -283,46 +291,62 @@ function fillSubtaskStatusbar(i) {
 }
 
 /**
- * inserts the assigned contacts to the task while considering the search-input
+ * inserts the assigned contacts to the tasks
  * 
  */
 function insertAssignedContactsToTaskHTML() {
-    let searchInput = document.getElementById('searchTaskInputField').value;
-
     for (let i = 0; i < taskList.length; i++) {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
         let task = taskList[i];
 
-        if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
-            if (!(taskList[i].firstNames.length > 2)) {
-                for (let j = 0; j < taskList[i].firstNames.length; j++) {
-                    let firstNameTask = taskList[i].firstNames[j];
-                    let lastNameTask = taskList[i].lastNames[j];
-                    for (let k = 0; k < userList.length; k++) {
-                        if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
-                            let userBackgroundColor = userList[k].backgroundColor;
-                            contactContainer.innerHTML += /*html*/ `
-                        <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
-                        `;
-                        }
-                    }
-                }
-            } else {
-                for (let j = 0; j < 2; j++) {
-                    let firstNameTask = taskList[i].firstNames[j];
-                    let lastNameTask = taskList[i].lastNames[j];
-                    for (let k = 0; k < userList.length; k++) {
-                        if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
-                            let userBackgroundColor = userList[k].backgroundColor;
-                            contactContainer.innerHTML += /*html*/ `
-                        <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
-                        `;
-                        }
-                    }
-                }
-                contactContainer.innerHTML += /*html*/ `
-                <div class="add-task-assigned-contact-overflow">+${taskList[i].firstNames.length - 2}</div>
+        if (!(task.firstNames.length > 2)) {
+            insertAssignedContactsToTaskGreaterThanTwoHTML(contactContainer, task)
+        } else {
+            insertAssignedContactsToTaskLowerThanTwoHTML(contactContainer, task)
+            contactContainer.innerHTML += /*html*/ `
+                <div class="add-task-assigned-contact-overflow">+${task.firstNames.length - 2}</div>
                 `;
+        }
+    }
+}
+
+/**
+ * inserts the assigned contacts to the tasks with more than 2 assigned contacts
+ * 
+ * @param {*} contactContainer the container for the assigned contacts
+ * @param {*} task the specific task
+ */
+function insertAssignedContactsToTaskGreaterThanTwoHTML(contactContainer, task) {
+    for (let j = 0; j < task.firstNames.length; j++) {
+        let firstNameTask = task.firstNames[j];
+        let lastNameTask = task.lastNames[j];
+        for (let k = 0; k < userList.length; k++) {
+            if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                let userBackgroundColor = userList[k].backgroundColor;
+                contactContainer.innerHTML += /*html*/ `
+            <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
+            `;
+            }
+        }
+    }
+}
+
+/**
+ * inserts the assigned contacts to the tasks with less or equal than 2 assigned contacts
+ * 
+ * @param {*} contactContainer the container for the assigned contacts
+ * @param {*} task for the specific task
+ */
+function insertAssignedContactsToTaskLowerThanTwoHTML(contactContainer, task) {
+    for (let j = 0; j < 2; j++) {
+        let firstNameTask = task.firstNames[j];
+        let lastNameTask = task.lastNames[j];
+        for (let k = 0; k < userList.length; k++) {
+            if (firstNameTask == userList[k].firstName && lastNameTask == userList[k].lastName) {
+                let userBackgroundColor = userList[k].backgroundColor;
+                contactContainer.innerHTML += /*html*/ `
+            <div class="add-task-selected-contact" style="background:${userBackgroundColor};">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}</div>
+            `;
             }
         }
     }
@@ -377,8 +401,6 @@ function toggleTaskBoardTask() {
             taskDiv.classList.toggle('display-none');
         }, 100);
     }
-
-
 }
 
 /**
@@ -541,7 +563,22 @@ function insertBoardTaskSlideInAssigned(i) {
  */
 function insertBoardTaskSlideInAssignedContactsIteration(i) {
     let contactContainer = document.getElementById('boardTaskSlideInDiv');
+    insertBoardTaskSlideInAssignedContactsIterationHTML(i, contactContainer)
 
+    contactContainer.innerHTML += /*html*/ `
+        <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
+            <img src="assets/img/edit_task.svg" alt="">
+        </div>
+        `;
+}
+
+/**
+ * inserts the html part of the board-task-slide-in-assigned-contacts (iteration)
+ * 
+ * @param {*} i for the specific task
+ * @param {*} contactContainer for the contact-container
+ */
+function insertBoardTaskSlideInAssignedContactsIterationHTML(i, contactContainer) {
     for (let j = 0; j < taskList[i].firstNames.length; j++) {
         let firstNameTask = taskList[i].firstNames[j];
         let lastNameTask = taskList[i].lastNames[j];
@@ -556,11 +593,6 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
             }
         }
     }
-    contactContainer.innerHTML += /*html*/ `
-        <div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
-            <img src="assets/img/edit_task.svg" alt="">
-        </div>
-        `;
 }
 
 /**
@@ -709,21 +741,45 @@ function boardTaskSlideInInsertSubtasks(i) {
         const subtask = taskList[i].subtasks[j];
         const subtaskState = taskList[i].subtasksState[j];
         if (subtaskState == true) {
-            subtaskContainer.innerHTML += /*html*/ `
-            <div class="add-task-subtask-div">
-                <input onclick="toggleSubtaskInlist(${i}, ${j})" checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
-                <span>${subtask}</span>
-            </div>
-        `;
+            boardTaskSlideInInsertSubtasksChecked(i, j, subtaskContainer, subtask)
         } else {
-            subtaskContainer.innerHTML += /*html*/ `
-            <div class="add-task-subtask-div">
-                <input onclick="toggleSubtaskInlist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
-                <span>${subtask}</span>
-            </div>
-        `;
+            boardTaskSlideInInsertSubtasksUnChecked(i, j, subtaskContainer, subtask)
         }
     }
+}
+
+/**
+ * inserts the checked subtasks for the task-slide-in-window
+ * 
+ * @param {*} i for the specific task
+ * @param {*} j for the specific subtask
+ * @param {*} subtaskContainer for the subtask-container
+ * @param {*} subtask for the specific subtask of the specific task
+ */
+function boardTaskSlideInInsertSubtasksChecked(i, j, subtaskContainer, subtask) {
+    subtaskContainer.innerHTML += /*html*/ `
+    <div class="add-task-subtask-div">
+        <input onclick="toggleSubtaskInlist(${i}, ${j})" checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+        <span>${subtask}</span>
+    </div>
+`;
+}
+
+/**
+ * inserts the unchecked subtasks for the task-slide-in-window
+ * 
+ * @param {*} i for the specific task
+ * @param {*} j for the specific subtask
+ * @param {*} subtaskContainer for the subtask-container
+ * @param {*} subtask for the specific subtask of the specific task
+ */
+function boardTaskSlideInInsertSubtasksUnChecked(i, j, subtaskContainer, subtask) {
+    subtaskContainer.innerHTML += /*html*/ `
+    <div class="add-task-subtask-div">
+        <input onclick="toggleSubtaskInlist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+        <span>${subtask}</span>
+    </div>
+`;
 }
 
 /**

@@ -437,22 +437,31 @@ function createSubtask() {
         subtaskInput.reportValidity();
         return;
     }
-
     if (!taskClipboard.subtasks.includes(subtaskInput.value)) {
-        taskClipboard.subtasks.push(subtaskInput.value)
-        taskClipboard.subtasksState.push(false);
-        subtaskContainer.innerHTML += /*html*/ `
-            <div class="add-task-subtask-div">
-                <input onclick="addSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" name="${subtaskInput.value}" id="">
-                <span>${subtaskInput.value}</span>
-            </div>
-            `;
-        subtaskInput.value = ``;
+        createSubtaskHTML(subtaskContainer, subtaskInput);
     } else {
         subtaskInput.setCustomValidity('Subtask already exists');
         subtaskInput.reportValidity();
         return;
     }
+}
+
+/**
+ * creates the html part of the subtask
+ * 
+ * @param {*} subtaskContainer the subtask container
+ * @param {*} subtaskInput the subtask value
+ */
+function createSubtaskHTML(subtaskContainer, subtaskInput) {
+    taskClipboard.subtasks.push(subtaskInput.value)
+    taskClipboard.subtasksState.push(false);
+    subtaskContainer.innerHTML += /*html*/ `
+        <div class="add-task-subtask-div">
+            <input onclick="addSubtaskToClipboard(this)" class="add-task-subtask-checkbox" type="checkbox" name="${subtaskInput.value}" id="">
+            <span>${subtaskInput.value}</span>
+        </div>
+        `;
+    subtaskInput.value = ``;
 }
 
 /**
