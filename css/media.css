@@ -562,7 +562,8 @@
 
 @media (max-width: 716px) {
   .contact-left {
-    height: 688px;
+    height: 670px;
+    padding-top: 5rem;
   }
 
   .contact-child-div {

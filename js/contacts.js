@@ -220,7 +220,7 @@ function showEditContactsHTML(i) {
                 <img src="./assets/img/login-email.svg" alt="">
             </div>
             <div class="input-contact">
-              <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+              <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
                 <img src="./assets/img/phone.svg" alt="">
             </div>          
           </div>
@@ -313,21 +313,7 @@ function removeAddContact() {
   newContactFadeIn.classList.remove("show-left");
 }
 
-/**
- *
- * proof the validation of the addContact Formular
- */
-function validateForm() {
-  const input = document.getElementById("contactNewName");
-  const name = input.value.trim();
-  if (name.value === "" || name.value.split(" ").length < 2) {
-    input.setCustomValidity("Bitte geben Sie Ihren Vor- und Nachnamen ein.");
-    input.reportValidity();
-    return false;
-  }
-  input.setCustomValidity("");
-  return true;
-}
+
 
 /**
  *
@@ -354,7 +340,7 @@ function showAddContact() {
             </div>
             <div class="new-contact-main" >
                 <img src="./assets/img/addNewContactProfil.svg">
-                <form onsubmit="return validateForm(); addNewContact()">
+                <form onsubmit="return addNewContact(); return false;">
                     <div class="input-newContact-main">
                         <div class="input-contact">
                             <input required type="text" pattern="[A-Za-z]+" id="contactNewName" class="input-contact-name" placeholder="Name">
@@ -365,7 +351,7 @@ function showAddContact() {
                                         <img src="./assets/img/login-email.svg" alt="">
                                         </div>
                                         <div class="input-contact">
-                                            <input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
+                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                                 <img src="./assets/img/phone.svg" alt="">
                                                 </div>
                                         </div>
@@ -387,6 +373,22 @@ function showAddContact() {
   return newContactFadeIn;
 }
 
+/* *
+ *
+ * proof the validation of the addContact Formular
+ */
+/* function validateForm() {
+  const input = document.getElementById("contactNewName");
+  const name = input.value.trim();
+  if (name.value === "" || name.value.split(" ").length < 2) {
+    input.setCustomValidity("Bitte geben Sie Ihren Vor- und Nachnamen ein.");
+    input.reportValidity();
+    return false;
+  }
+  input.setCustomValidity("");
+  return true;
+}
+ */
 /**
  *
  * invite the NewContact content
@@ -396,20 +398,22 @@ function addNewContact() {
   const contactEditEmail = document.getElementById("contactNewEmail");
   const contactEditNumber = document.getElementById("contactNewNumber");
 
-  // Verify that the first and last name have been entered.
-  if (contactEditName.value === "" || contactEditName.value.split(" ").length < 2) {
-    contactEditName.setCustomValidity("Please enter your first and last name.");
+  //
+  if (contactEditName.value === "" || contactEditEmail.value === "" || contactEditNumber.value === "") {
+    contactEditName.setCustomValidity("Please enter firstname, lastname, email and phone!");
+    contactEditEmail.setCustomValidity("Please enter email!");
+    contactEditNumber.setCustomValidity("Please enter phone!");
     contactEditName.reportValidity();
-    /*return;*/
-  } if (contactEditEmail.value === "") {
-    contactEditEmail.setCustomValidity("Please enter your email.");
     contactEditEmail.reportValidity();
-    /*return;*/
-  } if (contactEditNumber.value === "") {
-    contactEditNumber.setCustomValidity("Please enter your phone number.");
     contactEditNumber.reportValidity();
-    /*return;*/
+    return false;
+
+  } 
+  
+  if (contactEditEmail.value === "" && contactEditNumber.value === "" && contactEditName.value === "") {
+    return true;
   }
+  
 
   // Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
@@ -478,12 +482,15 @@ function doNotClose() {
 }
 
 /**
- * returns a random hex color code
+ * returns a random hex color code but not white
  *
  * @returns a string representing a hex color code
  */
 function getRandomColor() {
-  let color = Math.floor(Math.random() * 16777215).toString(16);
-  const randomColor = `#${color}`;
-  return randomColor;
+  let color = "";
+  do {
+    color = Math.floor(Math.random() * 16777215).toString(16);
+  } while (color === "ffffff");
+  return `#${color}`;
 }
+
