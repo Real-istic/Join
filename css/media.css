@@ -1015,15 +1015,14 @@
 
 @media (max-width: 650px){
   .registration-upper-right-inner-container{
-    top: 90%;
+    top: 91%;
     right: 50%;
     transform: translateX(50%);
     width: 315px;
-    top: 90%;
   }
 
   .log-in-container{
-    height: 580px;
+    height: 530px;
     padding-top: 45px;
   }
 
@@ -1078,5 +1077,14 @@
 
   .log-in-container-headline{
     width: 490px !important;
+  }
+}
+
+@media (max-width: 400px){
+  .join-logo-login-new-position{
+    top: 73px;
+    left: 35px;
+    width: 46px;
+    height: 88px;
   }
 }
