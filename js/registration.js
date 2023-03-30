@@ -434,6 +434,7 @@ function returnToLoginPageCSSHTML() {
   showLogInElements();
   document.getElementById("registrationUpperRightInnerContainer").style.display = "flex";
   document.getElementById("logInContainer").innerHTML = createLogInElementsHTML();
+  addEventListenerLogInInput();
   document.getElementById("logInCommitGuestLogInSection").style.justifyContent = `space-between`;
   document.getElementById("logInRememberMeForgotPasswordSection").style.display = "flex";
   document.getElementById("forgotPasswordDescriptionContainer").style.display = "none";
@@ -458,6 +459,7 @@ function createLogInElementsHTML() {
                 <span class="forgot-password-description" id="forgotPasswordDescription">Don't worry! We will send you an email with the instructions to reset your password.</span>
             </div>
     <div class="log-in-input-container" id="logInInputContainer">
+      <form id="logInForm">
         <div class="log-in-input-field">
             <input type="email" placeholder="Email" id="logInEmail">
             <img src="./assets/img/login-email.svg">
@@ -466,6 +468,7 @@ function createLogInElementsHTML() {
             <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
             <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility('Zero')">
         </div>
+      </form>  
         <div class="wrong-password-container" id="wrongPasswordContainer"></div>
     </div>
     <div class="log-in-remember-me-forgot-password-section" id="logInRememberMeForgotPasswordSection">
@@ -710,4 +713,16 @@ function logOut() {
  */
 function closeLogout() {
   document.getElementById("logOutBackground").style.display = "none";
+}
+
+
+function addEventListenerLogInInput(){
+let logInForm = document.getElementById('logInForm');
+
+  logInForm.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      logIn(); 
+  }
+});
 }

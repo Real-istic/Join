@@ -25,6 +25,7 @@ function initChangePassword(){
 function initRegistrationPageHTML(){
     document.body.innerHTML = returnRegistrationPageHTML();
     document.getElementById("logInContainer").innerHTML = createLogInElementsHTML();
+    addEventListenerLogInInput();
 }
 
 function returnRegistrationPageHTML(){

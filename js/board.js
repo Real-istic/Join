@@ -189,7 +189,6 @@ function addTaskFillSlideInMenu() {
 function toggleAddTaskMenuOffScreen() {
     let slideInMenu = document.getElementById('addTaskSlideInMenu');
     slideInMenu.classList.toggle('transform-x-off-screen');
-    // slideInMenu.style.toggle('display: none;')
     let opacityDiv = document.getElementById('reduceOpacity');
     opacityDiv.classList.toggle('reduce-opacity');
 }

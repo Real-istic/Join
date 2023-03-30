@@ -126,7 +126,7 @@ function summaryTopHTML() {
  */
 function summaryBottomHTML() {
     return /*html*/ `
-    <div class="task-box-deadline">
+    <div class="task-box-deadline" onclick="insertBoard()">
         <div class="task-box-deadline-left">
             <div class="task-picture-and-count">
                 <img src="assets/img/tasksurgent.svg" alt="">
@@ -145,7 +145,7 @@ function summaryBottomHTML() {
             </div>
         </div>
     </div>
-    <div class="task-box-to-do" id="taskBoxToDo">
+    <div class="task-box-to-do" id="taskBoxToDo" onclick="insertBoard()">
         <div class="task-picture-and-count">
             <img src="assets/img/taskstodo.svg" alt="">
             <span class="task-number" id="toDoAmount"></span>
@@ -154,7 +154,7 @@ function summaryBottomHTML() {
             Tasks <br> To-do
         </span>
     </div>
-    <div class="task-box" id="taskBoxTaskInBoard">
+    <div class="task-box" id="taskBoxTaskInBoard" onclick="insertBoard()">
         <div class="task-picture-and-count">
             <img src="assets/img/tasksinboard.svg" alt="">
             <span class="task-number">${taskList.length}</span>
@@ -163,7 +163,7 @@ function summaryBottomHTML() {
             Tasks in <br> Board
         </span>
     </div>
-    <div class="task-box" id="taskBoxTaskInProgress">
+    <div class="task-box" id="taskBoxTaskInProgress" onclick="insertBoard()">
         <div class="task-picture-and-count">
             <img src="assets/img/tasksinprogress.svg" alt="">
             <span class="task-number" id="inProgressAmount"></span>
@@ -172,7 +172,7 @@ function summaryBottomHTML() {
             Tasks in <br> Progress
         </span>
     </div>
-    <div class="task-box" id="TaskBoxAwaitingFeedback">
+    <div class="task-box" id="TaskBoxAwaitingFeedback" onclick="insertBoard()">
         <div class="task-picture-and-count">
             <img src="assets/img/tasksawaitingfeedback.svg" alt="">
             <span class="task-number" id="awaitFeedbackAmount"></span>
@@ -181,7 +181,7 @@ function summaryBottomHTML() {
             Awaiting <br> Feedback
         </span>
     </div>
-    <div class="task-box" id="TaskBoxTaskDone">
+    <div class="task-box" id="TaskBoxTaskDone" onclick="insertBoard()">
         <div class="task-picture-and-count">
             <img src="assets/img/tasksdone.svg" alt="">
             <span class="task-number" id="doneAmount"></span>
