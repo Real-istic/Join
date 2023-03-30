@@ -794,9 +794,22 @@
     top: 3rem;
     cursor: pointer;
   }
+
+  .privacy{
+    font-size: 13px;
+  }
+
+  .privacy_steam{
+    font-size: 29px;
+  }
 }
 
 @media (max-width: 440px) {
+
+  .privacy_steam{
+    font-size: 24px;
+  }
+
   .contact-left {
     height: 690px;
     top: 80px;

@@ -15,8 +15,8 @@ function insertPrivacy() {
  */
 function privacyHTML() {
     return /*html*/`
-<div>
-    <h2>Datenschutzerklärung</h2>
+<div class="privacy">
+    <h2 class="privacy_steam">Datenschutzerklärung</h2>
     <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
     <p>Daniel Bergmann</p>
     <h3>Ihre Betroffenenrechte</h3>
