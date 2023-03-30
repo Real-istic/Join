@@ -570,6 +570,7 @@ function insertBoardTaskSlideInAssignedContactsIteration(i) {
  */
 function boardTaskSlideInEditTask(i) {
     pushBoardTaskToClipboard(i)
+    document.getElementById('addTaskSlideInMenu').innerHTML = ``;
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
     slideInTask.innerHTML = /*html*/ `
     <div class="board-task-slide-in-edit-div">
