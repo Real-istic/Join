@@ -468,7 +468,7 @@ function pushEditedTaskTolist(i) {
     taskList[i].dueDate = document.getElementById('addTaskInputDate').value;
     taskList[i].category = taskClipboard.category
     taskList[i].categoryColor = taskClipboard.categoryColor
-    pushPriorityToTaskClipboard()
+    taskList[i].priority = taskClipboard.priority
     taskList[i].description = document.getElementById('addTaskDescription').value
     taskList[i].subtasks = taskClipboard.subtasks
     taskList[i].subtasksState = taskClipboard.subtasksState
