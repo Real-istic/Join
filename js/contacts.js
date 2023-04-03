@@ -3,7 +3,7 @@
  * Call the contacts-page
  */
 function insertContacts() {
-  markActiveNavElement('contacts');
+  markActiveNavElement("contacts");
   removeHelp();
   insertContentHTML();
   addTaskFillSlideInMenu();
@@ -105,7 +105,7 @@ function renderUserList() {
 
 /**
  * Call the renderContactSideScroll content and add show class for fade in from right
- * 
+ *
  * @param {number} i The index of the user in the userList
  * */
 function contactRightSide(i) {
@@ -176,16 +176,16 @@ function editContact(i) {
  * show the editContact content
  * @param {number} i The index of the user in the userList
  */
-  function showEditContacts() {
-    const editContactFadeIn = document.getElementById("contact-left-fadeIn");
-    const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
-    editContactFadeInBg.classList.add("show-left");
-    editContactFadeIn.classList.add("show-left");
-   }
+function showEditContacts() {
+  const editContactFadeIn = document.getElementById("contact-left-fadeIn");
+  const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
+  editContactFadeInBg.classList.add("show-left");
+  editContactFadeIn.classList.add("show-left");
+}
 
 /**
  * show the editContact HMTMLcontent
- * 
+ *
  */
 function showEditContactsHTML(i) {
   const firstNameLetter = userList[i].firstName.charAt(0);
@@ -209,7 +209,7 @@ function showEditContactsHTML(i) {
         <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
           <p>${contactNameLetter}</p>
         </div>
-        <form onsubmit="invEditContact(${i}); return false">
+        <form onsubmit="event.preventDefault(); invEditContact(${i});">
           <div class="input-contact-main">
             <div class="input-contact">
               <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
@@ -225,55 +225,79 @@ function showEditContactsHTML(i) {
             </div>          
           </div>
             <div class="button-container">
-              <button class="button-create">Save</button>
+            <button class="button-create" type="submit">Save</button>
             </div>
         </form>
     </div>
   </div>`;
-return editContactFadeIn;
+  return editContactFadeIn;
 }
 
-/**
- *
- * invite the editContact content
- */
 function invEditContact(index) {
-  const contactEditName = document.getElementById("contactEditName").value;
-  const contactEditEmail = document.getElementById("contactEditEmail").value;
-  const contactEditNumber = document.getElementById("contactEditNumber").value;
+  const contactEditName = document.getElementById("contactEditName");
+  const contactEditEmail = document.getElementById("contactEditEmail");
+  const contactEditNumber = document.getElementById("contactEditNumber");
+
+  // Remove custom validity messages (if previously set)
+  contactEditName.setCustomValidity("");
+  contactEditEmail.setCustomValidity("");
+  contactEditNumber.setCustomValidity("");
+
+  // Check if the form is valid
+  //if (!contactEditName.checkValidity() || !contactEditEmail.checkValidity() || !contactEditNumber.checkValidity()) {
+  // return false;
+  if (
+    contactEditName.value === "" ||
+    contactEditEmail.value === "" ||
+    contactEditNumber.value === ""
+  ) {
+    contactEditName.setCustomValidity(
+      "Please enter firstname, lastname, email and phone!"
+    );
+    contactEditEmail.setCustomValidity("Please enter email!");
+    contactEditNumber.setCustomValidity("Please enter phone!");
+    contactEditName.reportValidity();
+    contactEditEmail.reportValidity();
+    contactEditNumber.reportValidity();
+    return false;
+  }
 
   // Save changes in the userList
-  userList[index].firstName = contactEditName.split(" ")[0];
-  userList[index].lastName = contactEditName.split(" ")[1];
-  userList[index].email = contactEditEmail;
-  userList[index].phoneNumber = contactEditNumber;
+  userList[index].firstName = contactEditName.value.split(" ")[0];
+  userList[index].lastName = contactEditName.value.split(" ")[1];
+  userList[index].email = contactEditEmail.value;
+  userList[index].phoneNumber = contactEditNumber.value;
 
   // Update user data
   const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
+  const contactDetailBigLetter = document.querySelector(
+    ".contact-detail-big-letter"
+  );
   contactDetailBigLetter.textContent = contactNameLetter;
-  const contactDetailBigName = document.querySelector(".contact-detail-big-name");
+  const contactDetailBigName = document.querySelector(
+    ".contact-detail-big-name"
+  );
   contactDetailBigName.textContent = contactName;
 
-hideEditContacts();
-saveEditContact(userList);
-insertContacts();
-initbackend();
+  hideEditContacts();
+  saveEditContact(userList);
+  insertContacts();
+  initbackend();
 }
 
-/**
+/*
  * Hide the editContact content
  * @param {number} i The index of the user in the userList
  */
-  function hideEditContacts() {
-    const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
-    const editContactFadeIn = document.getElementById("contact-left-fadeIn");
-    editContactFadeInBg.classList.remove("show-left");
-    editContactFadeIn.classList.remove("show-left");
-  }
+function hideEditContacts() {
+  const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
+  const editContactFadeIn = document.getElementById("contact-left-fadeIn");
+  editContactFadeInBg.classList.remove("show-left");
+  editContactFadeIn.classList.remove("show-left");
+}
 
 /**
  *
@@ -312,8 +336,6 @@ function removeAddContact() {
   let newContactFadeIn = document.getElementById("contact-left-fadeIn");
   newContactFadeIn.classList.remove("show-left");
 }
-
-
 
 /**
  *
@@ -373,47 +395,35 @@ function showAddContact() {
   return newContactFadeIn;
 }
 
-/* *
- *
- * proof the validation of the addContact Formular
- */
-/* function validateForm() {
-  const input = document.getElementById("contactNewName");
-  const name = input.value.trim();
-  if (name.value === "" || name.value.split(" ").length < 2) {
-    input.setCustomValidity("Bitte geben Sie Ihren Vor- und Nachnamen ein.");
-    input.reportValidity();
-    return false;
-  }
-  input.setCustomValidity("");
-  return true;
-}
- */
-/**
- *
- * invite the NewContact content
- */
 function addNewContact() {
   const contactEditName = document.getElementById("contactNewName");
   const contactEditEmail = document.getElementById("contactNewEmail");
   const contactEditNumber = document.getElementById("contactNewNumber");
 
   //
-  if (contactEditName.value === "" || contactEditEmail.value === "" || contactEditNumber.value === "") {
-    contactEditName.setCustomValidity("Please enter firstname, lastname, email and phone!");
+  if (
+    contactEditName.value === "" ||
+    contactEditEmail.value === "" ||
+    contactEditNumber.value === ""
+  ) {
+    contactEditName.setCustomValidity(
+      "Please enter firstname, lastname, email and phone!"
+    );
     contactEditEmail.setCustomValidity("Please enter email!");
     contactEditNumber.setCustomValidity("Please enter phone!");
     contactEditName.reportValidity();
     contactEditEmail.reportValidity();
     contactEditNumber.reportValidity();
     return false;
+  }
 
-  } 
-  
-  if (contactEditEmail.value === "" && contactEditNumber.value === "" && contactEditName.value === "") {
+  if (
+    contactEditEmail.value === "" &&
+    contactEditNumber.value === "" &&
+    contactEditName.value === ""
+  ) {
     return true;
   }
-  
 
   // Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
@@ -436,21 +446,19 @@ function addNewContact() {
 
 /**
  * show new contact created message
- * 
+ *
  */
 function showNewContactMessage() {
-  
   if (document.getElementById("newContactCreated")) {
     const newContactMessage = document.getElementById("newContactCreated");
-    
+
     newContactMessage.classList.add("showNewContactFadeIn");
     setTimeout(() => {
       newContactMessage.classList.remove("showNewContactFadeIn");
     }, 3000);
   }
-  
-}  
- 
+}
+
 /**
  *
  * Load the editContact content
@@ -467,7 +475,7 @@ async function loadEditContact() {
  */
 function hideEditContacts() {
   bgHideRemove();
-  removeAddContact()
+  removeAddContact();
 }
 
 /**
@@ -487,9 +495,16 @@ function doNotClose() {
  * @returns a string representing a hex color code
  */
 function getRandomColor() {
-  const colors = ["#F8D030", "#78C850", "#3899E6", "#E0306A", "#007030", "#1C6BA0", "#64C8F0", "#FF9BCB"];
+  const colors = [
+    "#F8D030",
+    "#78C850",
+    "#3899E6",
+    "#E0306A",
+    "#007030",
+    "#1C6BA0",
+    "#64C8F0",
+    "#FF9BCB",
+  ];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
-
-

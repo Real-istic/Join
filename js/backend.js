@@ -109,8 +109,8 @@ async function restoreBackend() {
         },
         {
             "firstName": "Falk",
-            "lastName": "Müller",
-            "email": "falk.müller@example.com",
+            "lastName": "Mahn",
+            "email": "falk.mahn@example.com",
             "phoneNumber": "0123454799",
             "password": "trustno1",
             "backgroundColor": "#FFA723"
@@ -133,8 +133,8 @@ async function restoreBackend() {
         },
         {
             "firstName": "Lena",
-            "lastName": "Müller",
-            "email": "lena.mueller@example.com",
+            "lastName": "Miller",
+            "email": "lena.miller@example.com",
             "phoneNumber": "0123456790",
             "password": "qwerty",
             "backgroundColor": "#FF5733"
