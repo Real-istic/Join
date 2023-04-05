@@ -220,7 +220,7 @@ function showEditContactsHTML(i) {
                 <img src="./assets/img/login-email.svg" alt="">
             </div>
             <div class="input-contact">
-              <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+              <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
                 <img src="./assets/img/phone.svg" alt="">
             </div>          
           </div>
@@ -373,7 +373,7 @@ function showAddContact() {
                                         <img src="./assets/img/login-email.svg" alt="">
                                         </div>
                                         <div class="input-contact">
-                                            <input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
+                                            <input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                                 <img src="./assets/img/phone.svg" alt="">
                                                 </div>
                                         </div>
