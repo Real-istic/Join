@@ -164,6 +164,7 @@
     height: unset;
     padding: 30px;
     overflow-x: hidden;
+    z-index: 2;
   }
 
   .board-task-slide-in-title {
