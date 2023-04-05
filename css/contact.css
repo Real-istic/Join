@@ -155,19 +155,16 @@ element.style {
 
 .contact-main {
   position: absolute;
-  top: 40px;
   left: 60px;
 }
 
 .contact-left {
-  padding-right: 57px;
   background-color: #ffffff;
   position: fixed;
-  height: 89%;
-  top: 100px;
-  border-radius: 0px;
+  height: 100%;
   overflow-y: auto;
   box-shadow: 4px 0px 6px 0px #00000014;
+  min-width: 358px;
 }
 
 .contact-left::-webkit-scrollbar {
@@ -230,6 +227,7 @@ element.style {
   height: 110px;
   width: 340px;
   cursor: pointer;
+  margin-right: 8px;
 }
 
 .contact-child-div:hover {
