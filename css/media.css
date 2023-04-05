@@ -543,10 +543,6 @@
     right: -24rem;
   }
 
-  .contact-child-div {
-    padding-left: 7px;
-    width: 303px;
-  }
 }
 
 @media (max-width: 744px) {
@@ -558,10 +554,6 @@
 @media (max-width: 716px) {
   .contact-left {
     height: calc(100% - 180px);
-  }
-
-  .contact-child-div {
-    padding-left: 1px;
   }
 
   .contact-letter {
