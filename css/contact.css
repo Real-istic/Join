@@ -161,7 +161,7 @@ element.style {
 .contact-left {
   background-color: #ffffff;
   position: fixed;
-  height: 100%;
+  height: calc(100% - 100px);
   overflow-y: auto;
   box-shadow: 4px 0px 6px 0px #00000014;
   min-width: 358px;
