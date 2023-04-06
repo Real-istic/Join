@@ -620,6 +620,7 @@ element.style {
   letter-spacing: 0em;
   text-align: left;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .button-create:hover {
