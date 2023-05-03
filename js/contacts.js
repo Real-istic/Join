@@ -2,7 +2,7 @@
  *
  * Call the contacts-page
  */
-function insertContacts() {
+ function insertContacts() {
   markActiveNavElement("contacts");
   removeHelp();
   insertContentHTML();
@@ -11,59 +11,59 @@ function insertContacts() {
 }
 
 /**
- *
- * remove classlist of ID help
- */
+*
+* remove classlist of ID help
+*/
 function removeHelp() {
   document.getElementById("help").classList.remove("help-none");
 }
 
 /**
- * Renders the contacts content
- * @returns The HTML part
- * */
+* Renders the contacts content
+* @returns The HTML part
+* */
 function insertContentHTML() {
   contentDiv.innerHTML = /*html*/ `
-      ${addTaskSlideInMenu()}
-      <div class="contact-main">
-        <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg"></div>
-        <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
-            <div class="contact-left">${renderUserList()}</div>
-            <div class="contact-right" id="contact-right"></div>
-      </div>
-        <div class="new-contact-button" onclick="openNewContact()">New contact
-        <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
-      </div>
-      <div class="newContactCreated" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
+    ${addTaskSlideInMenu()}
+    <div class="contact-main">
+      <div class="contact-left-fadeIn-bg" id="contact-left-fadeIn-bg"></div>
+      <div class="contact-left-fadeIn" id="contact-left-fadeIn"></div>
+          <div class="contact-left">${renderUserList()}</div>
+          <div class="contact-right" id="contact-right"></div>
+    </div>
+      <div class="new-contact-button" onclick="openNewContact()">New contact
+      <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
+    </div>
+    <div class="newContactCreated" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
 }
 
 /**
- *
- * Call an event on editContact content
- */
+*
+* Call an event on editContact content
+*/
 function eventOnEditContact() {
   const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeInBg.addEventListener("click", function () {
-    editContactFadeInBg.classList.remove("show-left");
-    editContactFadeIn.classList.remove("show-left");
+      editContactFadeInBg.classList.remove("show-left");
+      editContactFadeIn.classList.remove("show-left");
   });
 }
 
 /**
- * Renders the contacts content with a sort the list of initial letters alphabetically
- * @returns The HTML part
- */
+* Renders the contacts content with a sort the list of initial letters alphabetically
+* @returns The HTML part
+*/
 function renderUserList() {
   let userListHTML = "";
   let initialLetters = [];
 
   // get a list of initial letters for all first names
   for (let h = 0; h < userList.length; h++) {
-    const firstNameLetter = userList[h].firstName.charAt(0);
-    if (!initialLetters.includes(firstNameLetter)) {
-      initialLetters.push(firstNameLetter);
-    }
+      const firstNameLetter = userList[h].firstName.charAt(0);
+      if (!initialLetters.includes(firstNameLetter)) {
+          initialLetters.push(firstNameLetter);
+      }
   }
 
   // sort the list of initial letters alphabetically
@@ -71,43 +71,43 @@ function renderUserList() {
 
   // create a list of users for each initial letter
   for (let x = 0; x < initialLetters.length; x++) {
-    const initialLetter = initialLetters[x];
-    let usersForLetterHTML = "";
+      const initialLetter = initialLetters[x];
+      let usersForLetterHTML = "";
 
-    for (let i = 0; i < userList.length; i++) {
-      const firstNameLetter = userList[i].firstName.charAt(0);
-      const lastNameLetter = userList[i].lastName.charAt(0);
-      const contactName = userList[i].firstName + " " + userList[i].lastName;
+      for (let i = 0; i < userList.length; i++) {
+          const firstNameLetter = userList[i].firstName.charAt(0);
+          const lastNameLetter = userList[i].lastName.charAt(0);
+          const contactName = userList[i].firstName + " " + userList[i].lastName;
 
-      if (firstNameLetter === initialLetter && userList[i].lastName !== "") {
-        usersForLetterHTML += /*html*/ `
-        <div class="contact-child-div" onclick ="contactRightSide(${i})">
-          <div class="contact-child-div">
-            <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-child">
-              <p>${firstNameLetter}${lastNameLetter}</p>
-            </div>
-            <div>
-              <p class="contact-name">${contactName}</p>
-              <p class="contact-email">${userList[i].email}</p>
-            </div>
+          if (firstNameLetter === initialLetter && userList[i].lastName !== "") {
+              usersForLetterHTML += /*html*/ `
+      <div class="contact-child-div" onclick ="contactRightSide(${i})">
+        <div class="contact-child-div">
+          <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-child">
+            <p>${firstNameLetter}${lastNameLetter}</p>
           </div>
-        </div>`;
-      }
-    }
-    userListHTML += /*html*/ `
-      <div class="contact-letter-main" >
-        <h4 class="contact-letter">${initialLetter}</h4>
-        ${usersForLetterHTML}
+          <div>
+            <p class="contact-name">${contactName}</p>
+            <p class="contact-email">${userList[i].email}</p>
+          </div>
+        </div>
       </div>`;
+          }
+      }
+      userListHTML += /*html*/ `
+    <div class="contact-letter-main" >
+      <h4 class="contact-letter">${initialLetter}</h4>
+      ${usersForLetterHTML}
+    </div>`;
   }
   return userListHTML;
 }
 
 /**
- * Call the renderContactSideScroll content and add show class for fade in from right
- *
- * @param {number} i The index of the user in the userList
- * */
+* Call the renderContactSideScroll content and add show class for fade in from right
+*
+* @param {number} i The index of the user in the userList
+* */
 function contactRightSide(i) {
   let rightSide = document.getElementById("contact-right");
   rightSide.classList.add("show");
@@ -115,10 +115,10 @@ function contactRightSide(i) {
 }
 
 /**
- * Renders the contactSideScroll content
- *
- * @returns The HTML part
- */
+* Renders the contactSideScroll content
+*
+* @returns The HTML part
+*/
 function renderContactSideScroll(i) {
   let ContactSideScrollHTML;
   const firstNameLetter = userList[i].firstName.charAt(0);
@@ -127,55 +127,55 @@ function renderContactSideScroll(i) {
   const contactName = userList[i].firstName + " " + userList[i].lastName;
 
   ContactSideScrollHTML = /*html*/ `
-    <div class="contact-right-side">
-      <div class="show-contact">
-        <div onclick="insertContacts()">
-          <img class="help-arrow-edit" src="assets/img/help-arrow.svg" alt="">
-        </div>
-        <div id="contactdetails">
-          <div class="contact-detail-main-side" id="0">
-          </div>        
-          <div class="contact-detail-head">
-            <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-big-letter">${contactNameLetter}</div>
-              <div class="contact-detail-name-task">
-                <p class="contact-detail-big-name">${contactName}</p>
-                <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
-              </div>
+  <div class="contact-right-side">
+    <div class="show-contact">
+      <div onclick="insertContacts()">
+        <img class="help-arrow-edit" src="assets/img/help-arrow.svg" alt="">
+      </div>
+      <div id="contactdetails">
+        <div class="contact-detail-main-side" id="0">
+        </div>        
+        <div class="contact-detail-head">
+          <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-big-letter">${contactNameLetter}</div>
+            <div class="contact-detail-name-task">
+              <p class="contact-detail-big-name">${contactName}</p>
+              <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
             </div>
           </div>
-          <div class="contact-detail-info-main">
-            <p class="contact-detail-info">Contact Information</p>
-            <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""><span class="edit-contact-text"> Edit Contact</span></p>
-            <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-img-contact" src="./assets/img/pen.svg" alt=""></p>
-          </div>              
-          <div>
-            <p class="contact-detail-email-number">Email</p>
-            <a href="mailto:${userList[i].email}"><span>${userList[i].email}</span></a>
-          </div>
-          <div>
-            <p class="contact-detail-email-number">Mobile</p>
-            <p>${userList[i].phoneNumber}</p> 
-          </div>
+        </div>
+        <div class="contact-detail-info-main">
+          <p class="contact-detail-info">Contact Information</p>
+          <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-contact" src="./assets/img/edit-contact.svg" alt=""><span class="edit-contact-text"> Edit Contact</span></p>
+          <p class="contact-detail-edit" onclick="editContact(${i})"><img class="icon-edit-img-contact" src="./assets/img/pen.svg" alt=""></p>
+        </div>              
+        <div>
+          <p class="contact-detail-email-number">Email</p>
+          <a href="mailto:${userList[i].email}"><span>${userList[i].email}</span></a>
+        </div>
+        <div>
+          <p class="contact-detail-email-number">Mobile</p>
+          <p>${userList[i].phoneNumber}</p> 
         </div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
   return ContactSideScrollHTML;
 }
 
 /**
- * Call the editContact content
- *
- * @param {number} i The index of the user in the userList
- */
+* Call the editContact content
+*
+* @param {number} i The index of the user in the userList
+*/
 function editContact(i) {
   showEditContacts();
   showEditContactsHTML(i);
 }
 
 /**
- * show the editContact content
- * @param {number} i The index of the user in the userList
- */
+* show the editContact content
+* @param {number} i The index of the user in the userList
+*/
 function showEditContacts() {
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
@@ -184,52 +184,52 @@ function showEditContacts() {
 }
 
 /**
- * show the editContact HMTMLcontent
- *
- */
+* show the editContact HMTMLcontent
+*
+*/
 function showEditContactsHTML(i) {
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeIn.innerHTML = /*html*/ `
-  <div class="edit-contact">
-    <div class="edit-contact-head">
-      <div class="edit-contact-cross">
-        <img class="img-cross" src="./assets/img/theCross.svg" onclick="hideEditContacts()" alt="">
-      </div>
-
-      <div class="edit-contact-header-info">
-        <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
-          <div class="edit-contact-h">Edit contact</div>
-          <div class="edit-contact-text-edit">Tasks are better with a team!</div>                   
-        </div>
-      </div>
-      <div class="edit-contact-main">
-        <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
-          <p>${contactNameLetter}</p>
-        </div>
-        <form onsubmit="event.preventDefault(); invEditContact(${i});">
-          <div class="input-contact-main">
-            <div class="input-contact">
-              <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
-              <img src="./assets/img/signup-user.svg" alt="">
-            </div>
-            <div class="input-contact">
-              <input required type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
-                <img src="./assets/img/login-email.svg" alt="">
-            </div>
-            <div class="input-contact">
-              <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
-                <img src="./assets/img/phone.svg" alt="">
-            </div>          
-          </div>
-            <div class="button-container">
-            <button class="button-create" type="submit">Save</button>
-            </div>
-        </form>
+<div class="edit-contact">
+  <div class="edit-contact-head">
+    <div class="edit-contact-cross">
+      <img class="img-cross" src="./assets/img/theCross.svg" onclick="hideEditContacts()" alt="">
     </div>
-  </div>`;
+
+    <div class="edit-contact-header-info">
+      <div><img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt=""></div>
+        <div class="edit-contact-h">Edit contact</div>
+        <div class="edit-contact-text-edit">Tasks are better with a team!</div>                   
+      </div>
+    </div>
+    <div class="edit-contact-main">
+      <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
+        <p>${contactNameLetter}</p>
+      </div>
+      <form onsubmit="event.preventDefault(); invEditContact(${i});">
+        <div class="input-contact-main">
+          <div class="input-contact">
+            <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
+            <img src="./assets/img/signup-user.svg" alt="">
+          </div>
+          <div class="input-contact">
+            <input required type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
+              <img src="./assets/img/login-email.svg" alt="">
+          </div>
+          <div class="input-contact">
+            <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
+              <img src="./assets/img/phone.svg" alt="">
+          </div>          
+        </div>
+          <div class="button-container">
+          <button class="button-create" type="submit">Save</button>
+          </div>
+      </form>
+  </div>
+</div>`;
   return editContactFadeIn;
 }
 
@@ -246,20 +246,14 @@ function invEditContact(index) {
   // Check if the form is valid
   //if (!contactEditName.checkValidity() || !contactEditEmail.checkValidity() || !contactEditNumber.checkValidity()) {
   // return false;
-  if (
-    contactEditName.value === "" ||
-    contactEditEmail.value === "" ||
-    contactEditNumber.value === ""
-  ) {
-    contactEditName.setCustomValidity(
-      "Please enter firstname, lastname, email and phone!"
-    );
-    contactEditEmail.setCustomValidity("Please enter email!");
-    contactEditNumber.setCustomValidity("Please enter phone!");
-    contactEditName.reportValidity();
-    contactEditEmail.reportValidity();
-    contactEditNumber.reportValidity();
-    return false;
+  if (contactEditName.value === "" || contactEditEmail.value === "" || contactEditNumber.value === "") {
+      contactEditName.setCustomValidity("Please enter firstname, lastname, email and phone!");
+      contactEditEmail.setCustomValidity("Please enter email!");
+      contactEditNumber.setCustomValidity("Please enter phone!");
+      contactEditName.reportValidity();
+      contactEditEmail.reportValidity();
+      contactEditNumber.reportValidity();
+      return false;
   }
 
   // Save changes in the userList
@@ -273,13 +267,9 @@ function invEditContact(index) {
   const firstNameLetter = userList[index].firstName.charAt(0);
   const lastNameLetter = userList[index].lastName.charAt(0);
   const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactDetailBigLetter = document.querySelector(
-    ".contact-detail-big-letter"
-  );
+  const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
   contactDetailBigLetter.textContent = contactNameLetter;
-  const contactDetailBigName = document.querySelector(
-    ".contact-detail-big-name"
-  );
+  const contactDetailBigName = document.querySelector(".contact-detail-big-name");
   contactDetailBigName.textContent = contactName;
 
   hideEditContacts();
@@ -289,9 +279,9 @@ function invEditContact(index) {
 }
 
 /*
- * Hide the editContact content
- * @param {number} i The index of the user in the userList
- */
+* Hide the editContact content
+* @param {number} i The index of the user in the userList
+*/
 function hideEditContacts() {
   const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
@@ -300,28 +290,28 @@ function hideEditContacts() {
 }
 
 /**
- *
- * Call the newContact content
- */
+*
+* Call the newContact content
+*/
 function openNewContact() {
   for (let i = 0; i < userList.length; i++) {
-    showAddContact();
+      showAddContact();
   }
 }
 
 /**
- *
- * Hide the content in gray background
- */
+*
+* Hide the content in gray background
+*/
 function bgHide() {
   const bgHide = document.getElementById("contact-left-fadeIn-bg");
   bgHide.classList.add("show-left");
 }
 
 /**
- *
- * remove the gray background from content
- */
+*
+* remove the gray background from content
+*/
 function bgHideRemove() {
   removeAddContact();
   const bgHideRemove = document.getElementById("contact-left-fadeIn-bg");
@@ -329,69 +319,69 @@ function bgHideRemove() {
 }
 
 /**
- *
- *  remove the Add contact content from the left Side
- */
+*
+*  remove the Add contact content from the left Side
+*/
 function removeAddContact() {
   let newContactFadeIn = document.getElementById("contact-left-fadeIn");
   newContactFadeIn.classList.remove("show-left");
 }
 
 /**
- *
- * show the Add contact content from the left Side
- */
+*
+* show the Add contact content from the left Side
+*/
 function showAddContact() {
   bgHide();
   let newContactFadeIn = document.getElementById("contact-left-fadeIn");
   newContactFadeIn.classList.add("show-left");
   newContactFadeIn.innerHTML = /*html*/ `
 
-    <div class="new-contact">
-    <div class="new-contact-head">
-        <div class="new-contact-cross">
-            <img class="img-cross" src="./assets/img/theCross.svg" onclick="bgHideRemove()" alt="">
-        </div>
-        <div class="new-contact-header-info">
-            <div>
-                <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
-            </div>
-            <div class="new-contact-h">Add contact</div>
-            <div class="add-contact-text">
-                Tasks are better with a team!
-            </div>
-            <div class="new-contact-main" >
-                <img src="./assets/img/addNewContactProfil.svg">
-                <form onsubmit="return addNewContact(); return false;">
-                    <div class="input-newContact-main">
-                        <div class="input-contact">
-                            <input required type="text" pattern="[A-Za-z]+" id="contactNewName" class="input-contact-name" placeholder="Name">
-                                <img src="./assets/img/signup-user.svg" alt="">
-                                </div>
-                                <div class="input-contact">
-                                    <input required="" type="email" id="contactNewEmail" class="input-contact-email" placeholder="Email">
-                                        <img src="./assets/img/login-email.svg" alt="">
-                                        </div>
-                                        <div class="input-contact">
-                                            <input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
-                                                <img src="./assets/img/phone.svg" alt="">
-                                                </div>
-                                        </div>
-                                        <div class="button-container">
-                                            <button class="button-cancel" onclick="bgHideRemove()">Cancel
-                                                <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-                                            </button>
-                                            <button class="button-create" onclick="addNewContact()">
-                                                Create contact
-                                                <img class="create-contact" src="./assets/img/akar-icons_check.svg" alt=""></button>
-                                        </div>
-                                </div>
-                        </div>
-                    </div>
-                </form>   
-        `;
+  <div class="new-contact">
+  <div class="new-contact-head">
+      <div class="new-contact-cross">
+          <img class="img-cross" src="./assets/img/theCross.svg" onclick="bgHideRemove()" alt="">
+      </div>
+      <div class="new-contact-header-info">
+          <div>
+              <img class="img-edit-contact" src="./assets/img/headerjoinlogo.svg" alt="">
+          </div>
+          <div class="new-contact-h">Add contact</div>
+          <div class="add-contact-text">
+              Tasks are better with a team!
+          </div>
+          <div class="new-contact-main" >
+              <img src="./assets/img/addNewContactProfil.svg">
+              <form onsubmit="return addNewContact(); return false;">
+                  <div class="input-newContact-main">
+                      <div class="input-contact">
+                          <input required type="text" pattern="[A-Za-z]+" id="contactNewName" class="input-contact-name" placeholder="Name">
+                              <img src="./assets/img/signup-user.svg" alt="">
+                              </div>
+                              <div class="input-contact">
+                                  <input required="" type="email" id="contactNewEmail" class="input-contact-email" placeholder="Email">
+                                      <img src="./assets/img/login-email.svg" alt="">
+                                      </div>
+                                      <div class="input-contact">
+                                          <input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
+                                              <img src="./assets/img/phone.svg" alt="">
+                                              </div>
+                                      </div>
+                                      <div class="button-container">
+                                          <button class="button-cancel" onclick="bgHideRemove()">Cancel
+                                              <svg width="14" height="13" viewBox="0 0 14 13" fill="blue" xmlns="http://www.w3.org/2000/svg">
+                                                  <path d="M7.00106 6.50008L12.2441 11.7431M1.75806 11.7431L7.00106 6.50008L1.75806 11.7431ZM12.2441 1.25708L7.00006 6.50008L12.2441 1.25708ZM7.00006 6.50008L1.75806 1.25708L7.00006 6.50008Z" stroke="#647188" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                              </svg>
+                                          </button>
+                                          <button class="button-create" onclick="addNewContact()">
+                                              Create contact
+                                              <img class="create-contact" src="./assets/img/akar-icons_check.svg" alt=""></button>
+                                      </div>
+                              </div>
+                      </div>
+                  </div>
+              </form>   
+      `;
   return newContactFadeIn;
 }
 
@@ -400,29 +390,18 @@ function addNewContact() {
   const contactEditEmail = document.getElementById("contactNewEmail");
   const contactEditNumber = document.getElementById("contactNewNumber");
 
-  //
-  if (
-    contactEditName.value === "" ||
-    contactEditEmail.value === "" ||
-    contactEditNumber.value === ""
-  ) {
-    contactEditName.setCustomValidity(
-      "Please enter firstname, lastname, email and phone!"
-    );
-    contactEditEmail.setCustomValidity("Please enter email!");
-    contactEditNumber.setCustomValidity("Please enter phone!");
-    contactEditName.reportValidity();
-    contactEditEmail.reportValidity();
-    contactEditNumber.reportValidity();
-    return false;
+  if (contactEditName.value === "" || contactEditEmail.value === "" || contactEditNumber.value === "") {
+      contactEditName.setCustomValidity("Please enter firstname, lastname, email and phone!");
+      contactEditEmail.setCustomValidity("Please enter email!");
+      contactEditNumber.setCustomValidity("Please enter phone!");
+      contactEditName.reportValidity();
+      contactEditEmail.reportValidity();
+      contactEditNumber.reportValidity();
+      return false;
   }
 
-  if (
-    contactEditEmail.value === "" &&
-    contactEditNumber.value === "" &&
-    contactEditName.value === ""
-  ) {
-    return true;
+  if (contactEditEmail.value === "" && contactEditNumber.value === "" && contactEditName.value === "") {
+      return true;
   }
 
   // Separate first and last names and make sure that the first letter is capitalized.
@@ -431,11 +410,11 @@ function addNewContact() {
   let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
 
   let newUser = {
-    firstName: firstName,
-    lastName: lastName,
-    email: contactEditEmail.value,
-    phoneNumber: contactEditNumber.value,
-    backgroundColor: `${getRandomColor()}`,
+      firstName: firstName,
+      lastName: lastName,
+      email: contactEditEmail.value,
+      phoneNumber: contactEditNumber.value,
+      backgroundColor: `${getRandomColor()}`,
   };
 
   addUser(newUser);
@@ -445,24 +424,24 @@ function addNewContact() {
 }
 
 /**
- * show new contact created message
- *
- */
+* show new contact created message
+*
+*/
 function showNewContactMessage() {
   if (document.getElementById("newContactCreated")) {
-    const newContactMessage = document.getElementById("newContactCreated");
+      const newContactMessage = document.getElementById("newContactCreated");
 
-    newContactMessage.classList.add("showNewContactFadeIn");
-    setTimeout(() => {
-      newContactMessage.classList.remove("showNewContactFadeIn");
-    }, 3000);
+      newContactMessage.classList.add("showNewContactFadeIn");
+      setTimeout(() => {
+          newContactMessage.classList.remove("showNewContactFadeIn");
+      }, 3000);
   }
 }
 
 /**
- *
- * Load the editContact content
- */
+*
+* Load the editContact content
+*/
 async function loadEditContact() {
   // userList aus dem Backend laden
   const userList = await backend.getItem("users", JSON.stringify(userList));
@@ -470,41 +449,32 @@ async function loadEditContact() {
 }
 
 /**
- *
- * Close the editContact content and remove the show class from the editContactFadeIn-bg
- */
+*
+* Close the editContact content and remove the show class from the editContactFadeIn-bg
+*/
 function hideEditContacts() {
   bgHideRemove();
   removeAddContact();
 }
 
 /**
- *
- * Prevent the editContact content from closing when clicking inside the content
- */
+*
+* Prevent the editContact content from closing when clicking inside the content
+*/
 function doNotClose() {
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeIn.addEventListener("click", (event) => {
-    event.stopPropagation();
+      event.stopPropagation();
   });
 }
 
 /**
- * returns a random hex color code but not white
- *
- * @returns a string representing a hex color code
- */
+* returns a random hex color code but not white
+*
+* @returns a string representing a hex color code
+*/
 function getRandomColor() {
-  const colors = [
-    "#F8D030",
-    "#78C850",
-    "#3899E6",
-    "#E0306A",
-    "#007030",
-    "#1C6BA0",
-    "#64C8F0",
-    "#FF9BCB",
-  ];
+  const colors = ["#F8D030", "#78C850", "#3899E6", "#E0306A", "#007030", "#1C6BA0", "#64C8F0", "#FF9BCB"];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
