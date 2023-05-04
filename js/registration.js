@@ -527,7 +527,7 @@ function forgotPasswordInputHTML() {
                 <img src="./assets/img/login-email.svg">
             </div>
             <div class="wrong-password-container" id="wrongEmailAlert"></div>
-                <button class="log-in-commit-guest-log-in-section-button-log-in" id="sendEmailButton" type="button" onclick="sendEmail()" style="width:270px; margin-top:40px;">Send me the email</button>
+                <button class="log-in-commit-guest-log-in-section-button-log-in" id="sendEmailButton" type="button" onclick="sendEmail()" style="width:270px;">Send me the email</button>
             </form>
         </div>
     `;
