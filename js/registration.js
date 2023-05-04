@@ -373,14 +373,17 @@ function signUpNewUser() {
   if (newContactName.value === "" || newContactName.value.split(" ").length < 2) {
     newContactName.setCustomValidity("Please enter your first and last name.");
     newContactName.reportValidity();
+    return
   }
-  if (newContactEmail.value === "") {
+  if (newContactEmail.value === "" || !newContactEmail.value.includes("@") || !newContactEmail.value.includes(".")) {
     newContactEmail.setCustomValidity("Please enter your email.");
     newContactEmail.reportValidity();
+    return
   }
   if (newContactPassword.value === "") {
     newContactPassword.setCustomValidity("Please enter your password.");
     newContactPassword.reportValidity();
+    return
   }
 
   // Separate first and last names and make sure that the first letter is capitalized.
