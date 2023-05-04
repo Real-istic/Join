@@ -236,7 +236,7 @@ async function restoreBackend() {
             "category": "Marketing",
             "categoryColor": "#de493e",
             "priority": "Urgent",
-            "description": "Test Text without any Meaning because it is just for the test.",
+            "description": "Creating new Icons is a very important task for the project.",
             "subtasks": [
                 "Subtask 1",
                 "Create new icons"
@@ -265,7 +265,7 @@ async function restoreBackend() {
             "category": "Finance",
             "categoryColor": "#259b24",
             "priority": "Medium",
-            "description": "Test Text without any Meaning because it is just for the test.",
+            "description": "Header creation was on of the first tasks we had to do.",
             "subtasks": [
                 "Coding all day long"
             ],
@@ -288,7 +288,7 @@ async function restoreBackend() {
             "category": "Sales",
             "categoryColor": "#fbc02d",
             "priority": "Low",
-            "description": "Test Text without any Meaning because it is just for the test.",
+            "description": "Clear and stylish nav area seems to be the way",
             "subtasks": [
                 "Coding all day long"
             ],
@@ -315,7 +315,7 @@ async function restoreBackend() {
             "category": "Human Resources",
             "categoryColor": "#9c27b0",
             "priority": "Low",
-            "description": "Test Text without any Meaning because it is just for the test.",
+            "description": "Contacts have to be creatable and managaable",
             "subtasks": [],
             "subtasksState": [],
             "taskStatus": "done"

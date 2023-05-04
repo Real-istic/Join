@@ -297,14 +297,15 @@ function insertAssignedContactsToTaskHTML() {
     for (let i = 0; i < taskList.length; i++) {
         let contactContainer = document.getElementById('boardTaskAssignedContacts' + taskList[i].title);
         let task = taskList[i];
-
-        if (!(task.firstNames.length > 2)) {
-            insertAssignedContactsToTaskGreaterThanTwoHTML(contactContainer, task)
-        } else {
-            insertAssignedContactsToTaskLowerThanTwoHTML(contactContainer, task)
-            contactContainer.innerHTML += /*html*/ `
+        if (contactContainer !== null) {
+            if (!(task.firstNames.length > 2)) {
+                insertAssignedContactsToTaskGreaterThanTwoHTML(contactContainer, task)
+            } else {
+                insertAssignedContactsToTaskLowerThanTwoHTML(contactContainer, task)
+                contactContainer.innerHTML += /*html*/ `
                 <div class="add-task-assigned-contact-overflow">+${task.firstNames.length - 2}</div>
                 `;
+            }
         }
     }
 }
