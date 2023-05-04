@@ -419,7 +419,7 @@ function insertOpenTaskSlideInHTML(i) {
         ${insertBoardTaskSlideInPriorityHTML(i)}
         ${boardTaskSlideInSubtaskHeaderHTML()}
         <div class="add-task-subtask-list" id="addTaskCreateSubtask${i}"></div>
-        ${insertBoardTaskSlideInAssigned(i)}
+        ${insertBoardTaskSlideInAssigned()}
     `;
     insertBoardTaskSlideInAssignedContactsIteration(i)
     boardTaskSlideInInsertSubtasks(i)
@@ -547,10 +547,9 @@ function insertBoardTaskSlideInPriorityHTML(i) {
 /**
  * inserts the board-task-slide-in-assigned-contacts-container
  * 
- * @param {*} i for the specific task
  * @returns the html part of it
  */
-function insertBoardTaskSlideInAssigned(i) {
+function insertBoardTaskSlideInAssigned() {
     return /*html*/ `
             <span class="board-task-slide-in-assignedto">Assigned to:</span>
     `;
@@ -686,8 +685,7 @@ function boardTaskEditSlideInInsertDueDate() {
 function boardTaskEditSlideInInsertPriority() {
     let priorityValue = taskClipboard.priority
     let priorityDocument = document.getElementById('addTaskPriorityInput' + priorityValue);
-    priorityDocument.checked = true
-
+    priorityDocument.checked = true;
     let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
     let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
