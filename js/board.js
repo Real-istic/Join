@@ -732,45 +732,6 @@ function boardTaskEditSlideInInsertPriority() {
 }
 
 /**
- * sets the priority class list for the urgent button
- * 
- * @param {*} urgentBox the urgent button
- * @param {*} mediumBox the medium button
- * @param {*} lowBox the low button
- */
-function setPriorityClassListUrgent(urgentBox, mediumBox, lowBox) {
-    urgentBox.classList.add('add-task-priority-urgent');
-    mediumBox.classList.remove('add-task-priority-medium');
-    lowBox.classList.remove('add-task-priority-low');
-}
-
-/**
- * sets the priority class list for the medium button
- * 
- * @param {*} urgentBox the urgent button
- * @param {*} mediumBox the medium button
- * @param {*} lowBox the low button
- */
-function setPriorityClassListMedium(urgentBox, mediumBox, lowBox) {
-    urgentBox.classList.remove('add-task-priority-urgent');
-    mediumBox.classList.add('add-task-priority-medium');
-    lowBox.classList.remove('add-task-priority-low');
-}
-
-/**
- * sets the priority class list for the low button
- * 
- * @param {*} urgentBox the urgent button
- * @param {*} mediumBox the medium button
- * @param {*} lowBox the low button
- */
-function setPriorityClassListLow(urgentBox, mediumBox, lowBox) {
-    urgentBox.classList.remove('add-task-priority-urgent');
-    mediumBox.classList.remove('add-task-priority-medium');
-    lowBox.classList.add('add-task-priority-low');
-}
-
-/**
  * inserts the subtask-header for the task-slide-in-menu
  * 
  * @returns the html part
@@ -895,56 +856,8 @@ async function createTaskBoardSite() {
     } else if (taskClipboard.priority == '') {
         priorityValidation();
     } else {
-        pushValuesToClipboard(title);
+        pushBoardTaskValuesToClipboard(title);
     }
-}
-
-/**
- * validates the title of the task if it is empty or not
- * 
- * @param {*} title task title
- * @returns if the title is empty
- */
-function titleEmptyValidation(title) {
-    title.setCustomValidity('You need a Title to create a Task!');
-    title.reportValidity();
-    return;
-}
-
-/**
- * validates the title of the task if it is already assigned
- * 
- * @param {*} title task title
- * @returns if the title is already assigned
- */
-function titleDuplicateValidation(title) {
-    title.setCustomValidity('Title is already assigned!');
-    title.reportValidity();
-    return
-}
-
-/**
- * validates the priority of the task if it is empty or not
- * 
- * @returns if the priority is empty
- */
-function priorityValidation() {
-    let priorityArea = document.getElementById('addTaskPriorityInputMedium');
-    priorityArea.setCustomValidity('No Priority given yet!')
-    priorityArea.reportValidity();
-    return;
-}
-
-/**
- * validates the title of the task if it is too long or not
- * 
- * @param {*} title task title
- * @returns if the title is too long
- */
-function titleLengthValidation(title) {
-    title.setCustomValidity('Title is too long');
-    title.reportValidity();
-    return;
 }
 
 /**
@@ -952,7 +865,7 @@ function titleLengthValidation(title) {
  * 
  * @param {*} title task title
  */
-async function pushValuesToClipboard(title) {
+async function pushBoardTaskValuesToClipboard(title) {
     taskClipboard.title = title.value;
     taskClipboard.taskStatus = boardTaskStatus;
     pushDueDateToTaskClipboard()

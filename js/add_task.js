@@ -180,7 +180,7 @@ function createCategoryListHTML(i) {
 }
 
 /**
- * function that build the surface to create a new category
+ *  build the surface to create a new category
  * 
  */
 function createNewCategory() {
@@ -207,7 +207,7 @@ function createNewCategoryHTML() {
 }
 
 /**
- * button function that interrupts the creation of a new category and returns it back to the category selecor
+ * button that interrupts the creation of a new category and returns it back to the category selecor
  * 
  */
 function interruptCreateNewCategory() {
@@ -231,7 +231,7 @@ function confirmCreateNewCategory() {
 }
 
 /**
- * function that connects selected color with new category name in the "create new category part"
+ *  connects selected color with new category name in the "create new category part"
  * iterate all radio buttons, check for selected radio button, get value if button is selected, return value
  * 
  * @returns the html part of the category list
@@ -284,7 +284,7 @@ function createNewCategoryColorSelectorRadioButtonHTML(i) {
 }
 
 /**
- * function that add the created category values (name, color) to the clipboard and fill the input with new name and color
+ *  add the created category values (name, color) to the clipboard and fill the input with new name and color
  * 
  */
 function addCategoryToClipboard(i) {
@@ -352,21 +352,54 @@ function addTaskSetPriority(priority) {
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
 
     if (priority == 'Urgent') {
-        urgentBox.classList.add('add-task-priority-urgent');
-        mediumBox.classList.remove('add-task-priority-medium');
-        lowBox.classList.remove('add-task-priority-low');
+        setPriorityClassListUrgent(urgentBox, mediumBox, lowBox);
     } else if (priority == 'Medium') {
-        urgentBox.classList.remove('add-task-priority-urgent');
-        mediumBox.classList.add('add-task-priority-medium');
-        lowBox.classList.remove('add-task-priority-low');
-
+        setPriorityClassListMedium(urgentBox, mediumBox, lowBox)
     } else if (priority == 'Low') {
-        urgentBox.classList.remove('add-task-priority-urgent');
-        mediumBox.classList.remove('add-task-priority-medium');
-        lowBox.classList.add('add-task-priority-low');
+        setPriorityClassListLow(urgentBox, mediumBox, lowBox)
     }
     taskClipboard.priority = priority;
 }
+
+/**
+ * sets the priority class list for the urgent button
+ * 
+ * @param {*} urgentBox the urgent button
+ * @param {*} mediumBox the medium button
+ * @param {*} lowBox the low button
+ */
+function setPriorityClassListUrgent(urgentBox, mediumBox, lowBox) {
+    urgentBox.classList.add('add-task-priority-urgent');
+    mediumBox.classList.remove('add-task-priority-medium');
+    lowBox.classList.remove('add-task-priority-low');
+}
+
+/**
+ * sets the priority class list for the medium button
+ * 
+ * @param {*} urgentBox the urgent button
+ * @param {*} mediumBox the medium button
+ * @param {*} lowBox the low button
+ */
+function setPriorityClassListMedium(urgentBox, mediumBox, lowBox) {
+    urgentBox.classList.remove('add-task-priority-urgent');
+    mediumBox.classList.add('add-task-priority-medium');
+    lowBox.classList.remove('add-task-priority-low');
+}
+
+/**
+ * sets the priority class list for the low button
+ * 
+ * @param {*} urgentBox the urgent button
+ * @param {*} mediumBox the medium button
+ * @param {*} lowBox the low button
+ */
+function setPriorityClassListLow(urgentBox, mediumBox, lowBox) {
+    urgentBox.classList.remove('add-task-priority-urgent');
+    mediumBox.classList.remove('add-task-priority-medium');
+    lowBox.classList.add('add-task-priority-low');
+}
+
 
 /**
  * toggles the categorylist while rotating the arrow by 90deg
@@ -403,8 +436,6 @@ function insertDescriptionHTML() {
         </div>
     `;
 }
-
-
 
 /**
  * inserts the subtask and subtasklist
@@ -495,29 +526,78 @@ function addSubtaskToClipboard(checkbox) {
  * @returns validation information
  */
 async function createTaskAddTaskSite() {
-
     let title = document.getElementById('addTaskInputTitle');
     let searchKey = 'title';
     let searchValue = title.value
     let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
-        title.setCustomValidity('You need a Title to create a Task!');
-        title.reportValidity();
-        return;
+        titleEmptyValidation(title);
     } else if (title.value.length >= 35) {
-        title.setCustomValidity('Title is too long');
-        title.reportValidity();
-        return;
+        titleLengthValidation(title);
     } else if (valueIsPresent) {
-        title.setCustomValidity('Title is already assigned!');
-        title.reportValidity();
-        return
+        titleDuplicateValidation(title);
     } else if (taskClipboard.priority == '') {
-        let priorityArea = document.getElementById('addTaskPriorityInputMedium');
-        priorityArea.setCustomValidity('No Priority given yet!')
-        priorityArea.reportValidity();
+        priorityValidation();
     } else {
-        taskClipboard.title = title.value;
+        pushAddTaskValuesToClipboard(title);
+    }
+}
+
+/**
+ * validates the title of the task if it is empty or not
+ * 
+ * @param {*} title task title
+ * @returns if the title is empty
+ */
+function titleEmptyValidation(title) {
+    title.setCustomValidity('You need a Title to create a Task!');
+    title.reportValidity();
+    return;
+}
+
+/**
+ * validates the title of the task if it is too long or not
+ * 
+ * @param {*} title task title
+ * @returns if the title is too long
+ */
+function titleLengthValidation(title) {
+    title.setCustomValidity('Title is too long');
+    title.reportValidity();
+    return;
+}
+
+/**
+ * validates the title of the task if it is already assigned
+ * 
+ * @param {*} title task title
+ * @returns if the title is already assigned
+ */
+function titleDuplicateValidation(title) {
+    title.setCustomValidity('Title is already assigned!');
+    title.reportValidity();
+    return
+}
+
+/**
+ * validates the priority of the task if it is empty or not
+ * 
+ * @returns if the priority is empty
+ */
+function priorityValidation() {
+    let priorityArea = document.getElementById('addTaskPriorityInputMedium');
+    priorityArea.setCustomValidity('No Priority given yet!')
+    priorityArea.reportValidity();
+    return;
+}
+
+/**
+ * pushes the values of the task to the taskClipboard and then to the backend
+ * 
+ * @param {*} title the title of the task
+ */
+async function pushAddTaskValuesToClipboard(title) {
+    taskClipboard.title = title.value;
         taskClipboard.taskStatus = 'toDo';
         pushDueDateToTaskClipboard()
         pushDescriptionToTaskClipboard()
@@ -526,7 +606,6 @@ async function createTaskAddTaskSite() {
         await initBackend()
         clearTask()
         insertAddTask();
-    }
 }
 
 /**
@@ -574,7 +653,7 @@ function pushDueDateToTaskClipboard() {
  */
 function pushPriorityToTaskClipboard(priority) {
     let taskPriority = document.querySelectorAll('.add-task-priority-input:checked');
-    
+
     taskClipboard.priority = taskPriority[0].name;
 }
 
@@ -614,10 +693,8 @@ function confirmAddedTaskToBoard() {
  */
 function searchContacts() {
     expandContactList();
-
     let input = document.getElementById('addContactToTaskInput');
     let filter = input.value.toLowerCase();
-
     let contacts = document.getElementsByClassName('add-task-checkbox-container');
     let container = document.getElementsByClassName('add-task-contact-container');
 
@@ -660,7 +737,7 @@ function openAndCloseContactList() {
 }
 
 /**
- * function that runs several functions for expanding contact list
+ *  runs several functions for expanding contact list
  * 
  */
 function expandContactList() {
@@ -698,7 +775,7 @@ function checkCheckboxes() {
 }
 
 /**
- * function that hides the contact list 
+ *  hides the contact list 
  * 
  */
 function hideContactList() {
@@ -723,7 +800,7 @@ function createContactAddTaskHTML(i) {
 }
 
 /**
- * function that removes/add contact to task
+ *  removes/add contact to task
  * 
  */
 function toggleContactTask(i) {
@@ -737,7 +814,7 @@ function toggleContactTask(i) {
 }
 
 /**
- * function that checks if contact is in task or not
+ *  checks if contact is in task or not
  * 
  * @returns if contact is in task or not
  * @param {*} i for the specific contact
@@ -753,7 +830,7 @@ function checkForContactInClipboard(i) {
 }
 
 /**
- * function that removes contact from task
+ *  removes contact from task
  * 
  * @param {*} i for the specific task
  */
@@ -768,7 +845,7 @@ function removeContactFromTask(i) {
 }
 
 /**
- * function that adds contact to task
+ *  adds contact to task
  * 
  */
 function addContactToTask(i) {
@@ -780,7 +857,7 @@ function addContactToTask(i) {
 }
 
 /**
- * function that returns html code that creates a div where the selected contacts for the task gets shown as icon 
+ *  returns html code that creates a div where the selected contacts for the task gets shown as icon 
  * 
  * @returns  html code that creates a div where the selected contacts for the task gets shown as icon
  */
@@ -791,7 +868,7 @@ function createSelectedContactIconsDivHTML() {
 }
 
 /**
- * function that creates the contact icons from selected contacts for a task
+ *  creates the contact icons from selected contacts for a task
  * 
  */
 function createSelectedContactIcons() {
