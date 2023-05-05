@@ -1,5 +1,4 @@
 /**
- *
  * Call the contacts-page
  */
  function insertContacts() {
@@ -11,7 +10,6 @@
 }
 
 /**
-*
 * remove classlist of ID help
 */
 function removeHelp() {
@@ -36,7 +34,6 @@ function insertContentHTML() {
     </div>
     <div class="newContactCreated" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
 }
-
 /**
 *
 * Call an event on editContact content
@@ -49,7 +46,6 @@ function eventOnEditContact() {
       editContactFadeIn.classList.remove("show-left");
   });
 }
-
 /**
 * Renders the contacts content with a sort the list of initial letters alphabetically
 * @returns The HTML part
@@ -65,10 +61,8 @@ function renderUserList() {
           initialLetters.push(firstNameLetter);
       }
   }
-
   // sort the list of initial letters alphabetically
   initialLetters.sort();
-
   // create a list of users for each initial letter
   for (let x = 0; x < initialLetters.length; x++) {
       const initialLetter = initialLetters[x];
@@ -171,7 +165,6 @@ function editContact(i) {
   showEditContacts();
   showEditContactsHTML(i);
 }
-
 /**
 * show the editContact content
 * @param {number} i The index of the user in the userList
@@ -182,7 +175,6 @@ function showEditContacts() {
   editContactFadeInBg.classList.add("show-left");
   editContactFadeIn.classList.add("show-left");
 }
-
 /**
 * show the editContact HMTMLcontent
 *
@@ -403,11 +395,9 @@ function addNewContact() {
       contactEditNumber.reportValidity();
       return false;
   }
-
   if (contactEditEmail.value === "" && contactEditNumber.value === "" && contactEditName.value === "") {
       return true;
   }
-
   // Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
   let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);

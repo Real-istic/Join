@@ -863,6 +863,8 @@
     top: 26rem;
     left: 7rem;
   }
+  .input-contact-main {
+    padding-top: 5rem;
 }
 
 @media (max-width: 370px) {
