@@ -287,6 +287,8 @@ function hideEditContacts() {
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeInBg.classList.remove("show-left");
   editContactFadeIn.classList.remove("show-left");
+  bgHideRemove();
+  removeAddContact();
 }
 
 /**
@@ -351,7 +353,9 @@ function showAddContact() {
               Tasks are better with a team!
           </div>
           <div class="new-contact-main" >
+            <div class="img_newContact">
               <img src="./assets/img/addNewContactProfil.svg">
+            </div> 
               <form onsubmit="return addNewContact(); return false;">
                   <div class="input-newContact-main">
                       <div class="input-contact">
@@ -446,15 +450,6 @@ async function loadEditContact() {
   // userList aus dem Backend laden
   const userList = await backend.getItem("users", JSON.stringify(userList));
   return userList;
-}
-
-/**
-*
-* Close the editContact content and remove the show class from the editContactFadeIn-bg
-*/
-function hideEditContacts() {
-  bgHideRemove();
-  removeAddContact();
 }
 
 /**
