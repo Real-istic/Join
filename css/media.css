@@ -534,7 +534,6 @@
 }
 
 @media (max-width: 790px) {
-
   .contact-main {
     left: 8px;
   }
@@ -602,8 +601,9 @@
     z-index: 2;
   }
   .contact-right-side {
-    padding: 50px 32px 25px 0px;
     z-index: 1;
+    left: 24rem;
+    position: absolute;
   }
   .contact-left-fadeIn-bg {
     z-index: 2;
@@ -623,7 +623,7 @@
   }
   .show {
     right: 1rem;
-    padding-left: 10rem;
+   /*  padding-left: 10rem; */
     padding-top: 4rem;
     height: 100vh;
     width: 100%;
@@ -639,7 +639,7 @@
     font-size: 18px;
   }
   .contact-detail-big-name {
-    font-size: 33px;
+    font-size: 27px;
   }
   .contact-detail-info-main {
     justify-content: flex-start;
@@ -653,10 +653,6 @@
     height: 24rem;
     position: fixed;
     top: 22rem;
-  }
-  .new-contact-main {
-    width: 350px;
-    height: 24rem;
   }
   .edit-contact {
     width: 350px;
@@ -730,7 +726,7 @@
   .input-newContact-main {
     width: 300px;
     height: 20rem;
-    padding-top: 2rem;
+    padding-top: 4rem;
   }
   .button-cancel {
     display: none;
@@ -801,29 +797,35 @@
 
   .show {
     position: fixed;
-    top: 5rem;
-    left: -3rem;
-    height: 690px;
-    width: 27rem;
+    top: 6.2rem;
+    left: -1rem;
+    height: 718px;
+    width: 31rem;
   }
   .new-contact-button {
     top: 7rem;
     right: 8rem;
   }
+  .contact-right-side {
+    z-index: 1;
+    left: 5rem;
+    position: absolute;
+}
 }
 
 @media (max-width: 400px) {
   .show {
-    left: -4rem;
+    left: -3rem;
   }
   .show-contact {
-    left: 3rem;
+    left: 0rem;
     z-index: 3;
     position: fixed;
     background-color: white;
     height: 670px;
-    bottom: 5rem;
-    padding-top: 4rem;
+    bottom: -7rem;
+    padding-top: 0rem;
+    padding-left: 4rem;
   }
   .contact-right-side {
     padding-left: 0rem;
@@ -832,6 +834,34 @@
     min-width: 70px;
     height: 70px;
     font-size: 30px;
+  }
+  .new-contact-main {
+    width: 350px;
+    height: 1rem;
+    position: fixed;
+    top: 29rem;
+  }
+  .img_newContact{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    bottom: 12rem;
+    left: 7rem;
+  }
+
+  .contact-detail-big-letter {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    bottom: 11rem;
+    left: 0rem;
+  }
+  .edit-contact-main {
+    width: 350px;
+    height: 0rem;
+    position: absolute;
+    top: 26rem;
+    left: 7rem;
   }
 }
 
@@ -868,7 +898,6 @@
 }
 
 @media (max-width: 716px) {
-
   .summary-top {
     font-size: 30px;
   }
@@ -961,7 +990,6 @@
   }
 }
 @media (max-width: 440px) {
-
   .summary-top {
     font-size: 30px;
   }
@@ -982,7 +1010,6 @@
   }
 }
 @media (max-width: 431px) {
-
   .task-box {
     width: 142px;
     height: 131px;
@@ -1091,8 +1118,8 @@
 
 @media (max-width: 400px) {
   .join-logo-login-new-position {
-    top: 73px;
-    left: 35px;
+    top: -6px;
+    left: 23px;
     width: 46px;
     height: 88px;
   }
