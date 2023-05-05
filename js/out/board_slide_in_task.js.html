@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: privacy.js</title>
+    <title>JSDoc: Source: board_slide_in_task.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: privacy.js</h1>
+    <h1 class="page-title">Source: board_slide_in_task.js</h1>
 
     
 
@@ -26,84 +26,276 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
-  * remove class help-none to show the question mark on the top right side
- * @param {string} contentDivId
+            <pre class="prettyprint source linenums"><code>
+/**
+ * toggles and inserts the board-task-slide-in-menu
+ * 
+ * @param {*} i the specific task
  */
-function insertPrivacy() {
-    markActiveNavElement('privacy')
-    contentDiv.innerHTML = privacyHTML();
-    document.getElementById("help").classList.remove("help-none");
+function openTask(i) {
+    pushBoardTaskToClipboard(i)
+    toggleTaskBoardTask()
+    insertOpenTaskSlideInHTML(i)
 }
 
 /**
+ * toggles the board-task-slide-in-menu in or out
  * 
- * show content of the privacy page
+ */
+function toggleTaskBoardTask() {
+    clearTaskClipboard()
+    let opacityDiv = document.getElementById('reduceOpacityBehindTask');
+    let taskDiv = document.getElementById('boardTaskSlideInDiv');
+
+    if (taskDiv.classList.contains('display-none')) {
+        toggleTaskBoardTaskStyleDisplayNone(opacityDiv, taskDiv)
+    } else {
+        toggleTaskBoardTaskStyleReduceOpacity(opacityDiv, taskDiv)
+    }
+}
+
+/**
+ * toggles the classes for the board-task-slide-in-menu
+ * 
+ * @param {*} opacityDiv the div behind the board-task-slide-in-menu
+ * @param {*} taskDiv the board-task-slide-in-div
+ */
+function toggleTaskBoardTaskStyleDisplayNone(opacityDiv, taskDiv) {
+    taskDiv.classList.toggle('display-none');
+    setTimeout(() => {
+        opacityDiv.classList.toggle('reduce-opacity');
+        taskDiv.classList.toggle('board-task-translate-y');
+    }, 100);
+}
+
+/**
+ * toggles the classes for the board-task-slide-in-menu 
+ *
+ * @param {*} opacityDiv the div behind the board-task-slide-in-menu
+ * @param {*} taskDiv the board-task-slide-in-div
+ */
+function toggleTaskBoardTaskStyleReduceOpacity(opacityDiv, taskDiv) {
+    opacityDiv.classList.toggle('reduce-opacity');
+    taskDiv.classList.toggle('board-task-translate-y');
+    setTimeout(() => {
+        taskDiv.classList.toggle('display-none');
+    }, 100);
+}
+
+/**
+ * inserts the whole html part for the board-task-slide-in-menu
+ * 
+ * @param {*} i for the specific Task
+ */
+function insertOpenTaskSlideInHTML(i) {
+    let taskSlideInDiv = document.getElementById('boardTaskSlideInDiv');
+
+    taskSlideInDiv.innerHTML = /*html*/ `
+        ${insertBoardTaskSlideInCategoryHTML(i)}
+        ${insertBoardTaskSlideInTitleHTML(i)}
+        ${insertBoardTaskSlideInDescriptionHTML(i)}
+        ${insertBoardTaskSlideInDueDateHTML(i)}
+        ${insertBoardTaskSlideInPriorityHTML(i)}
+        ${boardTaskSlideInSubtaskHeaderHTML()}
+        &lt;div class="add-task-subtask-list" id="addTaskCreateSubtask${i}">&lt;/div>
+        ${insertBoardTaskSlideInAssigned()}
+    `;
+    insertBoardTaskSlideInAssignedContactsIteration(i)
+    boardTaskSlideInInsertSubtasks(i)
+}
+
+/**
+ * inserts the the board-task-slide-in-category
+ * 
+ * @param {*} i for the specific task
  * @returns the html part
  */
-function privacyHTML() {
-    return /*html*/`
-&lt;div class="privacy">
-    &lt;h2 class="privacy_steam">Datenschutzerklärung&lt;/h2>
-    &lt;p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:&lt;/p>
-    &lt;p>Daniel Bergmann&lt;/p>
-    &lt;h3>Ihre Betroffenenrechte&lt;/h3>
-    &lt;p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte ausüben:&lt;/p>
-    &lt;ul>
-        &lt;li>Auskunft über Ihre bei uns gespeicherten Daten und deren Verarbeitung (Art. 15 DSGVO),&lt;/li>
-        &lt;li>Berichtigung unrichtiger personenbezogener Daten (Art. 16 DSGVO),&lt;/li>
-        &lt;li>Löschung Ihrer bei uns gespeicherten Daten (Art. 17 DSGVO),&lt;/li>
-        &lt;li>Einschränkung der Datenverarbeitung, sofern wir Ihre Daten aufgrund gesetzlicher Pflichten noch nicht löschen dürfen (Art. 18 DSGVO),&lt;/li>
-        &lt;li>Widerspruch gegen die Verarbeitung Ihrer Daten bei uns (Art. 21 DSGVO) und&lt;/li>
-        &lt;li>Datenübertragbarkeit, sofern Sie in die Datenverarbeitung eingewilligt haben oder einen Vertrag mit uns abgeschlossen haben (Art. 20 DSGVO).&lt;/li>
-    &lt;/ul>
-    &lt;p>Sofern Sie uns eine Einwilligung erteilt haben, können Sie diese jederzeit mit Wirkung für die Zukunft widerrufen.&lt;/p>
-    &lt;p>Sie können sich jederzeit mit einer Beschwerde an eine Aufsichtsbehörde wenden, z. B. an die zuständige Aufsichtsbehörde des Bundeslands Ihres Wohnsitzes oder an die für uns als verantwortliche Stelle zuständige Behörde.&lt;/p>
-    &lt;p>Eine Liste der Aufsichtsbehörden (für den nichtöffentlichen Bereich) mit Anschrift finden Sie unter: &lt;a href="https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html" target="_blank" rel="noopener nofollow">Datenschutz Aufsichtsbehördern&lt;/a>.&lt;/p>
-    &lt;p>&lt;/p>
-    &lt;h3>Erfassung allgemeiner Informationen beim Besuch unserer Website&lt;/h3>
-    &lt;h3>Art und Zweck der Verarbeitung:&lt;/h3>
-    &lt;p>Wenn Sie auf unsere Website zugreifen, d.h., wenn Sie sich nicht registrieren oder anderweitig Informationen übermitteln, werden automatisch Informationen allgemeiner Natur erfasst. Diese Informationen (Server-Logfiles) beinhalten etwa die Art des Webbrowsers, das verwendete Betriebssystem, den Domainnamen Ihres Internet-Service-Providers, Ihre IP-Adresse und ähnliches. &lt;/p>
-    &lt;p>Sie werden insbesondere zu folgenden Zwecken verarbeitet:&lt;/p>
-    &lt;ul>
-        &lt;li>Sicherstellung eines problemlosen Verbindungsaufbaus der Website,&lt;/li>
-        &lt;li>Sicherstellung einer reibungslosen Nutzung unserer Website,&lt;/li>
-        &lt;li>Auswertung der Systemsicherheit und -stabilität sowie&lt;/li>
-        &lt;li>zur Optimierung unserer Website.&lt;/li>
-    &lt;/ul>
-    &lt;p>Wir verwenden Ihre Daten nicht, um Rückschlüsse auf Ihre Person zu ziehen. Informationen dieser Art werden von uns ggfs. anonymisiert statistisch ausgewertet, um unseren Internetauftritt und die dahinterstehende Technik zu optimieren. &lt;/p>
-    &lt;h3>Rechtsgrundlage und berechtigtes Interesse:&lt;/h3>
-    &lt;p>Die Verarbeitung erfolgt gemäß Art. 6 Abs. 1 lit. f DSGVO auf Basis unseres berechtigten Interesses an der Verbesserung der Stabilität und Funktionalität unserer Website.&lt;/p>
-    &lt;h3>Empfänger:&lt;/h3>
-    &lt;p>Empfänger der Daten sind ggf. technische Dienstleister, die für den Betrieb und die Wartung unserer Webseite als Auftragsverarbeiter tätig werden.&lt;/p>
-    &lt;p>&lt;/p>
-    &lt;h3>Speicherdauer:&lt;/h3>
-    &lt;p>Die Daten werden gelöscht, sobald diese für den Zweck der Erhebung nicht mehr erforderlich sind. Dies ist für die Daten, die der Bereitstellung der Website dienen, grundsätzlich der Fall, wenn die jeweilige Sitzung beendet ist. &lt;/p>
-    &lt;p>&lt;/p>
-    &lt;h3>Bereitstellung vorgeschrieben oder erforderlich:&lt;/h3>
-    &lt;p>Die Bereitstellung der vorgenannten personenbezogenen Daten ist weder gesetzlich noch vertraglich vorgeschrieben. Ohne die IP-Adresse ist jedoch der Dienst und die Funktionsfähigkeit unserer Website nicht gewährleistet. Zudem können einzelne Dienste und Services nicht verfügbar oder eingeschränkt sein. Aus diesem Grund ist ein Widerspruch ausgeschlossen. &lt;/p>
-    &lt;p>&lt;/p>
-    &lt;h3>SSL-Verschlüsselung&lt;/h3>
-    &lt;p>Um die Sicherheit Ihrer Daten bei der Übertragung zu schützen, verwenden wir dem aktuellen Stand der Technik entsprechende Verschlüsselungsverfahren (z. B. SSL) über HTTPS.&lt;/p>
-    &lt;p>&lt;/p>
-    &lt;hr>
-    &lt;h3>Information über Ihr Widerspruchsrecht nach Art. 21 DSGVO&lt;/h3>
-    &lt;h3>Einzelfallbezogenes Widerspruchsrecht&lt;/h3>
-    &lt;p>Sie haben das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung Sie betreffender personenbezogener Daten, die aufgrund Art. 6 Abs. 1 lit. f DSGVO (Datenverarbeitung auf der Grundlage einer Interessenabwägung) erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmung gestütztes Profiling im Sinne von Art. 4 Nr. 4 DSGVO.&lt;/p>
-    &lt;p>Legen Sie Widerspruch ein, werden wir Ihre personenbezogenen Daten nicht mehr verarbeiten, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die Ihre Interessen, Rechte und Freiheiten überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.&lt;/p>
-    &lt;h3>Empfänger eines Widerspruchs&lt;/h3>
-    &lt;p>Daniel Bergmann
-        &lt;br>dhetzer3@gmail.com
-    &lt;/p>
-    &lt;hr>
-    &lt;h3>Änderung unserer Datenschutzbestimmungen&lt;/h3>
-    &lt;p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen Anforderungen entspricht oder um Änderungen unserer Leistungen in der Datenschutzerklärung umzusetzen, z.B. bei der Einführung neuer Services. Für Ihren erneuten Besuch gilt dann die neue Datenschutzerklärung.&lt;/p>
-    &lt;h3>Fragen an den Datenschutzbeauftragten&lt;/h3>
-    &lt;p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:&lt;/p>
-    &lt;p>&lt;/p>
-    &lt;p>&lt;em>Die Datenschutzerklärung wurde mithilfe der activeMind AG erstellt, den Experten für &lt;a href="https://www.activemind.de/datenschutz/datenschutzbeauftragter/" target="_blank" rel="noopener">externe Datenschutzbeauftragte&lt;/a> (Version #2020-09-30).&lt;/em>&lt;/p>
-&lt;/div>
-    `
+function insertBoardTaskSlideInCategoryHTML(i) {
+    return /*html*/ `
+        &lt;div class="board-task-slide-in-category">
+            &lt;img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
+            &lt;span class="board-task-category" style="background:${taskList[i].categoryColor};">${taskList[i].category}&lt;/span>
+        &lt;/div>
+    `;
+}
+
+/**
+ * inserts the the board-task-slide-in-title
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
+function insertBoardTaskSlideInTitleHTML(i) {
+    return /*html*/ `
+        &lt;span class="board-task-slide-in-title">${taskList[i].title}&lt;/span>
+    `;
+}
+
+/**
+ * inserts the board-task-slide-in-description
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
+function insertBoardTaskSlideInDescriptionHTML(i) {
+    return /*html*/ `
+    &lt;span class="board-task-slide-in-description">${taskList[i].description}&lt;/span>
+`;
+}
+
+/**
+ * inserts the board-task-slide-in-due_date
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part
+ */
+function insertBoardTaskSlideInDueDateHTML(i) {
+    return /*html*/ `
+    &lt;div class="board-task-slide-in-date-div">
+        &lt;span class="board-task-slide-in-datename">Due Date:&lt;/span>
+        &lt;span class="board-task-slide-in-datevalue">${taskList[i].dueDate}&lt;/span>
+    &lt;/div>
+`;
+}
+
+/**
+ * inserts the board-task-slide-in-priority
+ * 
+ * @param {*} i for the specific task
+ * @returns the html part of it
+ */
+function insertBoardTaskSlideInPriorityHTML(i) {
+    return /*html*/ `
+    &lt;div class="board-task-slide-in-priority-div">
+        &lt;span class="board-task-slide-in-priorityname">Priority:&lt;/span>
+        &lt;span class="board-task-slide-in-priorityvalue board-task-slide-in-priority-${taskList[i].priority.toLowerCase()}">${taskList[i].priority} &lt;img src="assets/img/priority${taskList[i].priority.toLowerCase()}.svg" alt="">&lt;/span>
+    &lt;/div>
+`;
+}
+
+/**
+ * inserts the board-task-slide-in-assigned-contacts-container
+ * 
+ * @returns the html part of it
+ */
+function insertBoardTaskSlideInAssigned() {
+    return /*html*/ `
+            &lt;span class="board-task-slide-in-assignedto">Assigned to:&lt;/span>
+    `;
+}
+
+/**
+ * inserts the board-task-slide-in-assigned-contacts (iteration)
+ * 
+ * @param {*} i for the specific task
+ */
+function insertBoardTaskSlideInAssignedContactsIteration(i) {
+    let contactContainer = document.getElementById('boardTaskSlideInDiv');
+    insertBoardTaskSlideInAssignedContactsIterationHTML(i, contactContainer)
+
+    contactContainer.innerHTML += /*html*/ `
+        &lt;div onclick="boardTaskSlideInEditTask(${i})" class="board-task-slide-in-editbutton">
+            &lt;img src="assets/img/edit_task.svg" alt="">
+        &lt;/div>
+        `;
+}
+
+/**
+ * inserts the html part of the board-task-slide-in-assigned-contacts (iteration)
+ * 
+ * @param {*} i for the specific task
+ * @param {*} contactContainer for the contact-container
+ */
+function insertBoardTaskSlideInAssignedContactsIterationHTML(i, contactContainer) {
+    for (let j = 0; j &lt; taskList[i].firstNames.length; j++) {
+        let firstNameTask = taskList[i].firstNames[j];
+        let lastNameTask = taskList[i].lastNames[j];
+        for (let k = 0; k &lt; userList.length; k++) {
+            if (firstNameTask == userList[k].firstName &amp;&amp; lastNameTask == userList[k].lastName) {
+                let userBackgroundColor = userList[k].backgroundColor;
+                contactContainer.innerHTML += /*html*/ `
+                    &lt;div class="board-task-slide-in-contact">
+                        &lt;div class="add-task-selected-contact" style="background:${userBackgroundColor}; margin:0;">${firstNameTask.charAt(0)}${lastNameTask.charAt(0)}&lt;/div>&lt;span class="board-task-slide-in-contact-name">${firstNameTask} ${lastNameTask}&lt;/span>
+                    &lt;/div>    
+                `;
+            }
+        }
+    }
+}
+
+/**
+ * inserts the subtask-header for the task-slide-in-menu
+ * 
+ * @returns the html part
+ */
+function boardTaskSlideInSubtaskHeaderHTML() {
+    return /*html*/ `
+        &lt;span class="board-task-slide-in-edit-task-subtask">Subtasks:&lt;/span>
+    `;
+}
+
+/**
+ * inserts the assigned-to-header for the task-slide-in-menu
+ * 
+ * @returns the html part
+ */
+function boardTaskSlideInAssignedToHeaderHTML() {
+    return /*html*/ `
+    &lt;span class="board-task-slide-in-edit-task-Assigned-to">Assigned to&lt;/span>
+`;
+}
+
+/**
+ * inserts the checkable subtasks for the task-slide-in-window 
+ * 
+ * @param {*} i for the specific task
+ */
+function boardTaskSlideInInsertSubtasks(i) {
+    let subtaskContainer = document.getElementById('addTaskCreateSubtask' + i);
+
+    for (let j = 0; j &lt; taskList[i].subtasks.length; j++) {
+        const subtask = taskList[i].subtasks[j];
+        const subtaskState = taskList[i].subtasksState[j];
+        if (subtaskState == true) {
+            boardTaskSlideInInsertSubtasksChecked(i, j, subtaskContainer, subtask)
+        } else {
+            boardTaskSlideInInsertSubtasksUnChecked(i, j, subtaskContainer, subtask)
+        }
+    }
+}
+
+/**
+ * inserts the checked subtasks for the task-slide-in-window
+ * 
+ * @param {*} i for the specific task
+ * @param {*} j for the specific subtask
+ * @param {*} subtaskContainer for the subtask-container
+ * @param {*} subtask for the specific subtask of the specific task
+ */
+function boardTaskSlideInInsertSubtasksChecked(i, j, subtaskContainer, subtask) {
+    subtaskContainer.innerHTML += /*html*/ `
+    &lt;div class="add-task-subtask-div">
+        &lt;input onclick="toggleSubtaskInlist(${i}, ${j})" checked class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+        &lt;span>${subtask}&lt;/span>
+    &lt;/div>
+`;
+}
+
+/**
+ * inserts the unchecked subtasks for the task-slide-in-window
+ * 
+ * @param {*} i for the specific task
+ * @param {*} j for the specific subtask
+ * @param {*} subtaskContainer for the subtask-container
+ * @param {*} subtask for the specific subtask of the specific task
+ */
+function boardTaskSlideInInsertSubtasksUnChecked(i, j, subtaskContainer, subtask) {
+    subtaskContainer.innerHTML += /*html*/ `
+    &lt;div class="add-task-subtask-div">
+        &lt;input onclick="toggleSubtaskInlist(${i}, ${j})" class="add-task-subtask-checkbox" type="checkbox" name="${subtask}" id="editSubtask${i}-${j}">
+        &lt;span>${subtask}&lt;/span>
+    &lt;/div>
+`;
 }</code></pre>
         </article>
     </section>
