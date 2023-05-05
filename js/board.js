@@ -385,22 +385,42 @@ function openTask(i) {
  */
 function toggleTaskBoardTask() {
     clearTaskClipboard()
-
     let opacityDiv = document.getElementById('reduceOpacityBehindTask');
     let taskDiv = document.getElementById('boardTaskSlideInDiv');
+
     if (taskDiv.classList.contains('display-none')) {
-        taskDiv.classList.toggle('display-none');
-        setTimeout(() => {
-            opacityDiv.classList.toggle('reduce-opacity');
-            taskDiv.classList.toggle('board-task-translate-y');
-        }, 100);
+        toggleTaskBoardTaskStyleDisplayNone(opacityDiv, taskDiv)
     } else {
+        toggleTaskBoardTaskStyleReduceOpacity(opacityDiv, taskDiv)
+    }
+}
+
+/**
+ * toggles the display-none class for the board-task-slide-in-menu 
+ * 
+ * @param {*} opacityDiv the div behind the board-task-slide-in-menu
+ * @param {*} taskDiv the board-task-slide-in-div
+ */
+function toggleTaskBoardTaskStyleDisplayNone(opacityDiv, taskDiv) {
+    taskDiv.classList.toggle('display-none');
+    setTimeout(() => {
         opacityDiv.classList.toggle('reduce-opacity');
         taskDiv.classList.toggle('board-task-translate-y');
-        setTimeout(() => {
-            taskDiv.classList.toggle('display-none');
-        }, 100);
-    }
+    }, 100);
+}
+
+/**
+ * toggles the reduce-opacity class for the board-task-slide-in-menu 
+ *
+ * @param {*} opacityDiv the div behind the board-task-slide-in-menu
+ * @param {*} taskDiv the board-task-slide-in-div
+ */
+function toggleTaskBoardTaskStyleReduceOpacity(opacityDiv, taskDiv) {
+    opacityDiv.classList.toggle('reduce-opacity');
+    taskDiv.classList.toggle('board-task-translate-y');
+    setTimeout(() => {
+        taskDiv.classList.toggle('display-none');
+    }, 100);
 }
 
 /**
@@ -437,24 +457,27 @@ async function boardTaskSaveEditTaskTolist(i) {
     let searchValue = title.value
     let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
-        title.setCustomValidity('You need a Title to create a Task!');
-        title.reportValidity();
-        return;
+        titleEmptyValidation(title);
     } else if (title.value.length >= 35) {
-        title.setCustomValidity('Title is too long!');
-        title.reportValidity();
-        return;
+        titleLengthValidation(title);
     } else if (!(title.value == taskClipboard.title) && (valueIsPresent)) {
-        title.setCustomValidity('Title is already assigned!');
-        title.reportValidity();
-        return
+        titleAlreadyExistsValidation(title);
     } else {
-        pushEditedTaskTolist(i)
-        await backend.setItem('tasks', JSON.stringify(taskList));
-        insertTaskTolistHTML()
-        insertOpenTaskSlideInHTML(i)
-        clearTaskClipboard()
+        initializeEditedTask(i);
     }
+}
+
+/**
+ * pushes the edited task to the task-list, then to the backend and reiterates the task-list
+ * 
+ * @param {*} i for the specific task
+ */
+async function initializeEditedTask(i) {
+    pushEditedTaskTolist(i)
+    await backend.setItem('tasks', JSON.stringify(taskList));
+    insertTaskTolistHTML()
+    insertOpenTaskSlideInHTML(i)
+    clearTaskClipboard()
 }
 
 /**
@@ -603,7 +626,18 @@ function boardTaskSlideInEditTask(i) {
     pushBoardTaskToClipboard(i)
     document.getElementById('addTaskSlideInMenu').innerHTML = ``;
     let slideInTask = document.getElementById('boardTaskSlideInDiv');
-    slideInTask.innerHTML = /*html*/ `
+    slideInTask.innerHTML = boardTaskFillSlideInEditTaskHTML(i);
+    boardTaskEditSlideInInsertValues(i)
+    createSelectedContactIcons();
+}
+
+/**
+ * 
+ * @param {*} i for the specific task
+ * @returns returns the html part for the slideInTask
+ */
+function boardTaskFillSlideInEditTaskHTML(i) {
+    return /*html*/ `
     <div class="board-task-slide-in-edit-div">
         <img onclick="toggleTaskBoardTask()" src="assets/img/x.svg" alt="">
         ${insertTaskTitleHTML()}
@@ -618,8 +652,6 @@ function boardTaskSlideInEditTask(i) {
         ${boardTaskSlideInOkButton(i)}
     </div>
     `;
-    boardTaskEditSlideInInsertValues(i)
-    createSelectedContactIcons();
 }
 
 /**
@@ -691,18 +723,51 @@ function boardTaskEditSlideInInsertPriority() {
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
 
     if (priorityValue == 'Urgent') {
-        urgentBox.classList.add('add-task-priority-urgent');
-        mediumBox.classList.remove('add-task-priority-medium');
-        lowBox.classList.remove('add-task-priority-low');
+        setPriorityClassListUrgent(urgentBox, mediumBox, lowBox);
     } else if (priorityValue == 'Medium') {
-        urgentBox.classList.remove('add-task-priority-urgent');
-        mediumBox.classList.add('add-task-priority-medium');
-        lowBox.classList.remove('add-task-priority-low');
+        setPriorityClassListMedium(urgentBox, mediumBox, lowBox)
     } else if (priorityValue == 'Low') {
-        urgentBox.classList.remove('add-task-priority-urgent');
-        mediumBox.classList.remove('add-task-priority-medium');
-        lowBox.classList.add('add-task-priority-low');
+        setPriorityClassListLow(urgentBox, mediumBox, lowBox)
     }
+}
+
+/**
+ * sets the priority class list for the urgent button
+ * 
+ * @param {*} urgentBox the urgent button
+ * @param {*} mediumBox the medium button
+ * @param {*} lowBox the low button
+ */
+function setPriorityClassListUrgent(urgentBox, mediumBox, lowBox) {
+    urgentBox.classList.add('add-task-priority-urgent');
+    mediumBox.classList.remove('add-task-priority-medium');
+    lowBox.classList.remove('add-task-priority-low');
+}
+
+/**
+ * sets the priority class list for the medium button
+ * 
+ * @param {*} urgentBox the urgent button
+ * @param {*} mediumBox the medium button
+ * @param {*} lowBox the low button
+ */
+function setPriorityClassListMedium(urgentBox, mediumBox, lowBox) {
+    urgentBox.classList.remove('add-task-priority-urgent');
+    mediumBox.classList.add('add-task-priority-medium');
+    lowBox.classList.remove('add-task-priority-low');
+}
+
+/**
+ * sets the priority class list for the low button
+ * 
+ * @param {*} urgentBox the urgent button
+ * @param {*} mediumBox the medium button
+ * @param {*} lowBox the low button
+ */
+function setPriorityClassListLow(urgentBox, mediumBox, lowBox) {
+    urgentBox.classList.remove('add-task-priority-urgent');
+    mediumBox.classList.remove('add-task-priority-medium');
+    lowBox.classList.add('add-task-priority-low');
 }
 
 /**
@@ -822,31 +887,80 @@ async function createTaskBoardSite() {
     let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
 
     if (title.value.trim() === '') {
-        title.setCustomValidity('You need a Title to create a Task!');
-        title.reportValidity();
-        return;
+        titleEmptyValidation(title);
     } else if (title.value.length >= 35) {
-        title.setCustomValidity('Title is too long');
-        title.reportValidity();
-        return;
+        titleLengthValidation(title)
     } else if (valueIsPresent) {
-        title.setCustomValidity('Title is already assigned!');
-        title.reportValidity();
-        return
+        titleDuplicateValidation(title);
     } else if (taskClipboard.priority == '') {
-        let priorityArea = document.getElementById('addTaskPriorityInputMedium');
-        priorityArea.setCustomValidity('No Priority given yet!')
-        priorityArea.reportValidity();
+        priorityValidation();
     } else {
-        taskClipboard.title = title.value;
-        taskClipboard.taskStatus = boardTaskStatus;
-        pushDueDateToTaskClipboard()
-        pushDescriptionToTaskClipboard()
-        await pushTaskToBackend()
-        confirmAddedTaskToBoard()
-        await initBackend()
-        insertTaskTolistHTML()
-        addTaskFillSlideInMenu()
-        clearTaskClipboard()
+        pushValuesToClipboard(title);
     }
+}
+
+/**
+ * validates the title of the task if it is empty or not
+ * 
+ * @param {*} title task title
+ * @returns if the title is empty
+ */
+function titleEmptyValidation(title) {
+    title.setCustomValidity('You need a Title to create a Task!');
+    title.reportValidity();
+    return;
+}
+
+/**
+ * validates the title of the task if it is already assigned
+ * 
+ * @param {*} title task title
+ * @returns if the title is already assigned
+ */
+function titleDuplicateValidation(title) {
+    title.setCustomValidity('Title is already assigned!');
+    title.reportValidity();
+    return
+}
+
+/**
+ * validates the priority of the task if it is empty or not
+ * 
+ * @returns if the priority is empty
+ */
+function priorityValidation() {
+    let priorityArea = document.getElementById('addTaskPriorityInputMedium');
+    priorityArea.setCustomValidity('No Priority given yet!')
+    priorityArea.reportValidity();
+    return;
+}
+
+/**
+ * validates the title of the task if it is too long or not
+ * 
+ * @param {*} title task title
+ * @returns if the title is too long
+ */
+function titleLengthValidation(title) {
+    title.setCustomValidity('Title is too long');
+    title.reportValidity();
+    return;
+}
+
+/**
+ * pushes the values of the task to the clipboard, then to the backend and then reiterates the board
+ * 
+ * @param {*} title task title
+ */
+async function pushValuesToClipboard(title) {
+    taskClipboard.title = title.value;
+    taskClipboard.taskStatus = boardTaskStatus;
+    pushDueDateToTaskClipboard()
+    pushDescriptionToTaskClipboard()
+    await pushTaskToBackend()
+    confirmAddedTaskToBoard()
+    await initBackend()
+    insertTaskTolistHTML()
+    addTaskFillSlideInMenu()
+    clearTaskClipboard()
 }
