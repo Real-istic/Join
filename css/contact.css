@@ -165,6 +165,7 @@ element.style {
   overflow-y: auto;
   box-shadow: 4px 0px 6px 0px #00000014;
   min-width: 358px;
+  left: 4rem;
 }
 
 .contact-left::-webkit-scrollbar {
@@ -279,12 +280,8 @@ element.style {
 }
 
 .contact-right-side {
-  min-width: 480px;
-  width: 100%;
-  max-width: 700px;
-  padding: 50px 32px 25px 65px;
-  right: -100%;
-  transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    margin-top: 4rem;
 }
 
 .back-in-media-contact {
@@ -416,7 +413,7 @@ element.style {
   border-radius: 0px 30px 30px 0px;
   box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
   overflow: auto;
-  left: -100%;
+  left: -200%;
   z-index: 2;
   transition: all 200ms ease-in-out;
 }

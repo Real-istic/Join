@@ -1,0 +1,239 @@
+@media (max-width: 860px) {
+    .help-arrow-edit {
+      display: flex;
+      justify-content: flex-end;
+      margin-left: 16rem;
+      margin-top: 20px;
+    }
+  
+    .help-arrow {
+      display: block;
+    }
+  
+    .add-task-slide-in-menu {
+      z-index: 2;
+    }
+  
+    .edit-contact {
+      width: 580px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      background-color: white;
+      border-radius: 0px 30px 30px 30px;
+      box-shadow: 0px 0px 4px rgb(0 0 0 / 16%);
+      overflow: hidden;
+      z-index: 2;
+    }
+  
+    .contact-right-side {
+      z-index: 1;
+      left: 24rem;
+      position: absolute;
+    }
+  
+    .contact-left-fadeIn-bg {
+      z-index: 2;
+    }
+  
+    .contact-name {
+      font-size: 19px;
+      font-weight: 400;
+      margin-top: 26.5px;
+      margin-bottom: 2.5px;
+      margin-left: 16px;
+      height: 51px;
+      border-bottom: 1px solid #d1d1d1;
+    }
+  
+    .newContactCreated {
+      left: 11rem;
+    }
+  
+    .show {
+      right: 1rem;
+      /*  padding-left: 10rem; */
+      padding-top: 4rem;
+      height: 100vh;
+      width: 100%;
+      background: white;
+      transition: all 1ms ease-in-out;
+      z-index: 1;
+    }
+  
+    .new-contact-button {
+      top: 8rem;
+      right: 26rem;
+      width: 160px;
+      height: 50px;
+      font-size: 18px;
+    }
+  
+    .contact-detail-big-name {
+      font-size: 27px;
+    }
+  
+    .contact-detail-info-main {
+      justify-content: flex-start;
+      margin-right: 100px;
+    }
+  }
+  
+  @media (max-width: 590px) {
+    .new-contact-main {
+      width: 350px;
+      height: 24rem;
+      position: fixed;
+      top: 22rem;
+    }
+  
+    .edit-contact {
+      width: 350px;
+    }
+  
+    .new-contact {
+      width: 350px;
+    }
+  
+    .contact-left-fadeIn {
+      border-radius: 0px 30px 30px 30px;
+      width: 350px;
+    }
+  
+    .img-edit-contact {
+      display: none;
+    }
+  
+    .edit-contact-h {
+      color: white;
+      padding-top: 12px;
+      font-family: Inter;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 56px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+  
+    .new-contact-h {
+      color: white;
+      padding-top: 12px;
+      font-family: Inter;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 56px;
+      letter-spacing: 0em;
+      text-align: left;
+    }
+  
+    .edit-contact-head {
+      background-color: #4589ff;
+      width: 350px;
+      height: 19rem;
+      padding-bottom: 70px;
+      border-radius: 0px 30px 0px 0px;
+    }
+  
+    .new-contact-head {
+      background-color: #4589ff;
+      width: 350px;
+      height: 19rem;
+      border-radius: 0px 30px 0px 0px;
+    }
+  
+    .new-contact-header-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 12rem;
+    }
+  
+    .input-contact-main {
+      width: 300px;
+      height: 20rem;
+      padding-top: 2rem;
+    }
+  
+    .edit-contact-text-edit {
+      font-weight: 400;
+      font-size: 21px;
+      color: #ffffff;
+      display: flex;
+      position: fixed;
+      left: 2rem;
+      top: 9rem;
+    }
+  
+    .input-newContact-main {
+      width: 300px;
+      height: 20rem;
+      padding-top: 4rem;
+    }
+  
+    .button-cancel {
+      display: none;
+    }
+  
+    .new-contact-button {
+      height: 53px;
+      width: 174px;
+      font-size: 20px;
+      right: 18rem;
+    }
+  
+    .contact-detail-big-letter {
+      min-width: 120px;
+      height: 120px;
+      font-size: 36px;
+    }
+  
+    .edit-contact-main {
+      width: 580px;
+      height: 388px;
+      background-color: #ffffff;
+      border-radius: 0px 0px 30px 0px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-right: 14.5rem;
+      padding-top: 43px;
+      padding-bottom: 20px;
+    }
+  }
+  
+  @media (max-width: 541px) {
+    .show {
+      right: 4rem;
+    }
+  
+    .newContactCreated {
+      left: 0rem;
+    }
+  
+    .new-contact-button {
+      right: 14rem;
+    }
+  }
+  
+  @media (max-width: 490px) {
+    .contact-detail-big-name {
+      font-size: 23px;
+    }
+  
+    .help-arrow {
+      position: absolute;
+      right: 3rem;
+      top: 3rem;
+      cursor: pointer;
+    }
+  
+    .privacy {
+      font-size: 13px;
+    }
+  
+    .privacy_steam {
+      font-size: 29px;
+    }
+  }
