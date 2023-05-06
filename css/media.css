@@ -33,7 +33,7 @@
   }
 
   .newContactCreated {
-      left: 38rem;
+      left: 4rem;
   }
 }
 
@@ -196,72 +196,6 @@
   }
 }
 
-@media (max-width: 445px) {
-  .show {
-      left: -3rem;
-  }
-
-  .show-contact {
-      left: 0rem;
-      z-index: 3;
-      position: fixed;
-      background-color: white;
-      height: 670px;
-      bottom: 0rem;
-      padding-top: 0rem;
-      padding-left: 4rem;
-  }
-
-  .contact-right-side {
-      padding-left: 0rem;
-  }
-
-  .contact-big-letter {
-      min-width: 70px;
-      height: 70px;
-      font-size: 30px;
-  }
-
-  .new-contact-main {
-      width: 350px;
-      height: 1rem;
-      position: fixed;
-      top: 29rem;
-  }
-
-  .img_newContact {
-      width: 100px;
-      height: 100px;
-      position: absolute;
-      bottom: 12rem;
-      left: 7rem;
-  }
-
-  .contact-detail-big-letter {
-      width: 120px;
-      height: 120px;
-      position: absolute;
-      bottom: 11rem;
-      left: 0rem;
-  }
-
-  .edit-contact-main {
-      width: 350px;
-      height: 0rem;
-      position: absolute;
-      top: 26rem;
-      left: 7rem;
-  }
-
-  .input-contact-main {
-      padding-top: 5rem;
-  }
-
-  .contact-right-side {
-      left: 2rem;
-  }
-}
-
 @media (max-width: 590px) {
   .new-contact-main {
       width: 350px;
@@ -310,7 +244,6 @@
   }
 
   .edit-contact-head {
-      background-color: #4589ff;
       width: 350px;
       height: 19rem;
       padding-bottom: 70px;
@@ -320,7 +253,7 @@
   .new-contact-head {
       background-color: #4589ff;
       width: 350px;
-      height: 19rem;
+      height: 16rem;
       border-radius: 0px 30px 0px 0px;
   }
 
@@ -379,12 +312,58 @@
   }
 }
 
-@media (max-width: 374px) {
-  .show-contact {
-      padding-left: 2rem;
+@media (max-width: 460px) {
+  .contact-right-side {
+      left: 3rem;
   }
 }
 
+@media (max-width: 400px) {
+  .contact-right-side {
+      left: 3rem;
+  }
+  .show {
+      right: 7rem;
+  }
+
+  .show-contact {
+      z-index: 3;
+      position: fixed;
+      background-color: white;
+      height: 690px;
+      bottom: 3rem;
+      padding-top: 4rem;
+      left: 0rem;
+      padding-left: 2rem;
+  }
+
+  .contact-detail-big-name {
+      font-size: 21px;
+  }
+}
+
+@media (max-width: 375px) {
+  .img_newContact {
+      display: none;
+  }
+  .new-contact-main {
+      height: 14rem;
+  }
+  .edit-contact-head {
+      height: 12rem;
+  }
+  .edit-contact-text-edit {
+      display: none;
+  }
+  .contact-detail-big-letter {
+      margin-top: 5rem;
+  }
+  .input-contact-main {
+      width: 300px;
+      height: 15rem;
+      padding-top: 3rem;
+  }
+}
 @media (max-width: 340px) {
   .show {
       right: 7rem;
