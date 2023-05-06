@@ -343,7 +343,6 @@ element.style {
 .contact-detail-info-main {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .contact-detail-info {

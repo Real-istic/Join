@@ -116,6 +116,7 @@
 
   .contact-right-side {
       z-index: 1;
+      top: 0;
       left: 26rem;
       position: absolute;
   }
@@ -192,7 +193,7 @@
       position: fixed;
       top: 6.2rem;
       left: 0rem;
-      height: 744px;
+      height: 100%;
       width: 46rem;
   }
   .contact-left {
