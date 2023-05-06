@@ -29,7 +29,9 @@ function insertContentHTML() {
           <div class="contact-left">${renderUserList()}</div>
           <div class="contact-right" id="contact-right"></div>
     </div>
+    <div class="new_contact-button">
       <div class="new-contact-button" onclick="openNewContact()">New contact
+    </div>
       <img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
     </div>
     <div class="newContactCreated" id="newContactCreated"><img src="./assets/img/contactCreated.svg"></div>`;
