@@ -77,21 +77,43 @@ function signUpNewUser() {
   signUpSetsUser(newContactName, newContactEmail, newContactPassword);
 }
 
+/**
+ * validates the name
+ * 
+ * @param {*} newContactName the new contact name
+ */
 function signUpNewUserValidateName(newContactName) {
   newContactName.setCustomValidity("Please enter your first and last name.");
   newContactName.reportValidity();
 }
 
+/**
+ * validates the email
+ * 
+ * @param {*} newContactEmail the new contact email
+ */
 function signUpNewUserValidateEmail(newContactEmail) {
   newContactEmail.setCustomValidity("Please enter your email.");
   newContactEmail.reportValidity();
 }
 
+/**
+ * validates the password
+ * 
+ * @param {*} newContactPassword the new contact password
+ */
 function signUpNewUserValidatePassword(newContactPassword) {
   newContactPassword.setCustomValidity("Please enter your password.");
   newContactPassword.reportValidity();
 }
 
+/**
+ * initialize the new user
+ * 
+ * @param {*} newContactName the new contact name
+ * @param {*} newContactEmail the new contact email
+ * @param {*} newContactPassword the new contact password
+ */
 function signUpSetsUser(newContactName, newContactEmail, newContactPassword) {
   let nameParts = newContactName.value.split(" ");
   let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
