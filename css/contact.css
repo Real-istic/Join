@@ -165,7 +165,7 @@ element.style {
   overflow-y: auto;
   box-shadow: 4px 0px 6px 0px #00000014;
   min-width: 358px;
-  left: 4rem;
+  left: 15rem;
 }
 
 .contact-left::-webkit-scrollbar {

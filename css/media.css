@@ -4,6 +4,10 @@
       right: 200px;
       top: 3rem;
   }
+
+  .contact-left {
+        left: 4rem;
+  }
 }
 
 @media (max-width: 1212px) {
