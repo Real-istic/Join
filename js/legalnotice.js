@@ -15,7 +15,7 @@ function insertLegalNotice(){
  */
 function legalNoticeHTML(){
     return /*html*/`
-    <div>
+    <div class="legal-notice-div">
         <h1 style="margin-top: 0;">Legal Notice</h1>
         <h2>Angaben gemäß § 5 TMG</h2>
         <p>Daniel Bergmann</p>

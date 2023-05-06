@@ -257,7 +257,7 @@ nav {
 
 .content {
   position: absolute;
-  top: 0px;
+  top: 30px;
   left: 232px;
   bottom: 0px;
   right: 0px;
@@ -307,18 +307,7 @@ nav {
   transition: all 80ms ease-in-out;
 }
 
-
-/* Summary */
-/* -> summary.css */
-
-
-/* board */
-/* -> board.css */
-
-
-/* add Task */
-/* -> add_task.css */
-
-
-/* log-in-screen */
-/* -> login.css */
+.legal-notice-div {
+  position: absolute;
+  top: 20px;
+}
