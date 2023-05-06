@@ -39,7 +39,7 @@ function SignUpInputHTML() {
       </div>
       <div class="log-in-input-field" >
           <input type="password" placeholder="Password" id="passwordInputZero" onkeyup="checkNumberOfLetters('Zero')">
-          <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility()">
+          <img class="cursor-pointer" src="./assets/img/password-icon.svg" id="passwordToggleZero" onclick="togglePasswordVisibility('Zero')">
       </div>
       `;
 }
