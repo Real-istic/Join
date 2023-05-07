@@ -1,4 +1,4 @@
-@media (max-width: 590px) {
+@media (max-width: 600px) {
     .new-contact-main {
         width: 350px;
         height: 24rem;
@@ -124,6 +124,7 @@
     .contact-right-side {
         left: 3rem;
     }
+    
     .show {
         right: 7rem;
     }
@@ -144,28 +145,34 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 380px) {
     .img_newContact {
         display: none;
     }
+
     .new-contact-main {
         height: 14rem;
     }
+
     .edit-contact-head {
         height: 12rem;
     }
+
     .edit-contact-text-edit {
         display: none;
     }
+
     .contact-detail-big-letter {
         margin-top: 5rem;
     }
+
     .input-contact-main {
         width: 300px;
         height: 15rem;
         padding-top: 3rem;
     }
 }
+
 @media (max-width: 340px) {
     .show {
         right: 7rem;
