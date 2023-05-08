@@ -135,6 +135,19 @@
   flex-direction: column;
   padding-bottom: 30px;
 }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+
 .input-newContact-main {
   display: flex;
   justify-content: center;

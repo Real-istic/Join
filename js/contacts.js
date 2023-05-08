@@ -218,7 +218,7 @@ function showEditContactsHTML(i) {
               <img src="./assets/img/login-email.svg" alt="">
           </div>
           <div class="input-contact">
-           <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber || ''}">
+           <input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber || ''}">
             <img src="./assets/img/phone.svg" alt="">
          </div>   
                    
@@ -376,7 +376,7 @@ function showAddContact() {
                                       <img src="./assets/img/login-email.svg" alt="">
                                       </div>
                                       <div class="input-contact">
-                                          <input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
+                                          <input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                               <img src="./assets/img/phone.svg" alt="">
                                               </div>
                                       </div>
@@ -402,33 +402,28 @@ function addNewContact() {
   const contactEditName = document.getElementById("contactNewName");
   const contactEditEmail = document.getElementById("contactNewEmail");
   const contactEditNumber = document.getElementById("contactNewNumber");
-
-  if (
-    contactEditName.value === "" ||
-    contactEditEmail.value === "" ||
-    contactEditNumber.value === ""
-  ) {
-    contactEditName.setCustomValidity(
-      "Please enter firstname, lastname, email and phone!"
-    );
-    contactEditEmail.setCustomValidity("Please enter email!");
-    contactEditNumber.setCustomValidity("Please enter phone!");
-    contactEditName.reportValidity();
-    contactEditEmail.reportValidity();
-    contactEditNumber.reportValidity();
-    return false;
-  }
-  if (
-    contactEditEmail.value === "" &&
-    contactEditNumber.value === "" &&
-    contactEditName.value === ""
-  ) {
-    return true;
-  }
-  // Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
-  let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
-  let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
+  let somethingIsWrongWithName = nameParts.length < 2 || nameParts[0].trim() === "" || nameParts[1].trim() === "" || nameParts.length > 2;
+  let firstName;
+  let lastName;
+
+  if (somethingIsWrongWithName) {
+    contactEditName.setCustomValidity("Please enter your First and Last name correctly!");
+    contactEditName.reportValidity();
+    // contactEditEmail.setCustomValidity("Please enter email!");
+    // contactEditNumber.setCustomValidity("Please enter phone!");
+    // contactEditEmail.reportValidity();
+    // contactEditNumber.reportValidity();
+    return;
+  } else {
+    // firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+    // lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
+  } 
+
+
+  if ((contactEditEmail.value === "") && (contactEditNumber.value === "") && (contactEditName.value === "")) {
+    return;
+  }
 
   let newUser = {
     firstName: firstName,
