@@ -150,7 +150,7 @@ function renderContactSideScroll(i) {
         </div>
         <div>
           <p class="contact-detail-email-number">Mobile</p>
-          <p>${userList[i].phoneNumber}</p> 
+          <p>${userList[i].phoneNumber || ''}</p> 
         </div>
       </div>
     </div>
@@ -213,10 +213,10 @@ function showEditContactsHTML(i) {
             <input required type="email" id="contactEditEmail" class="input-contact-email" value="${userList[i].email}">
               <img src="./assets/img/login-email.svg" alt="">
           </div>
-          <div class="input-contact">
-            <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
-              <img src="./assets/img/phone.svg" alt="">
-          </div>          
+          <input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber || ''}">
+          <img src="./assets/img/phone.svg" alt="">
+          </div>
+                   
         </div>
           <div class="button-container">
           <button class="button-create" type="submit">Save</button>
