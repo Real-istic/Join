@@ -1,7 +1,7 @@
 /* Contact Page */
 @media (max-width: 1400px) {
     .help-arrow {
-        right: 200px;
+        right: 100px;
         top: 3rem;
     }
 
@@ -98,6 +98,7 @@
 
     .help-arrow {
         display: block;
+        right: 50px
     }
 
     .add-task-slide-in-menu {
@@ -143,7 +144,6 @@
 
     .show {
         right: 1rem;
-        /*  padding-left: 10rem; */
         padding-top: 4rem;
         height: 100vh;
         width: 100%;
@@ -153,8 +153,7 @@
     }
 
     .new-contact-button {
-        top: 1rem;
-        /* right: 27rem; */
+        top: 44rem;
         width: 160px;
         height: 50px;
         font-size: 18px;
@@ -168,7 +167,7 @@
 
 @media (max-width: 800px) {
     .privacy_steam {
-        font-size: 24px;
+        font-size: 50px;
     }
 
     .show {
@@ -201,5 +200,6 @@
 
     .contact-left {
         left: 0rem;
+        width: 100%;
     }
 }

@@ -269,7 +269,7 @@ function invEditContact(index) {
   hideEditContacts();
   saveEditContact(userList);
   insertContacts();
-  initbackend();
+  initBackend();
 }
 
 /*
@@ -350,7 +350,7 @@ function showAddContact() {
             <div class="img_newContact">
               <img src="./assets/img/addNewContactProfil.svg">
             </div> 
-              <form onsubmit="return addNewContact(); return false;">
+              <div>
                   <div class="input-newContact-main">
                       <div class="input-contact">
                           <input required type="text" pattern="[A-Za-z]+" id="contactNewName" class="input-contact-name" placeholder="Name">
@@ -378,7 +378,7 @@ function showAddContact() {
                               </div>
                       </div>
                   </div>
-              </form>   
+              </div>   
       `;
   return newContactFadeIn;
 }
