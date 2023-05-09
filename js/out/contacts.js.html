@@ -29,7 +29,7 @@
             <pre class="prettyprint source linenums"><code>/**
  * Call the contacts-page
  */
- function insertContacts() {
+function insertContacts() {
   markActiveNavElement("contacts");
   removeHelp();
   insertContentHTML();
@@ -38,16 +38,16 @@
 }
 
 /**
-* remove classlist of ID help
-*/
+ * remove classlist of ID help
+ */
 function removeHelp() {
   document.getElementById("help").classList.remove("help-none");
 }
 
 /**
-* Renders the contacts content
-* @returns The HTML part
-* */
+ * Renders the contacts content
+ * @returns The HTML part
+ * */
 function insertContentHTML() {
   contentDiv.innerHTML = /*html*/ `
     ${addTaskSlideInMenu()}
@@ -57,52 +57,54 @@ function insertContentHTML() {
           &lt;div class="contact-left">${renderUserList()}&lt;/div>
           &lt;div class="contact-right" id="contact-right">&lt;/div>
     &lt;/div>
+    &lt;div class="new_contact-button">
       &lt;div class="new-contact-button" onclick="openNewContact()">New contact
+    &lt;/div>
       &lt;img class="new-contact-button-img" src="./assets/img/contact-member.svg" alt="">
     &lt;/div>
     &lt;div class="newContactCreated" id="newContactCreated">&lt;img src="./assets/img/contactCreated.svg">&lt;/div>`;
 }
 /**
-*
-* Call an event on editContact content
-*/
+ *
+ * Call an event on editContact content
+ */
 function eventOnEditContact() {
   const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeInBg.addEventListener("click", function () {
-      editContactFadeInBg.classList.remove("show-left");
-      editContactFadeIn.classList.remove("show-left");
+    editContactFadeInBg.classList.remove("show-left");
+    editContactFadeIn.classList.remove("show-left");
   });
 }
 /**
-* Renders the contacts content with a sort the list of initial letters alphabetically
-* @returns The HTML part
-*/
+ * Renders the contacts content with a sort the list of initial letters alphabetically
+ * @returns The HTML part
+ */
 function renderUserList() {
   let userListHTML = "";
   let initialLetters = [];
 
   // get a list of initial letters for all first names
   for (let h = 0; h &lt; userList.length; h++) {
-      const firstNameLetter = userList[h].firstName.charAt(0);
-      if (!initialLetters.includes(firstNameLetter)) {
-          initialLetters.push(firstNameLetter);
-      }
+    const firstNameLetter = userList[h].firstName.charAt(0);
+    if (!initialLetters.includes(firstNameLetter)) {
+      initialLetters.push(firstNameLetter);
+    }
   }
   // sort the list of initial letters alphabetically
   initialLetters.sort();
   // create a list of users for each initial letter
   for (let x = 0; x &lt; initialLetters.length; x++) {
-      const initialLetter = initialLetters[x];
-      let usersForLetterHTML = "";
+    const initialLetter = initialLetters[x];
+    let usersForLetterHTML = "";
 
-      for (let i = 0; i &lt; userList.length; i++) {
-          const firstNameLetter = userList[i].firstName.charAt(0);
-          const lastNameLetter = userList[i].lastName.charAt(0);
-          const contactName = userList[i].firstName + " " + userList[i].lastName;
+    for (let i = 0; i &lt; userList.length; i++) {
+      const firstNameLetter = userList[i].firstName.charAt(0);
+      const lastNameLetter = userList[i].lastName.charAt(0);
+      const contactName = userList[i].firstName + " " + userList[i].lastName;
 
-          if (firstNameLetter === initialLetter &amp;&amp; userList[i].lastName !== "") {
-              usersForLetterHTML += /*html*/ `
+      if (firstNameLetter === initialLetter &amp;&amp; userList[i].lastName !== "") {
+        usersForLetterHTML += /*html*/ `
       &lt;div class="contact-child-div" onclick ="contactRightSide(${i})">
         &lt;div class="contact-child-div">
           &lt;div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-child">
@@ -114,9 +116,9 @@ function renderUserList() {
           &lt;/div>
         &lt;/div>
       &lt;/div>`;
-          }
       }
-      userListHTML += /*html*/ `
+    }
+    userListHTML += /*html*/ `
     &lt;div class="contact-letter-main" >
       &lt;h4 class="contact-letter">${initialLetter}&lt;/h4>
       ${usersForLetterHTML}
@@ -126,10 +128,10 @@ function renderUserList() {
 }
 
 /**
-* Call the renderContactSideScroll content and add show class for fade in from right
-*
-* @param {number} i The index of the user in the userList
-* */
+ * Call the renderContactSideScroll content and add show class for fade in from right
+ *
+ * @param {number} i The index of the user in the userList
+ * */
 function contactRightSide(i) {
   let rightSide = document.getElementById("contact-right");
   rightSide.classList.add("show");
@@ -137,10 +139,10 @@ function contactRightSide(i) {
 }
 
 /**
-* Renders the contactSideScroll content
-*
-* @returns The HTML part
-*/
+ * Renders the contactSideScroll content
+ *
+ * @returns The HTML part
+ */
 function renderContactSideScroll(i) {
   let ContactSideScrollHTML;
   const firstNameLetter = userList[i].firstName.charAt(0);
@@ -158,7 +160,8 @@ function renderContactSideScroll(i) {
         &lt;div class="contact-detail-main-side" id="0">
         &lt;/div>        
         &lt;div class="contact-detail-head">
-          &lt;div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-big-letter">${contactNameLetter}&lt;/div>
+          &lt;div style="background-color: ${userList[i]["backgroundColor"]
+    }" class="contact-big-letter">${contactNameLetter}&lt;/div>
             &lt;div class="contact-detail-name-task">
               &lt;p class="contact-detail-big-name">${contactName}&lt;/p>
               &lt;p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()">&lt;img src="./assets/img/blue-plus.svg" alt="">Add Task&lt;/p>
@@ -172,11 +175,12 @@ function renderContactSideScroll(i) {
         &lt;/div>              
         &lt;div>
           &lt;p class="contact-detail-email-number">Email&lt;/p>
-          &lt;a href="mailto:${userList[i].email}">&lt;span>${userList[i].email}&lt;/span>&lt;/a>
+          &lt;a href="mailto:${userList[i].email}">&lt;span>${userList[i].email
+    }&lt;/span>&lt;/a>
         &lt;/div>
         &lt;div>
           &lt;p class="contact-detail-email-number">Mobile&lt;/p>
-          &lt;p>${userList[i].phoneNumber}&lt;/p> 
+          &lt;p>${userList[i].phoneNumber || ""}&lt;/p> 
         &lt;/div>
       &lt;/div>
     &lt;/div>
@@ -185,18 +189,18 @@ function renderContactSideScroll(i) {
 }
 
 /**
-* Call the editContact content
-*
-* @param {number} i The index of the user in the userList
-*/
+ * Call the editContact content
+ *
+ * @param {number} i The index of the user in the userList
+ */
 function editContact(i) {
   showEditContacts();
   showEditContactsHTML(i);
 }
 /**
-* show the editContact content
-* @param {number} i The index of the user in the userList
-*/
+ * show the editContact content
+ * @param {number} i The index of the user in the userList
+ */
 function showEditContacts() {
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
@@ -204,9 +208,9 @@ function showEditContacts() {
   editContactFadeIn.classList.add("show-left");
 }
 /**
-* show the editContact HMTMLcontent
-*
-*/
+ * show the editContact HMTMLcontent
+ *
+ */
 function showEditContactsHTML(i) {
   const firstNameLetter = userList[i].firstName.charAt(0);
   const lastNameLetter = userList[i].lastName.charAt(0);
@@ -229,7 +233,7 @@ function showEditContactsHTML(i) {
       &lt;div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
         &lt;p>${contactNameLetter}&lt;/p>
       &lt;/div>
-      &lt;form onsubmit="event.preventDefault(); invEditContact(${i});">
+      &lt;div>
         &lt;div class="input-contact-main">
           &lt;div class="input-contact">
             &lt;input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
@@ -240,68 +244,59 @@ function showEditContactsHTML(i) {
               &lt;img src="./assets/img/login-email.svg" alt="">
           &lt;/div>
           &lt;div class="input-contact">
-            &lt;input required type="tel" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber}">
-              &lt;img src="./assets/img/phone.svg" alt="">
-          &lt;/div>          
+           &lt;input required type="number" id="contactEditNumber" class="input-contact-name" value="${userList[i].phoneNumber || ''}">
+            &lt;img src="./assets/img/phone.svg" alt="">
+         &lt;/div>   
+                   
         &lt;/div>
           &lt;div class="button-container">
-          &lt;button class="button-create" type="submit">Save&lt;/button>
+          &lt;button class="button-create" onclick="invEditContact(${i})" type="submit">Save&lt;/button>
           &lt;/div>
-      &lt;/form>
+      &lt;/div>
   &lt;/div>
 &lt;/div>`;
   return editContactFadeIn;
 }
 
+/**
+ * edits the contact and saves it to the userList
+ * 
+ * @param {*} index the index of the user in the userList
+ */
 function invEditContact(index) {
   const contactEditName = document.getElementById("contactEditName");
   const contactEditEmail = document.getElementById("contactEditEmail");
   const contactEditNumber = document.getElementById("contactEditNumber");
+  const nameParts = contactEditName.value.split(" ");
 
-  // Remove custom validity messages (if previously set)
-  contactEditName.setCustomValidity("");
-  contactEditEmail.setCustomValidity("");
-  contactEditNumber.setCustomValidity("");
+  const validatedContact = validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts);
+  if (validatedContact) {
+    userList[index].firstName = validatedContact.firstName;
+    userList[index].lastName = validatedContact.lastName;
+    userList[index].email = contactEditEmail.value;
+    userList[index].phoneNumber = contactEditNumber.value;
 
-  // Check if the form is valid
-  //if (!contactEditName.checkValidity() || !contactEditEmail.checkValidity() || !contactEditNumber.checkValidity()) {
-  // return false;
-  if (contactEditName.value === "" || contactEditEmail.value === "" || contactEditNumber.value === "") {
-      contactEditName.setCustomValidity("Please enter firstname, lastname, email and phone!");
-      contactEditEmail.setCustomValidity("Please enter email!");
-      contactEditNumber.setCustomValidity("Please enter phone!");
-      contactEditName.reportValidity();
-      contactEditEmail.reportValidity();
-      contactEditNumber.reportValidity();
-      return false;
+    const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
+    const firstNameLetter = userList[index].firstName.charAt(0);
+    const lastNameLetter = userList[index].lastName.charAt(0);
+    const contactNameLetter = firstNameLetter + lastNameLetter;
+    const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
+    const contactDetailBigName = document.querySelector(".contact-detail-big-name");
+
+    contactDetailBigLetter.textContent = contactNameLetter;
+    contactDetailBigName.textContent = contactName;
+
+    hideEditContacts();
+    saveEditContact(userList);
+    insertContacts();
+    initBackend();
   }
-
-  // Save changes in the userList
-  userList[index].firstName = contactEditName.value.split(" ")[0];
-  userList[index].lastName = contactEditName.value.split(" ")[1];
-  userList[index].email = contactEditEmail.value;
-  userList[index].phoneNumber = contactEditNumber.value;
-
-  // Update user data
-  const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
-  const firstNameLetter = userList[index].firstName.charAt(0);
-  const lastNameLetter = userList[index].lastName.charAt(0);
-  const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
-  contactDetailBigLetter.textContent = contactNameLetter;
-  const contactDetailBigName = document.querySelector(".contact-detail-big-name");
-  contactDetailBigName.textContent = contactName;
-
-  hideEditContacts();
-  saveEditContact(userList);
-  insertContacts();
-  initbackend();
 }
 
 /*
-* Hide the editContact content
-* @param {number} i The index of the user in the userList
-*/
+ * Hide the editContact content
+ * @param {number} i The index of the user in the userList
+ */
 function hideEditContacts() {
   const editContactFadeInBg = document.getElementById("contact-left-fadeIn-bg");
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
@@ -312,28 +307,28 @@ function hideEditContacts() {
 }
 
 /**
-*
-* Call the newContact content
-*/
+ *
+ * Call the newContact content
+ */
 function openNewContact() {
   for (let i = 0; i &lt; userList.length; i++) {
-      showAddContact();
+    showAddContact();
   }
 }
 
 /**
-*
-* Hide the content in gray background
-*/
+ *
+ * Hide the content in gray background
+ */
 function bgHide() {
   const bgHide = document.getElementById("contact-left-fadeIn-bg");
   bgHide.classList.add("show-left");
 }
 
 /**
-*
-* remove the gray background from content
-*/
+ *
+ * remove the gray background from content
+ */
 function bgHideRemove() {
   removeAddContact();
   const bgHideRemove = document.getElementById("contact-left-fadeIn-bg");
@@ -341,18 +336,18 @@ function bgHideRemove() {
 }
 
 /**
-*
-*  remove the Add contact content from the left Side
-*/
+ *
+ *  remove the Add contact content from the left Side
+ */
 function removeAddContact() {
   let newContactFadeIn = document.getElementById("contact-left-fadeIn");
   newContactFadeIn.classList.remove("show-left");
 }
 
 /**
-*
-* show the Add contact content from the left Side
-*/
+ *
+ * show the Add contact content from the left Side
+ */
 function showAddContact() {
   bgHide();
   let newContactFadeIn = document.getElementById("contact-left-fadeIn");
@@ -376,7 +371,7 @@ function showAddContact() {
             &lt;div class="img_newContact">
               &lt;img src="./assets/img/addNewContactProfil.svg">
             &lt;/div> 
-              &lt;form onsubmit="return addNewContact(); return false;">
+              &lt;div>
                   &lt;div class="input-newContact-main">
                       &lt;div class="input-contact">
                           &lt;input required type="text" pattern="[A-Za-z]+" id="contactNewName" class="input-contact-name" placeholder="Name">
@@ -387,7 +382,7 @@ function showAddContact() {
                                       &lt;img src="./assets/img/login-email.svg" alt="">
                                       &lt;/div>
                                       &lt;div class="input-contact">
-                                          &lt;input required="" type="tel" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
+                                          &lt;input required="" type="number" id="contactNewNumber" class="input-contact-name" placeholder="Phone">
                                               &lt;img src="./assets/img/phone.svg" alt="">
                                               &lt;/div>
                                       &lt;/div>
@@ -404,66 +399,90 @@ function showAddContact() {
                               &lt;/div>
                       &lt;/div>
                   &lt;/div>
-              &lt;/form>   
+              &lt;/div>   
       `;
   return newContactFadeIn;
 }
 
+/**
+ * adds a new contact to the userList
+ */
 function addNewContact() {
   const contactEditName = document.getElementById("contactNewName");
   const contactEditEmail = document.getElementById("contactNewEmail");
   const contactEditNumber = document.getElementById("contactNewNumber");
-
-  if (contactEditName.value === "" || contactEditEmail.value === "" || contactEditNumber.value === "") {
-      contactEditName.setCustomValidity("Please enter firstname, lastname, email and phone!");
-      contactEditEmail.setCustomValidity("Please enter email!");
-      contactEditNumber.setCustomValidity("Please enter phone!");
-      contactEditName.reportValidity();
-      contactEditEmail.reportValidity();
-      contactEditNumber.reportValidity();
-      return false;
-  }
-  if (contactEditEmail.value === "" &amp;&amp; contactEditNumber.value === "" &amp;&amp; contactEditName.value === "") {
-      return true;
-  }
-  // Separate first and last names and make sure that the first letter is capitalized.
   let nameParts = contactEditName.value.split(" ");
-  let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
-  let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
-
-  let newUser = {
+  let firstName;
+  let lastName;
+  let validatedContact = validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts);
+  if (validatedContact) {
+    firstName = validatedContact.firstName;
+    lastName = validatedContact.lastName;
+    let newUser = {
       firstName: firstName,
       lastName: lastName,
       email: contactEditEmail.value,
       phoneNumber: contactEditNumber.value,
       backgroundColor: `${getRandomColor()}`,
-  };
-
-  addUser(newUser);
-  hideEditContacts();
-  insertContacts();
-  showNewContactMessage();
-}
-
-/**
-* show new contact created message
-*
-*/
-function showNewContactMessage() {
-  if (document.getElementById("newContactCreated")) {
-      const newContactMessage = document.getElementById("newContactCreated");
-
-      newContactMessage.classList.add("showNewContactFadeIn");
-      setTimeout(() => {
-          newContactMessage.classList.remove("showNewContactFadeIn");
-      }, 3000);
+    };
+    addUser(newUser);
+    hideEditContacts();
+    insertContacts();
+    showNewContactMessage();
   }
 }
 
 /**
-*
-* Load the editContact content
-*/
+ * validates the new contact
+ * 
+ * @param {*} contactEditName the name of the new contact
+ * @param {*} contactEditEmail the email of the new contact
+ * @param {*} contactEditNumber the phone number of the new contact
+ * @param {*} nameParts the name parts of the new contact (first and last name)
+ * @returns the validated contact
+ */
+function validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts) {
+  if ((nameParts.length &lt; 2) || (nameParts[0].trim() === "") || (nameParts[1].trim() === "") || (nameParts.length > 2)) {
+    contactEditName.setCustomValidity("Please enter your First and Last name correctly!");
+    contactEditName.reportValidity();
+    return null;
+  } else if (contactEditEmail.value === "" || !contactEditEmail.value.includes('@') || !contactEditEmail.value.includes('.')) {
+    contactEditEmail.setCustomValidity("Please enter a correct email address!");
+    contactEditEmail.reportValidity();
+    return null;
+  } else if (contactEditNumber.value === "") {
+    contactEditNumber.setCustomValidity("Please enter a phone number!");
+    contactEditNumber.reportValidity();
+    return null;
+  } else {
+    let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+    let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
+    return {
+      firstName: firstName,
+      lastName: lastName
+    };
+  }
+}
+
+/**
+ * show new contact created message
+ *
+ */
+function showNewContactMessage() {
+  if (document.getElementById("newContactCreated")) {
+    const newContactMessage = document.getElementById("newContactCreated");
+
+    newContactMessage.classList.add("showNewContactFadeIn");
+    setTimeout(() => {
+      newContactMessage.classList.remove("showNewContactFadeIn");
+    }, 3000);
+  }
+}
+
+/**
+ *
+ * Load the editContact content
+ */
 async function loadEditContact() {
   // userList aus dem Backend laden
   const userList = await backend.getItem("users", JSON.stringify(userList));
@@ -471,23 +490,32 @@ async function loadEditContact() {
 }
 
 /**
-*
-* Prevent the editContact content from closing when clicking inside the content
-*/
+ *
+ * Prevent the editContact content from closing when clicking inside the content
+ */
 function doNotClose() {
   const editContactFadeIn = document.getElementById("contact-left-fadeIn");
   editContactFadeIn.addEventListener("click", (event) => {
-      event.stopPropagation();
+    event.stopPropagation();
   });
 }
 
 /**
-* returns a random hex color code but not white
-*
-* @returns a string representing a hex color code
-*/
+ * returns a random hex color code but not white
+ *
+ * @returns a string representing a hex color code
+ */
 function getRandomColor() {
-  const colors = ["#F8D030", "#78C850", "#3899E6", "#E0306A", "#007030", "#1C6BA0", "#64C8F0", "#FF9BCB"];
+  const colors = [
+    "#F8D030",
+    "#78C850",
+    "#3899E6",
+    "#E0306A",
+    "#007030",
+    "#1C6BA0",
+    "#64C8F0",
+    "#FF9BCB",
+  ];
   const randomIndex = Math.floor(Math.random() * colors.length);
   return colors[randomIndex];
 }
@@ -501,13 +529,13 @@ function getRandomColor() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#SignUpButtonHTML">SignUpButtonHTML</a></li><li><a href="global.html#SignUpInputHTML">SignUpInputHTML</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addCategoryToClipboard">addCategoryToClipboard</a></li><li><a href="global.html#addCategoryToClipboardHTML">addCategoryToClipboardHTML</a></li><li><a href="global.html#addContactToTask">addContactToTask</a></li><li><a href="global.html#addEventListenerLogInInput">addEventListenerLogInInput</a></li><li><a href="global.html#addForgotPasswordHTML">addForgotPasswordHTML</a></li><li><a href="global.html#addReturnButtonHTML">addReturnButtonHTML</a></li><li><a href="global.html#addSubtaskToClipboard">addSubtaskToClipboard</a></li><li><a href="global.html#addTaskCreateNewCategoryColorSelector">addTaskCreateNewCategoryColorSelector</a></li><li><a href="global.html#addTaskFillSlideInMenu">addTaskFillSlideInMenu</a></li><li><a href="global.html#addTaskOffScreenMenu">addTaskOffScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#bgHide">bgHide</a></li><li><a href="global.html#bgHideRemove">bgHideRemove</a></li><li><a href="global.html#boardTaskEditSlideInInsertDescription">boardTaskEditSlideInInsertDescription</a></li><li><a href="global.html#boardTaskEditSlideInInsertDueDate">boardTaskEditSlideInInsertDueDate</a></li><li><a href="global.html#boardTaskEditSlideInInsertPriority">boardTaskEditSlideInInsertPriority</a></li><li><a href="global.html#boardTaskEditSlideInInsertTitle">boardTaskEditSlideInInsertTitle</a></li><li><a href="global.html#boardTaskEditSlideInInsertValues">boardTaskEditSlideInInsertValues</a></li><li><a href="global.html#boardTaskFillSlideInEditTaskHTML">boardTaskFillSlideInEditTaskHTML</a></li><li><a href="global.html#boardTaskSaveEditTaskTolist">boardTaskSaveEditTaskTolist</a></li><li><a href="global.html#boardTaskSlideInAssignedToHeaderHTML">boardTaskSlideInAssignedToHeaderHTML</a></li><li><a href="global.html#boardTaskSlideInEditTask">boardTaskSlideInEditTask</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasks">boardTaskSlideInInsertSubtasks</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasksChecked">boardTaskSlideInInsertSubtasksChecked</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasksUnChecked">boardTaskSlideInInsertSubtasksUnChecked</a></li><li><a href="global.html#boardTaskSlideInOkButton">boardTaskSlideInOkButton</a></li><li><a href="global.html#boardTaskSlideInSubtaskHeaderHTML">boardTaskSlideInSubtaskHeaderHTML</a></li><li><a href="global.html#boardTaskStatus">boardTaskStatus</a></li><li><a href="global.html#changeBackgroundColor">changeBackgroundColor</a></li><li><a href="global.html#changeLogInInputHTML">changeLogInInputHTML</a></li><li><a href="global.html#changeLogoColor">changeLogoColor</a></li><li><a href="global.html#changeLogoPosition">changeLogoPosition</a></li><li><a href="global.html#checkCheckboxes">checkCheckboxes</a></li><li><a href="global.html#checkForContactInClipboard">checkForContactInClipboard</a></li><li><a href="global.html#checkForExistingEmail">checkForExistingEmail</a></li><li><a href="global.html#checkForExpandedContactList">checkForExpandedContactList</a></li><li><a href="global.html#checkForSameInput">checkForSameInput</a></li><li><a href="global.html#checkNumberOfLetters">checkNumberOfLetters</a></li><li><a href="global.html#chooseRightPasswordImgage">chooseRightPasswordImgage</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskClipboard">clearTaskClipboard</a></li><li><a href="global.html#closeLogout">closeLogout</a></li><li><a href="global.html#commitChangePassword">commitChangePassword</a></li><li><a href="global.html#compareDates">compareDates</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#confirmCreateNewCategory">confirmCreateNewCategory</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#containers">containers</a></li><li><a href="global.html#contentDiv">contentDiv</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#createCategoryInputHTML">createCategoryInputHTML</a></li><li><a href="global.html#createCategoryListHTML">createCategoryListHTML</a></li><li><a href="global.html#createContactAddTaskHTML">createContactAddTaskHTML</a></li><li><a href="global.html#createForgotPasswordAnimation">createForgotPasswordAnimation</a></li><li><a href="global.html#createForgotPasswordHTML">createForgotPasswordHTML</a></li><li><a href="global.html#createForgotPasswordNewURLHTML">createForgotPasswordNewURLHTML</a></li><li><a href="global.html#createLogInElementsHTML">createLogInElementsHTML</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createNewCategoryColorSelectorHTML">createNewCategoryColorSelectorHTML</a></li><li><a href="global.html#createNewCategoryColorSelectorRadioButtonHTML">createNewCategoryColorSelectorRadioButtonHTML</a></li><li><a href="global.html#createNewCategoryHTML">createNewCategoryHTML</a></li><li><a href="global.html#createSelectedContactIcons">createSelectedContactIcons</a></li><li><a href="global.html#createSelectedContactIconsDivHTML">createSelectedContactIconsDivHTML</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createSubtaskHTML">createSubtaskHTML</a></li><li><a href="global.html#createTaskAddTaskSite">createTaskAddTaskSite</a></li><li><a href="global.html#createTaskBoardSite">createTaskBoardSite</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteTasksFromBackend">deleteTasksFromBackend</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#eventOnEditContact">eventOnEditContact</a></li><li><a href="global.html#expandContactList">expandContactList</a></li><li><a href="global.html#fillSubtaskStatusbar">fillSubtaskStatusbar</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#forgotPasswordInputHTML">forgotPasswordInputHTML</a></li><li><a href="global.html#getAmountofTasks">getAmountofTasks</a></li><li><a href="global.html#getAmountofTasksInStatus">getAmountofTasksInStatus</a></li><li><a href="global.html#getDeadlineAndAmountOfUrgetTasks">getDeadlineAndAmountOfUrgetTasks</a></li><li><a href="global.html#getNewCategoryColor">getNewCategoryColor</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#guestLogIn">guestLogIn</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#helpHTML">helpHTML</a></li><li><a href="global.html#hideContactList">hideContactList</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#initChangePassword">initChangePassword</a></li><li><a href="global.html#initRegistrationPageHTML">initRegistrationPageHTML</a></li><li><a href="global.html#initializeEditedTask">initializeEditedTask</a></li><li><a href="global.html#insertAddTask">insertAddTask</a></li><li><a href="global.html#insertAssignedContactsToTaskGreaterThanTwoHTML">insertAssignedContactsToTaskGreaterThanTwoHTML</a></li><li><a href="global.html#insertAssignedContactsToTaskHTML">insertAssignedContactsToTaskHTML</a></li><li><a href="global.html#insertAssignedContactsToTaskLowerThanTwoHTML">insertAssignedContactsToTaskLowerThanTwoHTML</a></li><li><a href="global.html#insertAwaitFeedbackTasksHeaderHTML">insertAwaitFeedbackTasksHeaderHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHTML">insertBoardHTML</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTaskSlideInAssigned">insertBoardTaskSlideInAssigned</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIteration">insertBoardTaskSlideInAssignedContactsIteration</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIterationHTML">insertBoardTaskSlideInAssignedContactsIterationHTML</a></li><li><a href="global.html#insertBoardTaskSlideInCategoryHTML">insertBoardTaskSlideInCategoryHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDescriptionHTML">insertBoardTaskSlideInDescriptionHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDueDateHTML">insertBoardTaskSlideInDueDateHTML</a></li><li><a href="global.html#insertBoardTaskSlideInPriorityHTML">insertBoardTaskSlideInPriorityHTML</a></li><li><a href="global.html#insertBoardTaskSlideInTitleHTML">insertBoardTaskSlideInTitleHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorFromInterruptHTML">insertCategorySelectorFromInterruptHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertContentHTML">insertContentHTML</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHeaderHTML">insertDoneTasksHeaderHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHeaderHTML">insertInProgressTasksHeaderHTML</a></li><li><a href="global.html#insertLegalNotice">insertLegalNotice</a></li><li><a href="global.html#insertOpenTaskSlideInHTML">insertOpenTaskSlideInHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertPrivacy">insertPrivacy</a></li><li><a href="global.html#insertSubtaskProgress">insertSubtaskProgress</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTaskTolistHTML">insertTaskTolistHTML</a></li><li><a href="global.html#insertTodoTasksHeaderHTML">insertTodoTasksHeaderHTML</a></li><li><a href="global.html#interruptCreateNewCategory">interruptCreateNewCategory</a></li><li><a href="global.html#legalNoticeHTML">legalNoticeHTML</a></li><li><a href="global.html#loadCategorylist">loadCategorylist</a></li><li><a href="global.html#loadChangePasswordPage">loadChangePasswordPage</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadContentHTML">loadContentHTML</a></li><li><a href="global.html#loadDragAndDrop">loadDragAndDrop</a></li><li><a href="global.html#loadEditContact">loadEditContact</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#loadRegistrationPage">loadRegistrationPage</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#markActiveNavElement">markActiveNavElement</a></li><li><a href="global.html#openAndCloseContactList">openAndCloseContactList</a></li><li><a href="global.html#openLogOutButton">openLogOutButton</a></li><li><a href="global.html#openNewContact">openNewContact</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#priorityValidation">priorityValidation</a></li><li><a href="global.html#privacyHTML">privacyHTML</a></li><li><a href="global.html#pushAddTaskValuesToClipboard">pushAddTaskValuesToClipboard</a></li><li><a href="global.html#pushBoardTaskToClipboard">pushBoardTaskToClipboard</a></li><li><a href="global.html#pushBoardTaskValuesToClipboard">pushBoardTaskValuesToClipboard</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushEditedTaskTolist">pushEditedTaskTolist</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTaskToBackend">pushTaskToBackend</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeAddContact">removeAddContact</a></li><li><a href="global.html#removeContactFromTask">removeContactFromTask</a></li><li><a href="global.html#removeEmailAnimation">removeEmailAnimation</a></li><li><a href="global.html#removeHelp">removeHelp</a></li><li><a href="global.html#removeWrongEmailAlert">removeWrongEmailAlert</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#restoreBackend">restoreBackend</a></li><li><a href="global.html#returnToLoginPage">returnToLoginPage</a></li><li><a href="global.html#returnToLoginPageCSSHTML">returnToLoginPageCSSHTML</a></li><li><a href="global.html#saveEditContact">saveEditContact</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendEmailAnimation">sendEmailAnimation</a></li><li><a href="global.html#setElementsFromLocalStorage">setElementsFromLocalStorage</a></li><li><a href="global.html#setPriorityClassListLow">setPriorityClassListLow</a></li><li><a href="global.html#setPriorityClassListMedium">setPriorityClassListMedium</a></li><li><a href="global.html#setPriorityClassListUrgent">setPriorityClassListUrgent</a></li><li><a href="global.html#showAddContact">showAddContact</a></li><li><a href="global.html#showEditContacts">showEditContacts</a></li><li><a href="global.html#showEditContactsHTML">showEditContactsHTML</a></li><li><a href="global.html#showLogInElements">showLogInElements</a></li><li><a href="global.html#showNewContactMessage">showNewContactMessage</a></li><li><a href="global.html#showWelcomeUserMessage">showWelcomeUserMessage</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#signUpNewUser">signUpNewUser</a></li><li><a href="global.html#signUpNewUserValidateEmail">signUpNewUserValidateEmail</a></li><li><a href="global.html#signUpNewUserValidateName">signUpNewUserValidateName</a></li><li><a href="global.html#signUpNewUserValidatePassword">signUpNewUserValidatePassword</a></li><li><a href="global.html#signUpSetsUser">signUpSetsUser</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#summaryTopLater">summaryTopLater</a></li><li><a href="global.html#taskToListHTML">taskToListHTML</a></li><li><a href="global.html#titleDuplicateValidation">titleDuplicateValidation</a></li><li><a href="global.html#titleEmptyValidation">titleEmptyValidation</a></li><li><a href="global.html#titleLengthValidation">titleLengthValidation</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li><li><a href="global.html#toggleContactTask">toggleContactTask</a></li><li><a href="global.html#togglePasswordPlaceholder">togglePasswordPlaceholder</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#toggleSubtaskInlist">toggleSubtaskInlist</a></li><li><a href="global.html#toggleTaskBoardTask">toggleTaskBoardTask</a></li><li><a href="global.html#toggleTaskBoardTaskStyleDisplayNone">toggleTaskBoardTaskStyleDisplayNone</a></li><li><a href="global.html#toggleTaskBoardTaskStyleReduceOpacity">toggleTaskBoardTaskStyleReduceOpacity</a></li><li><a href="global.html#toggleWrongPasswordAlert">toggleWrongPasswordAlert</a></li><li><a href="global.html#updatePassword">updatePassword</a></li><li><a href="global.html#userList">userList</a></li><li><a href="global.html#wrongPasswordHTML">wrongPasswordHTML</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#SignUpButtonHTML">SignUpButtonHTML</a></li><li><a href="global.html#SignUpInputHTML">SignUpInputHTML</a></li><li><a href="global.html#addCategory">addCategory</a></li><li><a href="global.html#addCategoryToClipboard">addCategoryToClipboard</a></li><li><a href="global.html#addCategoryToClipboardHTML">addCategoryToClipboardHTML</a></li><li><a href="global.html#addContactToTask">addContactToTask</a></li><li><a href="global.html#addEventListenerLogInInput">addEventListenerLogInInput</a></li><li><a href="global.html#addForgotPasswordHTML">addForgotPasswordHTML</a></li><li><a href="global.html#addNewContact">addNewContact</a></li><li><a href="global.html#addReturnButtonHTML">addReturnButtonHTML</a></li><li><a href="global.html#addSubtaskToClipboard">addSubtaskToClipboard</a></li><li><a href="global.html#addTaskCreateNewCategoryColorSelector">addTaskCreateNewCategoryColorSelector</a></li><li><a href="global.html#addTaskFillSlideInMenu">addTaskFillSlideInMenu</a></li><li><a href="global.html#addTaskOffScreenMenu">addTaskOffScreenMenu</a></li><li><a href="global.html#addTaskSetPriority">addTaskSetPriority</a></li><li><a href="global.html#addTaskSlideInMenu">addTaskSlideInMenu</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#bgHide">bgHide</a></li><li><a href="global.html#bgHideRemove">bgHideRemove</a></li><li><a href="global.html#boardTaskEditSlideInInsertDescription">boardTaskEditSlideInInsertDescription</a></li><li><a href="global.html#boardTaskEditSlideInInsertDueDate">boardTaskEditSlideInInsertDueDate</a></li><li><a href="global.html#boardTaskEditSlideInInsertPriority">boardTaskEditSlideInInsertPriority</a></li><li><a href="global.html#boardTaskEditSlideInInsertTitle">boardTaskEditSlideInInsertTitle</a></li><li><a href="global.html#boardTaskEditSlideInInsertValues">boardTaskEditSlideInInsertValues</a></li><li><a href="global.html#boardTaskFillSlideInEditTaskHTML">boardTaskFillSlideInEditTaskHTML</a></li><li><a href="global.html#boardTaskSaveEditTaskTolist">boardTaskSaveEditTaskTolist</a></li><li><a href="global.html#boardTaskSlideInAssignedToHeaderHTML">boardTaskSlideInAssignedToHeaderHTML</a></li><li><a href="global.html#boardTaskSlideInEditTask">boardTaskSlideInEditTask</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasks">boardTaskSlideInInsertSubtasks</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasksChecked">boardTaskSlideInInsertSubtasksChecked</a></li><li><a href="global.html#boardTaskSlideInInsertSubtasksUnChecked">boardTaskSlideInInsertSubtasksUnChecked</a></li><li><a href="global.html#boardTaskSlideInOkButton">boardTaskSlideInOkButton</a></li><li><a href="global.html#boardTaskSlideInSubtaskHeaderHTML">boardTaskSlideInSubtaskHeaderHTML</a></li><li><a href="global.html#boardTaskStatus">boardTaskStatus</a></li><li><a href="global.html#changeBackgroundColor">changeBackgroundColor</a></li><li><a href="global.html#changeLogInInputHTML">changeLogInInputHTML</a></li><li><a href="global.html#changeLogoColor">changeLogoColor</a></li><li><a href="global.html#changeLogoPosition">changeLogoPosition</a></li><li><a href="global.html#checkCheckboxes">checkCheckboxes</a></li><li><a href="global.html#checkForContactInClipboard">checkForContactInClipboard</a></li><li><a href="global.html#checkForExistingEmail">checkForExistingEmail</a></li><li><a href="global.html#checkForExpandedContactList">checkForExpandedContactList</a></li><li><a href="global.html#checkForSameInput">checkForSameInput</a></li><li><a href="global.html#checkNumberOfLetters">checkNumberOfLetters</a></li><li><a href="global.html#chooseRightPasswordImgage">chooseRightPasswordImgage</a></li><li><a href="global.html#clearTask">clearTask</a></li><li><a href="global.html#clearTaskClipboard">clearTaskClipboard</a></li><li><a href="global.html#closeLogout">closeLogout</a></li><li><a href="global.html#commitChangePassword">commitChangePassword</a></li><li><a href="global.html#compareDates">compareDates</a></li><li><a href="global.html#confirmAddedTaskToBoard">confirmAddedTaskToBoard</a></li><li><a href="global.html#confirmCreateNewCategory">confirmCreateNewCategory</a></li><li><a href="global.html#contactRightSide">contactRightSide</a></li><li><a href="global.html#containers">containers</a></li><li><a href="global.html#contentDiv">contentDiv</a></li><li><a href="global.html#createAnimation">createAnimation</a></li><li><a href="global.html#createCategoryInputHTML">createCategoryInputHTML</a></li><li><a href="global.html#createCategoryListHTML">createCategoryListHTML</a></li><li><a href="global.html#createContactAddTaskHTML">createContactAddTaskHTML</a></li><li><a href="global.html#createForgotPasswordAnimation">createForgotPasswordAnimation</a></li><li><a href="global.html#createForgotPasswordHTML">createForgotPasswordHTML</a></li><li><a href="global.html#createForgotPasswordNewURLHTML">createForgotPasswordNewURLHTML</a></li><li><a href="global.html#createLogInElementsHTML">createLogInElementsHTML</a></li><li><a href="global.html#createNewCategory">createNewCategory</a></li><li><a href="global.html#createNewCategoryColorSelectorHTML">createNewCategoryColorSelectorHTML</a></li><li><a href="global.html#createNewCategoryColorSelectorRadioButtonHTML">createNewCategoryColorSelectorRadioButtonHTML</a></li><li><a href="global.html#createNewCategoryHTML">createNewCategoryHTML</a></li><li><a href="global.html#createSelectedContactIcons">createSelectedContactIcons</a></li><li><a href="global.html#createSelectedContactIconsDivHTML">createSelectedContactIconsDivHTML</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createSubtaskHTML">createSubtaskHTML</a></li><li><a href="global.html#createTaskAddTaskSite">createTaskAddTaskSite</a></li><li><a href="global.html#createTaskBoardSite">createTaskBoardSite</a></li><li><a href="global.html#currentUser">currentUser</a></li><li><a href="global.html#deleteCategory">deleteCategory</a></li><li><a href="global.html#deleteTasksFromBackend">deleteTasksFromBackend</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#doNotClose">doNotClose</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#eventOnEditContact">eventOnEditContact</a></li><li><a href="global.html#expandContactList">expandContactList</a></li><li><a href="global.html#fillSubtaskStatusbar">fillSubtaskStatusbar</a></li><li><a href="global.html#forgotPassword">forgotPassword</a></li><li><a href="global.html#forgotPasswordInputHTML">forgotPasswordInputHTML</a></li><li><a href="global.html#getAmountofTasks">getAmountofTasks</a></li><li><a href="global.html#getAmountofTasksInStatus">getAmountofTasksInStatus</a></li><li><a href="global.html#getDeadlineAndAmountOfUrgetTasks">getDeadlineAndAmountOfUrgetTasks</a></li><li><a href="global.html#getNewCategoryColor">getNewCategoryColor</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#guestLogIn">guestLogIn</a></li><li><a href="global.html#help">help</a></li><li><a href="global.html#helpHTML">helpHTML</a></li><li><a href="global.html#hideContactList">hideContactList</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBackend">initBackend</a></li><li><a href="global.html#initChangePassword">initChangePassword</a></li><li><a href="global.html#initRegistrationPageHTML">initRegistrationPageHTML</a></li><li><a href="global.html#initializeEditedTask">initializeEditedTask</a></li><li><a href="global.html#insertAddTask">insertAddTask</a></li><li><a href="global.html#insertAssignedContactsToTaskGreaterThanTwoHTML">insertAssignedContactsToTaskGreaterThanTwoHTML</a></li><li><a href="global.html#insertAssignedContactsToTaskHTML">insertAssignedContactsToTaskHTML</a></li><li><a href="global.html#insertAssignedContactsToTaskLowerThanTwoHTML">insertAssignedContactsToTaskLowerThanTwoHTML</a></li><li><a href="global.html#insertAwaitFeedbackTasksHeaderHTML">insertAwaitFeedbackTasksHeaderHTML</a></li><li><a href="global.html#insertBoard">insertBoard</a></li><li><a href="global.html#insertBoardHTML">insertBoardHTML</a></li><li><a href="global.html#insertBoardHeaderHTML">insertBoardHeaderHTML</a></li><li><a href="global.html#insertBoardTaskSlideInAssigned">insertBoardTaskSlideInAssigned</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIteration">insertBoardTaskSlideInAssignedContactsIteration</a></li><li><a href="global.html#insertBoardTaskSlideInAssignedContactsIterationHTML">insertBoardTaskSlideInAssignedContactsIterationHTML</a></li><li><a href="global.html#insertBoardTaskSlideInCategoryHTML">insertBoardTaskSlideInCategoryHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDescriptionHTML">insertBoardTaskSlideInDescriptionHTML</a></li><li><a href="global.html#insertBoardTaskSlideInDueDateHTML">insertBoardTaskSlideInDueDateHTML</a></li><li><a href="global.html#insertBoardTaskSlideInPriorityHTML">insertBoardTaskSlideInPriorityHTML</a></li><li><a href="global.html#insertBoardTaskSlideInTitleHTML">insertBoardTaskSlideInTitleHTML</a></li><li><a href="global.html#insertBoardTasks">insertBoardTasks</a></li><li><a href="global.html#insertCategoryListHTML">insertCategoryListHTML</a></li><li><a href="global.html#insertCategorySelectorFromInterruptHTML">insertCategorySelectorFromInterruptHTML</a></li><li><a href="global.html#insertCategorySelectorHTML">insertCategorySelectorHTML</a></li><li><a href="global.html#insertContacts">insertContacts</a></li><li><a href="global.html#insertContentHTML">insertContentHTML</a></li><li><a href="global.html#insertDescriptionHTML">insertDescriptionHTML</a></li><li><a href="global.html#insertDoneTasksHeaderHTML">insertDoneTasksHeaderHTML</a></li><li><a href="global.html#insertDueDateHTML">insertDueDateHTML</a></li><li><a href="global.html#insertInProgressTasksHeaderHTML">insertInProgressTasksHeaderHTML</a></li><li><a href="global.html#insertLegalNotice">insertLegalNotice</a></li><li><a href="global.html#insertOpenTaskSlideInHTML">insertOpenTaskSlideInHTML</a></li><li><a href="global.html#insertPriorityHTML">insertPriorityHTML</a></li><li><a href="global.html#insertPrivacy">insertPrivacy</a></li><li><a href="global.html#insertSubtaskProgress">insertSubtaskProgress</a></li><li><a href="global.html#insertSubtasksHTML">insertSubtasksHTML</a></li><li><a href="global.html#insertSummary">insertSummary</a></li><li><a href="global.html#insertTaskContactlistHTML">insertTaskContactlistHTML</a></li><li><a href="global.html#insertTaskLeft">insertTaskLeft</a></li><li><a href="global.html#insertTaskRightHTML">insertTaskRightHTML</a></li><li><a href="global.html#insertTaskSlideInHeader">insertTaskSlideInHeader</a></li><li><a href="global.html#insertTaskTitleHTML">insertTaskTitleHTML</a></li><li><a href="global.html#insertTaskTolistHTML">insertTaskTolistHTML</a></li><li><a href="global.html#insertTodoTasksHeaderHTML">insertTodoTasksHeaderHTML</a></li><li><a href="global.html#interruptCreateNewCategory">interruptCreateNewCategory</a></li><li><a href="global.html#invEditContact">invEditContact</a></li><li><a href="global.html#legalNoticeHTML">legalNoticeHTML</a></li><li><a href="global.html#loadCategorylist">loadCategorylist</a></li><li><a href="global.html#loadChangePasswordPage">loadChangePasswordPage</a></li><li><a href="global.html#loadContactList">loadContactList</a></li><li><a href="global.html#loadContentHTML">loadContentHTML</a></li><li><a href="global.html#loadDragAndDrop">loadDragAndDrop</a></li><li><a href="global.html#loadEditContact">loadEditContact</a></li><li><a href="global.html#loadJSONFromServer">loadJSONFromServer</a></li><li><a href="global.html#loadRegistrationPage">loadRegistrationPage</a></li><li><a href="global.html#logIn">logIn</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#markActiveNavElement">markActiveNavElement</a></li><li><a href="global.html#openAndCloseContactList">openAndCloseContactList</a></li><li><a href="global.html#openLogOutButton">openLogOutButton</a></li><li><a href="global.html#openNewContact">openNewContact</a></li><li><a href="global.html#openTask">openTask</a></li><li><a href="global.html#priorityValidation">priorityValidation</a></li><li><a href="global.html#privacyHTML">privacyHTML</a></li><li><a href="global.html#pushAddTaskValuesToClipboard">pushAddTaskValuesToClipboard</a></li><li><a href="global.html#pushBoardTaskToClipboard">pushBoardTaskToClipboard</a></li><li><a href="global.html#pushBoardTaskValuesToClipboard">pushBoardTaskValuesToClipboard</a></li><li><a href="global.html#pushDescriptionToTaskClipboard">pushDescriptionToTaskClipboard</a></li><li><a href="global.html#pushDueDateToTaskClipboard">pushDueDateToTaskClipboard</a></li><li><a href="global.html#pushEditedTaskTolist">pushEditedTaskTolist</a></li><li><a href="global.html#pushPriorityToTaskClipboard">pushPriorityToTaskClipboard</a></li><li><a href="global.html#pushTaskToBackend">pushTaskToBackend</a></li><li><a href="global.html#rememberMe">rememberMe</a></li><li><a href="global.html#removeAddContact">removeAddContact</a></li><li><a href="global.html#removeContactFromTask">removeContactFromTask</a></li><li><a href="global.html#removeEmailAnimation">removeEmailAnimation</a></li><li><a href="global.html#removeHelp">removeHelp</a></li><li><a href="global.html#removeWrongEmailAlert">removeWrongEmailAlert</a></li><li><a href="global.html#renderContactSideScroll">renderContactSideScroll</a></li><li><a href="global.html#renderUserList">renderUserList</a></li><li><a href="global.html#returnToLoginPage">returnToLoginPage</a></li><li><a href="global.html#returnToLoginPageCSSHTML">returnToLoginPageCSSHTML</a></li><li><a href="global.html#saveEditContact">saveEditContact</a></li><li><a href="global.html#saveJSONToServer">saveJSONToServer</a></li><li><a href="global.html#searchContacts">searchContacts</a></li><li><a href="global.html#sendEmail">sendEmail</a></li><li><a href="global.html#sendEmailAnimation">sendEmailAnimation</a></li><li><a href="global.html#setElementsFromLocalStorage">setElementsFromLocalStorage</a></li><li><a href="global.html#setPriorityClassListLow">setPriorityClassListLow</a></li><li><a href="global.html#setPriorityClassListMedium">setPriorityClassListMedium</a></li><li><a href="global.html#setPriorityClassListUrgent">setPriorityClassListUrgent</a></li><li><a href="global.html#showAddContact">showAddContact</a></li><li><a href="global.html#showEditContacts">showEditContacts</a></li><li><a href="global.html#showEditContactsHTML">showEditContactsHTML</a></li><li><a href="global.html#showLogInElements">showLogInElements</a></li><li><a href="global.html#showNewContactMessage">showNewContactMessage</a></li><li><a href="global.html#showWelcomeUserMessage">showWelcomeUserMessage</a></li><li><a href="global.html#signUp">signUp</a></li><li><a href="global.html#signUpNewUser">signUpNewUser</a></li><li><a href="global.html#signUpNewUserValidateEmail">signUpNewUserValidateEmail</a></li><li><a href="global.html#signUpNewUserValidateName">signUpNewUserValidateName</a></li><li><a href="global.html#signUpNewUserValidatePassword">signUpNewUserValidatePassword</a></li><li><a href="global.html#signUpSetsUser">signUpSetsUser</a></li><li><a href="global.html#summaryBottomHTML">summaryBottomHTML</a></li><li><a href="global.html#summaryHTML">summaryHTML</a></li><li><a href="global.html#summaryTopHTML">summaryTopHTML</a></li><li><a href="global.html#summaryTopLater">summaryTopLater</a></li><li><a href="global.html#taskToListHTML">taskToListHTML</a></li><li><a href="global.html#titleDuplicateValidation">titleDuplicateValidation</a></li><li><a href="global.html#titleEmptyValidation">titleEmptyValidation</a></li><li><a href="global.html#titleLengthValidation">titleLengthValidation</a></li><li><a href="global.html#toggleAddTaskMenuOffScreen">toggleAddTaskMenuOffScreen</a></li><li><a href="global.html#toggleCategoryList">toggleCategoryList</a></li><li><a href="global.html#toggleContactTask">toggleContactTask</a></li><li><a href="global.html#togglePasswordPlaceholder">togglePasswordPlaceholder</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#toggleSubtaskInlist">toggleSubtaskInlist</a></li><li><a href="global.html#toggleTaskBoardTask">toggleTaskBoardTask</a></li><li><a href="global.html#toggleTaskBoardTaskStyleDisplayNone">toggleTaskBoardTaskStyleDisplayNone</a></li><li><a href="global.html#toggleTaskBoardTaskStyleReduceOpacity">toggleTaskBoardTaskStyleReduceOpacity</a></li><li><a href="global.html#toggleWrongPasswordAlert">toggleWrongPasswordAlert</a></li><li><a href="global.html#updatePassword">updatePassword</a></li><li><a href="global.html#userList">userList</a></li><li><a href="global.html#validateNewContact">validateNewContact</a></li><li><a href="global.html#wrongPasswordHTML">wrongPasswordHTML</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat May 06 2023 11:41:09 GMT+0200 (Mitteleuropäische Sommerzeit)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 09 2023 19:33:26 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

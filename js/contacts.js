@@ -132,9 +132,8 @@ function renderContactSideScroll(i) {
         <div class="contact-detail-main-side" id="0">
         </div>        
         <div class="contact-detail-head">
-          <div style="background-color: ${
-            userList[i]["backgroundColor"]
-          }" class="contact-big-letter">${contactNameLetter}</div>
+          <div style="background-color: ${userList[i]["backgroundColor"]
+    }" class="contact-big-letter">${contactNameLetter}</div>
             <div class="contact-detail-name-task">
               <p class="contact-detail-big-name">${contactName}</p>
               <p class="contact-detail-add-task" onclick="toggleAddTaskMenuOffScreen()"><img src="./assets/img/blue-plus.svg" alt="">Add Task</p>
@@ -148,9 +147,8 @@ function renderContactSideScroll(i) {
         </div>              
         <div>
           <p class="contact-detail-email-number">Email</p>
-          <a href="mailto:${userList[i].email}"><span>${
-    userList[i].email
-  }</span></a>
+          <a href="mailto:${userList[i].email}"><span>${userList[i].email
+    }</span></a>
         </div>
         <div>
           <p class="contact-detail-email-number">Mobile</p>
@@ -207,7 +205,7 @@ function showEditContactsHTML(i) {
       <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-detail-big-letter">
         <p>${contactNameLetter}</p>
       </div>
-      <form onsubmit="event.preventDefault(); invEditContact(${i});">
+      <div>
         <div class="input-contact-main">
           <div class="input-contact">
             <input required type="text" id="contactEditName" class="input-contact-name" value="${userList[i].firstName} ${userList[i].lastName}">
@@ -224,67 +222,47 @@ function showEditContactsHTML(i) {
                    
         </div>
           <div class="button-container">
-          <button class="button-create" type="submit">Save</button>
+          <button class="button-create" onclick="invEditContact(${i})" type="submit">Save</button>
           </div>
-      </form>
+      </div>
   </div>
 </div>`;
   return editContactFadeIn;
 }
 
+/**
+ * edits the contact and saves it to the userList
+ * 
+ * @param {*} index the index of the user in the userList
+ */
 function invEditContact(index) {
   const contactEditName = document.getElementById("contactEditName");
   const contactEditEmail = document.getElementById("contactEditEmail");
   const contactEditNumber = document.getElementById("contactEditNumber");
+  const nameParts = contactEditName.value.split(" ");
 
-  // Remove custom validity messages (if previously set)
-  contactEditName.setCustomValidity("");
-  contactEditEmail.setCustomValidity("");
-  contactEditNumber.setCustomValidity("");
+  const validatedContact = validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts);
+  if (validatedContact) {
+    userList[index].firstName = validatedContact.firstName;
+    userList[index].lastName = validatedContact.lastName;
+    userList[index].email = contactEditEmail.value;
+    userList[index].phoneNumber = contactEditNumber.value;
 
-  // Check if the form is valid
-  //if (!contactEditName.checkValidity() || !contactEditEmail.checkValidity() || !contactEditNumber.checkValidity()) {
-  // return false;
-  if (
-    contactEditName.value === "" ||
-    contactEditEmail.value === "" ||
-    contactEditNumber.value === ""
-  ) {
-    contactEditName.setCustomValidity(
-      "Please enter firstname, lastname, email and phone!"
-    );
-    contactEditEmail.setCustomValidity("Please enter email!");
-    contactEditNumber.setCustomValidity("Please enter phone!");
-    contactEditName.reportValidity();
-    contactEditEmail.reportValidity();
-    contactEditNumber.reportValidity();
-    return false;
+    const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
+    const firstNameLetter = userList[index].firstName.charAt(0);
+    const lastNameLetter = userList[index].lastName.charAt(0);
+    const contactNameLetter = firstNameLetter + lastNameLetter;
+    const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
+    const contactDetailBigName = document.querySelector(".contact-detail-big-name");
+
+    contactDetailBigLetter.textContent = contactNameLetter;
+    contactDetailBigName.textContent = contactName;
+
+    hideEditContacts();
+    saveEditContact(userList);
+    insertContacts();
+    initBackend();
   }
-
-  // Save changes in the userList
-  userList[index].firstName = contactEditName.value.split(" ")[0];
-  userList[index].lastName = contactEditName.value.split(" ")[1];
-  userList[index].email = contactEditEmail.value;
-  userList[index].phoneNumber = contactEditNumber.value;
-
-  // Update user data
-  const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
-  const firstNameLetter = userList[index].firstName.charAt(0);
-  const lastNameLetter = userList[index].lastName.charAt(0);
-  const contactNameLetter = firstNameLetter + lastNameLetter;
-  const contactDetailBigLetter = document.querySelector(
-    ".contact-detail-big-letter"
-  );
-  contactDetailBigLetter.textContent = contactNameLetter;
-  const contactDetailBigName = document.querySelector(
-    ".contact-detail-big-name"
-  );
-  contactDetailBigName.textContent = contactName;
-
-  hideEditContacts();
-  saveEditContact(userList);
-  insertContacts();
-  initBackend();
 }
 
 /*
@@ -398,45 +376,64 @@ function showAddContact() {
   return newContactFadeIn;
 }
 
+/**
+ * adds a new contact to the userList
+ */
 function addNewContact() {
   const contactEditName = document.getElementById("contactNewName");
   const contactEditEmail = document.getElementById("contactNewEmail");
   const contactEditNumber = document.getElementById("contactNewNumber");
   let nameParts = contactEditName.value.split(" ");
-  let somethingIsWrongWithName = nameParts.length < 2 || nameParts[0].trim() === "" || nameParts[1].trim() === "" || nameParts.length > 2;
   let firstName;
   let lastName;
+  let validatedContact = validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts);
+  if (validatedContact) {
+    firstName = validatedContact.firstName;
+    lastName = validatedContact.lastName;
+    let newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: contactEditEmail.value,
+      phoneNumber: contactEditNumber.value,
+      backgroundColor: `${getRandomColor()}`,
+    };
+    addUser(newUser);
+    hideEditContacts();
+    insertContacts();
+    showNewContactMessage();
+  }
+}
 
-  if (somethingIsWrongWithName) {
+/**
+ * validates the new contact
+ * 
+ * @param {*} contactEditName the name of the new contact
+ * @param {*} contactEditEmail the email of the new contact
+ * @param {*} contactEditNumber the phone number of the new contact
+ * @param {*} nameParts the name parts of the new contact (first and last name)
+ * @returns the validated contact
+ */
+function validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts) {
+  if ((nameParts.length < 2) || (nameParts[0].trim() === "") || (nameParts[1].trim() === "") || (nameParts.length > 2)) {
     contactEditName.setCustomValidity("Please enter your First and Last name correctly!");
     contactEditName.reportValidity();
-    // contactEditEmail.setCustomValidity("Please enter email!");
-    // contactEditNumber.setCustomValidity("Please enter phone!");
-    // contactEditEmail.reportValidity();
-    // contactEditNumber.reportValidity();
-    return;
+    return null;
+  } else if (contactEditEmail.value === "" || !contactEditEmail.value.includes('@') || !contactEditEmail.value.includes('.')) {
+    contactEditEmail.setCustomValidity("Please enter a correct email address!");
+    contactEditEmail.reportValidity();
+    return null;
+  } else if (contactEditNumber.value === "") {
+    contactEditNumber.setCustomValidity("Please enter a phone number!");
+    contactEditNumber.reportValidity();
+    return null;
   } else {
-    // firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
-    // lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
-  } 
-
-
-  if ((contactEditEmail.value === "") && (contactEditNumber.value === "") && (contactEditName.value === "")) {
-    return;
+    let firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1);
+    let lastName = nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1);
+    return {
+      firstName: firstName,
+      lastName: lastName
+    };
   }
-
-  let newUser = {
-    firstName: firstName,
-    lastName: lastName,
-    email: contactEditEmail.value,
-    phoneNumber: contactEditNumber.value,
-    backgroundColor: `${getRandomColor()}`,
-  };
-
-  addUser(newUser);
-  hideEditContacts();
-  insertContacts();
-  showNewContactMessage();
 }
 
 /**

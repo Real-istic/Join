@@ -2,7 +2,7 @@
  * backend URL
  * 
  */
-setURL('https://patrizio-marzullo.developerakademie.net/GitHub/Join/smallest_backend_ever')
+setURL('https://patrizio-marzullo.developerakademie.net/Join/smallest_backend_ever')
 
 /**
  * userList = list of our contacts/users
