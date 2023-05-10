@@ -8,6 +8,9 @@ let contentDiv;
  */
 let currentUser;
 
+/**
+ * title validation messages
+ */
 let titleIsEmpty = 'You need a Title to create a Task!'
 let titleLength = 'Title is too long'
 let titleDuplicate = 'Title is already assigned'
