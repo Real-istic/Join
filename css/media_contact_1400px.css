@@ -81,13 +81,6 @@
 }
 
 @media (max-width: 860px) {
-    .new_contact-button {
-        display: flex;
-        width: 329px;
-        height: 50px;
-        font-size: 18px;
-        justify-content: flex-end;
-    }
 
     .help-arrow-edit {
         display: flex;
@@ -178,9 +171,6 @@
     }
 }
 @media (max-width: 720px) {
-    .new_contact-button {
-        width: 315px;
-    }
 
     .show {
         position: fixed;
