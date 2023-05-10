@@ -63,20 +63,8 @@ function createSubtaskHTML(subtaskContainer, subtaskInput) {
  * @param {*} checkbox the specific checkbox clicked by the user
  */
 function addSubtaskToClipboard(checkbox) {
-
-    if (checkbox.checked) {
-        for (let i = 0; i < taskClipboard.subtasks.length; i++) {
-            const subtaskName = taskClipboard.subtasks[i];
-            if (subtaskName == checkbox.name) {
-                taskClipboard.subtasksState.splice(i, 1, true)
-            }
-        }
-    } else {
-        for (let i = 0; i < taskClipboard.subtasks.length; i++) {
-            const subtaskName = taskClipboard.subtasks[i];
-            if (subtaskName == checkbox.name) {
-                taskClipboard.subtasksState.splice(i, 1, false)
-            }
-        }
+    const subtaskIndex = taskClipboard.subtasks.indexOf(checkbox.name);
+    if (subtaskIndex !== -1) {
+        taskClipboard.subtasksState[subtaskIndex] = checkbox.checked;
     }
 }

@@ -8,6 +8,10 @@ let contentDiv;
  */
 let currentUser;
 
+let titleIsEmpty = 'You need a Title to create a Task!'
+let titleLength = 'Title is too long'
+let titleDuplicate = 'Title is already assigned'
+
 /**
  * marks the active tab in the nav-area
  * 

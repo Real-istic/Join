@@ -102,13 +102,17 @@ function boardTaskEditSlideInInsertPriority() {
     let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
     let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
+    
+    urgentBox.classList.remove('add-task-priority-urgent');
+    mediumBox.classList.remove('add-task-priority-medium');
+    lowBox.classList.remove('add-task-priority-low');
 
-    if (priorityValue == 'Urgent') {
-        setPriorityClassListUrgent(urgentBox, mediumBox, lowBox);
-    } else if (priorityValue == 'Medium') {
-        setPriorityClassListMedium(urgentBox, mediumBox, lowBox)
-    } else if (priorityValue == 'Low') {
-        setPriorityClassListLow(urgentBox, mediumBox, lowBox)
+    if (priorityValue === 'Urgent') {
+        urgentBox.classList.add('add-task-priority-urgent');
+    } else if (priorityValue === 'Medium') {
+        mediumBox.classList.add('add-task-priority-medium');
+    } else if (priorityValue === 'Low') {
+        lowBox.classList.add('add-task-priority-low');
     }
 }
 
@@ -136,11 +140,11 @@ async function boardTaskSaveEditTaskTolist(i) {
     let searchValue = title.value
     let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
-        titleEmptyValidation(title);
+        titleValidation(title, titleIsEmpty);
     } else if (title.value.length >= 35) {
-        titleLengthValidation(title);
+        titleValidation(title, titleLength);
     } else if (!(title.value == taskClipboard.title) && (valueIsPresent)) {
-        titleAlreadyExistsValidation(title);
+        titleValidation(title, titleDuplicate);
     } else {
         initializeEditedTask(i);
     }

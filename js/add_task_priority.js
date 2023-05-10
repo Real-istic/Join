@@ -35,60 +35,25 @@ function insertPriorityHTML() {
 }
 
 /**
- * Sets the prioritylevel of the Task
+ * sets the priority of the task
  * 
- * @param {*} priority name of the specific priority
+ * @param {*} priority the priority of the task
  */
 function addTaskSetPriority(priority) {
     let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
     let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
 
-    if (priority == 'Urgent') {
-        setPriorityClassListUrgent(urgentBox, mediumBox, lowBox);
-    } else if (priority == 'Medium') {
-        setPriorityClassListMedium(urgentBox, mediumBox, lowBox)
-    } else if (priority == 'Low') {
-        setPriorityClassListLow(urgentBox, mediumBox, lowBox)
+    urgentBox.classList.remove('add-task-priority-urgent');
+    mediumBox.classList.remove('add-task-priority-medium');
+    lowBox.classList.remove('add-task-priority-low');
+
+    if (priority === 'Urgent') {
+        urgentBox.classList.add('add-task-priority-urgent');
+    } else if (priority === 'Medium') {
+        mediumBox.classList.add('add-task-priority-medium');
+    } else if (priority === 'Low') {
+        lowBox.classList.add('add-task-priority-low');
     }
     taskClipboard.priority = priority;
-}
-
-/**
- * sets the priority class list for the urgent button
- * 
- * @param {*} urgentBox the urgent button
- * @param {*} mediumBox the medium button
- * @param {*} lowBox the low button
- */
-function setPriorityClassListUrgent(urgentBox, mediumBox, lowBox) {
-    urgentBox.classList.add('add-task-priority-urgent');
-    mediumBox.classList.remove('add-task-priority-medium');
-    lowBox.classList.remove('add-task-priority-low');
-}
-
-/**
- * sets the priority class list for the medium button
- * 
- * @param {*} urgentBox the urgent button
- * @param {*} mediumBox the medium button
- * @param {*} lowBox the low button
- */
-function setPriorityClassListMedium(urgentBox, mediumBox, lowBox) {
-    urgentBox.classList.remove('add-task-priority-urgent');
-    mediumBox.classList.add('add-task-priority-medium');
-    lowBox.classList.remove('add-task-priority-low');
-}
-
-/**
- * sets the priority class list for the low button
- * 
- * @param {*} urgentBox the urgent button
- * @param {*} mediumBox the medium button
- * @param {*} lowBox the low button
- */
-function setPriorityClassListLow(urgentBox, mediumBox, lowBox) {
-    urgentBox.classList.remove('add-task-priority-urgent');
-    mediumBox.classList.remove('add-task-priority-medium');
-    lowBox.classList.add('add-task-priority-low');
 }

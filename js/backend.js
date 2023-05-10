@@ -66,29 +66,11 @@ async function addCategory(category) {
 }
 
 /**
- * 
- * removes all categorys form the backend.
- */
-async function deleteCategory() {
-    await backend.deleteItem('category');
-    await initBackend();
-}
-
-/**
  * pushes the taskClipboard to the backend
  * 
  */
 async function pushTaskToBackend() {
     taskList.push(taskClipboard);
     await backend.setItem('tasks', JSON.stringify(taskList));
-    await initBackend()
-}
-
-/**
- * deletes all tasks from the backend
- * 
- */
-async function deleteTasksFromBackend() {
-    await backend.deleteItem('tasks');
     await initBackend()
 }

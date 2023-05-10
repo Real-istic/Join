@@ -123,11 +123,11 @@ async function createTaskAddTaskSite() {
     let searchValue = title.value
     let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
     if (title.value.trim() === '') {
-        titleEmptyValidation(title);
+        titleValidation(title, titleIsEmpty);
     } else if (title.value.length >= 35) {
-        titleLengthValidation(title);
+        titleValidation(title, titleLength);
     } else if (valueIsPresent) {
-        titleDuplicateValidation(title);
+        titleValidation(title, titleDuplicate);
     } else if (taskClipboard.priority == '') {
         priorityValidation();
     } else {
@@ -136,39 +136,16 @@ async function createTaskAddTaskSite() {
 }
 
 /**
- * validates the title of the task if it is empty or not
+ * validates the title of the task
  * 
- * @param {*} title task title
- * @returns if the title is empty
+ * @param {*} title the title of the task
+ * @param {*} titleValidationType the type of the validation
+ * @returns validation information
  */
-function titleEmptyValidation(title) {
-    title.setCustomValidity('You need a Title to create a Task!');
+function titleValidation(title, titleValidationType) {
+    title.setCustomValidity(titleValidationType);
     title.reportValidity();
     return;
-}
-
-/**
- * validates the title of the task if it is too long or not
- * 
- * @param {*} title task title
- * @returns if the title is too long
- */
-function titleLengthValidation(title) {
-    title.setCustomValidity('Title is too long');
-    title.reportValidity();
-    return;
-}
-
-/**
- * validates the title of the task if it is already assigned
- * 
- * @param {*} title task title
- * @returns if the title is already assigned
- */
-function titleDuplicateValidation(title) {
-    title.setCustomValidity('Title is already assigned!');
-    title.reportValidity();
-    return
 }
 
 /**

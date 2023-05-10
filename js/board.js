@@ -223,13 +223,12 @@ async function createTaskBoardSite() {
     let searchKey = 'title';
     let searchValue = title.value
     let valueIsPresent = taskList.some(obj => obj[searchKey] == searchValue);
-
     if (title.value.trim() === '') {
-        titleEmptyValidation(title);
+        titleValidation(title, titleIsEmpty);
     } else if (title.value.length >= 35) {
-        titleLengthValidation(title)
+        titleValidation(title, titleLength);v
     } else if (valueIsPresent) {
-        titleDuplicateValidation(title);
+        titleValidation(title, titleDuplicate);
     } else if (taskClipboard.priority == '') {
         priorityValidation();
     } else {
