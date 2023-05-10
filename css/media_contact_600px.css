@@ -1,4 +1,14 @@
 @media (max-width: 600px) {
+
+    .new-contact-button {
+        bottom: 2rem;
+        width: 160px;
+        height: 50px;
+        font-size: 18px;
+        left: 30%;
+        position: absolute;
+    }
+
     .new-contact-main {
         width: 350px;
         height: 24rem;
