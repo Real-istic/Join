@@ -9,6 +9,13 @@ let contentDiv;
 let currentUser;
 
 /**
+ * contact validation messages
+ */
+let contactNameCheck = 'Please enter your First and Last name correctly!'
+let contactEmailCheck  = 'Please enter a correct email address!'
+let contactNumberCheck = 'Please enter a phone number!'
+
+/**
  * title validation messages
  */
 let titleIsEmpty = 'You need a Title to create a Task!'
