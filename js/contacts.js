@@ -79,23 +79,35 @@ function generateUsersForLetterHTML(userList, initialLetter) {
     const firstNameLetter = user.firstName.charAt(0);
     const lastNameLetter = user.lastName.charAt(0);
     const contactName = user.firstName + " " + user.lastName;
-    return /*html*/ `
-      <div class="contact-child-div" onclick="contactRightSide(${userList.indexOf(user)})">
-        <div class="contact-child-div">
-          <div style="background-color: ${user.backgroundColor}" class="contact-child">
-            <p>${firstNameLetter}${lastNameLetter}</p>
-          </div>
-          <div>
-            <p class="contact-name">${contactName}</p>
-            <p class="contact-email">${user.email}</p>
-          </div>
-        </div>
-      </div>`;
+    return generateUsersForLetterReturnHTML(firstNameLetter, lastNameLetter, contactName, user);
   }).join("");
 
   return usersForLetterHTML;
 }
 
+/**
+ * renders the contacts content with a sort the list of initial letters alphabetically
+ * 
+ * @param {*} firstNameLetter the first letter of the first name
+ * @param {*} lastNameLetter the first letter of the last name
+ * @param {*} contactName the contact name
+ * @param {*} user the user
+ * @returns the html part
+ */
+function generateUsersForLetterReturnHTML(firstNameLetter, lastNameLetter, contactName, user) {
+  return /*html*/ `
+  <div class="contact-child-div" onclick="contactRightSide(${userList.indexOf(user)})">
+    <div class="contact-child-div">
+      <div style="background-color: ${user.backgroundColor}" class="contact-child">
+        <p>${firstNameLetter}${lastNameLetter}</p>
+      </div>
+      <div>
+        <p class="contact-name">${contactName}</p>
+        <p class="contact-email">${user.email}</p>
+      </div>
+    </div>
+  </div>`;
+}
 
 
 /**
