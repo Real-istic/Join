@@ -242,26 +242,45 @@ async function invEditContact(index) {
 
   const validatedContact = validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts);
   if (validatedContact) {
-    userList[index].firstName = validatedContact.firstName;
-    userList[index].lastName = validatedContact.lastName;
-    userList[index].email = contactEditEmail.value;
-    userList[index].phoneNumber = contactEditNumber.value;
-
-    const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
-    const firstNameLetter = userList[index].firstName.charAt(0);
-    const lastNameLetter = userList[index].lastName.charAt(0);
-    const contactNameLetter = firstNameLetter + lastNameLetter;
-    const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
-    const contactDetailBigName = document.querySelector(".contact-detail-big-name");
-
-    contactDetailBigLetter.textContent = contactNameLetter;
-    contactDetailBigName.textContent = contactName;
-
-    hideEditContacts();
-    await saveEditContact(userList);
-    insertContacts();
-    await initBackend();
+    invEditContactVariables(contactEditEmail, contactEditNumber, index, validatedContact);
   }
+}
+
+/**
+ * sets the variables for the editContact function
+ * 
+ * @param {*} contactEditEmail the email of the contact
+ * @param {*} contactEditNumber the phone number of the contact
+ * @param {*} index the index of the user in the userList
+ * @param {*} validatedContact the validated contact
+ */
+async function invEditContactVariables(contactEditEmail, contactEditNumber, index, validatedContact) {
+  userList[index].firstName = validatedContact.firstName;
+  userList[index].lastName = validatedContact.lastName;
+  userList[index].email = contactEditEmail.value;
+  userList[index].phoneNumber = contactEditNumber.value;
+
+  const contactName = `${userList[index].firstName} ${userList[index].lastName}`;
+  const firstNameLetter = userList[index].firstName.charAt(0);
+  const lastNameLetter = userList[index].lastName.charAt(0);
+  const contactNameLetter = firstNameLetter + lastNameLetter;
+  const contactDetailBigLetter = document.querySelector(".contact-detail-big-letter");
+  const contactDetailBigName = document.querySelector(".contact-detail-big-name");
+
+  contactDetailBigLetter.textContent = contactNameLetter;
+  contactDetailBigName.textContent = contactName;
+
+  await initEditContacts();
+}
+
+/**
+ * saves the edited contact to the backend
+ */
+async function initEditContacts() {
+  hideEditContacts();
+  await saveEditContact();
+  insertContacts();
+  await initBackend();
 }
 
 /*

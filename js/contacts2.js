@@ -10,7 +10,21 @@ function addNewContact() {
   let lastName;
   let validatedContact = validateNewContact(contactEditName, contactEditEmail, contactEditNumber, nameParts);
   if (validatedContact) {
-    firstName = validatedContact.firstName;
+    addNewContactValidation(contactEditEmail, contactEditNumber, firstName, lastName, validatedContact)
+  }
+}
+
+/**
+ * validates the new contact and adds it to the userList
+ * 
+ * @param {*} contactEditEmail the email of the new contact
+ * @param {*} contactEditNumber the phone number of the new contact
+ * @param {*} firstName the first name of the new contact
+ * @param {*} lastName the last name of the new contact
+ * @param {*} validatedContact the validated contact
+ */
+function addNewContactValidation(contactEditEmail, contactEditNumber, firstName, lastName, validatedContact) {
+  firstName = validatedContact.firstName;
     lastName = validatedContact.lastName;
     let newUser = {
       firstName: firstName,
@@ -23,7 +37,6 @@ function addNewContact() {
     hideEditContacts();
     insertContacts();
     showNewContactMessage();
-  }
 }
 
 /**
