@@ -46,56 +46,57 @@ function eventOnEditContact() {
     editContactFadeIn.classList.remove("show-left");
   });
 }
+
+/**
+ * renders the user list
+ * 
+ * @returns the html part
+ */
+function renderUserList() {
+  const initialLetters = [...new Set(userList.map(user => user.firstName.charAt(0)))].sort();
+
+  let userListHTML = "";
+  for (const initialLetter of initialLetters) {
+    const usersForLetterHTML = generateUsersForLetterHTML(userList, initialLetter);
+
+    userListHTML += /*html*/ `
+      <div class="contact-letter-main">
+        <h4 class="contact-letter">${initialLetter}</h4>
+        ${usersForLetterHTML}
+      </div>`;
+  }
+
+  return userListHTML;
+}
+
 /**
  * Renders the contacts content with a sort the list of initial letters alphabetically
  * @returns The HTML part
  */
-function renderUserList() {
-  let userListHTML = "";
-  let initialLetters = [];
-
-  // get a list of initial letters for all first names
-  for (let h = 0; h < userList.length; h++) {
-    const firstNameLetter = userList[h].firstName.charAt(0);
-    if (!initialLetters.includes(firstNameLetter)) {
-      initialLetters.push(firstNameLetter);
-    }
-  }
-  // sort the list of initial letters alphabetically
-  initialLetters.sort();
-  // create a list of users for each initial letter
-  for (let x = 0; x < initialLetters.length; x++) {
-    const initialLetter = initialLetters[x];
-    let usersForLetterHTML = "";
-
-    for (let i = 0; i < userList.length; i++) {
-      const firstNameLetter = userList[i].firstName.charAt(0);
-      const lastNameLetter = userList[i].lastName.charAt(0);
-      const contactName = userList[i].firstName + " " + userList[i].lastName;
-
-      if (firstNameLetter === initialLetter && userList[i].lastName !== "") {
-        usersForLetterHTML += /*html*/ `
-      <div class="contact-child-div" onclick ="contactRightSide(${i})">
+function generateUsersForLetterHTML(userList, initialLetter) {
+  const usersForLetter = userList.filter(user => user.firstName.charAt(0) === initialLetter && user.lastName !== "");
+  const usersForLetterHTML = usersForLetter.map(user => {
+    const firstNameLetter = user.firstName.charAt(0);
+    const lastNameLetter = user.lastName.charAt(0);
+    const contactName = user.firstName + " " + user.lastName;
+    return /*html*/ `
+      <div class="contact-child-div" onclick="contactRightSide(${userList.indexOf(user)})">
         <div class="contact-child-div">
-          <div style="background-color: ${userList[i]["backgroundColor"]}" class="contact-child">
+          <div style="background-color: ${user.backgroundColor}" class="contact-child">
             <p>${firstNameLetter}${lastNameLetter}</p>
           </div>
           <div>
             <p class="contact-name">${contactName}</p>
-            <p class="contact-email">${userList[i].email}</p>
+            <p class="contact-email">${user.email}</p>
           </div>
         </div>
       </div>`;
-      }
-    }
-    userListHTML += /*html*/ `
-    <div class="contact-letter-main" >
-      <h4 class="contact-letter">${initialLetter}</h4>
-      ${usersForLetterHTML}
-    </div>`;
-  }
-  return userListHTML;
+  }).join("");
+
+  return usersForLetterHTML;
 }
+
+
 
 /**
  * Call the renderContactSideScroll content and add show class for fade in from right
@@ -233,7 +234,7 @@ function showEditContactsHTML(i) {
  * 
  * @param {*} index the index of the user in the userList
  */
-function invEditContact(index) {
+async function invEditContact(index) {
   const contactEditName = document.getElementById("contactEditName");
   const contactEditEmail = document.getElementById("contactEditEmail");
   const contactEditNumber = document.getElementById("contactEditNumber");
@@ -257,9 +258,9 @@ function invEditContact(index) {
     contactDetailBigName.textContent = contactName;
 
     hideEditContacts();
-    saveEditContact(userList);
+    await saveEditContact(userList);
     insertContacts();
-    initBackend();
+    await initBackend();
   }
 }
 

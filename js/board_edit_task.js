@@ -102,11 +102,23 @@ function boardTaskEditSlideInInsertPriority() {
     let urgentBox = document.getElementById('addTaskPriorityLabelUrgent');
     let mediumBox = document.getElementById('addTaskPriorityLabelMedium');
     let lowBox = document.getElementById('addTaskPriorityLabelLow');
-    
+
     urgentBox.classList.remove('add-task-priority-urgent');
     mediumBox.classList.remove('add-task-priority-medium');
     lowBox.classList.remove('add-task-priority-low');
 
+    checkBoardTaskEditSlideInInsertPriority(priorityValue, urgentBox, mediumBox, lowBox)
+}
+
+/**
+ * checks the priority-value and sets the class for the edit-task-window
+ * 
+ * @param {*} priorityValue the priority-value of the task 
+ * @param {*} urgentBox the urgent-box of the edit-task-window
+ * @param {*} mediumBox the medium-box of the edit-task-window 
+ * @param {*} lowBox the low-box of the edit-task-window
+ */
+function checkBoardTaskEditSlideInInsertPriority(priorityValue, urgentBox, mediumBox, lowBox) {
     if (priorityValue === 'Urgent') {
         urgentBox.classList.add('add-task-priority-urgent');
     } else if (priorityValue === 'Medium') {

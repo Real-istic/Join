@@ -182,7 +182,7 @@ function wrongPasswordHTML() {
 /**
  * update the password in userList
  */
-function updatePassword(password) {
+async function updatePassword(password) {
     let emailFromURL = window.location.search.substring(1);
     let passwordUpdated;
 
@@ -190,8 +190,8 @@ function updatePassword(password) {
         if (userList[i].email == emailFromURL) {
             userList[i].password = password;
             passwordUpdated = true;
-            saveEditContact();
-            initBackend();
+            await saveEditContact();
+            await initBackend();
             sendEmailAnimation();
         }
     }
