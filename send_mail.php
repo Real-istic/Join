@@ -2,7 +2,7 @@
 ########### CONFIG ###############
 
 $recipient = $_POST['recipient'];
-$redirect = 'http://gruppenarbeit-join-473.developerakademie.net/Join/index.html';
+$redirect = 'https://patrizio-marzullo.developerakademie.net/Join/index.html';
 
 ########### CONFIG END ###########
 ?>
