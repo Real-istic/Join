@@ -13,7 +13,7 @@
   
   @media (max-width: 650px) {
     .registration-upper-right-inner-container {
-      top: 91%;
+      top: 85%;
       right: 50%;
       transform: translateX(50%);
       width: 315px;

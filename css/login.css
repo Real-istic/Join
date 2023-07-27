@@ -9,6 +9,7 @@
     z-index: 3;
     background-color: #4589ff;
     transition: 300ms ease-in-out;
+    padding-bottom: 40px;
   }
   
   .join-logo-login {
