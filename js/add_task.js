@@ -61,7 +61,10 @@ function insertTaskRightHTML() {
  */
 function insertTaskTitleHTML() {
     return /*html*/ `
-        <input class="add-task-input-title" placeholder="Enter a title" required type="text" name="" id="addTaskInputTitle">
+        <div class="add-task-title">
+            <span>Title</span>
+            <input class="add-task-input-title" placeholder="Enter a title" required type="text" name="" id="addTaskInputTitle">
+        </div>
     `;
 }
 
@@ -72,11 +75,14 @@ function insertTaskTitleHTML() {
  */
 function insertTaskContactlistHTML() {
     return /*html*/ `
-        <div class="add-task-contacts-assign" id="taskContacts">
-            <input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
-            <img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
-        </div>
-        <div id="addTaskContactList" class="add-task-contact-list scrollbar scrollbar1">
+        <div class="add-task-assign-contacts-div">
+            <span>Assign Contacts</span>
+            <div class="add-task-contacts-assign" id="taskContacts">
+                <input required class="add-task-select-contacts" placeholder="Select Contacts to assign" onkeyup="searchContacts()" id="addContactToTaskInput">
+                <img class="rotate-arrow-90" id="addTaskExpandArrow" src="assets/img/dropdownicon.svg" onclick="openAndCloseContactList()">
+            </div>
+            <div id="addTaskContactList" class="add-task-contact-list scrollbar scrollbar1">
+            </div>
         </div>
     `;
 }
@@ -167,14 +173,14 @@ function priorityValidation() {
  */
 async function pushAddTaskValuesToClipboard(title) {
     taskClipboard.title = title.value;
-        taskClipboard.taskStatus = 'toDo';
-        pushDueDateToTaskClipboard()
-        pushDescriptionToTaskClipboard()
-        await pushTaskToBackend()
-        confirmAddedTaskToBoard()
-        await initBackend()
-        clearTask()
-        insertAddTask();
+    taskClipboard.taskStatus = 'toDo';
+    pushDueDateToTaskClipboard()
+    pushDescriptionToTaskClipboard()
+    await pushTaskToBackend()
+    confirmAddedTaskToBoard()
+    await initBackend()
+    clearTask()
+    insertAddTask();
 }
 
 /**
