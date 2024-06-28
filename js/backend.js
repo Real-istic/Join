@@ -74,3 +74,20 @@ async function pushTaskToBackend() {
     await backend.setItem('tasks', JSON.stringify(taskList));
     await initBackend()
 }
+
+/**
+ * deletes the specific Task and updates the backend data
+ * 
+ * @param {*} taskTitle the title of the task that should be deleted
+ */
+async function deleteTask(taskTitle) {
+    let taskIndex = taskList.findIndex(task => task.title === taskTitle);
+
+    if (taskIndex !== -1) {
+        taskList.splice(taskIndex, 1);
+        await backend.setItem('tasks', JSON.stringify(taskList));
+        await initBackend();
+    } else {
+        console.log("TestTask nicht gefunden");
+    }
+}
