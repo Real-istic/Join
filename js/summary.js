@@ -10,7 +10,6 @@ function insertSummary() {
     getDeadlineAndAmountOfUrgetTasks();
     getAmountofTasks();
     removeHelp();
-    
 }
 
 /**

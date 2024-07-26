@@ -3,22 +3,24 @@
  * 
  */
 function insertTaskTolistHTML() {
-    document.getElementById('toDoTasksContainer').innerHTML = ``;
-    document.getElementById('inProgressTasksContainer').innerHTML = ``;
-    document.getElementById('awaitFeedbackTasksContainer').innerHTML = ``;
-    document.getElementById('doneTasksContainer').innerHTML = ``;
-    let lists;
-    let searchInput = document.getElementById('searchTaskInputField').value;
+    if (document.getElementById('boardNavElement').classList.contains('nav-element-active')) {
+        document.getElementById('toDoTasksContainer').innerHTML = ``;
+        document.getElementById('inProgressTasksContainer').innerHTML = ``;
+        document.getElementById('awaitFeedbackTasksContainer').innerHTML = ``;
+        document.getElementById('doneTasksContainer').innerHTML = ``;
+        let lists;
+        let searchInput = document.getElementById('searchTaskInputField').value;
 
-    for (let i = 0; i < taskList.length; i++) {
-        lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
-        const task = taskList[i];
+        for (let i = 0; i < taskList.length; i++) {
+            lists = document.getElementById(taskList[i].taskStatus + 'TasksContainer');
+            const task = taskList[i];
 
-        if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
-            lists.innerHTML += taskToListHTML(i, task);
+            if (task.title.toLowerCase().includes(searchInput.toLowerCase()) || task.description.toLowerCase().includes(searchInput.toLowerCase())) {
+                lists.innerHTML += taskToListHTML(i, task);
+            }
         }
+        insertAssignedContactsToTaskHTML()
     }
-    insertAssignedContactsToTaskHTML()
 }
 
 /**
